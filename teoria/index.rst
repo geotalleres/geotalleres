@@ -8,4 +8,5 @@ Contents:
 
    servicios-web/servicios-web
    geoserver-intro/geoserver_intro
+   geoserver-vector/geoserver_vector
 
