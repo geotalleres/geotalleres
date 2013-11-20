@@ -1,7 +1,7 @@
 Geotalleres
 ==============================================
 
-Contents:
+Contenidos:
 
 .. toctree::
    :maxdepth: 3
