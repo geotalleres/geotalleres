@@ -39,7 +39,7 @@ en la dirección. Por ejemplo:
 
 * http://www.diva-gis.org/data/rrd/ARG_rrd.zip
 
-* http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf‎
+* http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf
 
 * http://docs.geoserver.org/stable/en/user/gettingstarted/shapefile-quickstart/index.html
 
