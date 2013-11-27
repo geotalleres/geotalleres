@@ -9,7 +9,9 @@ PostgreSQL
 	Fecha              Autores
 	=================  ====================================================           
 	1 Septiembre 2012   * Fernando González (fernando.gonzalez@geomati.co)
-	24 Junio 2013		* Fernando González (fernando.gonzalez@fao.org)
+	24 Junio 2013       * Fernando González (fernando.gonzalez@fao.org)
+	                    * Ramiro Mata (rmata@zonageo.com.ar)
+	                    * Leandro Roncoroni (lronco@zonageo.com.ar)
 	=================  ====================================================
 
 	©2012 Fernando González Cortés 
