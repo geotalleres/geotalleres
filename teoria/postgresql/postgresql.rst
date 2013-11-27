@@ -18,7 +18,9 @@ PostgreSQL
 	
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
-	Los contenidos de este punto son traducciones de la documentación oficial de PostgreSQL.
+	Los contenidos de este punto son inicialmente traducciones de la documentación oficial de PostgreSQL que han sido extendidos posteriormente.
+
+.. note::
 	
 	PostgreSQL is Copyright © 1996-2006 by the PostgreSQL Global Development Group and is distributed under the terms of the license of the University of California below.
 	
