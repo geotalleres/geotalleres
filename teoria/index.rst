@@ -14,4 +14,5 @@ Contenidos:
    geoserver-raster/geoserver_raster
    optimizacion-raster-gdal/optimizacion-raster-gdal
    postgresql/postgresql
+   postgis/postgis
 
