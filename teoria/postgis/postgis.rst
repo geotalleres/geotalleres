@@ -24,7 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   cartodb
    referencias
 
 Indices and tables

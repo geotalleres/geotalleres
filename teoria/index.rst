@@ -25,3 +25,4 @@ Contenidos:
    postgis-analisis-espacial/analisis_espacial
    postgis-validacion/validacion
    postgis-raster/postgis_raster
+   postgis-cartodb/cartodb
