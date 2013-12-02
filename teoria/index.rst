@@ -18,4 +18,5 @@ Contenidos:
    postgresql/postgresql
    postgis-instalacion/instalacion
    postgis-caracteristicas-espaciales/caracteristicas_espaciales
+   postgis-simple-feature-model/simple_feature_model
 

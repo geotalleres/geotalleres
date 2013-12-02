@@ -24,7 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   simple_feature_model
    importacion_exportacion
    indexacion_espacial
    relaciones_espaciales
