@@ -17,4 +17,5 @@ Contenidos:
    conceptos-sql/conceptos_sql
    postgresql/postgresql
    postgis-instalacion/instalacion
+   postgis-caracteristicas-espaciales/caracteristicas_espaciales
 

@@ -41,10 +41,10 @@ primero añadir soporte para este lenguaje. Esto es necesario para versiones de 
 
 	$ createlang plpgsql curso
 
-.. image:: _images/postgis-images/pre-postgis.png
+.. image:: _images/pre-postgis.png
 	   :scale: 50 %
 
-.. image:: _images/postgis-images/pre-postgis-2.png
+.. image:: _images/pre-postgis-2.png
 	   :scale: 50 %
 	   
 Hecho esto, la instalación de |PG| se hará de una forma u otra, en función de si estamos usando una versión de |PSQL| anterior a la 9.1 o no.
@@ -97,16 +97,16 @@ Tras esta operación se puede observar que han aparecido dos
 nuevas tablas: *geometry_columns* y *spatial_ref_sys*, además de
 numerosas funciones en el esquema *public*.
 
-.. image:: _images/postgis-images/postgis-1.png
+.. image:: _images/postgis-1.png
 	   :scale: 50 %
 	   
-.. image:: _images/postgis-images/postgis-2.png
+.. image:: _images/postgis-2.png
 	   :scale: 50 %
 	   
-.. image:: _images/postgis-images/postgis-3.png
+.. image:: _images/postgis-3.png
 	   :scale: 50 %
 
-.. image:: _images/postgis-images/postgis-4.png
+.. image:: _images/postgis-4.png
 	   :scale: 50 %
 	   	   
 La tabla *geometry_columns* es un catálogo de las columnas espaciales existentes en la base de datos. Como PostGIS no utiliza los tipos de datos espaciales de PostgreSQL, debe buscarse una manera de identificar qué campo contiene geometrías. Esto se hace de manera estándar (OGC) manteniendo un catálogo con la lista de columnas espaciales que existen. Cuando un cliente, como gvSIG por ejemplo, intente identificar las tablas espaciales que hay en la base de datos irá a la tabla *geometry_columns* y verá referencias a las tablas que contienen los datos espaciales. Por esto hay que tenerla siempre actualizada. Por su parte, la tabla *spatial_ref_sys* contiene una lista con los sistemas de referencia disponibles.
