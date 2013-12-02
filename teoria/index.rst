@@ -21,4 +21,5 @@ Contenidos:
    postgis-simple-feature-model/simple_feature_model
    postgis-importacion-exportacion/importacion_exportacion
    postgis-indexacion-espacial/indexacion_espacial
+   postgis-relaciones-espaciales/relaciones_espaciales
 
