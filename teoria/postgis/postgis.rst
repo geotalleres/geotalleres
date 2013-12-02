@@ -24,8 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   importacion_exportacion
-   indexacion_espacial
    relaciones_espaciales
    analisis_espacial
    validacion
