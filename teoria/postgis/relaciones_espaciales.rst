@@ -88,7 +88,8 @@ Si usamos el valor obtenido en ``geom`` y consultamos a la base de datos::
 	WHERE ST_Equals(geom, '0101000020E6100000A6CC727E2F8052C0F9AF62A70EA81240');
 
 ::
-     	name      
+
+	   	name      
 	---------------
 	Casa de Piedra
 
@@ -315,7 +316,7 @@ El uso de las relaciones espaciales junto con funciones de agregacion, como **gr
 3. Las filas resultantes son agrupadas por el nombre del barrio y rellenadas con la función de agregación count().
 
 Prácticas
-========
+=========
 
 
 Comprueba si estas geometrías son iguales: LINESTRING(0 0, 10 0) Y MULTILINESTRING((10 0, 5 0),(0 0, 5 0)).

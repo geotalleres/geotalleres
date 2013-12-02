@@ -190,7 +190,7 @@ Instalación de módulos en PostgreSQL inferior a versión 9.1
 Deberemos instalar cada módulo cargando ficheros PL/pgSQL. Lo haremos mediante la herramienta de línea de comandos *psql*
 
 Raster
-^^^^^
+^^^^^^
 
 Este módulo se encarga de gestionar la información raster siguiendo la misma filosofía que el tipo geometry y permitiendo análisis raster y mezclar información raster y vectorial en el análisis.
 
@@ -200,7 +200,7 @@ La instalación de este módulo es similar a la instalación de |PG| realizandos
 	$ psql -U postgres -f path_raster_comments.sql -d [nombre_base_datos]
 	
 Topologia persistente
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Este es una forma de estructurar la información geográfica de manera diferente al modelo *simple features*. Se instala de manera opcional y no se tratará en este curso por exceder los objetivos del mismo.
 
