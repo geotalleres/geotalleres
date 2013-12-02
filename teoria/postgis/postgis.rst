@@ -24,7 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   teoria_bases_datos
    instalacion
    conceptos_sql   
    caracteristicas_espaciales

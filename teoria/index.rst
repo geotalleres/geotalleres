@@ -13,6 +13,7 @@ Contenidos:
    geoserver-vector/geoserver_vector
    geoserver-raster/geoserver_raster
    optimizacion-raster-gdal/optimizacion-raster-gdal
+   bases-de-datos/teoria_bases_datos
    postgresql/postgresql
    postgis/postgis
 
