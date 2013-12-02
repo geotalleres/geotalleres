@@ -22,4 +22,5 @@ Contenidos:
    postgis-importacion-exportacion/importacion_exportacion
    postgis-indexacion-espacial/indexacion_espacial
    postgis-relaciones-espaciales/relaciones_espaciales
-
+   postgis-analisis-espacial/analisis_espacial
+   postgis-validacion/validacion

@@ -24,9 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   
-   analisis_espacial
-   validacion
    postgis_raster
    cartodb
    referencias
