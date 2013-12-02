@@ -19,4 +19,5 @@ Contenidos:
    postgis-instalacion/instalacion
    postgis-caracteristicas-espaciales/caracteristicas_espaciales
    postgis-simple-feature-model/simple_feature_model
+   postgis-importacion-exportacion/importacion_exportacion
 
