@@ -529,3 +529,14 @@ La cláusula CREATE VIEW permite la creación de vistas. La cláusula asigna un 
 	# CREATE VIEW id_vista [(columna,…)]AS especificación_consulta;
 	
 Opcionalmente se puede asignar un nombre a cada columna de la vista. Si se especifica, la lista de nombres de las columnas debe de tener el mismo número de elementos que elnúmero de columnas producidas por la consulta. Si se omiten, cada columna de la vista1 adopta el nombre de la columna correspondiente en la consulta. 
+
+Referencias
+===========
+
+SQL en Wikipedia http://es.wikipedia.org/wiki/SQL
+
+Tutorial de SQL http://www.unalmed.edu.co/~mstabare/Sql.pdf
+
+SQL - JOIN Básico http://ariel.esdebian.org/27200/sql-join-basico
+
+SQL Commands - http://www.postgresql.org/docs/9.1/static/sql-commands.html

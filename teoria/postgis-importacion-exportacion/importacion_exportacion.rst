@@ -334,5 +334,20 @@ Prácticas
 
 Operaciones con QGIS: mostrar tablas de PostGIS, etiquetar, colorear, etc.
 	
-	
-	
+Referencias
+============
+
+ogr2ogr [EN] http://www.gdal.org/ogr2ogr.html
+
+GDAL [EN] http://www.gdal.org/
+
+OpenStreetMap en Wikipedia http://es.wikipedia.org/wiki/OpenStreetMap
+
+OpenStreetMap http://www.openstreetmap.org
+
+osm2phgsql [EN] http://wiki.openstreetmap.org/wiki/Osm2pgsql
+
+osmosis [EN] http://wiki.openstreetmap.org/wiki/Osmosis
+
+Cambiar encoding de UTF8 a Latin1 en PostGIS http://ingdesistemasvzla.blogspot.com.es/2011/02/cambiar-encoding-de-utf-8-latin1-en.html
+

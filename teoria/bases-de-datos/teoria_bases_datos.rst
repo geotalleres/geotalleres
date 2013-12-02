@@ -280,3 +280,22 @@ Modelización
 	6. Especializar y generalizar entidades donde sea posible
 
 
+Referencias
+============
+
+Restricciones a la Base de Datos: Integridad y seguridad http://s3.amazonaws.com/UNED/apuntes/Tema6.pdf
+
+Bases de datos http://es.wikipedia.org/wiki/Base_de_datos
+
+Modelos de datos relacional http://es.wikipedia.org/wiki/Modelo_relacional
+
+Implantación de sistemas informáticos de gestión. Bases de datos http://www.slideshare.net/johntoasa2010/teoria-de-base-de-datos
+
+Teoría de bases de datos http://si.ua.es/es/documentos/documentacion/office/access/teoria-de-bases-de-datos.pdf
+
+Diseño conceptual de bases de datos http://www.jorgesanchez.net/bd/disenoBD.pdf | http://www.jorgesanchez.net/bd/index.html | http://www.jorgesanchez.net/bd/ejercicioser.html
+
+Diseño de bases de datos relacionales Adoración de Miguel, Mario Pattini y Esperanza Marcos. Editorial Ra-Ma
+
+Entidades débiles http://www.dataprix.com/217-entidades-debiles
+

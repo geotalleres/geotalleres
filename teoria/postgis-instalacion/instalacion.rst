@@ -260,3 +260,22 @@ Práctica 1
 4. Compruebe el tipo de dato de la columna XXXXXXXXXXXXX
 
 5. Añada una columna de tipo XXXXXXXXXX a la tabla XXXXXXXXXX
+
+Referencias
+===========
+
+Installing PostGIS 2.0 on Ubuntu [EN] http://linfiniti.com/2012/05/installing-postgis-2-0-on-ubuntu/
+
+Instalar PostGIS 2.0 en Ubuntu Server 12.04 de 32 bits [EN] http://proyectosbeta.net/2012/08/instalar-postgis-2-0-en-ubuntu-server-12-04-de-32-bits/
+
+pgModeller [EN] http://pgmodeler.com.br/
+
+PostgreSQL 9.1.6 Documentation [EN] http://www.postgresql.org/docs/9.1/interactive/index.html
+
+PosgreSQL-es http://www.postgresql.org.es/
+
+Configuración básica de PostgreSQL http://www.postgresql.org.es/node/219
+
+psql [EN] http://www.postgresql.org/docs/9.1/static/app-psql.html
+
+pgAdmin III [EN] http://www.pgadmin.org/

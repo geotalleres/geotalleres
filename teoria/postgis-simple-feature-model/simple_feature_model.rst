@@ -142,3 +142,14 @@ Multipolygon
 	* El interior de cualquiera de las superficies que contiene no puede intersecar
 	* El contorno de cualquiera de las superficies que contiene puede intersecar pero solo en un número finito de puntos
 	* Son simples
+
+Referencias
+============
+
+Well Known Text en Wikipedia http://en.wikipedia.org/wiki/Well-known_text
+
+Lesson 2. Simple Feature Model [EN] http://manual.linfiniti.com/en/postgis/simple_feature_model.html
+
+Simple Feature Acces in Wikipedia [EN] http://en.wikipedia.org/wiki/Simple_Feature_Access
+
+	
