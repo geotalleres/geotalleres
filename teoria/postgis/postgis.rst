@@ -24,7 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   conceptos_sql   
    caracteristicas_espaciales
    simple_feature_model
    importacion_exportacion

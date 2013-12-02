@@ -14,6 +14,7 @@ Contenidos:
    geoserver-raster/geoserver_raster
    optimizacion-raster-gdal/optimizacion-raster-gdal
    bases-de-datos/teoria_bases_datos
+   conceptos-sql/conceptos_sql
    postgresql/postgresql
    postgis-instalacion/instalacion
 
