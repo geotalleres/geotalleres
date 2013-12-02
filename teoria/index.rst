@@ -15,5 +15,5 @@ Contenidos:
    optimizacion-raster-gdal/optimizacion-raster-gdal
    bases-de-datos/teoria_bases_datos
    postgresql/postgresql
-   postgis/postgis
+   postgis-instalacion/instalacion
 
