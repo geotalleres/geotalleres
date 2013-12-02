@@ -44,7 +44,7 @@ Tenemos datos relativos a todas las zonas del planeta y varios meses disponibles
 Los datos en si son ficheros GeoTIFF con una sola banda. Aquí vemos ambos fragmentos visualizados en QGIS:
 
 
-	.. image:: _images/temperaturas_colombia.png
+. image:: _images/temperaturas_colombia.png
 		:scale: 50 %
 
 Podríamos cargar los ficheros GeoTIFF por separado en una misma tabla, mediante dos llamadas a *raster2pgsql*, pero lo que vamos a hacer es construir un raster virtual en formato VRT, y cargar ese ráster en |PR| con una única llamada a *raster2pgsql*. Lo haremos en 3 pasos:
@@ -70,7 +70,7 @@ El recorte se hará usando la herramienta *clipper* de QGIS, que no es más que 
 La imagen recortada queda así (se ha aplicado un pseudo-color a la capa para apreciar el contorno de Colombia dentro del fichero GeoTiff):
 
  
-	.. image:: _images/temperaturas_recorte_colombia.png
+. image:: _images/temperaturas_recorte_colombia.png
 		:scale: 50 %
 
 Bastante más pequeña y manejable. 
@@ -276,7 +276,7 @@ Una de las grandes ventajas de poder tener datos de naturaleza ráster y vectori
 
 Trabajaremos con los datos ráster de temperaturas, y con los datos vectoriales de Colombia. Como vemos en esta imagen (coloreada con pseudocolor en QGIS 2.0), el ráster ocupa bastante más extensión que Colombia:
 
-	.. image:: _images/raster_with_vector.png
+. image:: _images/raster_with_vector.png
 		:scale: 50 %
 
 Lo que queremos es *recortar* la parte del ráster que queda dentro de los límites de Colombia. Y lo haremos únicamente con **consultas SQL**. Posteriormente, volcaremos ese ráster recortado a disco, en formato GeoTIFF.
@@ -299,7 +299,7 @@ Elegimos la primera opción, por no requerir la instalación de ningún software
 
 Y el aspecto de este ráster recortado una vez colocado sobre el mapa y coloreado con pseudocolor en QGIS 2.0 es:
 
-.. image:: _images/postgis_raster_clipped.png
+. image:: _images/postgis_raster_clipped.png
 	:scale: 30 %
 
 
