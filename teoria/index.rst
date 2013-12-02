@@ -24,3 +24,4 @@ Contenidos:
    postgis-relaciones-espaciales/relaciones_espaciales
    postgis-analisis-espacial/analisis_espacial
    postgis-validacion/validacion
+   postgis-raster/postgis_raster

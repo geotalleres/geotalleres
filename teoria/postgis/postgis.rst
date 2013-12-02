@@ -24,7 +24,6 @@ Contents:
 .. toctree::
    :maxdepth: 2
    
-   postgis_raster
    cartodb
    referencias
 
