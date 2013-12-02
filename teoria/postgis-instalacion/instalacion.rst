@@ -4,6 +4,19 @@
 Instalación de |PG|
 *********************
 
+.. note::
+
+	=================  ====================================================
+	Fecha              Autores
+	=================  ====================================================           
+	1 Noviembre 2012   * Micho García (micho.garcia@geomati.co)
+	15 Octubre  2013   * Jorge Arévalo(jorge.arevalo@geomati.co)
+	=================  ====================================================
+
+	©2012 Micho García
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 En este tema procederemos a la instalación del software del sistema gestor de base de datos relacional PostgreSQL en su versión más reciente 9.1, así como distintas herramientas con las que poder interactuar con el sistema. Además aprenderemos conceptos básicos de administración y gestión del sistema. Conoceremos la estructura del sistema, su organización y diferentes conceptos respecto de esta que serán de utilidad en su entendimiento y manejo.
 
 La instalación se realizará sobre los sistemas operativos Ubuntu, Windows y Mac OS X.

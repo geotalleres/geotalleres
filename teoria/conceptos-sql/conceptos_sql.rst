@@ -3,6 +3,19 @@
 Conceptos básicos de SQL
 ************************
 
+.. note::
+
+	=================  ====================================================
+	Fecha              Autores
+	=================  ====================================================           
+	1 Noviembre 2012   * Micho García (micho.garcia@geomati.co)
+	15 Octubre  2013   * Jorge Arévalo(jorge.arevalo@geomati.co)
+	=================  ====================================================
+
+	©2012 Micho García
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Introducción
 ============
 El lenguaje de consulta estructurado o SQL (por sus siglas en inglés **Structured Query Language**) es un lenguaje declarativo de acceso a bases de datos relacionales que permite especificar diversos tipos de operaciones en ellas. Una de sus características es el manejo del álgebra y el cálculo relacional que permiten efectuar consultas con el fin de recuperar de forma sencilla información de interés de bases de datos, así como hacer cambios en ella.

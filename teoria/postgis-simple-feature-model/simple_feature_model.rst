@@ -4,6 +4,19 @@
 Simple Feature Model
 ********************
 
+.. note::
+
+	=================  ====================================================
+	Fecha              Autores
+	=================  ====================================================           
+	1 Noviembre 2012   * Micho García (micho.garcia@geomati.co)
+	15 Octubre  2013   * Jorge Arévalo(jorge.arevalo@geomati.co)
+	=================  ====================================================
+
+	©2012 Micho García
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 OGC y el Simple Feature Model
 =============================
 La OGC o Open Geospatial Consortium, define unas normas que serán utilizadas para la definición posterior de las geometrías. Estas son la SFA y la SQL/MM. Según esta última, las geometrías se definirán en función del siguiente esquema de herencia:

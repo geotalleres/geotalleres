@@ -3,6 +3,20 @@
 **********************************
 Importación y exportación de datos
 **********************************
+
+.. note::
+
+	=================  ====================================================
+	Fecha              Autores
+	=================  ====================================================           
+	1 Noviembre 2012   * Micho García (micho.garcia@geomati.co)
+	15 Octubre  2013   * Jorge Arévalo(jorge.arevalo@geomati.co)
+	=================  ====================================================
+
+	©2012 Micho García
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 En este tema nos introduciremos en el uso de herramientas de importación/exportación de datos hasta/desde |PG|. Se realizará la importación con archivos de tipo ESRI ShapeFile y con datos descargados de OpenStreetMap. Para realizar estos procesos, se dispondrá de herramientas como ``shp2pgsql`` que vienen incluidas en |PG| o se utilizarán otras como ``osmosis`` u ``osm2pgsql`` descargadas desde los repositorios.
 
 Importación ESRI shapes mediante shp2pgsql
