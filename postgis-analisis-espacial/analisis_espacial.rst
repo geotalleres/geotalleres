@@ -3,6 +3,20 @@
 *****************
 Análisis espacial
 *****************
+
+.. note::
+
+	=================  ====================================================
+	Fecha              Autores
+	=================  ====================================================           
+	1 Noviembre 2012   * Micho García (micho.garcia@geomati.co)
+	15 Octubre  2013   * Jorge Arévalo(jorge.arevalo@geomati.co)
+	=================  ====================================================
+
+	©2012 Micho García
+	
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 El análisis de datos con SIG tiene por finalidad descubrir estructuras espaciales, asociaciones y relaciones entre los datos, así como modelar fenómenos geográficos. Los resultados reflejan la naturaleza y calidad de los datos, además de la pertinencia de los métodos y funciones aplicadas. Las tareas y transformaciones que se llevan a cabo en el análisis espacial precisan datos estructurados, programas con las funciones apropiadas y conocimientos sobre la naturaleza del problema, para definir los métodos de análisis.
 
 El proceso convierte los datos en información útil para conocer un problema determinado. Es evidente que los resultados del análisis espacial añaden valor económico y, sobre todo, información y conocimiento a los datos geográficos
