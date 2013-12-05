@@ -26,3 +26,4 @@ Contenidos:
    postgis-validacion/validacion
    postgis-raster/postgis_raster
    postgis-cartodb/cartodb
+   mapproxy/doc/source/index
