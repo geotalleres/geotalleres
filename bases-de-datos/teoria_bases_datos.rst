@@ -24,11 +24,11 @@ Bases de datos, el enfoque general
 ==================================
 La utilización de |BD| se ha extendido dando solución a problemas como
 
-	* Manejo de grandes volumenes de datos
+	* Manejo de grandes volúmenes de datos
 	* Complejidad en la extracción de estos datos
-	* Concurrencia en el acceso a datos, accesos simultaneos por varios usuarios
+	* Concurrencia en el acceso a datos, accesos simultáneos por varios usuarios
 
-Antes el almacenamiento y manejo de la información se realizaba mediante el uso de archivos, formatos tipo texto o archivos con estructuras internas (.dbf) permitian el manejo de esta información. Tenían limitaciones como
+Antes el almacenamiento y manejo de la información se realizaba mediante el uso de archivos, formatos tipo texto o archivos con estructuras internas (.dbf) permitían el manejo de esta información. Tenían limitaciones como
 
 	* Limitaciones en la cantidad de datos que era posible almacenar
 	* Rendimiento de lectura de estos archivos
@@ -109,10 +109,7 @@ Una **entidad** es todo aquello de lo cual nos interesa guardar **datos**, por e
 Práctica 1
 ----------
 
-Defina la estructura de una tabla para los Parques Naturales de Costa Rica. Para ello detecte la información necesaria susceptible de ser almacenada y estructurela en una tabla definiendo el nombre del campo.
-
-Fuente: http://es.wikipedia.org/wiki/Parques_nacionales_de_Costa_Rica
- 
+Defina la estructura de una tabla para los Parques Naturales de su país. Para ello detecte la información necesaria susceptible de ser almacenada y estructúrela en una tabla definiendo el nombre de los campos. 
 
 Modelización de |BD|
 ====================
@@ -134,25 +131,27 @@ Mediante este sencillo esquema podremos definir en nuestro sistema las entidades
 Ejemplo de tablas::
 
 	TABLA -> ENTIDAD -> PARQUE NATURAL
-	FILA -> REGISTRO -> Parque Nacional de Corcovado
+	FILA -> REGISTRO -> Parque Nacional de 
 	COLUMNA -> CAMPO -> 8º 33´´ N 83º 35´´ O
 	
 Ejemplos de entidad
 
 Algunos ejemplos de entidad son un empleado, un producto o un despacho. También son entidades otros elementos del mundo real de interés, menos tangibles pero igualmente diferenciables del resto de objetos; por ejemplo, una asignatura impartida en una universidad, un préstamo bancario, un pedido de un cliente, etc.
 
-El término entidad se utiliza tanto para denominar objetos individuales como para hacer referencia a conjuntos de objetos similares de los que nos interesan los mismos atributos; es decir, que, por ejemplo, se utiliza para designar tanto a un empleado concreto de una empresa como al conjunto de todos los empleados de la empresa. Más concretamente, el término entidad se puede referira instancias u ocurrencias concretas (empleados concretos) o a tipos o clases de entidades (el conjunto de todos los empleados).
+El término entidad se utiliza tanto para denominar objetos individuales como para hacer referencia a conjuntos de objetos similares de los que nos interesan los mismos atributos; es decir, que, por ejemplo, se utiliza para designar tanto a un empleado concreto de una empresa como al conjunto de todos los empleados de la empresa. Más concretamente, el término entidad se puede referirá instancias u ocurrencias concretas (empleados concretos) o a tipos o clases de entidades (el conjunto de todos los empleados).
 
-El modelo ER proporciona una notación diagramática para representar gráficamente las entidades y sus atributos:
+El modelo **ER** proporciona una notación diagramática para representar gráficamente las entidades y sus atributos:
 
 	* Las entidades se representan con un rectángulo. El nombre de la entidad se escribe en mayúsculas dentro del rectángulo.
+
+.. image:: _images/entidad.png
 
 Ejemplo de Entidad::
 
 	PARQUE NATURAL -> Entidad
 	OFICINA CORREO -> Entidad
-	ACCIDENTE GEOGRAFICO -> Entidad
-	
+	ACCIDENTE GEOGRÁFICO -> Entidad
+
 Entidad débil
 -------------
 
@@ -160,7 +159,9 @@ Una entidad débil es una entidad cuyos atributos no la identifican completament
 
 Una entidad débil se representa con un rectángulo doble, y la interrelación que ayuda a identificarla se representa con una doble línea.
 
-Ejemplo entidad debil::
+.. image:: _images/entidad_debil.png
+
+Ejemplo entidad débil::
 
 	Curso -> Profesor
 	Localidad -> Provincia
@@ -189,7 +190,7 @@ Dentro del |MR| podremos encontrar atributos multivaluados y también opcionales
  * Atributo identificador: Uno o más campos cuyos valores son únicos en cada ejemplar de una entidad
  	
  	1. Deben distinguir a cada ejemplar tendiendo en cuenta las entidades que utiliza el modelo
- 	2. Todos los ejemplares de un entidad deben tener el mismo identifiador
+ 	2. Todos los ejemplares de un entidad deben tener el mismo identificador
  	3. Cuando un atributo es importante aun cuando no tenga entidad concreta asociada, entonces se trata de una entidad y no de un atributo 	
 
 Ejemplo de atributo::
@@ -311,4 +312,6 @@ Diseño conceptual de bases de datos http://www.jorgesanchez.net/bd/disenoBD.pdf
 Diseño de bases de datos relacionales Adoración de Miguel, Mario Pattini y Esperanza Marcos. Editorial Ra-Ma
 
 Entidades débiles http://www.dataprix.com/217-entidades-debiles
+
+ACID http://es.wikipedia.org/wiki/ACID
 
