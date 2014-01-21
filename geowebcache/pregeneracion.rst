@@ -99,6 +99,6 @@ Por último, en el caso de teselas cuyo renderizado no contenga más de 256 colo
 
 Tras guardar los cambios, seremos capaces de seleccionar dicho formato en el formulario de pregeneración. Como comparativa, el resultado de pregenerar los niveles de 6 a 12 es 78Mb, un 10% menor que los 87Mb correspondientes al formato PNG.
 
-.. nota::
+.. note::
 
 	En caso de aplicar esta optimización, hay que asegurarse de que el cliente pide las teselas en el formato ``image/png8``. 
