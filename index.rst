@@ -12,6 +12,7 @@ Contenidos:
    geoserver-intro/geoserver_intro
    geoserver-vector/geoserver_vector
    geoserver-raster/geoserver_raster
+   geowebcache/pregeneracion.rst
    optimizacion-raster-gdal/optimizacion-raster-gdal
    bases-de-datos/teoria_bases_datos
    conceptos-sql/conceptos_sql
