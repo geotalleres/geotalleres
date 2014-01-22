@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Servir un fichero MBTiles creado con TileMill &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Ejercicios" href="index.html" />
+    <link rel="next" title="Extensión: propuesta de ejercicios" href="extension.html" />
+    <link rel="prev" title="Ejercicio: seeding y borrado de caches" href="seeding.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="extension.html" title="Extensión: propuesta de ejercicios"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="seeding.html" title="Ejercicio: seeding y borrado de caches"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de MapProxy</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Ejercicios</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="servir-un-fichero-mbtiles-creado-con-tilemill">
+<h1>Servir un fichero <em>MBTiles</em> creado con TileMill<a class="headerlink" href="#servir-un-fichero-mbtiles-creado-con-tilemill" title="Permalink to this headline">¶</a></h1>
+<p>El objetivo de este ejercicio es montar una capa en MapProxy que sirva una
+<em>cache</em> en formato <a class="reference external" href="http://mapbox.com/developers/mbtiles/">MBTiles</a> generada en <a class="reference external" href="http://mapbox.com/tilemill/">TileMill</a>. Es decir, realizamos todo
+el proceso de diseño cartográfico con esta herramienta y después ofrecemos a
+nuestros usuarios dicho trabajo con cualquiera de los servicios de MapProxy,
+aunque como es normal, se tendrán los mejores resultados en clientes que
+consuman directamente la <em>cache</em> sin tener que <em>resamplear</em> las teselas al
+tratarse de un dato vectorial.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="http://mapbox.com/tilemill/">TileMill</a> es una aplicación de <em>software</em> libre para el diseño de
+cartografía usando un lenguaje similar a las hojas de estilo CSS
+que se utilizan en diseño <em>web</em>. Una de las salidas de TileMill es
+la <em>cache</em> en formato <a class="reference external" href="http://mapbox.com/developers/mbtiles/">MBTiles</a>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">El formato <a class="reference external" href="http://mapbox.com/developers/mbtiles/">MBTiles</a> es en esencia una base de datos SQLite con un
+esquema predefinido para almacenar teselas. Tiene la ventaja de ser
+muy compacto porque en un único fichero se almacenan miles de
+imágenes de una forma estandarizada.</p>
+</div>
+<p>El fichero <em>MBTiles</em> proporcionado consiste en una capa de la zona de trabajo
+del taller en la que se muestran carreteras y edificios en tonos de gris y una
+serie de puntos con la ubicación de zonas de aparcamiento. El archivo se puede
+descargar de <a class="reference external" href="https://docs.google.com/file/d/0B28vBRfHgG9pZ3l3MXlQc09jSjQ/edit?usp=sharing">aquí</a>.</p>
+<p>El grid que define el fichero <em>MBTiles</em> es igual que el usado por Google Maps
+solo que se han exportado las teselas hasta el nivel 16, es decir:</p>
+<div class="highlight-python"><pre>grids:
+  parkings:
+    base: GLOBAL_MERCATOR
+    num_levels: 17</pre>
+</div>
+<p>Este ejercicio por tanto consiste en definir una nueva capa en MapProxy que
+apunte a una <em>cache</em> que no tiene <em>sources</em> (se debe indicar como una lista
+vacía porque el elemento es obligatorio). La cache ha configurar es de tipo
+<tt class="docutils literal"><span class="pre">mbtiles</span></tt> y hay que indicar la ubicación del fichero que habrá que dejar en la
+carpeta <tt class="docutils literal"><span class="pre">cache_data</span></tt>.</p>
+<div class="figure align-center">
+<img alt="TMS de la capa de *parkings* diseñada en TileMill" src="_static/exercise-mbtiles.png" style="width: 50%;" />
+<p class="caption">TMS de la capa de <em>parkings</em> diseñada en TileMill</p>
+</div>
+<p>En la siguiente figura se muestran las dos capas accedidas por separado desde un
+cliente GIS de escritorio (QGis) en el que se ha establecido una transparencia
+del 50% a la capa de ortofoto de tal forma que las zonas de aparcamiento se
+visualizan de forma más efectiva.</p>
+<div class="figure align-center">
+<img alt="Acceso a las dos capas desde QGis" src="_static/exercise-mbtiles2.png" style="width: 50%;" />
+<p class="caption">Acceso a las dos capas mediante WMS</p>
+</div>
+<div class="section" id="autores">
+<h2>Autores:<a class="headerlink" href="#autores" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Servir un fichero <em>MBTiles</em> creado con TileMill</a><ul>
+<li><a class="reference internal" href="#autores">Autores:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="seeding.html"
+                        title="previous chapter">Ejercicio: <em>seeding</em> y borrado de <em>caches</em></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="extension.html"
+                        title="next chapter">Extensión: propuesta de ejercicios</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/mapproxy/doc/source/ejercicios/mbtiles.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="extension.html" title="Extensión: propuesta de ejercicios"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="seeding.html" title="Ejercicio: seeding y borrado de caches"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de MapProxy</a> &raquo;</li>
+          <li><a href="index.html" >Ejercicios</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

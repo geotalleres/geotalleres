@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ejercicio: seeding y borrado de caches &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../../../index.html" />
+    <link rel="up" title="Ejercicios" href="index.html" />
+    <link rel="next" title="Servir un fichero MBTiles creado con TileMill" href="mbtiles.html" />
+    <link rel="prev" title="Ejercicio: acelerar el acceso a un WMS" href="acelerar-wms.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mbtiles.html" title="Servir un fichero MBTiles creado con TileMill"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="acelerar-wms.html" title="Ejercicio: acelerar el acceso a un WMS"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de MapProxy</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Ejercicios</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ejercicio-seeding-y-borrado-de-caches">
+<h1>Ejercicio: <em>seeding</em> y borrado de <em>caches</em><a class="headerlink" href="#ejercicio-seeding-y-borrado-de-caches" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sembrar-una-cache">
+<h2>Sembrar una caché<a class="headerlink" href="#sembrar-una-cache" title="Permalink to this headline">¶</a></h2>
+<p>Sembrar una caché significa llenar toda la caché de antemano. Hay un par de
+casos de uso típicos para los que es adecuado sembrar las cachés:</p>
+<ul class="simple">
+<li>Usar cartografía en portátiles sin una conexión fiable a Internet (en campo,
+en el extranjero, o en una demo)</li>
+<li>Acelerar el acceso a las capas cacheadas, descargando todo (por ejemplo) la
+noche anterior</li>
+</ul>
+<p>En este ejercicio vamos a sembrar los datos de OSM en el área de Gerona, pero
+sólo para unos cuantos niveles de zoom. Una vez hecho el sembrado, veremos cómo
+MapProxy sirve las imágenes sin necesidad de pedirlas al origen.</p>
+</div>
+<div class="section" id="sembrado-sencillo">
+<h2>Sembrado sencillo<a class="headerlink" href="#sembrado-sencillo" title="Permalink to this headline">¶</a></h2>
+<p>La tarea más sencilla es lanzar <em>una</em> <strong>tarea</strong> de sembrado <em>un</em> <strong>cache</strong> en
+<em>una</em> <strong>cobertura</strong> (área) para algunos <strong>niveles de zoom</strong>. La <em>cache</em> (con sus
+correspondientes <em>capas</em> y <em>origenes</em>) deberían estar ya definidos en vuestros
+<em>mapproxy.yaml</em>. Las tareas de sembrado y las coberturas se definen en un
+fichero aparte, normalmente nombrado <em>seed.yaml</em>.</p>
+<p>Hay que recordar que la caché es siempre una pirámide de imágenes, y que su
+extensión y niveles de zoom vienen referidos por el <em>grid</em> del <em>mapproxy.yaml</em>.
+Por eso, cuando se siembra una caché, se hace referencia a los niveles de zoom
+de esta pirámide.</p>
+<p>Primero queremos sembrar la caché de la capa de OpenStreetMap, en la zona de
+Gerona. Para hacer esto, escribid un fichero <em>seed.yaml</em> que contenga una tarea
+de sembrado que haga referencia a la <em>cache</em> apropiada y a una cobertura con el
+bounding box de Gerona, para niveles de zoom del 1 al 10.</p>
+<p>Una vez escrito el fichero <em>seed.yaml</em>, se puede hacer el sembrado ejecutando
+<tt class="docutils literal"><span class="pre">mapproxy-seed</span> <span class="pre">-f</span> <span class="pre">mapproxy.yaml</span> <span class="pre">-s</span> <span class="pre">seed.yaml</span> <span class="pre">-i</span></tt>. Si estuviera en producción,
+cambiaríamos <tt class="docutils literal"><span class="pre">-i</span></tt> por <tt class="docutils literal"><span class="pre">-seed=ALL</span></tt> para poder automatizarlo.</p>
+<p>A continuación puedes crear una tarea de caché de la capa de la ortofoto para el
+grid UTM, para niveles de zoom del 1 al 7 y el mismo <em>coverage</em>.</p>
+</div>
+<div class="section" id="limpiando-caches">
+<h2>Limpiando cachés<a class="headerlink" href="#limpiando-caches" title="Permalink to this headline">¶</a></h2>
+<p>Para asegurar que solo tenemos la caché de los datos que se usan en la oficina,
+vamos a crear una tarea de limpieza que borre los datos a partir del nivel 8 de
+la cache de la ortofoto del ICC en coordenadas UTM, pero solo aquellas teselas
+que tengan más de <strong>1 semana</strong>, <strong>2 días</strong>, <strong>3 horas</strong> y <strong>4 minutos</strong>.</p>
+<p>De esta forma mantenemos los niveles superiores pero nos deshacemos de aquellas
+teselas que no se visitan desde hace un tiempo.</p>
+</div>
+<div class="section" id="comprobacion">
+<h2>Comprobación<a class="headerlink" href="#comprobacion" title="Permalink to this headline">¶</a></h2>
+<p>Si ejecutamos el comando <tt class="docutils literal"><span class="pre">mapproxy-seed</span></tt> pasando como parámetro la opción
+<tt class="docutils literal"><span class="pre">--summary</span></tt> obtendremos el siguiente resumen de las tareas de sembrado y
+limpieza de teselas.</p>
+<div class="highlight-python"><pre>========== Seeding tasks ==========
+  girona_osm:
+    Seeding cache 'osm_cache' with grid 'GLOBAL_MERCATOR' in EPSG:900913
+    Limited to: 2.67000, 41.88000, 2.97000, 42.07000 (EPSG:4326)
+    Levels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    Overwriting: no tiles
+  girona_icc:
+    Seeding cache 'icc_cache' with grid 'utm_girona' in EPSG:25831
+    Limited to: 2.66902, 41.87953, 2.97009, 42.07047 (EPSG:4326)
+    Levels: [1, 2, 3, 4, 5, 6, 7]
+    Overwriting: no tiles
+========== Cleanup tasks ==========
+  girona:
+    Cleaning up cache 'icc_cache' with grid 'GLOBAL_MERCATOR' in EPSG:900913
+    Limited to: 2.67000, 41.88000, 2.97000, 42.07000 (EPSG:4326)
+    Levels: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    Remove: tiles older than 2013-01-25 15:20:58
+  girona:
+    Cleaning up cache 'icc_cache' with grid 'GLOBAL_GEODETIC' in EPSG:4326
+    Limited to: 2.67000, 41.88000, 2.97000, 42.07000 (EPSG:4326)
+    Levels: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    Remove: tiles older than 2013-01-25 15:20:58
+  girona:
+    Cleaning up cache 'icc_cache' with grid 'utm_girona' in EPSG:25831
+    Limited to: 2.66902, 41.87953, 2.97009, 42.07047 (EPSG:4326)
+    Levels: [8, 9, 10, 11]
+    Remove: tiles older than 2013-01-25 15:20:58</pre>
+</div>
+<p>Por otra parte, si ejecutamos <tt class="docutils literal"><span class="pre">mapproxy</span></tt> después de haber sembrado la caché,
+en su salida por consola se ven las peticiones WMS que está sirviendo, pero
+<strong>no</strong> las peticiones al <em>source</em> que debería estar haciendo (porque todas esas
+peticiones se han hecho durante el proceso de sembrado).</p>
+</div>
+</div>
+<div class="section" id="autores">
+<h1>Autores:<a class="headerlink" href="#autores" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Ejercicio: <em>seeding</em> y borrado de <em>caches</em></a><ul>
+<li><a class="reference internal" href="#sembrar-una-cache">Sembrar una caché</a></li>
+<li><a class="reference internal" href="#sembrado-sencillo">Sembrado sencillo</a></li>
+<li><a class="reference internal" href="#limpiando-caches">Limpiando cachés</a></li>
+<li><a class="reference internal" href="#comprobacion">Comprobación</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#autores">Autores:</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="acelerar-wms.html"
+                        title="previous chapter">Ejercicio: acelerar el acceso a un WMS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mbtiles.html"
+                        title="next chapter">Servir un fichero <em>MBTiles</em> creado con TileMill</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../../_sources/mapproxy/doc/source/ejercicios/seeding.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mbtiles.html" title="Servir un fichero MBTiles creado con TileMill"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="acelerar-wms.html" title="Ejercicio: acelerar el acceso a un WMS"
+             >previous</a> |</li>
+        <li><a href="../../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de MapProxy</a> &raquo;</li>
+          <li><a href="index.html" >Ejercicios</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

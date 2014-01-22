@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Propuesta TALLER: Introducción a MapProxy y configuración básica &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="propuesta-taller-introduccion-a-mapproxy-y-configuracion-basica">
+<h1>Propuesta TALLER: Introducción a MapProxy y configuración básica<a class="headerlink" href="#propuesta-taller-introduccion-a-mapproxy-y-configuracion-basica" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="facilitadores">
+<h2>Facilitadores:<a class="headerlink" href="#facilitadores" title="Permalink to this headline">¶</a></h2>
+<p>Ferrer Matoses, Pedro -Juan
+Sanz Salinas, Jorge Gaspar</p>
+</div>
+<div class="section" id="nivel-basico">
+<h2>Nivel: Básico<a class="headerlink" href="#nivel-basico" title="Permalink to this headline">¶</a></h2>
+<p>Los asistentes deberán conocer conceptos básicos del servicio WMS, manejo básico
+de consola linux (cambiar de carpeta, listar contenidos).</p>
+</div>
+<div class="section" id="descripcion">
+<h2>Descripción:<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<p>MapProxy es un servidor de teselas y proxy WMS Open Source, acelera las
+aplicaciones de mapas a través de la pregeneración de tiles integrando múltiples
+fuentes de datos y almacenándolos en una caché local.</p>
+<p>El objetivo del taller es dar a conocer la aplicación MapProxy; explicando
+cuales son sus funcionalidades básicas, cuales son sus potencialidades, repasar
+algunos casos de éxito y finalmente escribir y desplegar una configuración
+básica con las opciones más comunes.</p>
+<p>La primera parte del taller consistirá en realizar una introducción, instalación
+del software, creación de un proyecto de ejemplo y comprobar su funcionamiento.</p>
+<p>En la segunda parte del taller se revisarán algunos casos de uso de la
+aplicación y se realizarán ejercicios que resuelvan algunas de las dudas más
+frecuentes a la hora de empezar a usar este software.</p>
+</div>
+<div class="section" id="aplicaciones-necesarias">
+<h2>Aplicaciones necesarias:<a class="headerlink" href="#aplicaciones-necesarias" title="Permalink to this headline">¶</a></h2>
+<p>SO Linux de Escritorio basado en Debian/Ubuntu con los siguientes paquetes
+instalados:</p>
+<ul class="simple">
+<li>Navegador web</li>
+<li>Consola</li>
+<li>Editor de ficheros (gedit sirve pero vim its a win!!!)</li>
+<li>Algunas librerías de desarrollo y componentes Python</li>
+</ul>
+</div>
+<div class="section" id="materiales-necesarios">
+<h2>Materiales necesarios:<a class="headerlink" href="#materiales-necesarios" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Equipo con máquina virtual y conexión a internet</li>
+<li>Documentación del taller</li>
+</ul>
+</div>
+<div class="section" id="programa">
+<h2>Programa<a class="headerlink" href="#programa" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bloque-presentacion">
+<h3>Bloque Presentación:<a class="headerlink" href="#bloque-presentacion" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Agenda</li>
+<li>Mover a los no linuxeros</li>
+<li>Introducción de Mapproxy</li>
+<li>Origenes del proyecto</li>
+<li>A donde va</li>
+</ol>
+<p>(~30 min)</p>
+</div>
+<div class="section" id="bloque-instalacion">
+<h3>Bloque Instalación:<a class="headerlink" href="#bloque-instalacion" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Entornos virtuales en Python</li>
+<li>Crear el “venv”</li>
+<li>Instalar componentes</li>
+<li>Archivo de configuración</li>
+<li>Ejecución del servidor de desarrollo</li>
+<li>Ejercicio de instalación</li>
+</ol>
+<p>(~45 min)</p>
+</div>
+<div class="section" id="bloque-configuracion-de-mapproxy">
+<h3>Bloque Configuración de MapProxy:<a class="headerlink" href="#bloque-configuracion-de-mapproxy" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Los archivos de configuración (servicio y seeding)</p>
+</li>
+<li><p class="first">Archivos YAML</p>
+</li>
+<li><dl class="first docutils">
+<dt>Organizado de mayor a menor/de fuera hacia dentro/de como se ofrece a como</dt>
+<dd><p class="first last">se guarda</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Explicar el árbol Sevicio/Capa/Origen/Cache/Grid/Opciones globales y que</dt>
+<dd><p class="first last">las relaciones pueden ser uno a muchos</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Viendo el archivo de configuración del ejercicio anterior, ir explicando (sin
+entrar en detalle que eso se hace luego) los siguientes puntos</p>
+<ol class="arabic simple">
+<li>Servicios -&gt; cómo se configuran (las más habituales)</li>
+<li>Capas<ol class="arabic">
+<li>Origenes de datos</li>
+<li>Estructura en árbol</li>
+</ol>
+</li>
+<li>Caché -&gt; Grid y Source</li>
+<li>Source -&gt; Origenes soportados por MP</li>
+<li>Grids -&gt;</li>
+<li>Globals -&gt; Importante dónde se guarda la caché</li>
+</ol>
+<p>Archivo de Seeding</p>
+<ol class="arabic simple">
+<li>Seeding</li>
+<li>Cleaning</li>
+<li>Coberturas</li>
+</ol>
+<p>(~45 min y descanso)</p>
+</div>
+<div class="section" id="bloque-practico">
+<h3>Bloque Práctico<a class="headerlink" href="#bloque-practico" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Explicar para qué sirve MapProxy</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Casos de uso {pequeña explicación del caso de uso con gráficos}<ol class="arabic">
+<li>Acelerar el acceso a un WMS habitual</li>
+<li>Generar WMS de OSM</li>
+<li>Meter &#8220;Coberturas&#8221; [son ROI de MapProxy]</li>
+<li>Seeding y cleaning</li>
+<li>Reproyectar y cachear un servicio de teselas externo</li>
+</ol>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<p>(~30 min)</p>
+<ol class="arabic">
+<li><p class="first">Ejercicios</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Acelerar el acceso a un WMS habitual y convertir OSM (TMS) en un servicio</dt>
+<dd><p class="first last">WMS. (ejercicio guiado -&gt; 20 min)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Reproyectar y cachear un TMS externo.</p>
+</li>
+<li><p class="first">Seeding y cleaning y Coberturas.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>(~30 min por ejercicio)</p>
+<ol class="arabic">
+<li><p class="first">Opciones de despliegue y cierre</p>
+<ol class="arabic">
+<li><p class="first">Explicar como se despliega en producción</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>como fastcgi</li>
+<li>como aplicacion wsgi</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="first docutils">
+<dt>Conclusiones (repaso de lo que hemos visto e invitación a temas</dt>
+<dd><p class="first last">avanzados)</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<p>(~20 min)</p>
+<ol class="arabic simple">
+<li>Avanzados<ol class="arabic">
+<li>Ofrecer WMTS/TMS de servicios propios</li>
+<li>Restructurar árboles de capas como un nuevo servicio</li>
+<li>Redirigir el getLegendgraphic y el getFeatureInfo</li>
+<li>Publicar servicios diseñados con TileMill (MBTiles o el XML de Mapnik)</li>
+<li>Modo multimapa</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Propuesta TALLER: Introducción a MapProxy y configuración básica</a><ul>
+<li><a class="reference internal" href="#facilitadores">Facilitadores:</a></li>
+<li><a class="reference internal" href="#nivel-basico">Nivel: Básico</a></li>
+<li><a class="reference internal" href="#descripcion">Descripción:</a></li>
+<li><a class="reference internal" href="#aplicaciones-necesarias">Aplicaciones necesarias:</a></li>
+<li><a class="reference internal" href="#materiales-necesarios">Materiales necesarios:</a></li>
+<li><a class="reference internal" href="#programa">Programa</a><ul>
+<li><a class="reference internal" href="#bloque-presentacion">Bloque Presentación:</a></li>
+<li><a class="reference internal" href="#bloque-instalacion">Bloque Instalación:</a></li>
+<li><a class="reference internal" href="#bloque-configuracion-de-mapproxy">Bloque Configuración de MapProxy:</a></li>
+<li><a class="reference internal" href="#bloque-practico">Bloque Práctico</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/mapproxy/doc/propuesta.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

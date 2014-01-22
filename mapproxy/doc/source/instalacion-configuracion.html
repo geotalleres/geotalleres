@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalación de MapProxy &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Taller de MapProxy" href="index.html" />
+    <link rel="next" title="El archivo de configuración mappproxy.yaml" href="elarchivodeconfiguracion.html" />
+    <link rel="prev" title="Presentación" href="presentacion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="elarchivodeconfiguracion.html" title="El archivo de configuración mappproxy.yaml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="presentacion.html" title="Presentación"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Taller de MapProxy</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="instalacion-de-mapproxy">
+<h1>Instalación de MapProxy<a class="headerlink" href="#instalacion-de-mapproxy" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">El siguiente proceso de instalación está orientado a una máquina GNU/Linux de tipo Debian/Ubuntu o similar. En <a class="reference external" href="http://geomaticblog.net/2012/10/10/instalando-mapproxy-en-windows-paso-a-paso/">esta entrada del geomaticblog</a> puede encontrarse unas notas de instalación en <em>Windows</em>.</p>
+</div>
+<div class="section" id="descarga-de-dependencias-del-sistema">
+<h2>Descarga de dependencias del sistema<a class="headerlink" href="#descarga-de-dependencias-del-sistema" title="Permalink to this headline">¶</a></h2>
+<p>Instalar paquetes iniciales:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install tree python-virtualenv</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Las líneas de esta documentación que comiencen con el símbolo
+del dólar indican instrucciones a ejecutar en una consola
+del sistema. Si vas a copiar estas líneas en tu consola debes hacerlo
+<strong>sin incluir el dólar</strong>.</p>
+</div>
+<p>Instalar el resto de dependencias de MapProxy:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install python-imaging \
+  python-yaml libproj0 libgeos-dev python-lxml libgdal-dev \
+  python-shapely build-essential python-dev libjpeg-dev \
+  zlib1g-dev libfreetype6-dev</pre>
+</div>
+<p>Esto descargará unas 200MB en binarios en un sistema nuevo, tardará un buen
+rato...  A partir de aquí todo se ejecuta como un usuario normal. En el caso
+de OSGeo Live muchos de estos paquetes ya están instalados y por tanto solo
+instalará los necesarios.</p>
+</div>
+<div class="section" id="como-instalar-mapproxy">
+<h2>Cómo instalar MapProxy<a class="headerlink" href="#como-instalar-mapproxy" title="Permalink to this headline">¶</a></h2>
+<p>Primero vamos a descargar los materiales del taller. En el home del usuario
+ejecutar:</p>
+<div class="highlight-python"><pre>$ mkdir mapproxy-workshop
+$ wget -O mapproxy-workshop/mapproxy-workshop.pdf "http://bit.ly/mapproxy-workshop"</pre>
+</div>
+<p>Con esto tendremos una nueva carpeta <tt class="docutils literal"><span class="pre">mapproxy-workshop</span></tt> con el documento pdf
+del taller.</p>
+<p>Moverse a la carpeta creada y crear el entorno virtual con:</p>
+<div class="highlight-python"><pre>$ virtualenv venv</pre>
+</div>
+<p>Activar el entorno virtual con:</p>
+<div class="highlight-python"><pre>$ source venv/bin/activate</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Una vez activado el entorno virtual nos aparecerá entre paréntesis en
+el símbolo del sistema el nombre del mismo. Se indica igualmente
+en estas instrucciones para recordarlo.</p>
+</div>
+<p>Instalar la librería de tratamiento de imágenes PIL con:</p>
+<div class="highlight-python"><pre>(venv)$ pip install https://bitbucket.org/olt/pil-2009-raclette/get/default.tar.gz</pre>
+</div>
+<p>Y ya por fin podemos instalar MapProxy:</p>
+<div class="highlight-python"><pre>(venv)$ pip install MapProxy</pre>
+</div>
+<p>Al finalizar podremos comprobar que MapProxy está instalado usando la
+instrucción <tt class="docutils literal"><span class="pre">mapproxy-util</span></tt>:</p>
+<div class="highlight-python"><pre>(venv)$ mapproxy-util --version
+MapProxy 1.5.0</pre>
+</div>
+</div>
+<div class="section" id="crear-un-proyecto-de-demostracion">
+<h2>Crear un proyecto de demostración<a class="headerlink" href="#crear-un-proyecto-de-demostracion" title="Permalink to this headline">¶</a></h2>
+<p>Para comprobar que MapProxy está funcionando correctamente vamos a crear un
+proyecto de ejemplo y lo arrancaremos con el servidor de pruebas que MapProxy
+incorpora. Para ello, nos colocaremos en la carpeta raíz del taller y crearemos
+la carpeta <tt class="docutils literal"><span class="pre">confs</span></tt>. Nos movemos a esa carpeta y ejecutamos la herramienta que
+MapProxy incorpora para diferentes tareas <tt class="docutils literal"><span class="pre">mapproxy-util</span></tt>.:</p>
+<div class="highlight-python"><pre>(venv)$ mapproxy-util create -t base-config test</pre>
+</div>
+<p>Y veremos aparecer en pantalla la confirmación de que ha escrito los archivos:</p>
+<div class="highlight-python"><pre>writing test/mapproxy.yaml
+writing test/seed.yaml</pre>
+</div>
+<p>Esta instrucción ha creado la carpeta <tt class="docutils literal"><span class="pre">test</span></tt> y dentro de ella dos ficheros de
+configuración que veremos en la siguiente parte del taller. El fichero
+<tt class="docutils literal"><span class="pre">mapproxy.yaml</span></tt> configura el servidor de teselas y <tt class="docutils literal"><span class="pre">seed.yaml</span></tt> las tareas de
+pregeneración y/o limpieza de teselas.</p>
+<p>Para ejecutar el servidor de pruebas se utilizará de nuevo <tt class="docutils literal"><span class="pre">mapproxy-util</span></tt>
+esta vez con la tarea de arrancar el servidor de pruebas.:</p>
+<div class="highlight-python"><pre>(venv)$ cd test
+(venv)$ mapproxy-util serve-develop mapproxy.yaml</pre>
+</div>
+<p>Y veremos aparecer en pantalla líneas similares a las siguientes:</p>
+<div class="highlight-python"><pre>[2012-12-06 17:20:09,814] mapproxy.config - INFO - reading: /home/user/mapproxy-workshop/confs/test/mapproxy.yaml
+[2012-12-06 17:20:09,907] mapproxy.service.wmts - WARNING - grid 'global_geodetic_sqrt2' is not compatible with WMTS, skipping for layer 'osm'
+[2012-12-06 17:20:09,909] mapproxy.service.wmts - WARNING - grid 'global_geodetic_sqrt2' is not compatible with WMTS, skipping for layer 'osm'
+[info]  * Running on http://127.0.0.1:8080/
+[info]  * Restarting with reloader: stat() polling
+[2012-12-06 17:20:10,234] mapproxy.config - INFO - reading: /home/user/mapproxy-workshop/confs/test/mapproxy.yaml
+[2012-12-06 17:20:10,321] mapproxy.service.wmts - WARNING - grid 'global_geodetic_sqrt2' is not compatible with WMTS, skipping for layer 'osm'
+[2012-12-06 17:20:10,324] mapproxy.service.wmts - WARNING - grid 'global_geodetic_sqrt2' is not compatible with WMTS, skipping for layer 'osm'</pre>
+</div>
+<p>Si nos dirigimos con nuestro navegador a la dirección web <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>
+podremos ver un mensaje de bienvenida y si hacemos clic en el enlace <em>demo</em>
+MapProxy nos mostrará su interfaz de demostración de servicios. En esta página
+podemos ver diferentes enlaces a ficheros de capacidades y a visores. Podemos
+probar con el servicio <strong>TMS</strong> y ver la capa <tt class="docutils literal"><span class="pre">osm</span></tt> en el sistema de
+coordenadas <tt class="docutils literal"><span class="pre">EPSG:900913</span></tt> en formato <tt class="docutils literal"><span class="pre">png</span></tt>.</p>
+<div class="figure align-center">
+<img alt="Interfaz de demostración de MapProxy" src="../../../_images/demo-test.png" style="width: 50%;" />
+<p class="caption">Interfaz de demostración de MapProxy</p>
+</div>
+<p>Esta interfaz además de permitir navegar por la cartografía, ofrece información
+adicional sobre la <em>cache</em> como las coordenadas de sus límites, los niveles de
+resolución así como el código mínimo necesario para cargar dicha capa usando la
+biblioteca de <em>webmapping</em> <a class="reference external" href="http://www.openlayers.org">OpenLayers</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Para apagar el servidor de pruebas se debe pulsar la combinación de
+teclas <tt class="docutils literal"><span class="pre">Control+C</span></tt>.</p>
+</div>
+<p>Si se observa cuidadosamente la salida de <tt class="docutils literal"><span class="pre">mapproxy-util</span></tt>, se pueden tanto las peticiones que mapproxy hace al <em>source</em>:</p>
+<div class="highlight-python"><pre>[2013-02-03 20:08:15,241] mapproxy.source.request - INFO - GET http://shagrat.icc.es/lizardtech/iserv/ows?layers=orto5m&amp;width=541&amp;version=1.1.1&amp;bbox=482127.752371,4636453.33696,497518.196187,4655724.38706&amp;service=WMS&amp;format=image%2Fpng&amp;styles=&amp;srs=EPSG%3A25831&amp;request=GetMap&amp;height=678 200 759.8 366</pre>
+</div>
+<p>Así como las peticiones que mapproxy <em>responde</em> al cliente:</p>
+<div class="highlight-python"><pre>[info] 127.0.0.1 - - [03/Feb/2013 20:08:23] "GET /service?LAYERS=orto5m-icc&amp;FORMAT=image%2Fpng&amp;SRS=EPSG%3A3857&amp;EXCEPTIONS=application%2Fvnd.ogc.se_inimage&amp;TRANSPARENT=TRUE&amp;SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;STYLES=&amp;BBOX=284862.66336419,5137678.0304892,342979.26470981,5176813.788971&amp;WIDTH=891&amp;HEIGHT=600 HTTP/1.1" 200 -</pre>
+</div>
+<p>Finalmente, podemos comprobar cómo el servidor ha guardado algunas teselas al
+visitar la demostración en la carpeta <tt class="docutils literal"><span class="pre">confs/test/cache_data</span></tt> que podemos ver
+desde la consola si navegamos hasta esa carpeta y ejecutamos el comando
+<tt class="docutils literal"><span class="pre">tree</span></tt>:</p>
+<div class="highlight-python"><pre>$ tree -d -L 3
+.
+└── osm_cache_EPSG900913
+    ├── 01
+    │   └── 000
+    ├── 03
+    │   └── 000
+    ├── 05
+    │   └── 000
+    ├── 07
+    │   └── 000
+    └── tile_locks</pre>
+</div>
+<p>Como vemos ha creado una carpeta para la <em>cache</em> de la capa <tt class="docutils literal"><span class="pre">osm</span></tt> y una
+estructura de carpetas donde se almacenan las imágenes.</p>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p>¿Qué tamaño tienen las imágenes? ¿En qué formato están?
+Si tenemos <em>imagemagick</em> instalado en nuestro ordenador, podemos ver
+información sobre las imágenes del caché rápidamente ejecutando:</p>
+<div class="last highlight-python"><pre>identify `find cache_data | grep png`</pre>
+</div>
+</div>
+</div>
+<div class="section" id="despliegue">
+<h2>Despliegue<a class="headerlink" href="#despliegue" title="Permalink to this headline">¶</a></h2>
+<p>No es objetivo de este taller describir el proceso de despliegue de MapProxy en
+un servidor de producción. MapProxy es una aplicación escrita en Python que
+sigue el estándar <a class="reference external" href="http://www.python.org/dev/peps/pep-3333/">WSGI</a> de publicación de aplicaciones web. Este estándar
+permite publicar aplicaciones de diferentes formas que dependerán en parte de
+nuestro entorno. En la <a class="reference external" href="http://mapproxy.org/docs/1.5.0/deployment.html">documentación de despliegue</a> de MapProxy se detallan las
+más importantes entre las que se podrían destacar:</p>
+<ul class="simple">
+<li>Mediante <a class="reference external" href="http://mapproxy.org/docs/1.5.0/deployment.html#apache-mod-wsgi">Apache + mod_WSGI</a>: en esta configuración se activa este módulo de
+Apache y se configura una sección en la configuración del mismo que apunte a
+la ubicación de nuestro <em>server script</em>. Esta variante funciona tanto en
+Windows como en servidores GNU/Linux.</li>
+<li>Mediante <a class="reference external" href="http://mapproxy.org/docs/1.5.0/deployment.html#gunicorn">Gunicorn</a>: en esta configuración se configura un servicio que arranca
+un servidor gunicorn que se podrá a continuación exponer directamente u
+ofrecer a través de un proxy inverso con otro servidor web como Apache o
+Nginx. Esta variante solo se puede configurar en máquinas GNU/Linux.</li>
+</ul>
+<p>En ambos casos se utiliza un script de arranque de la aplicación WSGI que se
+puede generar con la herramienta <tt class="docutils literal"><span class="pre">mapproxy-util</span></tt>.</p>
+</div>
+<div class="section" id="autores">
+<h2>Autores:<a class="headerlink" href="#autores" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Instalación de MapProxy</a><ul>
+<li><a class="reference internal" href="#descarga-de-dependencias-del-sistema">Descarga de dependencias del sistema</a></li>
+<li><a class="reference internal" href="#como-instalar-mapproxy">Cómo instalar MapProxy</a></li>
+<li><a class="reference internal" href="#crear-un-proyecto-de-demostracion">Crear un proyecto de demostración</a></li>
+<li><a class="reference internal" href="#despliegue">Despliegue</a></li>
+<li><a class="reference internal" href="#autores">Autores:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="presentacion.html"
+                        title="previous chapter">Presentación</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="elarchivodeconfiguracion.html"
+                        title="next chapter">El archivo de configuración mappproxy.yaml</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/mapproxy/doc/source/instalacion-configuracion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="elarchivodeconfiguracion.html" title="El archivo de configuración mappproxy.yaml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="presentacion.html" title="Presentación"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Taller de MapProxy</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

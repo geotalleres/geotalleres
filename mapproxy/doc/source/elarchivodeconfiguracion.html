@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>El archivo de configuración mappproxy.yaml &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../../index.html" />
+    <link rel="up" title="Taller de MapProxy" href="index.html" />
+    <link rel="next" title="El archivo de configuración seed.yaml" href="elarchivodeseeding.html" />
+    <link rel="prev" title="Instalación de MapProxy" href="instalacion-configuracion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="elarchivodeseeding.html" title="El archivo de configuración seed.yaml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="instalacion-configuracion.html" title="Instalación de MapProxy"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Taller de MapProxy</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="el-archivo-de-configuracion-mappproxy-yaml">
+<h1>El archivo de configuración mappproxy.yaml<a class="headerlink" href="#el-archivo-de-configuracion-mappproxy-yaml" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
+<p>Las diferentes funcionalidades de MapProxy se configuran a través de archivos <em>YAML</em> que es un estandar de serialización de datos que se emplea en diversos lenguajes de programación.</p>
+<p>MapProxy se configura a través de los archivos <strong>mappproxy.yaml</strong> y <strong>seed.yaml</strong> definiendo para cada archivo una serie de secciones y de directivas en las secciones.</p>
+<p>En la presente sección hablaremos solo del archivo principal de configuración <em>mappproxy.yaml</em>. Dejaremos el archivo <em>seed.yaml</em> para la sección <a class="reference internal" href="elarchivodeseeding.html#elarchivodeseeding"><em>El archivo de configuración seed.yaml</em></a>.</p>
+<p>Es muy importante respetar la indentación en los archivos, y esta debe realizarse con <strong>espacios</strong> y nunca con tabuladores.</p>
+</div>
+<div class="section" id="mapproxy-yaml">
+<h2>mapproxy.yaml<a class="headerlink" href="#mapproxy-yaml" title="Permalink to this headline">¶</a></h2>
+<p>El archivo está compuesto de las siguientes secciones</p>
+<dl class="docutils">
+<dt><strong>services:</strong></dt>
+<dd>Definición de los servicios que se van a ofrecer.</dd>
+<dt><strong>layers:</strong></dt>
+<dd>Definición de las capas que se servirán. Cada capa puede estar constituida por varias <em>sources</em> y <em>caches</em></dd>
+<dt><strong>caches:</strong></dt>
+<dd>En esta sección se configuran las cachés internas de los servicios.</dd>
+<dt><strong>sources:</strong></dt>
+<dd>Definición de los orígenes de datos de los servicios.</dd>
+<dt><strong>grids:</strong></dt>
+<dd>En esta sección se definen las rejillas sobre las que se alinean las imágenes que genera MapProxy.</dd>
+<dt><strong>globals:</strong></dt>
+<dd>En esta sección generalmente se definen parámetros que son comunes a todas las secciones.</dd>
+</dl>
+<p>El orden en el que aparecen las secciones no es importante.</p>
+<p>El archivo puede subdividirse en varios archivos utilizando la directiva <strong>base</strong>.</p>
+<div class="section" id="services">
+<h3>services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h3>
+<p>MapProxy puede generar los siguientes tipos de servicio:</p>
+<ul class="simple">
+<li>Web Map Service (OGC WMS) y WMS-C [<strong>wms</strong>]</li>
+<li>Tiled Map Services (TMS) [<strong>tms</strong>]</li>
+<li>Keyhole Markup Language (OGC KML) [<strong>kml</strong>]</li>
+<li>Web Map Tile Services (WMTS) [<strong>wmts</strong>]</li>
+<li>MapProxy Demo Service [<strong>demo</strong>]</li>
+</ul>
+<p>Para cada uno se emplea su propia clave, que aparece listada entre corchetes, y en algunos casos se pueden configurar opciones adicionales.</p>
+<p>Para el presente taller utilizaremos el servicio <em>wms</em> que se configura indicando los sistemas de referencia en los que se va a servir (<strong>srs</strong>), los formatos de imagen (<strong>image_formats</strong>) y metadatos adicionales (<strong>md</strong>):</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">wms</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">srs</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;EPSG:3857&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;EPSG:900913&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;EPSG:4258&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;EPSG:4326&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;EPSG:25831&#39;</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">image_formats</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;image/jpeg&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;image/png&#39;</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">md</span><span class="p-Indicator">:</span>
+      <span class="c1"># metadata used in capabilities documents</span>
+      <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Taller MapProxy</span>
+      <span class="l-Scalar-Plain">abstract</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ejercicio de aceleración de WMS y OSM con MapProxy</span>
+      <span class="l-Scalar-Plain">online_resource</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://localhost:8080/service</span>
+      <span class="l-Scalar-Plain">contact</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">person</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Pedro-Juan Ferrer, Iván Sánchez y Jorge Sanz</span>
+        <span class="l-Scalar-Plain">position</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Facilitadores</span>
+        <span class="l-Scalar-Plain">organization</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Geoinquietos Valencia</span>
+        <span class="l-Scalar-Plain">email</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pferrer@osgeo.org , jsanz@osgeo.org y ivan@sanchezortega.es</span>
+      <span class="l-Scalar-Plain">access_constraints</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">Este servicio tiene únicamente objetivos educativos.</span>
+      <span class="l-Scalar-Plain">fees</span><span class="p-Indicator">:</span> <span class="s">&#39;None&#39;</span>
+</pre></div>
+</div>
+<p>Puede encontrarse una descripción más completa de las claves y opciones de los servicios en <a class="reference external" href="http://mapproxy.org/docs/1.5.0/services.html">la página de documentación de services de MapProxy</a></p>
+</div>
+<div class="section" id="layers">
+<h3>layers<a class="headerlink" href="#layers" title="Permalink to this headline">¶</a></h3>
+<p>Las capas definen la información que MapProxy proporciona y están formadas por una lista (una lista de <em>YAML</em>) de pares clave - valor.</p>
+<p>La información mínima que se requiere es el nombre (<strong>name</strong>) como identificador único, el título (<strong>title</strong>) como pequeña descripción y el origen u orígenes de datos (del propio archivo de MapProxy) que la conforman (<strong>source</strong>):</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">layers</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">orto5m-icc-proxy</span>
+    <span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ortofoto 1:5000 del ICC de la zona de Girona</span>
+    <span class="l-Scalar-Plain">sources</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">icc_wms</span><span class="p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Puede encontrarse más información sobre las capas así como otros parámetros configurables de las mismas en <a class="reference external" href="http://mapproxy.org/docs/1.5.0/configuration.html#layers">la sección de layers de la página de configuración de la documentación de MapProxy</a></p>
+</div>
+<div class="section" id="caches">
+<h3>caches<a class="headerlink" href="#caches" title="Permalink to this headline">¶</a></h3>
+<p>En <em>caches</em> se configura la manera en la que se almacena una copia de la información en disco, para no tenerla que volver a pedir al servidor. La información que hay que proporcionar en este caso es el origen de datos (<strong>sources</strong>) y el grid o grids (<strong>grids</strong>) sobre los que queremos guardar los cachés. En caso de haber varios grids se creará una caché separada por cada capa y cada <em>grid</em></p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">caches</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">osm_cache</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">grids</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">utm_girona</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">sources</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">osm_wms</span><span class="p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Puede encontrarse más información sobre las caches así como otros parámetros configurables de los mismos en <a class="reference external" href="http://mapproxy.org/docs/1.5.0/configuration.html#caches">la sección de caches de la página de configuración de la documentación de MapProxy</a></p>
+</div>
+<div class="section" id="sources">
+<h3>sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h3>
+<p>En esta sección se definen los diferentes orígenes de datos de los servicios que ofrece el archivo de MapProxy, se define el nombre del origen de datos y se configuran parámetros del mismo como el tipo (<strong>type</strong>) del que admite <em>wms</em>, <em>tiles</em>, <em>mapserver</em>, <em>mapnik</em> y <em>debug</em>. Cada tipo tiene sus propias configuraciones.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">sources</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">icc_wms</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">wms</span>
+    <span class="l-Scalar-Plain">req</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">url</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">http://shagrat.icc.es/lizardtech/iserv/ows</span>
+      <span class="l-Scalar-Plain">layers</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">orto5m</span>
+    <span class="l-Scalar-Plain">supported_srs</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">&#39;EPSG:4326&#39;</span><span class="p-Indicator">,</span> <span class="s">&#39;EPSG:25831&#39;</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">coverage</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">bbox</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">2.67</span><span class="p-Indicator">,</span><span class="nv">41.88</span><span class="p-Indicator">,</span><span class="nv">2.97</span><span class="p-Indicator">,</span><span class="nv">42.07</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">bbox_srs</span><span class="p-Indicator">:</span> <span class="s">&#39;EPSG:4326&#39;</span>
+</pre></div>
+</div>
+<p>Puede encontrarse una descripción más completa de las claves de cada tipo en <a class="reference external" href="http://mapproxy.org/docs/1.5.0/sources.html">la página de sources de la documentación de MapProxy</a></p>
+</div>
+<div class="section" id="grids">
+<h3>grids<a class="headerlink" href="#grids" title="Permalink to this headline">¶</a></h3>
+<p>La sección de grids define las rejillas que emplea MapProxy a nivel interno para almacenar las imágenes generadas. Hay varias opciones de configuración, muchas pueden emplearse simultáneamente aunque tengan efectos contradictorios y produzcan resultados ambiguos.</p>
+<p>En general lo mínimo a definir <em>debería</em> ser el nombre, el sistema de referencia (<strong>srs</strong>), el <em>bounding box</em> (<strong>bbox</strong>) y las resoluciones (<strong>min_res</strong> y <strong>max_res</strong>) aunque en los grids que están basados en otros grids la lista de parámetros puede ser menor.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">grids</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">utm_girona</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">srs</span><span class="p-Indicator">:</span> <span class="s">&#39;EPSG:25831&#39;</span>
+    <span class="l-Scalar-Plain">bbox</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">2.67</span><span class="p-Indicator">,</span><span class="nv">41.88</span><span class="p-Indicator">,</span><span class="nv">2.97</span><span class="p-Indicator">,</span><span class="nv">42.07</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">bbox_srs</span><span class="p-Indicator">:</span> <span class="s">&#39;EPSG:4326&#39;</span>
+    <span class="l-Scalar-Plain">min_res</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2000</span>
+    <span class="l-Scalar-Plain">max_res</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">.5</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">La resolución se mide en unidades del SRS por pixel. Como estamos usando EPSG:25831, que es una proyección UTM, podemos suponer que la resolución mínima es de 2000 metros/pixel y la máxima de 50 cm/pixel.</p>
+</div>
+<p>Se puede consultar más información sobre las claves en la <a class="reference external" href="http://mapproxy.org/docs/1.5.0/configuration.html#id5">sección de grids de la página de configuración de la documentación de MapProxy</a></p>
+</div>
+<div class="section" id="globals">
+<h3>globals<a class="headerlink" href="#globals" title="Permalink to this headline">¶</a></h3>
+<p>En esta sección se colocan directivas y claves que son comunes a todas las otras secciones o son internas de MapProxy.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">globals</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">cache</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">base_dir</span><span class="p-Indicator">:</span> <span class="s">&#39;cache_data&#39;</span>
+    <span class="l-Scalar-Plain">lock_dir</span><span class="p-Indicator">:</span> <span class="s">&#39;cache_data/locks&#39;</span>
+
+  <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">resampling_method</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">bilinear</span>
+      <span class="l-Scalar-Plain">jpeg_quality</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">90</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="first admonition-title">Attention</p>
+<p class="last">Si el directorio de caché no empieza por una barra &#8220;/&#8221;, se supone que es un directorio <em>relativo</em> a donde se encuentre el fichero <tt class="docutils literal"><span class="pre">mapproxy.yaml</span></tt>.</p>
+</div>
+<p>Una vez más hay amplia información sobre las claves y directivas en la <a class="reference external" href="http://mapproxy.org/docs/1.5.0/configuration.html#globals">sección de globals de la página de configuración de la documentación de MapProxy</a></p>
+</div>
+</div>
+<div class="section" id="relacion-entre-los-componentes">
+<h2>Relación entre los componentes<a class="headerlink" href="#relacion-entre-los-componentes" title="Permalink to this headline">¶</a></h2>
+<p>Para tener una idea global de como interrelacionan los distintos componentes de MapProxy podemos consultar el mapa conceptual de la figura <a class="reference internal" href="#mcmapproxy"><em>Mapa conceptual de interrelacion entre los componentes de MapProxy</em></a>.</p>
+<div class="figure align-center" id="mcmapproxy">
+<img alt="Mapa conceptual de interrelacion entre los componentes de MapProxy" src="../../../_images/Esquema_funcionamiento_MapProxy.png" style="width: 500px;" />
+<p class="caption">Mapa conceptual de interrelacion entre los componentes de MapProxy</p>
+</div>
+</div>
+<div class="section" id="autores">
+<h2>Autores:<a class="headerlink" href="#autores" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">El archivo de configuración mappproxy.yaml</a><ul>
+<li><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li><a class="reference internal" href="#mapproxy-yaml">mapproxy.yaml</a><ul>
+<li><a class="reference internal" href="#services">services</a></li>
+<li><a class="reference internal" href="#layers">layers</a></li>
+<li><a class="reference internal" href="#caches">caches</a></li>
+<li><a class="reference internal" href="#sources">sources</a></li>
+<li><a class="reference internal" href="#grids">grids</a></li>
+<li><a class="reference internal" href="#globals">globals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relacion-entre-los-componentes">Relación entre los componentes</a></li>
+<li><a class="reference internal" href="#autores">Autores:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="instalacion-configuracion.html"
+                        title="previous chapter">Instalación de MapProxy</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="elarchivodeseeding.html"
+                        title="next chapter">El archivo de configuración seed.yaml</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../../_sources/mapproxy/doc/source/elarchivodeconfiguracion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="elarchivodeseeding.html" title="El archivo de configuración seed.yaml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="instalacion-configuracion.html" title="Instalación de MapProxy"
+             >previous</a> |</li>
+        <li><a href="../../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Taller de MapProxy</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
