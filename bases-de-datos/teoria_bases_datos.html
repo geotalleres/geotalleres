@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Teoría de base de datos &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Conceptos básicos de SQL" href="../conceptos-sql/conceptos_sql.html" />
+    <link rel="prev" title="Optimización de GeoTIFF para su publicación" href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../conceptos-sql/conceptos_sql.html" title="Conceptos básicos de SQL"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html" title="Optimización de GeoTIFF para su publicación"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="teoria-de-bd">
+<h1>Teoría de <strong>base de datos</strong><a class="headerlink" href="#teoria-de-bd" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="bases-de-datos-el-enfoque-general">
+<h2>Bases de datos, el enfoque general<a class="headerlink" href="#bases-de-datos-el-enfoque-general" title="Permalink to this headline">¶</a></h2>
+<p>La utilización de <strong>base de datos</strong> se ha extendido dando solución a problemas como</p>
+<blockquote>
+<div><ul class="simple">
+<li>Manejo de grandes volúmenes de datos</li>
+<li>Complejidad en la extracción de estos datos</li>
+<li>Concurrencia en el acceso a datos, accesos simultáneos por varios usuarios</li>
+</ul>
+</div></blockquote>
+<p>Antes el almacenamiento y manejo de la información se realizaba mediante el uso de archivos, formatos tipo texto o archivos con estructuras internas (.dbf) permitían el manejo de esta información. Tenían limitaciones como</p>
+<blockquote>
+<div><ul class="simple">
+<li>Limitaciones en la cantidad de datos que era posible almacenar</li>
+<li>Rendimiento de lectura de estos archivos</li>
+<li>Bloqueo de los archivos con el acceso por usuario</li>
+<li>Imposibilidad de gestionar el versionado de manera sencilla</li>
+</ul>
+</div></blockquote>
+<p>Gracias al desarrollo de la tecnología se democratiza el uso de ordenadores potentes que permiten poner a disposición de las organizaciones equipos potentes que gestionen de manera eficiente las <strong>base de datos</strong> mediante Sistemas gestores de bases de datos (SGBD).</p>
+<p>Una base de datos es</p>
+<blockquote>
+<div><ul class="simple">
+<li>Una gran masa de datos relacionados entre si pertenecientes a un mismo contexto</li>
+<li>Colección estructurada almacenada en un sistema informático</li>
+</ul>
+</div></blockquote>
+<p>Objetivo</p>
+<blockquote>
+<div><ul class="simple">
+<li>Aportar a la organización a la que sirve la información necesaria</li>
+</ul>
+</div></blockquote>
+<p>Funciones</p>
+<blockquote>
+<div><ul class="simple">
+<li>Recogida</li>
+<li>Almacenamiento</li>
+<li>Procesamiento</li>
+<li>Recuperación</li>
+</ul>
+</div></blockquote>
+<p>Propiedades</p>
+<blockquote>
+<div><ul class="simple">
+<li>Estructuradas de manera independiente de las aplicaciones y del soporte de almacenamiento que las contiene (SQL)</li>
+<li>Presentan la menor redundancia posible</li>
+<li>Son compartidas por todos los usuarios de una red</li>
+</ul>
+</div></blockquote>
+<p>Así de esta manera podremos definir unos <strong>Objetivos generales de la base de datos</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Abstracción de la información</li>
+<li>Independencia</li>
+<li>Redundancia mínima</li>
+<li>Consistencia</li>
+<li>Seguridad</li>
+<li>Integridad</li>
+<li>Respaldo y recuperación</li>
+<li>Control de la concurrencia, versionado</li>
+<li>Tiempo de respuesta</li>
+</ul>
+</div></blockquote>
+<p>Debemos diferenciar entre <strong>base de datos</strong> y <strong>SGBD</strong>. La primera se encarga del almacenamiento propiamente dicho y el <strong>SGBD</strong> de la manipulación de la información contenida en la base de datos. Una <strong>base de datos</strong> asimismo contendrá no solo los datos propios, sino que puede almacenar consultas sobre estos datos, vistas, informes...</p>
+<p>El <strong>modelo de datos</strong> es el encargado de reflejar mediante un conjunto de REGLAS y CONCEPTOS la estructura de datos y operaciones aplicables sobre estos datos. Se trata de una abstracción de la realidad. Permite definir el tipo de datos que hay en la <strong>base de datos</strong> y la forma en que se relacionan. Además aplica restricciones entre estos datos, condiciones que deben cumplir estos para reflejar la realidad. Por último se definen en ellos las operaciones de manipulación de los datos de la <strong>base de datos</strong></p>
+<p>Existen modelos de datos jerárquicos, de red, orientados a objetos... Nosotros estudiaremos en Modelo de datos relacional, por ser el más ampliamente utilizado para el modelado de la realidad. Desarrollado en 1970 por Edgar Frank Codd se ha consolidado como el paradigma de los modelos de datos.
+Una base de datos relacional es un conjunto de una o más tablas estructuradas en registros (líneas) y campos (columnas), que se vinculan entre sí por un campo en común, en ambos casos posee las mismas características como por ejemplo el nombre de campo, tipo y longitud; a este campo generalmente se le denomina ID, identificador o clave. A esta manera de construir bases de datos se le denomina modelo relacional y está implementado en los <strong>SGBD</strong> relacionales, como por ejemplo PostgreSQL.</p>
+</div>
+<div class="section" id="tablas-columnas-registros">
+<h2>Tablas, columnas, registros<a class="headerlink" href="#tablas-columnas-registros" title="Permalink to this headline">¶</a></h2>
+<p>Dentro del modelo de datos relacional los conceptos básicos con las que comenzar serán</p>
+<blockquote>
+<div><ul class="simple">
+<li>Tablas</li>
+<li>Columnas</li>
+<li>Registros</li>
+<li>Relaciones</li>
+</ul>
+</div></blockquote>
+<p>Para llegar a comprender la necesidad de estos debemos partir del deseo de almacenar una información determinada, unos datos.
+Los <strong>datos</strong> serian la información que deseamos almacenar. Un dato puede ser</p>
+<blockquote>
+<div><ul class="simple">
+<li>El area de un parque natural</li>
+<li>El nombre de un parque natural</li>
+<li>La dirección de una oficina de correos</li>
+<li>El número de empleados de la oficina de correos</li>
+<li>El nombre de un accidente geográfico</li>
+<li>Las coordenadas de un accidente geográfico</li>
+<li>...</li>
+</ul>
+</div></blockquote>
+<p>Cualquier echo conocido que pueda registrarse y que tenga un significado implícito.
+Una <strong>entidad</strong> es todo aquello de lo cual nos interesa guardar <strong>datos</strong>, por ejemplo</p>
+<blockquote>
+<div><ul class="simple">
+<li>Parques naturales</li>
+<li>Oficinas de correos</li>
+<li>Accidentes geográficos</li>
+<li>...</li>
+</ul>
+</div></blockquote>
+<div class="section" id="practica-1">
+<h3>Práctica 1<a class="headerlink" href="#practica-1" title="Permalink to this headline">¶</a></h3>
+<p>Defina la estructura de una tabla para los Parques Naturales de su país. Para ello detecte la información necesaria susceptible de ser almacenada y estructúrela en una tabla definiendo el nombre de los campos.</p>
+</div>
+</div>
+<div class="section" id="modelizacion-de-bd">
+<h2>Modelización de <strong>base de datos</strong><a class="headerlink" href="#modelizacion-de-bd" title="Permalink to this headline">¶</a></h2>
+<p>Para seguir adelante con el <strong>modelo relacional</strong> antes necesitamos definir algunos conceptos más</p>
+<div class="section" id="entidad">
+<h3>Entidad<a class="headerlink" href="#entidad" title="Permalink to this headline">¶</a></h3>
+<p>Por entidad entendemos un objeto del mundo real que podemos distinguir del resto de objetos y del que nos interesan algunas propiedades.</p>
+<p>En el <strong>modelo relacional</strong>, se puede observar que estas entidades se formarán por atributos o campos referidos a un mismo tema que interesa almacenar. Una entidad debe definir cualquier objeto real o abstracto (que pueda ser pensado) y acerca del cual queremos guardar información. Se representan mediante rectángulos en el <strong>modelo relacional</strong></p>
+<p>Una entidad se correspondería en el <strong>modelo relacional</strong> con una tabla. La tabla a su vez estará formada por filas y columnas que serán</p>
+<blockquote>
+<div><ul class="simple">
+<li>FILAS serían cada unidad necesaria de almacenamiento, que se corresponden con los REGISTROS de la tabla</li>
+<li>COLUMNAS que se corresponden con los CAMPOS, unidad mínima de información, donde podríamos almacenar cada dato referente a una propiedad del REGISTRO</li>
+</ul>
+</div></blockquote>
+<p>Mediante este sencillo esquema podremos definir en nuestro sistema las entidades mínimas necesarias para almacenar información.</p>
+<p>Ejemplo de tablas:</p>
+<div class="highlight-python"><pre>TABLA -&gt; ENTIDAD -&gt; PARQUE NATURAL
+FILA -&gt; REGISTRO -&gt; Parque Nacional de
+COLUMNA -&gt; CAMPO -&gt; 8º 33´´ N 83º 35´´ O</pre>
+</div>
+<p>Ejemplos de entidad</p>
+<p>Algunos ejemplos de entidad son un empleado, un producto o un despacho. También son entidades otros elementos del mundo real de interés, menos tangibles pero igualmente diferenciables del resto de objetos; por ejemplo, una asignatura impartida en una universidad, un préstamo bancario, un pedido de un cliente, etc.</p>
+<p>El término entidad se utiliza tanto para denominar objetos individuales como para hacer referencia a conjuntos de objetos similares de los que nos interesan los mismos atributos; es decir, que, por ejemplo, se utiliza para designar tanto a un empleado concreto de una empresa como al conjunto de todos los empleados de la empresa. Más concretamente, el término entidad se puede referirá instancias u ocurrencias concretas (empleados concretos) o a tipos o clases de entidades (el conjunto de todos los empleados).</p>
+<p>El modelo <strong>ER</strong> proporciona una notación diagramática para representar gráficamente las entidades y sus atributos:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Las entidades se representan con un rectángulo. El nombre de la entidad se escribe en mayúsculas dentro del rectángulo.</li>
+</ul>
+</div></blockquote>
+<img alt="../_images/entidad.png" src="../_images/entidad.png" />
+<p>Ejemplo de Entidad:</p>
+<div class="highlight-python"><pre>PARQUE NATURAL -&gt; Entidad
+OFICINA CORREO -&gt; Entidad
+ACCIDENTE GEOGRÁFICO -&gt; Entidad</pre>
+</div>
+</div>
+<div class="section" id="entidad-debil">
+<h3>Entidad débil<a class="headerlink" href="#entidad-debil" title="Permalink to this headline">¶</a></h3>
+<p>Una entidad débil es una entidad cuyos atributos no la identifican completamente, sino que sólo la identifican de forma parcial. Esta entidad debe participar en una interrelación que ayuda a identificarla.</p>
+<p>Una entidad débil se representa con un rectángulo doble, y la interrelación que ayuda a identificarla se representa con una doble línea.</p>
+<img alt="../_images/entidad_debil.png" src="../_images/entidad_debil.png" />
+<p>Ejemplo entidad débil:</p>
+<div class="highlight-python"><pre>Curso -&gt; Profesor
+Localidad -&gt; Provincia</pre>
+</div>
+</div>
+<div class="section" id="dominio-y-valor">
+<h3>Dominio y valor<a class="headerlink" href="#dominio-y-valor" title="Permalink to this headline">¶</a></h3>
+<p>El conjunto de posibles valores que puede tomar una cierta característica se denomina <strong>dominio</strong></p>
+<img alt="../_images/dominio.png" src="../_images/dominio.png" />
+<p>Ejemplo de dominio:</p>
+<div class="highlight-python"><pre>Inglés pertenece al dominio de Idiomas
+33000ha pertenece al dominio de unidades de medida de superficie</pre>
+</div>
+</div>
+<div class="section" id="atributo">
+<h3>Atributo<a class="headerlink" href="#atributo" title="Permalink to this headline">¶</a></h3>
+<p>Cada una de las propiedades o características que tiene un tipo de entidad o un tipo de relación se denomina <strong>atributo</strong>; estos toman valores de uno o varios dominios.</p>
+<img alt="../_images/atributo.png" src="../_images/atributo.png" />
+<p>Dentro del <strong>modelo relacional</strong> podremos encontrar atributos multivaluados y también opcionales.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Atributo multivaluado: atributos de una entidad que pueden tener más de un valor.</p>
+</li>
+<li><p class="first">Atributo optativo: aquel que puede admitir valores nulos</p>
+</li>
+<li><p class="first">Atributo identificador: Uno o más campos cuyos valores son únicos en cada ejemplar de una entidad</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Deben distinguir a cada ejemplar tendiendo en cuenta las entidades que utiliza el modelo</li>
+<li>Todos los ejemplares de un entidad deben tener el mismo identificador</li>
+<li>Cuando un atributo es importante aun cuando no tenga entidad concreta asociada, entonces se trata de una entidad y no de un atributo</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>Ejemplo de atributo:</p>
+<div class="highlight-python"><pre>Parque Natural -&gt; Superficie
+Parque Natural -&gt; Nombre
+Parque Natural -&gt; Teléfono</pre>
+</div>
+<p>Ejemplo de atributo multivaluado:</p>
+<div class="highlight-python"><pre>Idiomas de un curso -&gt; Inglés, francés...</pre>
+</div>
+</div>
+<div class="section" id="restricciones">
+<h3>Restricciones<a class="headerlink" href="#restricciones" title="Permalink to this headline">¶</a></h3>
+<p>Se trata de limitaciones en las estructuras y en los datos impuestas por el propio modelo o por el desarrollador del modelo. Estas solo deben darse entre las entidades del modelo, nunca entre las relaciones. El modelo obliga a que las entidades tengan un identificador.
+El uso de dominios se puede considerar una restricción sobre los valores. Además existen restricciones estructurales.</p>
+<p>Ejemplo restricción:</p>
+<div class="highlight-python"><pre>* Restricción de dominio::
+        * Un trabajador de Correos de Costa Rica no puede tener un sueldo menor a 75000 colones
+* Integridad referencial::
+        * Si cierra Correos de Costa Rica no puede quedar ninguna Oficina en la base de datos</pre>
+</div>
+</div>
+<div class="section" id="relacion">
+<h3>Relación<a class="headerlink" href="#relacion" title="Permalink to this headline">¶</a></h3>
+<p>Esta se define como la asociación, vinculación o correspondencia entre entidades. Pueden existir mas de una relación entre entidades.</p>
+<img alt="../_images/interrelacion.png" src="../_images/interrelacion.png" />
+<p>Ejemplo de interrelación:</p>
+<div class="highlight-python"><pre>País -&gt; tiene -&gt; Parque Natural</pre>
+</div>
+<p>En una relación se pueden definir los siguientes elementos:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Nombre, es el valor por el que se distingue del resto. En la representación gráfica se correspondería con la etiqueta incluida en el rombo que representa la relación. Aporta semántica al <strong>modelo relacional</strong></p>
+</li>
+<li><p class="first">Grado, se trata del número de entidades que participan en un tipo de relación. Será de grado 2 (o binaria) cuando asocia dos tipos de entidad. Para las relaciones de grado 2 puede existir un caso particular que son las <tt class="docutils literal"><span class="pre">reflexivas</span></tt> o <tt class="docutils literal"><span class="pre">recursivas</span></tt>, en las cuales una entidad se asocia consigo misma.</p>
+<blockquote>
+<div><img alt="../_images/reflexiva.png" src="../_images/reflexiva.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Tipo de correspondencia, es el número máximo de ejemplares que pueden estar asociados, en una determinada relación, con un ejemplar de otro tipo. Para representarlo graficamente se pone una etiqueta 1:1, 1:N o N:M en el lado de la relación que corresponda o bien se orienta el arco de la unión en el sentido 1 a N mediante una flecha</p>
+<blockquote>
+<div><img alt="../_images/tipo_correspondencia.png" src="../_images/tipo_correspondencia.png" />
+</div></blockquote>
+</li>
+<li><p class="first">Papel (&#8220;rol&#8221;), la función que cada uno de los tipos de entidad realiza en la relación. Se representa poniendo el nombre del <strong>papel</strong> en el arco de cada entidad</p>
+<blockquote>
+<div><img alt="../_images/papel.png" src="../_images/papel.png" />
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="cardinalidad-de-un-tipo-de-entidad">
+<h4>Cardinalidad de un tipo de entidad<a class="headerlink" href="#cardinalidad-de-un-tipo-de-entidad" title="Permalink to this headline">¶</a></h4>
+<p>Se define como el número mínimo y máximo de ejemplares de un tipo de entidad que pueden estar interrelacionadas con un ejemplar del otro, u otros tipos de entidad que participan en el tipo de relación. Se representará graficamente mediante un etiqueta del tipo (0,1), (1,1), (0,N) o (1,N).</p>
+<blockquote>
+<div><img alt="../_images/cardinalidad.png" src="../_images/cardinalidad.png" />
+</div></blockquote>
+</div>
+<div class="section" id="atributos-de-las-relaciones">
+<h4>Atributos de las relaciones<a class="headerlink" href="#atributos-de-las-relaciones" title="Permalink to this headline">¶</a></h4>
+<p>Se puede dar el caso de que existan atributos para las relaciones. Cuando esto se da en una relación 1:N este atributo debe llevarse a la entidad de cardinalidad máxima. En el caso de relaciones 1:1 o N:M el atributo se mantiene en la relación</p>
+<p>Ejemplo de atributos en relación:</p>
+<div class="highlight-python"><pre>1:N Curso -&gt; Tiene (Fecha_imparte) -&gt; Edición = Curso -&gt; Tiene -&gt; Edición (Fecha_imparte)
+1:1 Hombre -&gt; Matrimonio (Fecha) -&gt; Mujer</pre>
+</div>
+</div>
+</div>
+<div class="section" id="generalizacion-especializacion">
+<h3>Generalización/Especialización<a class="headerlink" href="#generalizacion-especializacion" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="entidades-ia">
+<h4>Entidades <tt class="docutils literal"><span class="pre">is</span> <span class="pre">a</span></tt><a class="headerlink" href="#entidades-ia" title="Permalink to this headline">¶</a></h4>
+<p>Un tipo de entidad <tt class="docutils literal"><span class="pre">is</span> <span class="pre">a</span></tt> es aquella que se descompone en entidades especializadas. Existen dos tipos de entidades <tt class="docutils literal"><span class="pre">is</span> <span class="pre">a</span></tt>: <strong>especializaciones</strong> y <strong>generalizaciones</strong>.</p>
+<p>Se denomina <strong>especialización</strong> se trata de entidades que se pueden dividir en entidades más concretas. La entidad general comparte con las especializadas sus atributos. Se detecta cuando hay ejemplares para los que no tienen sentido algunos de los atributos mientras que otros si.</p>
+<p>La <strong>generalización</strong> es si se agrupan varias entidades en una o mas entidades generales. Se observa generalización si en varias entidades existen atributos iguales.</p>
+<blockquote>
+<div><img alt="../_images/isa.png" src="../_images/isa.png" />
+</div></blockquote>
+<p>En estas relaciones se puede hablar de herencia en los atributos, superentidad y subentidad. Mediante un circulo en la superentidad indicaremos que esta es optativa.</p>
+<p>También podemos indicar exclusividad, mediante un arco que cruce las lineas de relación. De esta manera indicaremos que la subentidad debe ser única.</p>
+</div>
+</div>
+<div class="section" id="normalizacion">
+<h3>Normalización<a class="headerlink" href="#normalizacion" title="Permalink to this headline">¶</a></h3>
+<p>El proceso de normalización de bases de datos consiste en aplicar una serie de reglas a las relaciones obtenidas tras el paso del modelo entidad-relación al modelo relacional.
+Las bases de datos relacionales se normalizan para:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Evitar la redundancia de los datos.</li>
+<li>Evitar problemas de actualización de los datos en las tablas.</li>
+<li>Proteger la integridad de los datos.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="modelizacion">
+<h3>Modelización<a class="headerlink" href="#modelizacion" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Encontrar entidades (conjuntos de entidades)</li>
+<li>Identificar atributos de las entidades</li>
+<li>Buscar identificadores</li>
+<li>Especificar las relaciones y cardinalidades</li>
+<li>Identificar entidades débiles</li>
+<li>Especializar y generalizar entidades donde sea posible</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<p>Restricciones a la Base de Datos: Integridad y seguridad <a class="reference external" href="http://s3.amazonaws.com/UNED/apuntes/Tema6.pdf">http://s3.amazonaws.com/UNED/apuntes/Tema6.pdf</a></p>
+<p>Bases de datos <a class="reference external" href="http://es.wikipedia.org/wiki/Base_de_datos">http://es.wikipedia.org/wiki/Base_de_datos</a></p>
+<p>Modelos de datos relacional <a class="reference external" href="http://es.wikipedia.org/wiki/Modelo_relacional">http://es.wikipedia.org/wiki/Modelo_relacional</a></p>
+<p>Implantación de sistemas informáticos de gestión. Bases de datos <a class="reference external" href="http://www.slideshare.net/johntoasa2010/teoria-de-base-de-datos">http://www.slideshare.net/johntoasa2010/teoria-de-base-de-datos</a></p>
+<p>Teoría de bases de datos <a class="reference external" href="http://si.ua.es/es/documentos/documentacion/office/access/teoria-de-bases-de-datos.pdf">http://si.ua.es/es/documentos/documentacion/office/access/teoria-de-bases-de-datos.pdf</a></p>
+<p>Diseño conceptual de bases de datos <a class="reference external" href="http://www.jorgesanchez.net/bd/disenoBD.pdf">http://www.jorgesanchez.net/bd/disenoBD.pdf</a> | <a class="reference external" href="http://www.jorgesanchez.net/bd/index.html">http://www.jorgesanchez.net/bd/index.html</a> | <a class="reference external" href="http://www.jorgesanchez.net/bd/ejercicioser.html">http://www.jorgesanchez.net/bd/ejercicioser.html</a></p>
+<p>Diseño de bases de datos relacionales Adoración de Miguel, Mario Pattini y Esperanza Marcos. Editorial Ra-Ma</p>
+<p>Entidades débiles <a class="reference external" href="http://www.dataprix.com/217-entidades-debiles">http://www.dataprix.com/217-entidades-debiles</a></p>
+<p>ACID <a class="reference external" href="http://es.wikipedia.org/wiki/ACID">http://es.wikipedia.org/wiki/ACID</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Teoría de <strong>base de datos</strong></a><ul>
+<li><a class="reference internal" href="#bases-de-datos-el-enfoque-general">Bases de datos, el enfoque general</a></li>
+<li><a class="reference internal" href="#tablas-columnas-registros">Tablas, columnas, registros</a><ul>
+<li><a class="reference internal" href="#practica-1">Práctica 1</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelizacion-de-bd">Modelización de <strong>base de datos</strong></a><ul>
+<li><a class="reference internal" href="#entidad">Entidad</a></li>
+<li><a class="reference internal" href="#entidad-debil">Entidad débil</a></li>
+<li><a class="reference internal" href="#dominio-y-valor">Dominio y valor</a></li>
+<li><a class="reference internal" href="#atributo">Atributo</a></li>
+<li><a class="reference internal" href="#restricciones">Restricciones</a></li>
+<li><a class="reference internal" href="#relacion">Relación</a><ul>
+<li><a class="reference internal" href="#cardinalidad-de-un-tipo-de-entidad">Cardinalidad de un tipo de entidad</a></li>
+<li><a class="reference internal" href="#atributos-de-las-relaciones">Atributos de las relaciones</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#generalizacion-especializacion">Generalización/Especialización</a><ul>
+<li><a class="reference internal" href="#entidades-ia">Entidades <tt class="docutils literal"><span class="pre">is</span> <span class="pre">a</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#normalizacion">Normalización</a></li>
+<li><a class="reference internal" href="#modelizacion">Modelización</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html"
+                        title="previous chapter">Optimización de GeoTIFF para su publicación</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../conceptos-sql/conceptos_sql.html"
+                        title="next chapter">Conceptos básicos de SQL</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/bases-de-datos/teoria_bases_datos.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../conceptos-sql/conceptos_sql.html" title="Conceptos básicos de SQL"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html" title="Optimización de GeoTIFF para su publicación"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

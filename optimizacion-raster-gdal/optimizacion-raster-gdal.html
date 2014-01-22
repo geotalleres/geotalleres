@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Optimización de GeoTIFF para su publicación &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Teoría de base de datos" href="../bases-de-datos/teoria_bases_datos.html" />
+    <link rel="prev" title="Pregeneración de teselas en GeoWebCache" href="../geowebcache/pregeneracion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../bases-de-datos/teoria_bases_datos.html" title="Teoría de base de datos"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="optimizacion-de-geotiff-para-su-publicacion">
+<h1>Optimización de GeoTIFF para su publicación<a class="headerlink" href="#optimizacion-de-geotiff-para-su-publicacion" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Diciembre 2012</td>
+<td><ul class="first last simple">
+<li>Oscar Fonts (<a class="reference external" href="mailto:oscar&#46;fonts&#37;&#52;&#48;geomati&#46;co">oscar<span>&#46;</span>fonts<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>Los datos raster generalmente contienen una gran cantidad de información, mucha más de la que se puede mostrar en una pantalla de una sola vez.
+Para que GeoServer pueda gestionar esta gran cantidad de datos de forma eficiente en diferentes situaciones, es necesario prestar atención a su optimización.</p>
+<p>Imaginemos que queremos mostrar por pantalla una imagen raster de 10.000 x 10.000 píxeles.
+Puesto que la resolución de la pantalla es limitada, sólamente será capaz de mostrar,
+como máximo, un 1% de los píxeles totales del raster.</p>
+<p>En lugar de leer todo el ráster, debemos incorporar mecanismos en que no sea necesario leer completamente todos los datos cada vez que visualizamos el ráster, sino sólamente a la porción de información que podemos visualizar. Esto se hace de dos modos:</p>
+<ul class="simple">
+<li>En situación de &#8220;zoom in&#8221;, es conveniente poder acceder sólo a la porción de imagen que se va a mostrar, descartando el resto.</li>
+<li>En situación de &#8220;zoom out&#8221;, es conveniente disponer de una o varias copias del ráster a resoluciones menores.</li>
+</ul>
+<p>El formato interno de los ficheros GeoTIFF se puede procesar y prepararlo para estas dos situaciones.</p>
+<p>Para ello utilizaremos las librerías GDAL desde la línea de comandos.
+En concreto, veremos las utilidades <tt class="docutils literal"><span class="pre">gdalinfo</span></tt>, <tt class="docutils literal"><span class="pre">gdal_translate</span></tt> y  <tt class="docutils literal"><span class="pre">gdaladdo</span></tt>.</p>
+<div class="section" id="gdalinfo">
+<h2>gdalinfo<a class="headerlink" href="#gdalinfo" title="Permalink to this headline">¶</a></h2>
+<p>Proporciona información sobre ficheros ráster.</p>
+<ul>
+<li><p class="first">Abrir una consola (terminal).</p>
+</li>
+<li><p class="first">Acceder al directorio que contiene las imágenes landsat:</p>
+<div class="highlight-python"><pre>cd pry_workshop_data/raster/landsat/</pre>
+</div>
+</li>
+<li><p class="first">Ejecutar <tt class="docutils literal"><span class="pre">gdalinfo</span></tt> sobre la imagen de 1990:</p>
+<div class="highlight-python"><pre>gdalinfo landsat_1990.tif</pre>
+</div>
+</li>
+</ul>
+<p>Obtendremos información sobre el tamaño del fichero, el sistema de coordenadas, y la manera en que están codificadas las diferentes bandas internamente.</p>
+<p>En concreto, observamos:</p>
+<div class="highlight-python"><pre>Band 1 Block=3069x1 Type=Byte, ColorInterp=Red
+Band 2 Block=3069x1 Type=Byte, ColorInterp=Green
+Band 3 Block=3069x1 Type=Byte, ColorInterp=Blue</pre>
+</div>
+<p>Esto significa que la imagen está guardada en &#8220;tiras&#8221; de 1px de alto.</p>
+</div>
+<div class="section" id="gdal-translate">
+<h2>gdal_translate<a class="headerlink" href="#gdal-translate" title="Permalink to this headline">¶</a></h2>
+<p>Para optimizar el acceso en situaciones de &#8220;zoom in&#8221;, podemos cambiar esta codificación interna
+para que almacene la información en bloques cuadrados de 512x512 píxeles. Ejecutar:</p>
+<div class="highlight-python"><pre>gdal_translate -co "TILED=YES" -co "BLOCKXSIZE=512" -co "BLOCKYSIZE=512" landsat_1990.tif landsat_1990_tiled.tif</pre>
+</div>
+<p>Veamos la información en la nueva imagen:</p>
+<div class="highlight-python"><pre>gdalinfo landsat_1990_tiled.tif</pre>
+</div>
+<p>Ahora obtenemos:</p>
+<div class="highlight-python"><pre>Band 1 Block=512x512 Type=Byte, ColorInterp=Red
+Band 2 Block=512x512 Type=Byte, ColorInterp=Green
+Band 3 Block=512x512 Type=Byte, ColorInterp=Blue</pre>
+</div>
+</div>
+<div class="section" id="gdaladdo">
+<h2>gdaladdo<a class="headerlink" href="#gdaladdo" title="Permalink to this headline">¶</a></h2>
+<p>Para optimizar el acceso en situaciones de &#8220;zoom out&#8221;, podemos añadir, internamente, una serie de imágenes a menor resolución:</p>
+<div class="highlight-python"><pre>gdaaddo landsat_1990_tiled.tif 2 4 8</pre>
+</div>
+<p>Ejecutando de nuevo gdalinfo, observamos que para cada banda aparece esta nueva información:</p>
+<div class="highlight-python"><pre>Overviews of mask band: 1535x1535, 768x768, 384x384</pre>
+</div>
+<p>La ventaja de utilizar la línea de comandos es que se puede crear un <em>script</em>  para automatizar
+este procesado y aplicarlo masivamente a un gran conjunto de ficheros siempre que sea necesario.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Para saber más...</p>
+<ul class="last simple">
+<li><a class="reference external" href="http://www.gdal.org/gdal_utilities.html">GDAL Utilities</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Optimización de GeoTIFF para su publicación</a><ul>
+<li><a class="reference internal" href="#gdalinfo">gdalinfo</a></li>
+<li><a class="reference internal" href="#gdal-translate">gdal_translate</a></li>
+<li><a class="reference internal" href="#gdaladdo">gdaladdo</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../geowebcache/pregeneracion.html"
+                        title="previous chapter">Pregeneración de teselas en GeoWebCache</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../bases-de-datos/teoria_bases_datos.html"
+                        title="next chapter">Teoría de <strong>base de datos</strong></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/optimizacion-raster-gdal/optimizacion-raster-gdal.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../bases-de-datos/teoria_bases_datos.html" title="Teoría de base de datos"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

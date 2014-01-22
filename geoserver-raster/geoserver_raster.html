@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GeoServer: Publicación de datos raster &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Pregeneración de teselas en GeoWebCache" href="../geowebcache/pregeneracion.html" />
+    <link rel="prev" title="GeoServer: Publicación de datos vectoriales" href="../geoserver-vector/geoserver_vector.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-vector/geoserver_vector.html" title="GeoServer: Publicación de datos vectoriales"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geoserver-publicacion-de-datos-raster">
+<h1>GeoServer: Publicación de datos raster<a class="headerlink" href="#geoserver-publicacion-de-datos-raster" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Diciembre 2012</td>
+<td><ul class="first last simple">
+<li>Oscar Fonts (<a class="reference external" href="mailto:oscar&#46;fonts&#37;&#52;&#48;geomati&#46;co">oscar<span>&#46;</span>fonts<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="almacen-de-datos-geotiff">
+<h2>Almacen de datos GeoTIFF<a class="headerlink" href="#almacen-de-datos-geotiff" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>En la página &#8220;Almacenes de datos&#8221;, hacer clic en &#8220;Agregar nuevo almacén&#8221;.</li>
+</ul>
+<p>Los datos raster para el taller se encuentran en formato GeoTIFF.
+A diferencia de los datos vectoriales, no tenemos un almacén de tipo
+&#8220;Directory of spatial files&#8221; para datos raster, así que deberemos crear
+un almacén distinto para cada una de las capas.</p>
+<p>Comencemos con el primer fichero: Una clasificación de coberturas forestales.</p>
+<ul class="simple">
+<li>Escoger &#8220;GeoTIFF&#8221; bajo &#8220;Origenes de datos raster&#8221;.</li>
+<li>En el formulario, utilizar &#8220;unredd&#8221; como espacio de nombres, y &#8220;forest_cover&#8221; como nombre de la capa. Opcionalmente, agregar una descripción.</li>
+<li>Clicar en &#8220;Buscar...&#8221; en &#8220;Parámetros de conexión&#8221;, y navegar hasta el fichero <tt class="file docutils literal"><span class="pre">/home/unredd/Desktop/pry_workshop_data/raster/forest_cover_1990.tif</span></tt>.</li>
+<li>Clicar en &#8220;Guardar&#8221;.</li>
+</ul>
+<p>Se presentará una nueva página con una <em>&#8220;lista&#8221;</em> de las capas a publicar: Sólo aparece un elemento, &#8220;forest_cover_1990&#8221;, puesto que el almacén sólo contempla un fichero GeoTIFF.</p>
+</div>
+<div class="section" id="publicacion-de-una-capa-geotiff">
+<h2>Publicación de una capa GeoTIFF<a class="headerlink" href="#publicacion-de-una-capa-geotiff" title="Permalink to this headline">¶</a></h2>
+<p>Desde esta página,</p>
+<ul class="simple">
+<li>Clicar en &#8220;Publicación&#8221; para publicar.</li>
+</ul>
+<p>Se presentará una página para rellenar los datos sobre la capa, similar a la que ya vimos para la creación de capas vectoriales.</p>
+<p>En esta ocasión, GeoServer ha detectado automáticamente el sistema de referencia de coordenadas de la capa GeoTIFF.
+A diferencia de las capas vectoriales, no hará falta declarar manualmente el SRS y los encuadres, que ya tienen la información necesaria.</p>
+<ul class="simple">
+<li>Clicar en &#8220;Guardar&#8221;.</li>
+<li>Previsualizar la nueva capa &#8220;forest_cover_1990&#8221; en OpenLayers.</li>
+</ul>
+<p>En la misma página de previsualización, clicando sobre cada una de estas áreas, obtenemos una información numérica, <tt class="docutils literal"><span class="pre">PALETTE_INDEX</span></tt>. Se
+distinguen cinco valores distintos: Área sin datos (amarillo), Bosque Atlántico (verde), Bosque Chaqueño (azul), Superficie no
+forestal (magenta), y Masas de Agua (rojo). Esta combinación de colores de alto contraste permite distinguir claramente
+cada clase, pero obviamente no es la que mejor se asocia visualmente con el significado de cada categoría.</p>
+</div>
+<div class="section" id="simbolizacion-raster">
+<h2>Simbolización Raster<a class="headerlink" href="#simbolizacion-raster" title="Permalink to this headline">¶</a></h2>
+<p>Podemos asociar cada uno de los valores a un nuevo color que represente mejor cada clase:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="42%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Valor</th>
+<th class="head">Clase</th>
+<th class="head">Nuevo color deseado</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Área sin datos</td>
+<td>Transparente</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Bosque Atlántico</td>
+<td>Verde oscuro (#005700)</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Bosque Chaqueño</td>
+<td>Verde claro (#01E038)</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Superficie no forestal</td>
+<td>Amarillo pálido (#FFFF9C)</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Masa de Agua</td>
+<td>Azul (#3938FE)</td>
+</tr>
+</tbody>
+</table>
+<p>A partir de esta tabla, crearemos un estilo SLD para la capa ráster.</p>
+<ul class="simple">
+<li>En la página &#8220;Estilos&#8221;, &#8220;Agregar un nuevo estilo&#8221;.</li>
+<li>Asignarle el nombre &#8220;forest_mask&#8221;.</li>
+<li>Dejar el &#8220;Espacio de nombres&#8221; en blanco.</li>
+</ul>
+<p>En lugar de escribir el SLD desde cero, podemos utilizar la opción &#8220;Copiar de un estilo existente&#8221;.</p>
+<ul class="simple">
+<li>Utilizar &#8220;Copiar de un estilo existente&#8221; para cargar el estilo &#8220;raster&#8221;.</li>
+<li>Sustituir el contenido de <tt class="docutils literal"><span class="pre">RasterSymbolizer</span></tt> por este otro:</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;ColorMap</span> <span class="na">type=</span><span class="s">&quot;values&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ColorMapEntry</span> <span class="na">quantity=</span><span class="s">&quot;1&quot;</span> <span class="na">label=</span><span class="s">&quot;Bosque Atlantico&quot;</span> <span class="na">color=</span><span class="s">&quot;#005700&quot;</span> <span class="na">opacity=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;ColorMapEntry</span> <span class="na">quantity=</span><span class="s">&quot;2&quot;</span> <span class="na">label=</span><span class="s">&quot;Bosque Chaco&quot;</span> <span class="na">color=</span><span class="s">&quot;#01E038&quot;</span> <span class="na">opacity=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;ColorMapEntry</span> <span class="na">quantity=</span><span class="s">&quot;3&quot;</span> <span class="na">label=</span><span class="s">&quot;Zona no boscosa&quot;</span> <span class="na">color=</span><span class="s">&quot;#FFFF9C&quot;</span> <span class="na">opacity=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;ColorMapEntry</span> <span class="na">quantity=</span><span class="s">&quot;4&quot;</span> <span class="na">label=</span><span class="s">&quot;Masa de agua&quot;</span> <span class="na">color=</span><span class="s">&quot;#3938FE&quot;</span> <span class="na">opacity=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/ColorMap&gt;</span>
+</pre></div>
+</div>
+<p>Este mapa de color asigna, a cada posible valor, un color y una etiqueta personalizada. El valor &#8220;0&#8221; (Área sin datos), al no aparecer en el mapa, se representará como transparente.</p>
+<ul class="simple">
+<li>&#8220;Validar&#8221; el nuevo SLD, &#8220;Enviar&#8221;, y asignar como estilo por defecto a la capa &#8220;forest_cover_1990&#8221; (en la pestaña &#8220;Publicación&#8221;).</li>
+<li>Previsualizar de nuevo la capa:</li>
+</ul>
+</div>
+<div class="section" id="publicacion-de-un-mosaico-raster-temporal">
+<h2>Publicación de un mosaico Raster temporal<a class="headerlink" href="#publicacion-de-un-mosaico-raster-temporal" title="Permalink to this headline">¶</a></h2>
+<p>Vamos a publicar una capa ráster con una imagen satelital RGB que pueda usarse como capa base de referencia.</p>
+<p>En lugar de un solo fichero GeoTIFF, en esta ocasión disponemos de cuatro imagenes correspondientes a cuatro años distintos: 1990, 2000, 2005 y 2010.</p>
+<p>Vamos a publicar las cuatro imágenes en como una sola capa, componiendo un &#8220;mosaico temporal&#8221;.</p>
+<ul>
+<li><p class="first">En la página &#8220;Almacenes de datos&#8221;, hacer clic en &#8220;Agregar nuevo almacén&#8221;.</p>
+</li>
+<li><p class="first">Escoger &#8220;ImageMosaic&#8221; bajo &#8220;Origenes de datos raster&#8221;.</p>
+</li>
+<li><p class="first">Utilizaremos &#8220;landsat&#8221; como nombre para el almacen de datos.</p>
+</li>
+<li><p class="first">Este tipo de almacen no dispone de la utilidad &#8220;Buscar...&#8221; para indicar la localización de los datos, así que tendremos que escribirla a mano:</p>
+<div class="highlight-python"><pre>file:///home/unredd/Desktop/pry_workshop_data/raster/landsat/</pre>
+</div>
+</li>
+<li><p class="first">Clicar en &#8220;Guardar&#8221;, y luego en &#8220;publicación&#8221; en la página siguiente.</p>
+</li>
+<li><p class="first">Ir a la pestaña &#8220;dimensions&#8221;, para habilitar la dimensión &#8220;Time&#8221;. Escoger &#8220;List&#8221; como opción de presentación.</p>
+</li>
+<li><p class="first">&#8220;Guardar&#8221; y previsualizar la capa.</p>
+</li>
+</ul>
+<div class="section" id="como-se-define-la-dimension-temporal">
+<h3>Cómo se define la dimensión temporal<a class="headerlink" href="#como-se-define-la-dimension-temporal" title="Permalink to this headline">¶</a></h3>
+<p>Si abrimos los contenidos de <tt class="file docutils literal"><span class="pre">pry_workshop_data/raster/landsat</span></tt>, observamos los siguientes ficheros GeoTIFF, que contienen las imágenes para cada instante:</p>
+<p>:file:<tt class="docutils literal"><span class="pre">landsat_1990.tif</span></tt>
+:file:<tt class="docutils literal"><span class="pre">landsat_2000.tif</span></tt>
+:file:<tt class="docutils literal"><span class="pre">landsat_2005.tif</span></tt>
+:file:<tt class="docutils literal"><span class="pre">landsat_2010.tif</span></tt></p>
+<p>Vemos que el nombre de todos los ficheros comienza por las mismas 8 letras <tt class="docutils literal"><span class="pre">landsat_</span></tt>, y que terminan con cuatro cifras indicando el año. De algún modo debemos indicar a GeoServer cómo están formados estos nombres, para que pueda extraer la información temporal a partir de ellos.</p>
+<p>Esto se realiza mediante una serie de ficheros de <cite>properties</cite>:</p>
+<blockquote>
+<div><p><tt class="file docutils literal"><span class="pre">timeregex.properties</span></tt>, cuyo contenido es:</p>
+<div class="highlight-python"><pre>regex=[0-9]{4}</pre>
+</div>
+<p>Indica que la dimensión temporal está formada por 4 cifras.</p>
+<p><tt class="file docutils literal"><span class="pre">indexer.properties</span></tt>, cuyo contenido es:</p>
+<div class="highlight-python"><pre>TimeAttribute=time
+Schema=the_geom:Polygon,location:String,time:java.util.Date
+PropertyCollectors=TimestampFileNameExtractorSPI[timeregex](time)</pre>
+</div>
+<p>Indica que la marca temporal será obtenida aplicando <cite>timeregex</cite>, y se almacenará en un índice como atributo <cite>time</cite>.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Para saber más...</p>
+<ul class="last simple">
+<li>Documentación técnica NFMS: <a class="reference external" href="http://nfms4redd.org/doc/html/geoserver/raster_data/mosaic.html">GeoServer &gt; Advanced Raster data preparation and configuration &gt; Adding an Image Mosaic to GeoServer</a></li>
+<li><a class="reference external" href="http://www.regular-expressions.info/">Página sobre expresiones regulares</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="consumo-del-servicio-temporal">
+<h2>Consumo del servicio temporal<a class="headerlink" href="#consumo-del-servicio-temporal" title="Permalink to this headline">¶</a></h2>
+<p>Ahora que tenemos una capa temporal publicada podemos pasar a formar a consumirla con algún cliente estándar. Desafortunadamente gvSIG no es capaz de consumir la
+capa y QGIS no tiene soporte para la dimensión temporal. Sin embargo, es posible obtener las imágenes en los distintos instantes símplemente
+utilizando el navegador web. Para ello, las llamadas que se hacen deben incluir el parámetro <em>TIME</em>, como en los siguientes ejemplos:</p>
+<div class="highlight-python"><pre>http://168.202.48.83/geoserver/ows?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;BBOX=-13.910569,12.090411,5.395932,32.233551&amp;
+        TIME=2000&amp;CRS=EPSG:4326&amp;WIDTH=923&amp;HEIGHT=885&amp;LAYERS=capacitacion:test&amp;STYLES=&amp;FORMAT=image/png&amp;DPI=96&amp;TRANSPARENT=TRUE
+
+http://168.202.48.83/geoserver/ows?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;BBOX=-13.910569,12.090411,5.395932,32.233551&amp;
+        TIME=2005&amp;CRS=EPSG:4326&amp;WIDTH=923&amp;HEIGHT=885&amp;LAYERS=capacitacion:test&amp;STYLES=&amp;FORMAT=image/png&amp;DPI=96&amp;TRANSPARENT=TRUE
+
+http://168.202.48.83/geoserver/ows?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;BBOX=-13.910569,12.090411,5.395932,32.233551&amp;
+        TIME=2010&amp;CRS=EPSG:4326&amp;WIDTH=923&amp;HEIGHT=885&amp;LAYERS=capacitacion:test&amp;STYLES=&amp;FORMAT=image/png&amp;DPI=96&amp;TRANSPARENT=TRUE</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Para saber más...</p>
+<ul class="last simple">
+<li>Documentación técnica NFMS: <a class="reference external" href="http://nfms4redd.org/doc/html/geoserver/raster_data/processing.html">GeoServer &gt; Advanced Raster data preparation and configuration &gt; Processing with GDAL</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GeoServer: Publicación de datos raster</a><ul>
+<li><a class="reference internal" href="#almacen-de-datos-geotiff">Almacen de datos GeoTIFF</a></li>
+<li><a class="reference internal" href="#publicacion-de-una-capa-geotiff">Publicación de una capa GeoTIFF</a></li>
+<li><a class="reference internal" href="#simbolizacion-raster">Simbolización Raster</a></li>
+<li><a class="reference internal" href="#publicacion-de-un-mosaico-raster-temporal">Publicación de un mosaico Raster temporal</a><ul>
+<li><a class="reference internal" href="#como-se-define-la-dimension-temporal">Cómo se define la dimensión temporal</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#consumo-del-servicio-temporal">Consumo del servicio temporal</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../geoserver-vector/geoserver_vector.html"
+                        title="previous chapter">GeoServer: Publicación de datos vectoriales</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../geowebcache/pregeneracion.html"
+                        title="next chapter">Pregeneración de teselas en GeoWebCache</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/geoserver-raster/geoserver_raster.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-vector/geoserver_vector.html" title="GeoServer: Publicación de datos vectoriales"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

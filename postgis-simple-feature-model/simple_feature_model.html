@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Simple Feature Model &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Importación y exportación de datos" href="../postgis-importacion-exportacion/importacion_exportacion.html" />
+    <link rel="prev" title="PostGIS, características espaciales" href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-importacion-exportacion/importacion_exportacion.html" title="Importación y exportación de datos"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" title="PostGIS, características espaciales"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="simple-feature-model">
+<h1>Simple Feature Model<a class="headerlink" href="#simple-feature-model" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="ogc-y-el-simple-feature-model">
+<h2>OGC y el Simple Feature Model<a class="headerlink" href="#ogc-y-el-simple-feature-model" title="Permalink to this headline">¶</a></h2>
+<p>La OGC o Open Geospatial Consortium, define unas normas que serán utilizadas para la definición posterior de las geometrías. Estas son la SFA y la SQL/MM. Según esta última, las geometrías se definirán en función del siguiente esquema de herencia:</p>
+<blockquote>
+<div><img alt="../_images/ogc_sfs.png" src="../_images/ogc_sfs.png" />
+</div></blockquote>
+<p>Dentro de este esquema se definen tres tipos diferentes de geometrías:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Geometrías abstractas</strong>, que sirven para modelar el comportamiento de las geometrías que heredan de ellas.</li>
+<li><strong>Geometrías básicas</strong>, son las principales de PostGIS, soportadas desde los inicios de este y que soportan un análisis espacial completo.</li>
+<li><strong>Geometrías circulares</strong>, geometrías que soportan tramos circulares</li>
+</ul>
+</div></blockquote>
+<div class="section" id="dimension-de-una-geometria">
+<h3>Dimensión de una geometría<a class="headerlink" href="#dimension-de-una-geometria" title="Permalink to this headline">¶</a></h3>
+<p>El concepto de dimensión se explica de una manera sencilla mediante el uso de algunos ejemplos:</p>
+<blockquote>
+<div><ul class="simple">
+<li>una entidad de tipo punto, tendrá dimensión 0</li>
+<li>una de tipo linea, tendrá dimensión 1</li>
+<li>una de tipo superficie, tendrá una dimensión igual a 2.</li>
+</ul>
+</div></blockquote>
+<p>En PostGIS utilizando una función especial podremos obtener el valor de esta dimensión. Si se trata de una colección de geometrías, el valor que se obtendrá será el de la dimensión de mayor valor de la colección.</p>
+</div>
+<div class="section" id="interior-contorno-y-exterior-de-las-geometrias">
+<h3>Interior, contorno y exterior de las geometrías<a class="headerlink" href="#interior-contorno-y-exterior-de-las-geometrias" title="Permalink to this headline">¶</a></h3>
+<p>Las definiciones las encontraremos en la norma. A continuación se indican los valores para las geometrías básicas.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="34%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tipos de
+geometría</strong></td>
+<td><strong>Interior</strong></td>
+<td><strong>Contorno</strong></td>
+</tr>
+<tr class="row-even"><td>ST_Point</td>
+<td>El propio punto o puntos</td>
+<td>Vacio</td>
+</tr>
+<tr class="row-odd"><td>ST_Linestring</td>
+<td>Puntos que permanecen
+cuando contorno se elimina</td>
+<td>Dos puntos finales</td>
+</tr>
+<tr class="row-even"><td>ST_MultiLinestring</td>
+<td>Idem</td>
+<td>Puntos de contorno de un nº
+impar de elementos</td>
+</tr>
+<tr class="row-odd"><td>ST_Polygon</td>
+<td>Puntos del interior de
+los anillos</td>
+<td>Conjunto de anillos exterior
+e interior (Rings)</td>
+</tr>
+<tr class="row-even"><td>ST_Multipolygon</td>
+<td>Idem</td>
+<td>Conjunto de anillos exterior
+e interior (Rings)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="wkt-y-wkb">
+<h2>WKT y WKB<a class="headerlink" href="#wkt-y-wkb" title="Permalink to this headline">¶</a></h2>
+<p>WKT es el acrónimo en inglés de <tt class="docutils literal"><span class="pre">Well</span> <span class="pre">Known</span> <span class="pre">Text</span></tt>, que se puede definir como una codificación o sintaxis diseñada específicamente para describir objetos espaciales expresados de forma vectorial. Los objetos que es capaz de describir son: puntos, multipuntos, líneas, multilíneas, polígonos, multipolígonos, colecciones de geometría y puntos en 3 y 4 dimensiones. Su especificación ha sido promovida por un organismo internacional, el Open Geospatial Consortium, siendo su sintaxis muy fácil de utilizar, de forma que es muy generalizado su uso en la industria geoinformática. De hecho, WKT es la base de otros formatos más conocidos como el KML utilizado en Google Maps y Google Earth.</p>
+<p>Muchas de las bases de datos espaciales, y en especial Postgresql, utiliza esta codificación cuando se carga la extensión PostGIS. Existe una variante de este lenguaje, pero expresada de forma binaria, denominada WKB (Well Know Binary), también utilizada por estos gestores espaciales, pero con la ventaja de que al ser compilada en forma binaria la velocidad de proceso es muy elevada.</p>
+<p>A efectos prácticos la sintaxis WKT consta de una descripción de los vértices que componen la geometría. Para que esta forma de especificar las geometrías tengan sentido deben de acompañarse de una indicación de la referencia espacial o proyección cartográfica utilizada en dicho vector.</p>
+<p>Ejemplos de sintaxis:</p>
+<div class="highlight-python"><pre>Punto: POINT(30 50)
+Línea: LINESTRING(1 1, 5 5, 10 10, 20 20)
+Multilínea: LINESTRING( (1 1, 5 5, 10 10, 20 20),(20 30, 10 15, 40 5) )
+Polígono simple: POLYGON ((0 0, 10 0, 10 10, 0 0))
+Varios polígono en una sola geometría (multipolígono): POLYGON ( (0 0, 10 0, 10 10, 0 10, 0 0),( 20 20, 20 40, 40 40, 40 20, 20 20) )
+Geometrías de distinto tipo en un sólo elemento: GEOMETRYCOLLECTION(POINT(4 6),LINESTRING(4 6,7 10))
+Punto vacío: POINT EMPTY
+Multipolígono vacío: MULTIPOLYGON EMPTY</pre>
+</div>
+<p>WKB acrónimo de <tt class="docutils literal"><span class="pre">Well</span> <span class="pre">Known</span> <span class="pre">Binary</span></tt> es la variante de este lenguaje, pero expresada de forma binaria, también utilizada por los gestores espaciales, pero con la ventaja de que al ser compilada en forma binaria la velocidad de proceso es muy elevada.</p>
+</div>
+<div class="section" id="tipos-de-datos-espaciales">
+<h2>Tipos de datos espaciales<a class="headerlink" href="#tipos-de-datos-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Una base de datos ordinaria tiene cadenas, fechas y números. Una base de datos
+añade tipos adicionales para georreferenciar los objetos almacenados. Estos
+tipos espaciales abstraen y encapsulan estructuras tales como el contorno y
+la dimensión.</p>
+<p>De forma simplificada, tenemos los siguientes tipos de datos espaciales:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tipo de geometria</strong></td>
+<td><strong>WKT</strong></td>
+</tr>
+<tr class="row-even"><td>POINT</td>
+<td>&#8220;POINT(0 0)&#8221;</td>
+</tr>
+<tr class="row-odd"><td>LINESTRING</td>
+<td>&#8220;LINESTRING(0 0, 1 1, 2 2, 3 4)&#8221;</td>
+</tr>
+<tr class="row-even"><td>POLYGON</td>
+<td>&#8220;POLYGON(0 0, 0 1, 1 1, 0 0)&#8221;</td>
+</tr>
+<tr class="row-odd"><td>MULTIPOINT</td>
+<td>&#8220;MULTIPOINT(0 0, 1 1, 2 2)&#8221;</td>
+</tr>
+<tr class="row-even"><td>MULTILINESTRING</td>
+<td>&#8220;MULTILINESTRING ((10 10, 2 2, 10 40),
+(40 40, 30 30, 40 20, 30 10))&#8221;</td>
+</tr>
+<tr class="row-odd"><td>MULTIPOLYGON</td>
+<td>&#8220;MULTIPOLYGON (((3 2, 0 0, 5 4, 3 2))&#8221;</td>
+</tr>
+<tr class="row-even"><td>GEOMETRY COLLECTION</td>
+<td><dl class="first last docutils">
+<dt>&#8220;GEOMETRYCOLLECTION(</dt>
+<dd>POINT(4 6),LINESTRING(4 6,7 10))&#8221;</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="definicion-de-geometrias-basicas">
+<h2>Definición de geometrías básicas<a class="headerlink" href="#definicion-de-geometrias-basicas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="point-y-multipoint">
+<h3>Point y Multipoint<a class="headerlink" href="#point-y-multipoint" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Geometrias con 0 dimensiones</li>
+<li>El contorno es el conjunto vacio</li>
+<li>Una geometría Multipoint es simple si no tiene ningún punto repetido</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="linestring">
+<h3>Linestring<a class="headerlink" href="#linestring" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Geometrias de 1 dimensión</li>
+<li>Simple si no pasa por el mismo punto dos veces</li>
+<li>Cerrada si su punto inicial y final es el mismo</li>
+<li>El contorno si es cerrada es el conjunto vacio</li>
+<li>El contorno si no es cerrada son su punto final e inicial</li>
+<li>Si es simple y cerrada es un anillo (Ring)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="multilinestring">
+<h3>Multilinestring<a class="headerlink" href="#multilinestring" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Geometrías de 1 dimensión</li>
+<li>Cerrada si todos sus elementos son cerrados</li>
+<li>Si es cerrada su contorno es el conjunto vacio</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="polygon">
+<h3>Polygon<a class="headerlink" href="#polygon" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Geometrías de 2 dimensiones</li>
+<li>Contiene un único interior conectado</li>
+<li>Tiene un anillo exterior y 0 o más anillos interiores</li>
+<li>El contorno es un conjunto de lineas cerradas que se corresponden con sus contornos exterior e interior</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="multipolygon">
+<h3>Multipolygon<a class="headerlink" href="#multipolygon" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>El interior de cualquiera de las superficies que contiene no puede intersecar</li>
+<li>El contorno de cualquiera de las superficies que contiene puede intersecar pero solo en un número finito de puntos</li>
+<li>Son simples</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<p>Well Known Text en Wikipedia <a class="reference external" href="http://en.wikipedia.org/wiki/Well-known_text">http://en.wikipedia.org/wiki/Well-known_text</a></p>
+<p>Lesson 2. Simple Feature Model [EN] <a class="reference external" href="http://manual.linfiniti.com/en/postgis/simple_feature_model.html">http://manual.linfiniti.com/en/postgis/simple_feature_model.html</a></p>
+<p>Simple Feature Acces in Wikipedia [EN] <a class="reference external" href="http://en.wikipedia.org/wiki/Simple_Feature_Access">http://en.wikipedia.org/wiki/Simple_Feature_Access</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Simple Feature Model</a><ul>
+<li><a class="reference internal" href="#ogc-y-el-simple-feature-model">OGC y el Simple Feature Model</a><ul>
+<li><a class="reference internal" href="#dimension-de-una-geometria">Dimensión de una geometría</a></li>
+<li><a class="reference internal" href="#interior-contorno-y-exterior-de-las-geometrias">Interior, contorno y exterior de las geometrías</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wkt-y-wkb">WKT y WKB</a></li>
+<li><a class="reference internal" href="#tipos-de-datos-espaciales">Tipos de datos espaciales</a></li>
+<li><a class="reference internal" href="#definicion-de-geometrias-basicas">Definición de geometrías básicas</a><ul>
+<li><a class="reference internal" href="#point-y-multipoint">Point y Multipoint</a></li>
+<li><a class="reference internal" href="#linestring">Linestring</a></li>
+<li><a class="reference internal" href="#multilinestring">Multilinestring</a></li>
+<li><a class="reference internal" href="#polygon">Polygon</a></li>
+<li><a class="reference internal" href="#multipolygon">Multipolygon</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html"
+                        title="previous chapter"><em>PostGIS</em>, características espaciales</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-importacion-exportacion/importacion_exportacion.html"
+                        title="next chapter">Importación y exportación de datos</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-simple-feature-model/simple_feature_model.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-importacion-exportacion/importacion_exportacion.html" title="Importación y exportación de datos"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" title="PostGIS, características espaciales"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

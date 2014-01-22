@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Importación y exportación de datos &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Indexación espacial" href="../postgis-indexacion-espacial/indexacion_espacial.html" />
+    <link rel="prev" title="Simple Feature Model" href="../postgis-simple-feature-model/simple_feature_model.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-indexacion-espacial/indexacion_espacial.html" title="Indexación espacial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-simple-feature-model/simple_feature_model.html" title="Simple Feature Model"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="importacion-y-exportacion-de-datos">
+<h1>Importación y exportación de datos<a class="headerlink" href="#importacion-y-exportacion-de-datos" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>En este tema nos introduciremos en el uso de herramientas de importación/exportación de datos hasta/desde PostGIS. Se realizará la importación con archivos de tipo ESRI ShapeFile y con datos descargados de OpenStreetMap. Para realizar estos procesos, se dispondrá de herramientas como <tt class="docutils literal"><span class="pre">shp2pgsql</span></tt> que vienen incluidas en PostGIS o se utilizarán otras como <tt class="docutils literal"><span class="pre">osmosis</span></tt> u <tt class="docutils literal"><span class="pre">osm2pgsql</span></tt> descargadas desde los repositorios.</p>
+<div class="section" id="importacion-esri-shapes-mediante-shp2pgsql">
+<h2>Importación ESRI shapes mediante shp2pgsql<a class="headerlink" href="#importacion-esri-shapes-mediante-shp2pgsql" title="Permalink to this headline">¶</a></h2>
+<p>El cargador <tt class="docutils literal"><span class="pre">shp2pgsql</span></tt> convierte archivos ESRI Shape en SQL preparado para la inserción en la base de datos. Se utiliza desde la linea de comandos, aunque existe una versión con interfaz gráfica para el sistema operativo Windows. Se puede acceder a la ayuda de la herramienta mediante:</p>
+<div class="highlight-python"><pre>$ shp2pgsql -?</pre>
+</div>
+<p>Para el uso de la herramienta:</p>
+<div class="highlight-python"><pre>$ shp2pgsql [&lt;opciones&gt;] &lt;ruta_shapefile&gt; [&lt;esquema&gt;.]&lt;tabla&gt;</pre>
+</div>
+<p>entre las opciones encontraremos:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>-s &lt;srid&gt;</strong>  Asigna el sistema de coordenadas. Por defecto será -1</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>(-d|a|c|p)</strong></dt>
+<dd><ul class="first last simple">
+<li><em>-d</em>  Elimina la tabla, la recrea y la llena con los datos del shape</li>
+<li><em>-a</em>  Llena la tabla con los datos del shape. Debe tener el mismo esquema exactamente</li>
+<li><em>-c</em>  Crea una nueva tabla y la llena con los datos. opción por defecto.</li>
+<li><em>-p</em>  Modo preparar, solo crea la tabla</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>-g &lt;geocolumn&gt;</strong> Especifica el nombre de la columna geometría (usada habitualmente en modo <em>-a</em>)</p>
+</li>
+<li><p class="first"><strong>-D</strong> Usa el formato Dump de postgresql</p>
+</li>
+<li><p class="first"><strong>-G</strong> Usa tipo geogrfía, requiere datos de longitud y latitud</p>
+</li>
+<li><p class="first"><strong>-k</strong> Guarda los identificadores en postgresql</p>
+</li>
+<li><p class="first"><strong>-i</strong> Usa int4 para todos los campos integer del dbf</p>
+</li>
+<li><p class="first"><strong>-I</strong> Crea un índice spacial en la columna de la geometría</p>
+</li>
+<li><p class="first"><strong>-S</strong> Genera geometrías simples en vez de geometrías MULTI</p>
+</li>
+<li><p class="first"><strong>-w</strong> Salida en WKT</p>
+</li>
+<li><p class="first"><strong>-W &lt;encoding&gt;</strong> Especifica la codificación de los caracteres. (por defecto : &#8220;WINDOWS-1252&#8221;).</p>
+</li>
+<li><p class="first"><strong>-N &lt;policy&gt;</strong> estrategia de manejo de geometrías NULL (insert*,skip,abort).</p>
+</li>
+<li><p class="first"><strong>-n</strong>  Solo importa el archivo DBF</p>
+</li>
+<li><p class="first"><strong>-?</strong>  Muestra la ayuda</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="section" id="practica">
+<h3>Práctica<a class="headerlink" href="#practica" title="Permalink to this headline">¶</a></h3>
+<p>Realice la importación de los datos proporcionados para el taller. Se le proporcionará asistencia con los parámetros a usar.</p>
+<p>Es conveniente definir el encoding de la base de datos como LATIN1. Se puede hacer con una sentencia update:</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"># update pg_database set encoding=8 where datname=&#8217;base_de_datos&#8217;</p>
+</div>
+<a class="reference internal image-reference" href="../_images/encoding.png"><img alt="../_images/encoding.png" src="../_images/encoding.png" style="width: 230.5px; height: 318.0px;" /></a>
+</div></blockquote>
+<p>Comprobar que se ha actualizado correctamente la tabla <tt class="docutils literal"><span class="pre">geometry_columns</span></tt>.</p>
+<p>Cargar alguno de los ficheros con la GUI de pgAdmin III.</p>
+<p>Vamos a hacer algunos cambios dentro de la tabla <em>barrios_de_bogota</em>. Tras cargar el SHP, ejecutemos estas sentencias desde psql o pgAdmin III:</p>
+<div class="highlight-python"><pre># update barrios_de_bogota set name='Usaquén' where gid = 1;
+update barrios_de_bogota set name='Chapinero' where gid = 2;
+update barrios_de_bogota set name='Santa Fé' where gid = 3;
+update barrios_de_bogota set name='San Cristóbal' where gid = 4;
+update barrios_de_bogota set name='Usme' where gid = 5;
+update barrios_de_bogota set name='Tunjuelito' where gid = 6;
+update barrios_de_bogota set name='Bosa' where gid = 7;
+update barrios_de_bogota set name='Ciudad Kennedy' where gid = 8;
+update barrios_de_bogota set name='Fontibón' where gid = 9;
+update barrios_de_bogota set name='Engativá' where gid = 10;
+update barrios_de_bogota set name='Suba' where gid = 11;
+update barrios_de_bogota set name='Barrios Unidos' where gid = 12;
+update barrios_de_bogota set name='Teusaquillo' where gid = 13;
+update barrios_de_bogota set name='Los Mártires' where gid = 14;
+update barrios_de_bogota set name='Antonio Nariño' where gid = 15;
+update barrios_de_bogota set name='Puente Aranda' where gid = 16;
+update barrios_de_bogota set name='Ciudad Bolívar' where gid = 17;
+update barrios_de_bogota set name='Rafael Uribe' where gid = 18;
+update barrios_de_bogota set name='Sumapáz' where gid = 19;</pre>
+</div>
+<p>Y posteriormente éstas:</p>
+<div class="highlight-python"><pre># ALTER TABLE public.barrios_de_bogota ADD COLUMN population numeric DEFAULT 0;
+update barrios_de_bogota set population=544924 where gid = 1;
+update barrios_de_bogota set population=156274 where gid = 2;
+update barrios_de_bogota set population=107044 where gid = 3;
+update barrios_de_bogota set population=409653 where gid = 4;
+update barrios_de_bogota set population=301621 where gid = 5;
+update barrios_de_bogota set population=302342 where gid = 6;
+update barrios_de_bogota set population=795283 where gid = 7;
+update barrios_de_bogota set population=1344777 where gid = 8;
+update barrios_de_bogota set population=327933 where gid = 9;
+update barrios_de_bogota set population=893944 where gid = 10;
+update barrios_de_bogota set population=1118580 where gid = 11;
+update barrios_de_bogota set population=254162 where gid = 12;
+update barrios_de_bogota set population=138993  where gid = 13;
+update barrios_de_bogota set population=95866 where gid = 14;
+update barrios_de_bogota set population=116648 where gid = 15;
+update barrios_de_bogota set population=257090 where gid = 16;
+update barrios_de_bogota set population=567861 where gid = 17;
+update barrios_de_bogota set population=396711 where gid = 18;
+update barrios_de_bogota set population=20952 where gid = 19;</pre>
+</div>
+<p>Por último, añadamos una nueva columna, que usaremos en un ejercicio posterior:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ALTER TABLE public.barrios_de_bogota ADD COLUMN city text DEFAULT &#39;&#39;;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="exportacion-desde-pg-a-archivos-de-tipo-esri-shapefile">
+<h2>Exportación desde PostGIS a archivos de tipo ESRI Shapefile<a class="headerlink" href="#exportacion-desde-pg-a-archivos-de-tipo-esri-shapefile" title="Permalink to this headline">¶</a></h2>
+<p>Para este proceso utilizaremos la herramienta <tt class="docutils literal"><span class="pre">pgsql2shp</span></tt>. Con ella podremos convertir los datos de nuestra base de datos en archivos ESRI Shape. Igual que para el caso anterior, la herramienta se utilizará desde la linea de comandos:</p>
+<div class="highlight-python"><pre>     $ pgsql2shp [&lt;opciones&gt;] &lt;basedatos&gt; [&lt;esquema&gt;.]&lt;tabla&gt;
+$ pgsql2shp [&lt;opciones&gt;] &lt;basedatos&gt; &lt;consulta&gt;</pre>
+</div>
+<p>las opciones serán:</p>
+<div class="highlight-python"><pre>* **-f &lt;nombrearchivo&gt;**  Especifica el nombre del archivo a crear
+* **-h &lt;host&gt;**  Indica el servidor donde realizará la conexión
+* **-p &lt;puerto&gt;**  Permite indicar el puerto de la base de datos
+* **-P &lt;password&gt;**  Contraseña
+* **-u &lt;user&gt;** Usuario
+* **-g &lt;geometry_column&gt;** Columna de geometría que será exportada</pre>
+</div>
+<div class="section" id="id1">
+<h3>Práctica<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Exportar algún fichero de la base de datos a Shapefile otra vez.</div></blockquote>
+</div>
+</div>
+<div class="section" id="gdal-ogr">
+<h2>GDAL/OGR<a class="headerlink" href="#gdal-ogr" title="Permalink to this headline">¶</a></h2>
+<p>GDAL/OGR es una librería de lectura y escritura de formatos geoespaciales, tanto <em>Raster</em> con GDAL como <em>Vectorial</em> con OGR. Se trata de una librería de software libre ampliamente utilizada.</p>
+<div class="section" id="ogrinfo">
+<h3>ogrinfo<a class="headerlink" href="#ogrinfo" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">ogrinfo</span></tt> obtiene información de los datos vectoriales. Podremos utilizar esta herramienta para la obtención de esta información de las tablas que tenemos almacenadas en la base de datos. El uso se realiza a través de la consola:</p>
+<div class="highlight-python"><pre>$ ogrinfo [&lt;opciones&gt;] &lt;ruta fuente datos&gt;</pre>
+</div>
+<p>Entre las opciones destacaremos:</p>
+<div class="highlight-python"><pre>* **-where** muestra los datos de las filas que cumplan la clausula
+* **-sql** filtra la información mediante consultas SQL
+* **-geom={YES/NO/SUMMARY}** modifica la visualización de la información de la columna geométrica</pre>
+</div>
+<p>Para utilizar <tt class="docutils literal"><span class="pre">ogrinfo</span></tt> contra nuestra base de datos, debemos utilizar la opción <tt class="docutils literal"><span class="pre">PG:</span></tt> indicandole la cadena de conexión:</p>
+<div class="highlight-python"><pre>$ ogrinfo PG:"host=localhost user=usuario dbname=basedatos password=contraseña"</pre>
+</div>
+<p>seguidamente incluiremos cualquiera de las opciones anteriores. De esta manera por ejemplo podremos indicar:</p>
+<div class="highlight-python"><pre>$ ogrinfo PG:"host=localhost user=usuario dbname=basedatos password=contraseña" -sql "&lt;una consulta&gt;" &lt;fuente de datos&gt;</pre>
+</div>
+</div>
+<div class="section" id="ogr2ogr">
+<h3>ogr2ogr<a class="headerlink" href="#ogr2ogr" title="Permalink to this headline">¶</a></h3>
+<p>OGR es capaz de convertir a PostGIS todos los formatos que maneja, y será capaz de exportar desde PostGIS todos aquellos en los que tiene permitida la escritura. Ejecutando:</p>
+<div class="highlight-python"><pre>$ ogr2ogr --formats</pre>
+</div>
+<p>podremos comprobar los formatos que maneja la herramienta. La étiqueta <tt class="docutils literal"><span class="pre">write</span></tt> nos indica si podemos crear este tipo de formatos. Hemos de tener en cuenta el formato de salida para poder manejar los parametros especiales de cada formato.</p>
+<p>En la página principal de GDAL podremos encontrar un listado de todas las opciones que nos permite manejar el comando. Detallamos a continuación algunas de las principales:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>-select &lt;lista de campos&gt;</strong> lista separada por comas que indica la lista de campos de la capa de origen que se quiere exportar</li>
+<li><strong>-where &lt;condición&gt;</strong> consulta a los datos de origen</li>
+<li><strong>-sql</strong> posibilidad de insertar una consulta más compleja</li>
+</ul>
+</div></blockquote>
+<p>Otras opciones en referencia al formato de destino (las anteriores hacían referencia al de origen):</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>-f &lt;driver ogr&gt;</strong> formato del fichero de salida</li>
+<li><strong>-lco VARIABLE=VALOR</strong> Variables propias del driver de salida</li>
+<li><strong>-a_srs &lt;srid&gt;</strong> asigna el SRID especificado a la capa de salida</li>
+<li><strong>-t_srs &lt;srid&gt;</strong> Reproyecta la capa de salida según el SRID especificado</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h3>Práctica<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Vamos a cargar en PostGIS directamente un fichero KML y un fichero CSV.</p>
+<div class="section" id="cargar-fichero-kml">
+<h4>Cargar fichero KML<a class="headerlink" href="#cargar-fichero-kml" title="Permalink to this headline">¶</a></h4>
+<p>Descargar de <a class="reference external" href="http://forest.jrc.ec.europa.eu/effis/applications/firenews/kml/?&amp;from_date=08/09/2013&amp;to_date=15/09/2013">http://forest.jrc.ec.europa.eu/effis/applications/firenews/kml/?&amp;from_date=08/09/2013&amp;to_date=15/09/2013</a> el fichero firenews.kml</p>
+<p>A continuación, cargarlo en PostGIS con esta instrucción:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ogr2ogr -a_srs epsg:4326 -f &quot;PostgreSQL&quot; PG:&quot;dbname=taller_semana_geomatica host=localhost user=postgres password=postgres port=5432&quot; firenews.kml</span>
+</pre></div>
+</div>
+<p>Ya tendríamos el fichero cargado.</p>
+</div>
+<div class="section" id="cargar-fichero-csv">
+<h4>Cargar fichero CSV<a class="headerlink" href="#cargar-fichero-csv" title="Permalink to this headline">¶</a></h4>
+<p>Vamos a usar el fichero con los incendios detectados en las últimas 24 horas por Modis. Está en <a class="reference external" href="http://firms.modaps.eosdis.nasa.gov/active_fire/text/Global_24h.csv">http://firms.modaps.eosdis.nasa.gov/active_fire/text/Global_24h.csv</a></p>
+<p>Ahora, podemos elegir una de dos opciones:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Crear a mano una tabla con los campos necesarios y usar el comando COPY de PostgreSQL para copiar directamente el CSV.</li>
+<li>Crear un fichero VRT a partir del CSV y cargar con ogr2ogr dicho fichero VRT</li>
+</ul>
+</div></blockquote>
+<p>Para el primer caso, la tabla a crear es como sigue:</p>
+<div class="highlight-python"><pre># CREATE TABLE incendios_modis_24h (
+ogc_fid integer NOT NULL,
+the_geom public.geometry(Point,3857),
+latitude character varying,
+longitude character varying,
+brightness character varying,
+scan character varying,
+track character varying,
+acq_date character varying,
+acq_time character varying,
+satellite character varying,
+confidence character varying,
+version character varying,
+bright_t31 character varying,
+frp character varying
+);</pre>
+</div>
+<p>Y la línea a ejecutar desde psql o pgAdmin III:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># COPY incendios_modis24h FROM &#39;/path/to/csv/file/incendios_modis.csv&#39; WITH DELIMITER &#39;;&#39; CSV HEADER;</span>
+</pre></div>
+</div>
+<p>Para el caso de usar ogr2ogr, primero creamos el VRT:</p>
+<div class="highlight-python"><pre>&lt;OGRVRTDataSource&gt;
+        &lt;OGRVRTLayer name="Global_24h"&gt;
+                &lt;SrcDataSource&gt;Global_24h.csv&lt;/SrcDataSource&gt;
+                &lt;GeometryType&gt;wkbPoint&lt;/GeometryType&gt;
+                &lt;LayerSRS&gt;EPSG:4326&lt;/LayerSRS&gt;
+                &lt;GeometryField encoding="PointFromColumns" x="longitude" y="latitude"/&gt;
+        &lt;/OGRVRTLayer&gt;
+&lt;/OGRVRTDataSource&gt;</pre>
+</div>
+<p>Y luego ejecutamos ogr2ogr:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ogr2ogr -a_srs epsg:4326 -f &quot;PostgreSQL&quot; PG:&quot;dbname=taller_semana_geomatica host=localhost user=postgres password=postgres port=5432&quot; incendios_modis.vrt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importacion-datos-osm-a-postgis">
+<h2>Importación datos OSM a PostGIS<a class="headerlink" href="#importacion-datos-osm-a-postgis" title="Permalink to this headline">¶</a></h2>
+<p>OpenStreetMap (también conocido como OSM) es un proyecto colaborativo para crear mapas libres y editables.</p>
+<p>Los mapas se crean utilizando información geográfica capturada con dispositivos GPS móviles, ortofotografías y otras fuentes libres. Esta cartografía, tanto las imágenes creadas como los datos vectoriales almacenados en su base de datos, se distribuye bajo licencia abierta Open Database Licence (ODbL).</p>
+<p>OSM dispone de un modelo de datos particular que no responde al modelo característico de los SIG. Este está compuesto de:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Node</li>
+<li>Way</li>
+<li>Relation</li>
+</ul>
+</div></blockquote>
+<p>a diferencia de las geometrías características como:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Punto</li>
+<li>Linea</li>
+<li>Poligono</li>
+</ul>
+</div></blockquote>
+<p>una característica particular es la ausencia de polígonos dentro del modelo, estos se realizan mediante la asignación de una relación a una linea cerrada. Esta particularidad no impide que los datos de OSM puedan ser adaptados al modelo de geometrías normal mediante cargadores de datos OSM. A continuación se presentan dos de los más utilizados</p>
+<div class="section" id="osm2pgsql">
+<h3>osm2pgsql<a class="headerlink" href="#osm2pgsql" title="Permalink to this headline">¶</a></h3>
+<p>Mediante el uso de este programa podremos incorporar en nuestra base de datos los datos obtenidos desde OSM. Una vez que hemos realizado la importación, aparecerán en nuestra base de datos las tablas que serán el resultado de esta importación:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>planet_osm_point</em></li>
+<li><em>planet_osm_line</em></li>
+<li><em>planet_osm_polygon</em></li>
+<li><em>planet_osm_roads</em></li>
+</ul>
+</div></blockquote>
+<p>Al disponer el modelo de OSM de cientos de etiquetas, la importación crea en las tablas un gran número de campos de los que la mayoría tendrán valor NULL.</p>
+<p>La ejecución se realiza desde la consola:</p>
+<div class="highlight-python"><pre>$ osm2pgsql [opciones] ruta_fichero.osm otro_fichero.osm
+$ osm2pgsql [opciones] ruta_planet.[gz, bz2]</pre>
+</div>
+<p>algunas de las opciones se detallan a continuación:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>-H</em> Servidor PostGIS</li>
+<li><em>-P &lt;puerto&gt;</em> Puerto</li>
+<li><em>-U &lt;usuario&gt;</em> Usuario</li>
+<li><em>-W</em> pregunta la password del usuario</li>
+<li><em>-d &lt;base_de_datos&gt;</em> base de datos de destino</li>
+<li><em>-a</em> añade datos a las tablas importadas anteriormente</li>
+<li><em>-l</em> almacena las coordenadas en latitud/longitug en lugar de Spherical Mercator</li>
+<li><em>-s</em> utiliza tablas secundarias para la importación en lugar de hacerlo en memoria</li>
+<li><em>-S &lt;fichero_de_estilos&gt;</em> ruta al fichero que indica las etiquetas de OSM que se quiere importar</li>
+<li><em>-v</em> modo verborrea, muestra la salida de las operaciones por consola</li>
+</ul>
+</div></blockquote>
+<p>En caso de no disponer del SRID 900913 en nuestro PostGIS podremos utilizar la definición que hay de él en <tt class="docutils literal"><span class="pre">osm2pgsql</span></tt>. Simplemente ejecutaremos el script 900913.sql</p>
+</div>
+<div class="section" id="id3">
+<h3>Práctica<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Vamos a exportar datos de OpenStreetMap y cargarlos en PostGIS con osm2pgsql. Para ello, vamos primero a <a class="reference external" href="http://www.openstreetmap.org">http://www.openstreetmap.org</a>/export#</p>
+<p>Veremos que, si el área a exportar es muy grande, la página nos redireccionará a servicios de descarga masiva, como <a class="reference external" href="http://download.geofabrik.de/south-america/colombia.html">http://download.geofabrik.de/south-america/colombia.html</a>. De hecho, el enlace para descargar los datos de Colombia es <a class="reference external" href="http://download.geofabrik.de/south-america/colombia-latest.osm.bz2">http://download.geofabrik.de/south-america/colombia-latest.osm.bz2</a>. Pero, <strong>ojo</strong>: si hay muchos datos y la máquina no es muy potente, puede tardar mucho en cargarlos.</p>
+<p>Una vez hemos descargado lo que queremos, vamos a proceder a activar en PostGIS la extensión hstore. Esto permite la creación de una nueva estructura de almacenamiento en PostGIS llamada hstore. No es más que una estructura de datos pensada para almacenar en una columna un dato de tipo <em>clave =&gt; valor</em>. Gracias a ello, podremos usar etiquetas en las consultas que lancemos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT way, tags FROM planet_osm_polygon WHERE (tags -&gt; &#39;landcover&#39;) = &#39;trees&#39;;</span>
+</pre></div>
+</div>
+<p>Para tener más información, ir a <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Osm2pgsql#hstore">http://wiki.openstreetmap.org/wiki/Osm2pgsql#hstore</a></p>
+<p>Para cargar en PostGIS el fichero exportado, ejecutaríamos esta orden (<strong>no ejecutarla</strong>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># osm2pgsql -d taller_semana_geomatica -U postgres --hstore colombia-latest.osm</span>
+</pre></div>
+</div>
+<p>El problema es que eso cargaría nuestros datos en una proyección 900913 (WebMercator). Si lo queremos en 4326 (WGS84), la instrucción es:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># osm2pgsql -d taller_semana_geomatica -U postgres --latlong --hstore colombia-latest.osm</span>
+</pre></div>
+</div>
+<p>Si tras ejecutar la instrucción obtenemos este error:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Projection code failed to initialise</span>
+</pre></div>
+</div>
+<p>El problema es que osm2pgsql no sabe dónde buscar las definiciones de los sistemas de coordenadas. Debemos definir la variable de entorno <em>PROJ_LIB</em> para que apunte donde es debido. En Linux sería:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># export PROJ_LIB=/usr/local/share/proj</span>
+</pre></div>
+</div>
+<p>Esto cargaría los datos de OSM en nuestra base de datos. Si nos fijamos en la tabla de polígonos, vemos que tienen definido un campo <em>population</em>. Desde QGIS podemos configurar para que solo nos muestre los polígonos con los datos de población, y compararlos con los que hemos metido a mano en la tabla <em>barrios_de_bogota</em>, actualizados en 1998.</p>
+</div>
+<div class="section" id="osmosis">
+<h3>osmosis<a class="headerlink" href="#osmosis" title="Permalink to this headline">¶</a></h3>
+<p>Esta herramienta también realiza la importación de datos desde OSM a PostGIS, pero a diferencia de la anterior, esta mantiene las relaciones entre los objetos de OSM importados. Se recomienda acudir a la documentación de la herramienta para comprender mejor su uso.</p>
+</div>
+</div>
+<div class="section" id="consulta-mediante-visores-web-y-sig-escritorio">
+<h2>Consulta mediante visores web y SIG escritorio<a class="headerlink" href="#consulta-mediante-visores-web-y-sig-escritorio" title="Permalink to this headline">¶</a></h2>
+<p>Mediante el uso de diferentes Software tanto de escritorio como de entorno web, accederemos a los datos que hemos importado y podremos tanto visualizarlos como crear servicios web adaptados de estos datos.</p>
+<div class="section" id="practicas">
+<h3>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h3>
+<p>Operaciones con QGIS: mostrar tablas de PostGIS, etiquetar, colorear, etc.</p>
+</div>
+</div>
+<div class="section" id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<p>ogr2ogr [EN] <a class="reference external" href="http://www.gdal.org/ogr2ogr.html">http://www.gdal.org/ogr2ogr.html</a></p>
+<p>GDAL [EN] <a class="reference external" href="http://www.gdal.org/">http://www.gdal.org/</a></p>
+<p>OpenStreetMap en Wikipedia <a class="reference external" href="http://es.wikipedia.org/wiki/OpenStreetMap">http://es.wikipedia.org/wiki/OpenStreetMap</a></p>
+<p>OpenStreetMap <a class="reference external" href="http://www.openstreetmap.org">http://www.openstreetmap.org</a></p>
+<p>osm2phgsql [EN] <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Osm2pgsql">http://wiki.openstreetmap.org/wiki/Osm2pgsql</a></p>
+<p>osmosis [EN] <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Osmosis">http://wiki.openstreetmap.org/wiki/Osmosis</a></p>
+<p>Cambiar encoding de UTF8 a Latin1 en PostGIS <a class="reference external" href="http://ingdesistemasvzla.blogspot.com.es/2011/02/cambiar-encoding-de-utf-8-latin1-en.html">http://ingdesistemasvzla.blogspot.com.es/2011/02/cambiar-encoding-de-utf-8-latin1-en.html</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Importación y exportación de datos</a><ul>
+<li><a class="reference internal" href="#importacion-esri-shapes-mediante-shp2pgsql">Importación ESRI shapes mediante shp2pgsql</a><ul>
+<li><a class="reference internal" href="#practica">Práctica</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exportacion-desde-pg-a-archivos-de-tipo-esri-shapefile">Exportación desde PostGIS a archivos de tipo ESRI Shapefile</a><ul>
+<li><a class="reference internal" href="#id1">Práctica</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gdal-ogr">GDAL/OGR</a><ul>
+<li><a class="reference internal" href="#ogrinfo">ogrinfo</a></li>
+<li><a class="reference internal" href="#ogr2ogr">ogr2ogr</a></li>
+<li><a class="reference internal" href="#id2">Práctica</a><ul>
+<li><a class="reference internal" href="#cargar-fichero-kml">Cargar fichero KML</a></li>
+<li><a class="reference internal" href="#cargar-fichero-csv">Cargar fichero CSV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#importacion-datos-osm-a-postgis">Importación datos OSM a PostGIS</a><ul>
+<li><a class="reference internal" href="#osm2pgsql">osm2pgsql</a></li>
+<li><a class="reference internal" href="#id3">Práctica</a></li>
+<li><a class="reference internal" href="#osmosis">osmosis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#consulta-mediante-visores-web-y-sig-escritorio">Consulta mediante visores web y SIG escritorio</a><ul>
+<li><a class="reference internal" href="#practicas">Prácticas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-simple-feature-model/simple_feature_model.html"
+                        title="previous chapter">Simple Feature Model</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-indexacion-espacial/indexacion_espacial.html"
+                        title="next chapter">Indexación espacial</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-importacion-exportacion/importacion_exportacion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-indexacion-espacial/indexacion_espacial.html" title="Indexación espacial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-simple-feature-model/simple_feature_model.html" title="Simple Feature Model"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

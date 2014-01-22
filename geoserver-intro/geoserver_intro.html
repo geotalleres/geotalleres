@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introducción a GeoServer &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="GeoServer: Publicación de datos vectoriales" href="../geoserver-vector/geoserver_vector.html" />
+    <link rel="prev" title="Introducción a Linux" href="../linux/linux.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../geoserver-vector/geoserver_vector.html" title="GeoServer: Publicación de datos vectoriales"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../linux/linux.html" title="Introducción a Linux"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduccion-a-geoserver">
+<h1>Introducción a GeoServer<a class="headerlink" href="#introduccion-a-geoserver" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Diciembre 2012</td>
+<td><ul class="first last simple">
+<li>Oscar Fonts (<a class="reference external" href="mailto:oscar&#46;fonts&#37;&#52;&#48;geomati&#46;co">oscar<span>&#46;</span>fonts<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>La interfaz web de administración de GeoServer está accesible en:</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost/geoserver/">http://localhost/geoserver/</a></div></blockquote>
+<p>Nótese que es posible acceder remotamente a dicha interfaz, de tal manera que si la dirección de la máquina es por ejemplo <em>172.16.250.131</em>, es
+posible acceder desde cualquier otra máquina:</p>
+<div class="highlight-python"><pre>http://172.16.250.131/geoserver/</pre>
+</div>
+<p>Para poder cambiar la configuración, es necesario identificarse con el usuario <strong>admin</strong> y contraseña <strong>geoserver</strong>.</p>
+<p>La columna de la izquerda reune los enlaces hacia todas las páginas de configuración.</p>
+<p>En este apartado veremos brevemente la primera sección, <strong>Servidor</strong>.</p>
+<div class="section" id="estado-del-servidor">
+<h2>Estado del Servidor<a class="headerlink" href="#estado-del-servidor" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/gs_estado_del_servidor.png" src="../_images/gs_estado_del_servidor.png" />
+<div class="section" id="el-directorio-de-datos">
+<h3>El directorio de datos<a class="headerlink" href="#el-directorio-de-datos" title="Permalink to this headline">¶</a></h3>
+<p>La información más importante de esta primera página es el <strong>directorio de datos</strong>, técnicamente conocido como <cite>GEOSERVER_DATA_DIR</cite>. Indica el directorio donde se almacenará toda la información relativa a la configuración de GeoServer. Por tanto, es una localización de la que convendrá realizar copias de seguridad.</p>
+<p>En nuestro caso, el directorio de datos es <tt class="file docutils literal"><span class="pre">/var/geoserver/data</span></tt>.</p>
+</div>
+<div class="section" id="maquina-java-y-jai-nativo">
+<h3>Máquina Java y JAI nativo<a class="headerlink" href="#maquina-java-y-jai-nativo" title="Permalink to this headline">¶</a></h3>
+<p>Para un óptimo rendimiento de GeoServer, es recomendable utilizar la máquina virtual de java de Oracle 1.6, e instalar las librerías nativas JAI y JAI ImageIO.</p>
+<p>Los detalles sobre la instalación de GeoServer quedan fuera del alcance de esta guía. En caso necesario, se pueden consultar en la <a class="reference external" href="http://nfms4redd.org/doc/html/">documentación técnica de referencia de la plataforma</a>, y en la <a class="reference external" href="http://docs.geoserver.org/stable/en/user/">documentación oficial de GeoServer</a>.</p>
+</div>
+</div>
+<div class="section" id="logs-de-geoserver">
+<h2>Logs de GeoServer<a class="headerlink" href="#logs-de-geoserver" title="Permalink to this headline">¶</a></h2>
+<p>El <tt class="docutils literal"><span class="pre">log</span></tt> o <strong>archivo de registro</strong> de una aplicación es un fichero de texto donde se van almacenando detalles sobre la ejecución del mismo. Así, un archivo de <tt class="docutils literal"><span class="pre">log</span></tt> guarda un histórico con el detalle de las operaciones realizadas, con mayor o menor detalle. Generalmente, cuando ocurre un error de ejecución, se consulta este archivo para obtener detalles sobre las causas del mismo.</p>
+</div>
+<div class="section" id="informacion-de-contacto">
+<h2>Información de Contacto<a class="headerlink" href="#informacion-de-contacto" title="Permalink to this headline">¶</a></h2>
+<p>Esta información de contacto se utilizará en los documentos de <em>GetCapabilities</em> del servidor de mapas. Así pues, es una información que se hará pública, y que servirá a los consumidores de los geoservicios para contactar con sus responsables. Es por tanto importante rellenarla con datos significativos:</p>
+<img alt="../_images/gs_informacion_contacto.png" src="../_images/gs_informacion_contacto.png" />
+<p>Demostración: Es posible visualizar esta información desde gvSIG al realizar la conexión al servidor cargando una capa WMS por ejemplo.</p>
+</div>
+<div class="section" id="acerca-de-geoserver">
+<h2>Acerca de GeoServer<a class="headerlink" href="#acerca-de-geoserver" title="Permalink to this headline">¶</a></h2>
+<p>Esta es una página informativa donde se puede consultar la versión de GeoServer, así como enlaces a la web principal del proyecto, a la documentación, y al sistema de seguimiento de incidencias.</p>
+</div>
+<div class="section" id="gestion-de-usuarios">
+<h2>Gestión de usuarios<a class="headerlink" href="#gestion-de-usuarios" title="Permalink to this headline">¶</a></h2>
+<p>TODO: verificar que está actualizado</p>
+<p>Existe la posibilidad de cambiar la contraseña del usuario <em>admin</em>, así como de crear nuevas cuentas de usuario con permisos de administración. Sin embargo en este
+punto nos centraremos únicamente en el cambio de contraseña del usuario <em>admin</em>.</p>
+<p>Para ello, hay que seguir los siguientes pasos:</p>
+<ol class="arabic">
+<li><p class="first">lo primero que hay que hacer es seleccionar la entrada &#8220;Users, Groups, Roles&#8221; del apartado de &#8220;Seguridad&#8221;.</p>
+<a class="reference internal image-reference" href="../_images/gs_password_change0.png"><img alt="../_images/gs_password_change0.png" src="../_images/gs_password_change0.png" style="width: 116.0px; height: 74.0px;" /></a>
+</li>
+<li><p class="first">En la pantalla resultante hay que seleccionar <em>Users/Groups</em>.</p>
+<img alt="../_images/gs_password_change1.png" src="../_images/gs_password_change1.png" />
+</li>
+<li><p class="first">Y en ella pinchar sobre <em>admin</em> para poder editar su password:</p>
+<img alt="../_images/gs_password_change2.png" src="../_images/gs_password_change2.png" />
+<a class="reference internal image-reference" href="../_images/gs_password_change3.png"><img alt="../_images/gs_password_change3.png" src="../_images/gs_password_change3.png" style="width: 170.4px; height: 110.4px;" /></a>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introducción a GeoServer</a><ul>
+<li><a class="reference internal" href="#estado-del-servidor">Estado del Servidor</a><ul>
+<li><a class="reference internal" href="#el-directorio-de-datos">El directorio de datos</a></li>
+<li><a class="reference internal" href="#maquina-java-y-jai-nativo">Máquina Java y JAI nativo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#logs-de-geoserver">Logs de GeoServer</a></li>
+<li><a class="reference internal" href="#informacion-de-contacto">Información de Contacto</a></li>
+<li><a class="reference internal" href="#acerca-de-geoserver">Acerca de GeoServer</a></li>
+<li><a class="reference internal" href="#gestion-de-usuarios">Gestión de usuarios</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../linux/linux.html"
+                        title="previous chapter">Introducción a Linux</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../geoserver-vector/geoserver_vector.html"
+                        title="next chapter">GeoServer: Publicación de datos vectoriales</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/geoserver-intro/geoserver_intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../geoserver-vector/geoserver_vector.html" title="GeoServer: Publicación de datos vectoriales"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../linux/linux.html" title="Introducción a Linux"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

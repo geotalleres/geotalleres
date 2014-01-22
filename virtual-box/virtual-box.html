@@ -1,0 +1,216 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalación de la máquina virtual &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Servicios web" href="../servicios-web/servicios-web.html" />
+    <link rel="prev" title="Geotalleres" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../servicios-web/servicios-web.html" title="Servicios web"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Geotalleres"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="instalacion-de-la-maquina-virtual">
+<h1>Instalación de la máquina virtual<a class="headerlink" href="#instalacion-de-la-maquina-virtual" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>La formación se va a realizar en una máquina virtual. Para ello se utilizará un software de virtualización,
+que se encargará de hospedar la máquina virtual. Para el caso que nos ocupa crearemos una máquina ubuntu/linux dentro
+del software de virtualización VirtualBox.</p>
+<p>Los pasos necesarios para esto son:</p>
+<ul class="simple">
+<li>Descarga e instalación de VirtualBox.</li>
+<li>Creación de una máquina máquina virtual</li>
+<li>Instalación de ubuntu/linux</li>
+</ul>
+<p>En la terminología de los software de virtualización, la máquina real es la anfitriona, <em>host</em> en inglés; mientras que la
+máquina virtual es la huésped, o <em>guest</em> en inglés.</p>
+<div class="section" id="instalacion-de-virtualbox">
+<h2>Instalación de VirtualBox<a class="headerlink" href="#instalacion-de-virtualbox" title="Permalink to this headline">¶</a></h2>
+<p>El primero de los pasos es descargar VirtualBox del epígrafe &#8220;VirtualBox platform packages&#8221; de la página de descargas <a class="footnote-reference" href="#id3" id="id1">[*]</a>
+y proceder a su instalación.</p>
+<p>Más adelante será necesario instalar Ubuntu/Linux, por lo que es recomendable realizar la descarga del programa de instalación
+mientras se prepara la máquina virtual. Para ello es necesario ir a la página de descargas de Ubuntu <a class="footnote-reference" href="#id4" id="id2">[†]</a> y descargar
+Ubuntu Desktop, preferiblemente el paquete para 32 bits de la versión 12.04 LTS (Long Term Support, soporte a largo plazo).</p>
+<p>La página de Ubuntu pide una pequeña contribución para la descarga, pero no es obligatorio hacerla. Es posible continuar
+hacia la descarga pinchando en el enlace &#8220;not now, take me to the download&#8221;:</p>
+<img alt="../_images/ubuntu_download.png" src="../_images/ubuntu_download.png" />
+<p>El resultado de esta descarga debe ser un fichero con un nombre parecido a &#8220;ubuntu-12.04.1-desktop-i386.iso&#8221;.</p>
+</div>
+<div class="section" id="creacion-de-una-maquina-virtual">
+<h2>Creación de una máquina virtual<a class="headerlink" href="#creacion-de-una-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<p>Una vez VirtualBox está instalado, se deberá arrancar y crear una nueva máquina virtual:</p>
+<img alt="../_images/p00.png" src="../_images/p00.png" />
+<p>A continuación le damos un nombre a la máquina virtual y especificamos el sistema operativo &#8220;Linux&#8221;, &#8220;Ubuntu&#8221;.</p>
+<img alt="../_images/p01.png" src="../_images/p01.png" />
+<p>Especificamos 1024Mb de memoria para la máquina virtual. Hay que tener en cuenta que esta memoria se toma de la máquina anfitriona
+por lo que si la máquina anfitriona tiene menos de 2048Mb, dar 1024Mb a la máquina virtual puede ser demasiado, ya que la anfitriona se
+puede quedar sin memoria.</p>
+<p>Como regla general, lo deseable es 1024Mb pero en ningún caso debe sobrepasarse el 50% de la memoria total de la máquina
+anfitriona.</p>
+<img alt="../_images/p02.png" src="../_images/p02.png" />
+<p>Por último sólo queda especificar el tamaño y tipo del disco, en el que dejaremos las opciones que vienen por defecto.</p>
+<img alt="../_images/p03.png" src="../_images/p03.png" />
+<img alt="../_images/p04.png" src="../_images/p04.png" />
+<img alt="../_images/p05.png" src="../_images/p05.png" />
+<img alt="../_images/p06.png" src="../_images/p06.png" />
+<p>Ahora la máquina está creada y puede ser arrancada seleccionándola y pulsando el botón &#8220;Start&#8221;.</p>
+<img alt="../_images/p07.png" src="../_images/p07.png" />
+<p>Al arrancar se ofrecen varios mensajes informativos que no son muy importantes. Uno de ellos informa sobre la &#8220;tecla anfitriona&#8221;. Cuando
+se está trabajando en la máquina virtual y se pulsa dicha tecla, el software de virtualización quita el foco al sistema
+operativo y lo devuelve a la maquina anfitriona. La tecla por defecto es el &#8220;Control&#8221; derecho.</p>
+<img alt="../_images/p08.png" src="../_images/p08.png" />
+</div>
+<div class="section" id="instalacion-de-ubuntu-linux">
+<h2>Instalación de Ubuntu/Linux<a class="headerlink" href="#instalacion-de-ubuntu-linux" title="Permalink to this headline">¶</a></h2>
+<p>Lo siguiente que hay que hacer es instalar una versión de Ubuntu/Linux. El propio proceso de arranque de la máquina
+virtual pregunta a continuación dónde puede encontrar una imagen del sistema operativo.</p>
+<p>A continuación hay que pulsar el botón de la carpetita para seleccionar la imagen de Ubuntu que descargamos en el primer punto: ubuntu-12.04.1-desktop-i386.iso.</p>
+<img alt="../_images/p09.png" src="../_images/p09.png" />
+<p>Y por último sólo queda pulsar el botón <em>Start</em> para comenzar la instalación.</p>
+<img alt="../_images/p10.png" src="../_images/p10.png" />
+<p>Un aspecto importante es que la instalación se puede seguir en Español, seleccionándolo desde la lista de la izquierda.</p>
+<img alt="../_images/p11.png" src="../_images/p11.png" />
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td><a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[†]</a></td><td><a class="reference external" href="http://www.ubuntu.com/download">http://www.ubuntu.com/download</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Instalación de la máquina virtual</a><ul>
+<li><a class="reference internal" href="#instalacion-de-virtualbox">Instalación de VirtualBox</a></li>
+<li><a class="reference internal" href="#creacion-de-una-maquina-virtual">Creación de una máquina virtual</a></li>
+<li><a class="reference internal" href="#instalacion-de-ubuntu-linux">Instalación de Ubuntu/Linux</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Geotalleres</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../servicios-web/servicios-web.html"
+                        title="next chapter">Servicios web</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/virtual-box/virtual-box.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../servicios-web/servicios-web.html" title="Servicios web"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Geotalleres"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

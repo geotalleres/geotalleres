@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Validación &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="PostGIS Raster" href="../postgis-raster/postgis_raster.html" />
+    <link rel="prev" title="Análisis espacial" href="../postgis-analisis-espacial/analisis_espacial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-raster/postgis_raster.html" title="PostGIS Raster"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-analisis-espacial/analisis_espacial.html" title="Análisis espacial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="validacion">
+<h1>Validación<a class="headerlink" href="#validacion" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="validar-geometrias">
+<h2>Validar geometrías<a class="headerlink" href="#validar-geometrias" title="Permalink to this headline">¶</a></h2>
+<p>Una operación común cuando se trabaja con datos vectoriales es validar que dichos datos cumplen ciertas condiciones que los hacen óptimos para realizar análisis espacial sobre los mismos. O de otra forma, que cumplen ciertas condiciones topológicas.</p>
+<p>Los puntos y las líneas son objetos muy sencillos. Intuitivamente, podemos afirmar que no hay manera de que sean <em>topológicamente inválidos</em>. Pero un polígono es un objeto más complejo, y debería cumplir ciertas condiciones. Y debe cumplirlas porque muchos algoritmos espaciales son capaces de ejecutarse rápidamente gracias a que asumen una consistencias de los datos de entrada. Si tuviéramos que forzar a que esos algoritmos revisaran las entradas, serían mucho más lentos.</p>
+<p>Veamos un ejemplo de porqué esto es importante. Supongamos que tenemos este polígono sencillo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># POLYGON((0 0, 0 1, 2 1, 2 2, 1 2, 1 0, 0 0));</span>
+</pre></div>
+</div>
+<p>Gráficamente:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/poligono_invalido.png"><img alt="../_images/poligono_invalido.png" src="../_images/poligono_invalido.png" style="width: 174.5px; height: 163.0px;" /></a>
+</div></blockquote>
+<p>Podemos ver el límite exterior de esta figura como un símbolo de <em>infinito</em> cuadrado. O sea, que tiene un <em>lazo</em> en el medio (una intersección consigo mismo). Si quisiéramos calcular el área de esta figura, podemos ver intuitivamente que tiene 2 unidades de área (si hablamos de metros, serían 2 metros cuadrados).</p>
+<p>Veamos qué piensa PostGIS del área de esta figura:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT ST_Area(ST_GeometryFromText(&#39;POLYGON((0 0, 0 1, 1 1, 2 1, 2 2, 1 2, 1 1, 1 0, 0 0))&#39;));</span>
+</pre></div>
+</div>
+<p>El resultado será:</p>
+<div class="highlight-python"><pre># st_area
+ ---------
+0</pre>
+</div>
+<p>¿Qué es lo que ha sucedido aquí?</p>
+<p>El algoritmo de cálculo de áreas de PostGIS (muy rápido) asume que los anillos no van a intersectar consigo mismos. Un anillo que cumpla las condiciones adecuadas para el análisis espacial, debe tener el área que encierra <strong>siempre</strong> en el mismo lado. Sin embargo, en la imagen mostrada, el anillo tiene, en una parte, el área encerrada en el lado izquierdo. Y en la otra, el área está encerrada en el lado derecho. Esto causa que las áreas calculadas para cada parte del polígono tengan valores opuestos (1 y -1) y se anulen entre si.</p>
+<p>Este ejemplo es muy sencillo, porque podemos ver rápidamente que el polígono es inválido, al contener una intersección consigo mismo (algo que ESRI permite en un SHP, pero PostGIS no, porque implementa SFSQL: <a class="reference external" href="http://www.opengeospatial.org/standards/sfs">http://www.opengeospatial.org/standards/sfs</a>). Pero, ¿qué sucede si tenemos millones de polígonos? Necesitamos una manera de detectar si son válidos o inválidos. Afortunadamente, PostGIS tiene una función para esto: <strong>ST_IsValid</strong>, que devuelve TRUE o FALSE:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT ST_IsValid(ST_GeometryFromText(&#39;POLYGON((0 0, 0 1, 1 1, 2 1, 2 2, 1 2, 1 1, 1 0, 0 0))&#39;))</span>
+</pre></div>
+</div>
+<p>Devuelve:</p>
+<div class="highlight-python"><pre># st_isvalid
+ ------------
+         f</pre>
+</div>
+<p>Incluso tenemos una función que nos dice la razón por la que una geometría es inválida:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT ST_IsValidReason(ST_GeometryFromText(&#39;POLYGON((0 0, 0 1, 1 1, 2 1, 2 2, 1 2, 1 1, 1 0, 0 0))&#39;));</span>
+</pre></div>
+</div>
+<p>Que devuelve:</p>
+<div class="highlight-python"><pre># st_isvalidreason
+------------------------
+Self-intersection[1 1]</pre>
+</div>
+<div class="section" id="practica">
+<h3>Práctica<a class="headerlink" href="#practica" title="Permalink to this headline">¶</a></h3>
+<p>Vamos a comprobar la validez de las geometrías del shapefile <em>world_borders</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT gid, name, ST_IsValidReason(geom) FROM tm_world_borders WHERE ST_IsValid(geom)=false;</span>
+</pre></div>
+</div>
+<p>Obtenemos el resultado:</p>
+<div class="highlight-python"><pre>#  gid |  name  |                  st_isvalidreason
+  -----+--------+-----------------------------------------------------
+    24 | Canada | Ring Self-intersection[-53.756367 48.5032620000001]
+    33 | Chile  | Ring Self-intersection[-70.917236 -54.708618]
+   155 | Norway | Ring Self-intersection[5.33694400000002 61.592773]
+   175 | Russia | Ring Self-intersection[143.661926 49.31221]</pre>
+</div>
+<p>Observamos que hay 4 polígonos con intersecciones consigo mismos. Esto es un ejemplo del aspecto que tienen estas auto-intersecciones:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/self_intersection.png"><img alt="../_images/self_intersection.png" src="../_images/self_intersection.png" style="width: 286.0px; height: 183.0px;" /></a>
+</div></blockquote>
+<p>Para resolver estos errores topológicos, tenemos a nuestra disposición la función <em>ST_MakeValid</em>. Esta función es nueva en PostGIS 2.0. Hasta entonces, estos problemas se resolvían con técnicas como hacer un buffer de tamaño 0 alrededor de la geometría inválida, y dejar que la función <em>ST_Buffer</em> la arreglara. Esto es así porque <em>ST_Buffer</em> en realidad construye una nueva geometría réplica de la antigua y construyendo un buffer alrededor de ella. Si este buffer es de tamaño 0, el resultado es solo la réplica de la anterior geometría. Pero al ser construida siguiendo las reglas topológicas de OGC, solucionaba muchos problemas como éste.</p>
+<p>La función <em>ST_MakeValid</em> es más apropiada para arreglar geometrías. Únicamente requiere <strong>GEOS 3.3.0</strong> o superior para funcionar (<strong>GEOS 3.3.4</strong>) si estamos usando PostGIS 2.1). Para saber qué versión de GEOS tenemos instalada basta con ejecutar:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT postgis_full_version()</span>
+</pre></div>
+</div>
+<p>Si se tiene una versión de GEOS inferior a la 3.3.0, se pueden seguir los consejos de Paul Ramsey: <a class="reference external" href="http://blog.opengeo.org/2010/09/08/tips-for-the-postgis-power-user/">http://blog.opengeo.org/2010/09/08/tips-for-the-postgis-power-user/</a></p>
+<p>Para comprobar el funcionamiento de <em>ST_MakeValid</em> vamos a crear una tabla nueva donde almacenemos únicamente uno de los polígonos conflictivos, marcado como <em>erroneo</em>. A continuación, crearemos un nuevo registro en dicha tabla con el polígono corregido.</p>
+<p>Para hacerlo, ejecutemos esta query, que es algo compleja. Como sabemos que el problema es una auto-intersección que forma un anillo, vamos a <em>desmontar</em> la geometría en su lista de anillos y quedarnos solo con aquel que intersecta con el punto donde se detectó el error:</p>
+<div class="highlight-python"><pre># SELECT * INTO invalid_geometries
+FROM (
+SELECT 'broken'::varchar(10) as status,
+ST_GeometryN(geom, generate_series(1, ST_NRings(geom)))::geometry(Polygon,4326) as the_geom
+FROM tm_world_borders
+WHERE name = 'Chile') AS foo
+WHERE ST_Intersects(the_geom, ST_SetSRID(ST_Point(-70.917236,-54.708618), 4326));</pre>
+</div>
+<p>Con eso hemos creado la tabla <em>invalid_geometries</em> y añadido el anillo que contiene el error. Ahora añadamos un nuevo registro con el resultado de llamar a <em>ST_MakeValid</em> sobre el polígono erróneo:</p>
+<div class="highlight-python"><pre># INSERT INTO invalid_geometries
+VALUES ('repaired', (SELECT ST_MakeValid(the_geom) FROM invalid_geometries));</pre>
+</div>
+<p>La función ST_MakeValid, realmente solo ha añadido un anillo más a la geometría inválida, para hacerla válida. Lo podemos comprobar con:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT status, ST_NRings(the_geom) FROM invalid_geometries;</span>
+</pre></div>
+</div>
+<p>Que devuelve:</p>
+<div class="highlight-python"><pre># status  | st_nrings
+----------+-----------
+ broken   |         1
+ repaired |         2</pre>
+</div>
+<p>Ahora que ya hemos comprobado cómo funciona <em>ST_MakeValid</em>, podemos arreglar todas las geometrías inválidas:</p>
+<div class="highlight-python"><pre># UPDATE tm_world_borders
+SET the_geom = ST_MakeValid(the_geom)
+WHERE ST_IsValid(the_geom) = false;</pre>
+</div>
+<p>Una manera de evitar tener tablas con geometrías inválidas es definir una <em>constraint</em> que lo impida:</p>
+<div class="highlight-python"><pre># ALTER TABLE tm_world_borders
+ADD CONSTRAINT geometry_valid_check
+CHECK (ST_IsValid(geom));</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Validación</a><ul>
+<li><a class="reference internal" href="#validar-geometrias">Validar geometrías</a><ul>
+<li><a class="reference internal" href="#practica">Práctica</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-analisis-espacial/analisis_espacial.html"
+                        title="previous chapter">Análisis espacial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-raster/postgis_raster.html"
+                        title="next chapter"><em>PostGIS Raster</em></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-validacion/validacion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-raster/postgis_raster.html" title="PostGIS Raster"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-analisis-espacial/analisis_espacial.html" title="Análisis espacial"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

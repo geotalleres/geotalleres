@@ -1,0 +1,217 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Productos basados en PostGIS: CartoDB, OpenGeo &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Taller de MapProxy" href="../mapproxy/doc/source/index.html" />
+    <link rel="prev" title="PostGIS Raster" href="../postgis-raster/postgis_raster.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../mapproxy/doc/source/index.html" title="Taller de MapProxy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-raster/postgis_raster.html" title="PostGIS Raster"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="productos-basados-en-postgis-cartodb-opengeo">
+<h1>Productos basados en PostGIS: CartoDB, OpenGeo<a class="headerlink" href="#productos-basados-en-postgis-cartodb-opengeo" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="cartodb">
+<h2>CartoDB<a class="headerlink" href="#cartodb" title="Permalink to this headline">¶</a></h2>
+<p>CartoDB es un <em>SaaS</em>: <a class="reference external" href="http://en.wikipedia.org/wiki/Software_as_a_service">http://en.wikipedia.org/wiki/Software_as_a_service</a>. Básicamente, es un PostGIS que sirve datos desde una plataforma cloud: <a class="reference external" href="http://cartodb.com/">http://cartodb.com/</a></p>
+<p>Se pueden cargar los datos en tablas a través de una interfaz web. También se pueden realizar consultas y visualizar los datos utilizando un mapa base. Todo esto sin necesidad de programar una sola línea de código.</p>
+<p>Cuenta con un servicio básico gratuito para almacenar hasta 5 MB en 5 tablas. Si se quiere más espacio, hay varios planes de pago: <a class="reference external" href="http://cartodb.com/pricing/">http://cartodb.com/pricing/</a></p>
+<p>Vamos a ver los usos básicos de CartoDB, y un uso avanzado</p>
+<div class="section" id="cartodb-basico">
+<h3>CartoDB básico<a class="headerlink" href="#cartodb-basico" title="Permalink to this headline">¶</a></h3>
+<p>Una vez registrados y autenticados en la página, vemos la opción de crear una nueva tabla, a la derecha:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_new_table.png"><img alt="../_images/cartodb_new_table.png" src="../_images/cartodb_new_table.png" style="width: 69.5px; height: 79.0px;" /></a>
+</div></blockquote>
+<p>Para crear una nueva tabla, se nos pide que elijamos un fichero de nuestro disco duro, de una URL o directamente conectemos con nuestro Dropbox. Las extensiones de archivo permitidas son: csv, xls, xlsx, zip, kml, geojson, json, ods, kmz, gpx, tar, gz, tgz, osm, bz2, tif, tiff, txt, sql (sí, también permite ráster)</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_import_table.png"><img alt="../_images/cartodb_import_table.png" src="../_images/cartodb_import_table.png" style="width: 300.0px; height: 239.0px;" /></a>
+</div></blockquote>
+<p>Asimismo, vemos que se nos da la opción de importar datasets ya predefinidos, con lo cuál tendremos una tabla creada con dos clics de ratón.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_table_created.png"><img alt="../_images/cartodb_table_created.png" src="../_images/cartodb_table_created.png" style="width: 632.5px; height: 332.5px;" /></a>
+</div></blockquote>
+<p>Y lo más importante... ¡un visualizador ya listo, sin hacer nada más! Incluso podemos cambiar nuestro mapa base.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_map_view.png"><img alt="../_images/cartodb_map_view.png" src="../_images/cartodb_map_view.png" style="width: 607.0px; height: 281.5px;" /></a>
+</div></blockquote>
+<p>Pulsando la opción <em>Visualize</em> (arriba a la derecha) podemos darle nombre a nuestro mapa y compartirlo con quien queramos.</p>
+<p>Por supuesto, podemos ejecutar consultas sobre nuestros datos, y quedarnos solo con los registros que queramos</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_query.png"><img alt="../_images/cartodb_query.png" src="../_images/cartodb_query.png" style="width: 303.0px; height: 280.0px;" /></a>
+</div></blockquote>
+<p>En resumen: podemos manipular nuestros datos y visualizarlos al momento, ¡sin necesidad de montar una infraestructura WMS!</p>
+</div>
+<div class="section" id="cartodb-avanzado-torque">
+<h3>CartoDB avanzado: Torque<a class="headerlink" href="#cartodb-avanzado-torque" title="Permalink to this headline">¶</a></h3>
+<p>Torque es una librería construída sobre CartoDB que permite la visualización de datos temporales como si se tratara de una animación. Para elllo, utiliza <em>HTML5</em> para la renderización y el concepto de <em>datacube</em> para modelar los datos.</p>
+<p>Un <em>datacube</em>, de manera resumida y visual, es esto:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_data_cubes.png"><img alt="../_images/cartodb_data_cubes.png" src="../_images/cartodb_data_cubes.png" style="width: 450.0px; height: 337.0px;" /></a>
+</div></blockquote>
+<p>Es decir: un conjunto de datos espaciales (geometrías) ubicados en una determinada posición en un momento temporal.</p>
+<p>El <em>datacube</em> en si, se crea con SQL:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cartodb_data_cubes_sql.png"><img alt="../_images/cartodb_data_cubes_sql.png" src="../_images/cartodb_data_cubes_sql.png" style="width: 569.0px; height: 320.5px;" /></a>
+</div></blockquote>
+<p>Cualquier usuario de CartoDB puede probar esta funcionalidad, si tiene datos espaciados temporalmente. Algunos ejemplos:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Seguimiento del movimiento de un coche en tiempo real: <a class="reference external" href="http://cartodb.github.io/torque/examples/car.html">http://cartodb.github.io/torque/examples/car.html</a></li>
+<li>Un velero de la Royal Navy durante la WWI. Los datos geográficos fueron tomados del libro de registro del capitán: <a class="reference external" href="http://www.theguardian.com/news/datablog/interactive/2012/oct/01/first-world-war-royal-navy-ships-mapped">http://www.theguardian.com/news/datablog/interactive/2012/oct/01/first-world-war-royal-navy-ships-mapped</a> (o si se prefiere jugar con los parámetros: <a class="reference external" href="http://cartodb.github.io/torque/">http://cartodb.github.io/torque/</a>)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="opengeo">
+<h2>OpenGEO<a class="headerlink" href="#opengeo" title="Permalink to this headline">¶</a></h2>
+<p>Es un stack completo de software libre. Desde el almacenamiento en base de datos hasta su visualización. Consta de:</p>
+<div class="highlight-python"><pre>* PostGIS: para almacenar los datos
+* GeoServer: para servirlos a través de Internet
+* GeoWebCache: caché de teselas para acelerar el servicio
+* GeoExplorer: aplicación web para editar y publicar mapas.</pre>
+</div>
+<p>Se puede descargar o ejecutar desde la nube.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Productos basados en PostGIS: CartoDB, OpenGeo</a><ul>
+<li><a class="reference internal" href="#cartodb">CartoDB</a><ul>
+<li><a class="reference internal" href="#cartodb-basico">CartoDB básico</a></li>
+<li><a class="reference internal" href="#cartodb-avanzado-torque">CartoDB avanzado: Torque</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#opengeo">OpenGEO</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-raster/postgis_raster.html"
+                        title="previous chapter"><em>PostGIS Raster</em></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../mapproxy/doc/source/index.html"
+                        title="next chapter">Taller de MapProxy</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-cartodb/cartodb.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../mapproxy/doc/source/index.html" title="Taller de MapProxy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-raster/postgis_raster.html" title="PostGIS Raster"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

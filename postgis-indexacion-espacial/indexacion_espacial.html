@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Indexación espacial &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Relaciones espaciales" href="../postgis-relaciones-espaciales/relaciones_espaciales.html" />
+    <link rel="prev" title="Importación y exportación de datos" href="../postgis-importacion-exportacion/importacion_exportacion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-relaciones-espaciales/relaciones_espaciales.html" title="Relaciones espaciales"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-importacion-exportacion/importacion_exportacion.html" title="Importación y exportación de datos"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="indexacion-espacial">
+<h1>Indexación espacial<a class="headerlink" href="#indexacion-espacial" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>La indexación espacial es una de las funcionalidades importantes de las bases de datos espaciales. Los indices consiguen que las búsquedas espaciales en un gran número de datos sean eficientes. Sin idenxación, la búsqueda se realizaria de manera secuencial teniendo que buscar en todos los registros de la base de datos. La indexación organiza los datos en una estructura de arbol que es recorrida rapidamente en la búsqueda de un registro.</p>
+<div class="section" id="como-funcionan-los-indices-espaciales">
+<h2>Como funcionan los índices espaciales<a class="headerlink" href="#como-funcionan-los-indices-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Las base de datos estándar crean un arbol jerarquico basados en los valores de las columnas. Los indice espaciales funcionan de una manera diferente, los índices no son capaces de indexar las geometrías, e indexarán las cajas (box) de las geometrías.</p>
+<blockquote>
+<div><img alt="../_images/boundingbox.png" src="../_images/boundingbox.png" />
+</div></blockquote>
+<p>La caja (box) es el rectángulo definido por las máximas y mínimas coordenadas x e y de una geometría.</p>
+<blockquote>
+<div><img alt="../_images/bbox.png" src="../_images/bbox.png" />
+</div></blockquote>
+<p>En la figura se puede observar que solo la linea intersecta a la estrella amarilla, mientras que si utilizamos los índices comprobaremos que la caja amarilla es intersectada por dos figuras la caja roja y la azul. El camino eficiente para responder correctamente a la pregunta <strong>¿qué elemento intersecta la estrella amarilla?</strong> es primero responder a la pregunta <strong>¿qué cajas intersectan la caja amarilla?</strong> usando el índice (consulta rápida) y luego calcular exactamente <strong>¿quien intersecta a la estrella amarilla?</strong> sobre el resultado de la consulta de las cajas.</p>
+</div>
+<div class="section" id="creacion-de-indices-espaciales">
+<h2>Creación de indices espaciales<a class="headerlink" href="#creacion-de-indices-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>La síntaxis será la siguiente:</p>
+<div class="highlight-python"><pre>CREATE INDEX [Nombre_del_indice] ON [Nombre_de_tabla] USING GIST ([campo_de_geometria]);</pre>
+</div>
+<p>Esta operación puede requerir bastante tiempo en tablas de gran tamaño.</p>
+</div>
+<div class="section" id="uso-de-indices-espaciales">
+<h2>Uso de índices espaciales<a class="headerlink" href="#uso-de-indices-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>La mayor parte de las funciones en PostGIS (ST_Contains, ST_Intersects, ST_DWithin, etc) incluyen un filtrado por indice automáticamente.</p>
+<p>Para hacer que una función utilice el índice, hay que hacer uso del operador <strong>&amp;&amp;</strong>. Para las geometrías, el operador <strong>&amp;&amp;</strong> significa &#8220;la caja que toca (touch) o superpone (overlap)&#8221; de la misma manera que para un número el operador <strong>=</strong> significa &#8220;valores iguales&#8221;</p>
+</div>
+<div class="section" id="analyze-y-vacuum">
+<h2>ANALYZE y VACUUM<a class="headerlink" href="#analyze-y-vacuum" title="Permalink to this headline">¶</a></h2>
+<p>El planificador de PostGIS se encarga de mantener estadísticas sobre la distribución de los datos de cada columna de la tabla indexada. Por defecto PostgreSQL ejecuta la estadísticas regularmente. Si hay algún cambio grande en la estructura de las tablas, es recomendable ejecutar un <tt class="docutils literal"><span class="pre">ANALYZE</span></tt> manualmente para actualizar estas estadísticas. Este comando obliga a PostgreSQL a recorrer los datos de las tablas con columnas indexadas y actualizar sus estadísticas internas.</p>
+<p>No solo con crear el índice y actualizar las estadísticas obtendremos una manera eficiente de manejar nuestras tablas. La operación  <tt class="docutils literal"><span class="pre">VACUUM</span></tt> debe ser realizada siempre que un indice sea creado o después de un gran número de UPDATEs, INSERTs o DELETEs. El comando <tt class="docutils literal"><span class="pre">VACUUM</span></tt> obliga a PostgreSQL a utilizar el espacio no usado en la tabla que dejan las actualizaciones y los borrados de elementos.</p>
+<p>Hacer un <tt class="docutils literal"><span class="pre">VACUUM</span></tt> es crítico para la eficiencia de la base de datos. PostgreSQL dispone de la opción <tt class="docutils literal"><span class="pre">Autovacuum</span></tt>. De esta manera PostgreSQL realizará VACUUMs y ANALYZEs de manera periodica en función de la actividad que haya en la tabla:</p>
+<div class="highlight-python"><pre>VACUUM ANALYZE [Nombre_tabla]
+VACUUM ANALYZE [Nombre_tabla] ([Nombre_columna])</pre>
+</div>
+<p>Esta orden actualiza las estadísticas y elimina los datos borrados que se encontraban marcados como eliminados.</p>
+</div>
+<div class="section" id="practicas">
+<h2>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Compare los resultados de obtener la población del barrio West Village así como el tiempo necesario para ejecutar cada operación. Use el operador de caja en una si y en otra no.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Indexación espacial</a><ul>
+<li><a class="reference internal" href="#como-funcionan-los-indices-espaciales">Como funcionan los índices espaciales</a></li>
+<li><a class="reference internal" href="#creacion-de-indices-espaciales">Creación de indices espaciales</a></li>
+<li><a class="reference internal" href="#uso-de-indices-espaciales">Uso de índices espaciales</a></li>
+<li><a class="reference internal" href="#analyze-y-vacuum">ANALYZE y VACUUM</a></li>
+<li><a class="reference internal" href="#practicas">Prácticas</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-importacion-exportacion/importacion_exportacion.html"
+                        title="previous chapter">Importación y exportación de datos</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-relaciones-espaciales/relaciones_espaciales.html"
+                        title="next chapter">Relaciones espaciales</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-indexacion-espacial/indexacion_espacial.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-relaciones-espaciales/relaciones_espaciales.html" title="Relaciones espaciales"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-importacion-exportacion/importacion_exportacion.html" title="Importación y exportación de datos"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

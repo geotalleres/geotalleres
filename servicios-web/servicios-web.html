@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Servicios web &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Introducción a Linux" href="../linux/linux.html" />
+    <link rel="prev" title="Instalación de la máquina virtual" href="../virtual-box/virtual-box.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../linux/linux.html" title="Introducción a Linux"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../virtual-box/virtual-box.html" title="Instalación de la máquina virtual"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="servicios-web">
+<h1>Servicios web<a class="headerlink" href="#servicios-web" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>Existen múltiples definiciones del concepto de servicio web, ya que es un concepto muy general. En el caso que nos ocupa nos
+referiremos a servicios disponibles en la red que pueden ser accedido usando el protocolo HTTP, especificando unos parámetros
+y obteniendo una salida como resultado. Dichos servicios son componentes que realizan una tarea específica y que
+pueden ser combinados para construir servicios más complejos.</p>
+<p>Al contrario que las aplicaciones monolíticas en las que los componentes están fuertemente acoplados, los sistemas basados en
+servicios web fomentan la independencia de los distintos elementos que forman la aplicación. Así, los componentes son
+servicios que exponen una API al resto para la colaboración en el contexto de la aplicación y que pueden ser intercambiados
+fácilmente por otros servicios que ofrezcan la misma API.</p>
+<div class="section" id="http">
+<h2>HTTP<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h2>
+<p>Los servicios que se van a consumir durante el curso se construyen sobre el protocolo HyperText Transfer Protocol (HTTP), por lo que se van a ilustrar algunos conceptos del
+mismo.</p>
+<p>Las interacciones HTTP se dan cuando un equipo cliente envía peticiones a un servidor. Estas peticiones incluyen un encabezado con
+información descriptiva sobre la petición y un cuerpo de mensaje opcional. Entre los datos del encabezado se encuentra el método
+requerido: GET, PUT, PUSH, etc. Está fuera del ámbito de esta documentación explicar las semánticas de los distintos métodos exceptuando
+la mención de que la barra de direcciones de los navegadores web realiza peticiones HTTP GET para descargarse el recurso especificado
+en la dirección. Por ejemplo:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.fao.org/fileadmin/templates/faoweb/images/FAO-logo.png">http://www.fao.org/fileadmin/templates/faoweb/images/FAO-logo.png</a></li>
+<li><a class="reference external" href="http://www.diva-gis.org/data/rrd/ARG_rrd.zip">http://www.diva-gis.org/data/rrd/ARG_rrd.zip</a></li>
+<li><a class="reference external" href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a></li>
+<li><a class="reference external" href="http://docs.geoserver.org/stable/en/user/gettingstarted/shapefile-quickstart/index.html">http://docs.geoserver.org/stable/en/user/gettingstarted/shapefile-quickstart/index.html</a></li>
+</ul>
+<p>Siguiendo con el mismo ejemplo, mediante la barra de direcciones podemos descargar distintos tipos de contenidos: páginas HTML, ficheros
+de texto plano, ficheros XML, imágenes, vídeos, etc. Algunos de estos contenidos son directamente interpretados por el navegador mientras que
+para otros se ofrece la descarga del recurso. ¿En qué se basa el navegador para tomar estas decisiones?</p>
+<p>Cada respuesta desde el servidor tiene también una cabecera en la que especifica el <em>Content-Type</em> de los datos que vienen en el cuerpo del
+mensaje de respuesta. El <em>Content-Type</em> puede ser por ejemplo:</p>
+<ul class="simple">
+<li>text/html</li>
+<li>text/plain</li>
+<li>text/xml</li>
+<li>image/gif</li>
+<li>video/mpeg</li>
+<li>application/zip</li>
+</ul>
+<p>El navegador usa este valor para interpretar de una manera u otra el flujo de bytes que le envía el servidor, de manera que si en la cabecera
+aparece &#8220;image/gif&#8221; entenderá que está recibiendo una imagen y la mostrará al usuario, mientras que si lee &#8220;text/html&#8221; el navegador interpretará
+los bytes recibidos como una página HTML y la visualizará, la hará responder a los eventos del usuario, etc.</p>
+<p>Por último, la respuesta incorpora un código con información adicional sobre lo que sucedió en el servidor al recibir la petición. El código más habitual
+usando el navegador es el 200, que informa que el contenido de la respuesta es aquello que se pidió. Otros códigos indican condiciones de errores, como el frecuente 404, que indica que el recurso que se ha pedido no existe en el servidor, o el 500 que indica que hubo un error en el servidor al procesar la petición.</p>
+</div>
+<div class="section" id="servicios-del-open-geospatial-consortium-ogc">
+<h2>Servicios del Open Geospatial Consortium (OGC)<a class="headerlink" href="#servicios-del-open-geospatial-consortium-ogc" title="Permalink to this headline">¶</a></h2>
+<p>El Open Geospatial Consortium es un consorcio industrial internacional que reúne centenares de compañias, agencias gubernamentales y universidades para
+la participación en la creación de estándares disponibles de forma pública.</p>
+<p>En el contexto de los servicios web el OGC define los OGC Web Services (OWS), que son estándares construidos sobre el protocolo HTTP y que definen
+los parámetros, información de cabecera, etc. de las distintas peticiones y sus respuestas, así como la relación entre ellas. Por ejemplo, el estándar WMS, del que hablaremos posteriormente en profundidad, define una petición <tt class="docutils literal"><span class="pre">GetMap</span></tt> para obtener imágenes de datos almacenados en el servidor y define que la respuesta debe tener un <em>Content-Type</em> de imágenes (<tt class="docutils literal"><span class="pre">image/png</span></tt>, <tt class="docutils literal"><span class="pre">image/gif</span></tt>, etc.) y que la petición deberá incluir una serie de parámetros para poder generar la imagen: nombre de la capa, extensión a dibujar, tamaño de la imagen resultante, etc. Los OWS proporcionan una infraestructura interoperable, independiente de la implementación y de los proveedores para la creación de aplicaciones basadas en web y relacionadas con la información geográfica.</p>
+<p>Entre las ventajas del uso de estándares podemos destacar:</p>
+<ul class="simple">
+<li>Es posible consumir servicios de otros proveedores, independientemente de la implementación concreta de estos.</li>
+<li>Existen desarrollos OpenSource que implementan estos estándares y permiten por tanto la publicación con interfaces estándar de forma sencilla.</li>
+<li>Multitud de herramientas OpenSource que permiten trabajar con los datos consumidos a través de estas interfaces.</li>
+</ul>
+<p>Dos de los OWS más representativos son Web Map Service (WMS) y Web Feature Service (WFS), que vemos con algo más de detalle a continuación.</p>
+<p>El estándar WMS define básicamente tres tipos de peticiones: <em>GetCapabilities</em>, <em>GetMap</em> y <em>GetFeatureInfo</em>. La primera de ellas es común para todos
+los OWS y devuelve un documento XML con información sobre las capas existentes en el servidor, los sistemas de coordenadas (CRS, Coordinate Reference System)
+soportados, etc.</p>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wms/CARTOCIUDAD/CARTOCIUDAD?REQUEST=GetCapabilities</pre>
+</div>
+<p>La petición GetMap obtiene imágenes con representaciones gráficas de la información geográfica existente en el servidor:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wms/CARTOCIUDAD/CARTOCIUDAD?REQUEST=GetMap&amp;SERVICE=WMS&amp;VERSION=1.3.0&amp;LAYERS=DivisionTerritorial&amp;
+        CRS=EPSG:25830&amp;BBOX=718563.200906236,4363954.866694199,735300.5071689372,4377201.249079251&amp;WIDTH=701&amp;
+        HEIGHT=555&amp;FORMAT=image/png&amp;STYLES=municipio&amp;TRANSPARENT=TRUE</pre>
+</div>
+<p>Y por último, la petición GetFeatureInfo es capaz de proporcionar información sobre un punto:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wms/CARTOCIUDAD/CARTOCIUDAD?REQUEST=GetFeatureInfo&amp;SERVICE=WMS&amp;QUERY_LAYERS=CodigoPostal&amp;
+        VERSION=1.3.0&amp;INFO_FORMAT=application/vnd.ogc.gml&amp;LAYERS=CodigoPostal&amp;CRS=EPSG:25830&amp;
+        BBOX=665656.9561496238,4410190.54853407,690496.231896245,4427113.624503085&amp;WIDTH=706&amp;HEIGHT=481&amp;
+        FORMAT=image/png&amp;STYLES=codigo_postal&amp;TRANSPARENT=TRUE&amp;I=475&amp;J=204&amp;FEATURE_COUNT=10000&amp;EXCEPTIONS=XML</pre>
+</div>
+<p>Ejercicio: ¿Qué otra utilidad conocemos para visualizar los tres enlaces anteriores?</p>
+<p>Por su parte el estándar WFS no trabaja con representaciones de los datos sino que lo hace con los datos mismos. Para ello define las siguientes llamadas:</p>
+<ul class="simple">
+<li>GetCapabilities: Al igual que todos los OWS, WFS admite la llamada GetCapabilities para obtener una lista de las capas y posibilidades que ofrece
+el servicio.</li>
+<li>DescribeFeatureType: Permite obtener un documento con la estructura de los datos.</li>
+<li>GetFeature: Permite realizar una consulta al sistema y obtener las entidades que cumplen los criterios de búsqueda.</li>
+</ul>
+<p>Así, podemos ver qué capas hay en un servicio WFS:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wfs-comunidad/services?request=GetCapabilities&amp;service=WFS</pre>
+</div>
+<p>Consultar la estructura de una de ellas:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wfs-comunidad/services?request=DescribeFeatureType&amp;service=WFS&amp;VERSION=1.0.0&amp;
+        TypeName=app:entidadLocal_&amp;outputformat=text/xml;%20subtype=gml/3.1.1</pre>
+</div>
+<p>Y efectivamente descargar algunas de sus entidades:</p>
+<div class="highlight-python"><pre>http://www.cartociudad.es/wfs-comunidad/services?REQUEST=GetFeature&amp;SERVICE=WFS&amp;TYPENAME=app:entidadLocal_&amp;
+        NAMESPACE=xmlns%28app=http://www.deegree.org/app%29&amp;VERSION=1.1.0&amp;EXCEPTIONS=XML&amp;MAXFEATURES=10</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Servicios web</a><ul>
+<li><a class="reference internal" href="#http">HTTP</a></li>
+<li><a class="reference internal" href="#servicios-del-open-geospatial-consortium-ogc">Servicios del Open Geospatial Consortium (OGC)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../virtual-box/virtual-box.html"
+                        title="previous chapter">Instalación de la máquina virtual</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../linux/linux.html"
+                        title="next chapter">Introducción a Linux</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/servicios-web/servicios-web.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../linux/linux.html" title="Introducción a Linux"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../virtual-box/virtual-box.html" title="Instalación de la máquina virtual"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

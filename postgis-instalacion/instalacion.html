@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalación de PostgreSQL &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="PostGIS, características espaciales" href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" />
+    <link rel="prev" title="PostgreSQL" href="../postgresql/postgresql.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" title="PostGIS, características espaciales"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgresql/postgresql.html" title="PostgreSQL"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="instalacion-de-pg">
+<h1>Instalación de <em>PostgreSQL</em><a class="headerlink" href="#instalacion-de-pg" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>En este tema procederemos a la instalación del software del sistema gestor de base de datos relacional PostgreSQL en su versión más reciente 9.1, así como distintas herramientas con las que poder interactuar con el sistema. Además aprenderemos conceptos básicos de administración y gestión del sistema. Conoceremos la estructura del sistema, su organización y diferentes conceptos respecto de esta que serán de utilidad en su entendimiento y manejo.</p>
+<p>La instalación se realizará sobre los sistemas operativos Ubuntu, Windows y Mac OS X.</p>
+<div class="section" id="introduccion-a-postgresql">
+<h2>Introducción a PostgreSQL<a class="headerlink" href="#introduccion-a-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>PostgreSQL es un sistema de gestión de bases de datos objeto-relacional, distribuido bajo licencia BSD y con su código fuente disponible libremente. Es el sistema de gestión de bases de datos de código abierto más potente del mercado y en sus últimas versiones no tiene nada que envidiarle a otras bases de datos comerciales.</p>
+<p>PostgreSQL utiliza un modelo cliente/servidor y usa multiprocesos en vez de multihilos para garantizar la estabilidad del sistema. Un fallo en uno de los procesos no afectará el resto y el sistema continuará funcionando.</p>
+<p>Distinguiremos algunos de los componentes más interesantes de la arquitectura del sistema:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Aplicación cliente: Esta es la aplicación cliente que utiliza PostgreSQL como administrador de bases de datos. La conexión puede ocurrir via TCP/IP ó sockets locales.</li>
+<li>Ficheros de configuracion: Los 3 ficheros principales de configuración utilizados por PostgreSQL, postgresql.conf, pg_hba.conf y pg_ident.conf</li>
+<li>Disco: Disco físico donde se almacenan los datos y toda la información necesaria para que PostgreSQL funcione</li>
+</ol>
+</div></blockquote>
+<div class="section" id="caracteristicas">
+<h3>Características<a class="headerlink" href="#caracteristicas" title="Permalink to this headline">¶</a></h3>
+<p>La última serie de producción es la 9.1. Sus características técnicas la hacen una de las bases de datos más potentes y robustas del mercado. Su desarrollo comenzo hace más de 16 años, y durante este tiempo, estabilidad, potencia, robustez, facilidad de administración e implementación de estándares han sido las características que más se han tenido en cuenta durante su desarrollo. PostgreSQL funciona muy bien con grandes cantidades de datos y una alta concurrencia de usuarios accediendo a la vez a el sistema.</p>
+<p>A continuación teneis algunas de las características más importantes y soportadas por PostgreSQL:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Generales</p>
+<blockquote>
+<div><ul class="simple">
+<li>Es una base de datos 100% ACID, Atomicidad, Consistencia, Aislamiento, Durabilidad</li>
+<li>Integridad referencial</li>
+<li>Tablespaces</li>
+<li>Copias de seguridad en caliente (Online/hot backups)</li>
+<li>Unicode</li>
+<li>Juegos de caracteres internacionales</li>
+<li>Regionalización por columna</li>
+<li>Multi-Version Concurrency Control (MVCC)</li>
+<li>Multiples métodos de autentificación</li>
+<li>Acceso encriptado via SSL</li>
+<li>Actualización in-situ integrada (pg_upgrade)</li>
+<li>Completa documentación</li>
+<li>Licencia BSD</li>
+<li>Disponible para Linux y UNIX en todas sus variantes (AIX, BSD, HP-UX, SGI IRIX, Mac OS X, Solaris, Tru64) y Windows 32/64bit.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Programación / Desarrollo</p>
+<blockquote>
+<div><ul class="simple">
+<li>Funciones/procedimientos almacenados (stored procedures) en numerosos lenguajes de programacion, entre otros PL/pgSQL (similar al PL/SQL de oracle), PL/Perl, PL/Python y PL/Tcl</li>
+<li>Bloques anónimos de código de procedimientos (sentencias DO)</li>
+<li>Numerosos tipos de datos y posibilidad de definir nuevos tipos. Además de los tipos estándares en cualquier base de datos, tenemos disponibles, entre otros, tipos geométricos, de direcciones de red, de cadenas binarias, UUID, XML, matrices, etc</li>
+<li>Soporta el almacenamiento de objetos binarios grandes (gráficos, videos, sonido, ...)</li>
+<li>APIs para programar en C/C++, Java, .Net, Perl, Python, Ruby, Tcl, ODBC, PHP, Lisp, Scheme, Qt y muchos otros.</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">SQL</p>
+<blockquote>
+<div><ul class="simple">
+<li>SQL92, SQL99, SQL2003, SQL2008</li>
+<li>Llaves primarias (<strong>primary keys</strong>) y foráneas (<strong>foreign keys</strong>)</li>
+<li>Check, Unique y Not null constraints</li>
+<li>Columnas auto-incrementales</li>
+<li>Indices compuestos, únicos, parciales y funcionales en cualquiera de los metodos de almacenamiento disponibles, B-tree, R-tree, hash ó GiST</li>
+<li>Sub-selects</li>
+<li>Consultas recursivas</li>
+<li>Joins</li>
+<li>Vistas (views)</li>
+<li>Disparadores (triggers) comunes, por columna, condicionales.</li>
+<li>Reglas (Rules)</li>
+<li>Herencia de tablas (Inheritance)</li>
+<li>Eventos LISTEN/NOTIFY</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="instalacion-y-configuracion-de-pg">
+<h2>Instalación y configuración de <em>PostgreSQL</em><a class="headerlink" href="#instalacion-y-configuracion-de-pg" title="Permalink to this headline">¶</a></h2>
+<p>Para instalar <em>PostgreSQL</em> utilizaremos los repositorios oficiales de nuestro sistema operativo Linux desde los cuales tendremos acceso al paquete oficial. Para ello abrimos una consola y:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install postgresql-9.1</pre>
+</div>
+<p>De esta manera tan sencilla, tendremos corriendo una instancia de <em>PostgreSQL</em> en nuestro servidor. Una instalación más personalizada es posible realizarla a través del código fuente de la aplicación, pero necesita un conocimiento básico de este proceso. Puede encontrarlo en la página oficial de <em>PostgreSQL</em>. Una vez instalado <em>PostgreSQL</em> procederemos a la configuración y puesta en marcha del entorno.</p>
+</div>
+<div class="section" id="configuracion">
+<h2>Configuración<a class="headerlink" href="#configuracion" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="estructura-de-la-instalacion">
+<h3>Estructura de la instalación<a class="headerlink" href="#estructura-de-la-instalacion" title="Permalink to this headline">¶</a></h3>
+<p>La instalación de <em>PostgreSQL</em> genera la siguiente estructura de carpetas, que habrá que tener en cuenta para el manejo del servidor:</p>
+<div class="highlight-python"><pre>* /usr/lib/postgresql/9.1 -&gt; ejecutables y librerías
+* /usr/share/postgresql/9.1 -&gt; archivos sql para creación estructura
+* /usr/share/postgresql-common -&gt; herramientas comunes para administración
+* /var/lib/postgresql/9.1
+* /etc/postgresql/9.1
+* main</pre>
+</div>
+<p>En esta última localización se encuentran los archivos necesarios para la configuración:</p>
+<div class="highlight-python"><pre>pg_hba.conf postgresql.conf</pre>
+</div>
+<p><strong>pg_hba.conf</strong> es el archivo de configuración de la autentificación de <em>PostgreSQL</em>
+<strong>postgresql.conf</strong> es el archivo de configuración de <em>PostgreSQL</em></p>
+</div>
+<div class="section" id="configuracion-de-los-accesos-al-servidor">
+<h3>Configuración de los accesos al servidor<a class="headerlink" href="#configuracion-de-los-accesos-al-servidor" title="Permalink to this headline">¶</a></h3>
+<p>Lo primero es configurar el servidor para que acepte conexiones de red. Para ello modificaremos el archivo <cite>pg_hba.conf</cite>, archivo que se utiliza para definir los diferentes tipos de acceso de un usuario al cluster de la siguiente manera:</p>
+<div class="highlight-python"><pre>[Tipo de conexion][database][usuario][IP][Netmask][Tipo de autentificacion][opciones]</pre>
+</div>
+<p>En el sistema puesto en marcha se accederá sólo con el usuario <em>postgres</em> por lo que es
+necesario que tenga acceso desde la máquina local para fines administrativos. La siguiente
+línea de <em>pg_hba.conf</em> permite que se acceda a todas las bases de datos (<em>all</em>) con el usuario
+<em>postgres</em> desde el propio servidor (<em>local</em>):</p>
+<div class="highlight-python"><pre>local   all             postgres                                ident</pre>
+</div>
+<p>Durante el desarrollo incluimos una línea que también permite acceder a todas las bases de datos
+(primer <em>all</em>) desde máquinas remotas (<em>host</em>) a cualquier usuario (<em>segundo all</em>):</p>
+<div class="highlight-python"><pre>host    all     all     0.0.0.0/32              md5</pre>
+</div>
+<p>La IP <em>0.0.0.0/32</em> indica que se aceptan conexiones de cualquier máquina, independientemente de
+su dirección IP. Aunque se acepten conexiones desde máquinas remotas, la autenticación se
+realiza por <em>md5</em>, lo que requiere conocer el password del usuario de la base de datos para conectar
+de manera efectiva.</p>
+<p>Al finalizar los desarrollos se eliminará dicha línea, pudiendo dejar en su lugar una que permita sólo
+el acceso a los ordenadores de la red, es decir las IPs que comiencen por &#8220;192.168.0&#8221;:</p>
+<div class="highlight-python"><pre>host    all     postgres    192.168.0.0/32         md5</pre>
+</div>
+<p>Lo cual permitirá conectar directamente con un cliente PostgreSQL, como <em>pgAdmin3</em>.</p>
+<p>Una vez definida la regla de acceso a nuestro servidor, le indicaremos las interfaces en las que puede escuchar el servidor. Para ello modificaremos el parámetro <cite>listen_address</cite> en el archivo <cite>postgresql.conf</cite> de la siguiente manera:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">listen_address</span> <span class="o">=</span> <span class="s">&#39;*&#39;</span>
+</pre></div>
+</div>
+<p>En los parámetros de seguridad, activaremos la encriptación de las claves de usuario modificando en el mismo archivo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">password_encryption</span> <span class="o">=</span> <span class="n">on</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="clientes-psql-y-pgadmin3">
+<h2>Clientes: psql y pgadmin3<a class="headerlink" href="#clientes-psql-y-pgadmin3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="psql">
+<h3>psql<a class="headerlink" href="#psql" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">psql</span> <span class="pre">-</span> <span class="pre">PostgreSQL</span> <span class="pre">interactive</span> <span class="pre">terminal</span></tt>, es un frontend tipo terminal para la gestión de PostgreSQL. Permite ejecutar consultas interactivamente, ejecutandolos contra la instancia de PostgreSQL, y ver los resultados de estas consultas. Alternativamente también permite ejecutar estas consultas desde un archivo. Proveé además un número de comandos y varias facilidades para escribir scripts y automatizar una variedad de tareas.</p>
+<p>El ejecutable se encuentra instalado en la ruta <tt class="docutils literal"><span class="pre">/usr/bin/psql</span></tt>, y se puede ejecutar desde una consola. Para ello lo primero que debemos hacer es entrar al sistema como un usuario con permisos para manejar la base de datos recien instalada.</p>
+<p>Recién instalado <em>PostgreSQL</em> dispone unicamente del usuario <strong>postgres</strong> como superusuario con el que podremos realizar tareas de administración sobre la base de datos. Lo primero será modificar la clave de este usuario.</p>
+<p>Primero lo haremos en el sistema, abrimos una terminal y tecleamos:</p>
+<div class="highlight-python"><pre>$ sudo passwd postgres</pre>
+</div>
+<p>de esta manera el sistema nos preguntará la nueva clave de usuario. Una vez realizdo este paso, modificaremos la password de este usuario en la misma instancia de <em>PostgreSQL</em>. Para ello entramos en la consola <cite>psql</cite> con el usuario <strong>postgres</strong>:</p>
+<div class="highlight-python"><pre>$ su postgres</pre>
+</div>
+<p>y con ese usuario:</p>
+<div class="highlight-python"><pre>$ psql</pre>
+</div>
+<p>De esta manera entramos en la consola de <em>PostgreSQL</em> a través del usuario <tt class="docutils literal"><span class="pre">postgres</span></tt> desde donde modificaremos la contraseña del usuario:</p>
+<div class="highlight-python"><pre>postgres=# alter user postgres with password '&lt;una_password&gt;';</pre>
+</div>
+<p>Existen diferentes opciones para el manejo de <tt class="docutils literal"><span class="pre">psql</span></tt>, se recomienda una lectura detenida de todos en la página oficial de <em>PostgreSQL</em>. Aquí mostraremos solo algunos de los más utilizados:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>psql nombre_base_datos</strong> o <strong>psql -d nombre_base_de_datos</strong> accederá a la base de datos que le indiquemos</li>
+<li><strong>psql -f ruta_a_archivo</strong> utiliza las sentencias que se encuentren dentro del archivo</li>
+<li><strong>psql -h nombre_servidor</strong> se conecta al servidor que le indiquemos</li>
+<li><strong>psql -p puerto</strong> se conecta a la instancia de <em>PostgreSQL</em> a través del puerto indicado</li>
+<li><strong>psql -l</strong> muestra un listado de las bases de datos de la instancia</li>
+<li><strong>psql -U nombre_usuario</strong> se conecta usando el usuario indicado</li>
+<li><strong>psql -V</strong> muestra la versión de psql</li>
+</ul>
+</div></blockquote>
+<p>Las opciones se pueden pasar de manera encadenada, por ejemplo, para conectarse a una base de datos en un servidor mediante un usuario:</p>
+<div class="highlight-python"><pre>$ psql -U usuario -d basedatos -h servidor -p puerto</pre>
+</div>
+<p>Una vez que accedemos al través de la consola <tt class="docutils literal"><span class="pre">psql</span></tt>, podremos comenzar a explorar el sistema. A continuación se detallan algunos de los comandos más usados que nos permiten extraer esta información:</p>
+<div class="highlight-python"><pre>* select version(); nos indicará la versión del servidor que tenemos instalada
+* \l muestra un listado de las bases de datos
+* select * from pg_user; nos muestra todos los usuarios del sistema
+* select * from pg_tables; muestra todas las tablas incluidas las del sistema
+* \c database cambia de base de datos
+* \dn muestra todos los esquemas de la base de datos
+* \dt muestra las tablas, acepta expresiones para filtrar por ejemplo, \dt p* todas las tablas que empiezan por p
+* \du listado de usuarios/grupos y roles
+* \d tabla columnas, y tipos de datos de la tabla
+* \i ruta_archivo ejecuta las sentencias de un archivo
+* \o ruta_archivo devuelve los datos a un archivo
+* \conninfo muestra la información de la conexión
+* \encoding codificación fija la codificación del sistema, o sin parámetro la muestra
+* \q sale de la consola ``psql``
+* \? ayuda</pre>
+</div>
+<p>Mediante el manejo de los comandos DLL desde la consola <tt class="docutils literal"><span class="pre">psql</span></tt> podremos definir la estructura de la base de datos. Por ejemplo podremos crear bases de datos mediante:</p>
+<div class="highlight-python"><pre>postgres=# CREATE DATABASE midb;</pre>
+</div>
+<p>Para una definición más extensa del uso de los comandos acudir a la referencia de <em>PostgreSQL</em></p>
+<div class="section" id="practicas">
+<h4>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="practica-1">
+<h5>Práctica 1<a class="headerlink" href="#practica-1" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic simple">
+<li>Cree un usuario <tt class="docutils literal"><span class="pre">prueba</span></tt> en la tabla de usuarios</li>
+<li>Asigne password <tt class="docutils literal"><span class="pre">pru3ba</span></tt> al usuario</li>
+<li>Asigne permisos de superusuario a <tt class="docutils literal"><span class="pre">prueba</span></tt></li>
+<li>Cree una base de datos <tt class="docutils literal"><span class="pre">midb</span></tt> en el esquema anterior usando como plantilla <tt class="docutils literal"><span class="pre">template1</span></tt></li>
+<li>Cree un esquema <tt class="docutils literal"><span class="pre">curso</span></tt></li>
+<li>Asigne todos los permisos al esquema <tt class="docutils literal"><span class="pre">curso</span></tt> para el usuario <tt class="docutils literal"><span class="pre">alumno</span></tt></li>
+<li>Cargue desde el archivo parques_naturales.sql la información en la base de datos recien creada</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="pgadmin">
+<h3>pgAdmin<a class="headerlink" href="#pgadmin" title="Permalink to this headline">¶</a></h3>
+<p>pgAdmin es el más popular software para la administración de <em>PostgreSQL</em> a través de entorno gráfico. Se puede utilizar para el manejo de las versiones de <em>PostgreSQL</em> 7.3 en adelante. Soporta todas las funcionalidades de <em>PostgreSQL</em> y permite una administración más sencilla de este. Incluye un editor de SQL desde el que se pueden realizar las consultas.</p>
+<p>Para instalar pgAdmin en nuestros equipos simplemente desde una consola introduciremos:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install pgadmin3</pre>
+</div>
+<p>Una vez instalado podremos arrancarlo desde el menú de aplicaciones -&gt; Desarrollo -&gt; pgAdmin III</p>
+<blockquote>
+<div><img alt="../_images/pgadmin3.png" src="../_images/pgadmin3.png" />
+</div></blockquote>
+<p>Ahora necesitaremos conectar con nuestra instancia de <em>PostgreSQL</em>, para ello pulsamos sobre el botón <tt class="docutils literal"><span class="pre">Add</span> <span class="pre">a</span> <span class="pre">connection</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">server</span></tt>:</p>
+<blockquote>
+<div><img alt="../_images/add_connection.png" src="../_images/add_connection.png" />
+</div></blockquote>
+<p>Aparecerá una interfaz donde introduciremos los datos de conexión:</p>
+<blockquote>
+<div><img alt="../_images/conexion.png" src="../_images/conexion.png" />
+</div></blockquote>
+<p>Introduciendo los datos necesarios accederemos al servidor, y podremos visualizar los esquemas, bases de datos, <tt class="docutils literal"><span class="pre">Tablespaces</span></tt>, usuarios y demás. Si vamos al editor de SQL podremos ejecutar consultas sobre nuestra base de datos:</p>
+<blockquote>
+<div><img alt="../_images/sql_editor.png" src="../_images/sql_editor.png" />
+</div></blockquote>
+<div class="section" id="id1">
+<h4>Prácticas<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Práctica 1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Arranque <tt class="docutils literal"><span class="pre">pgAdmin</span> <span class="pre">III</span></tt> y conectese al servidor instalado en su equipo utilizando el usuario <tt class="docutils literal"><span class="pre">prueba</span></tt> creado en la práctica anterior</li>
+<li>Abra la base de datos <tt class="docutils literal"><span class="pre">midb</span></tt> y compruebe que se ha creado correctamente</li>
+<li>Averigue la estructura de la base de datos <tt class="docutils literal"><span class="pre">midb</span></tt></li>
+<li>Compruebe el tipo de dato de la columna XXXXXXXXXXXXX</li>
+<li>Añada una columna de tipo XXXXXXXXXX a la tabla XXXXXXXXXX</li>
+</ol>
+</div>
+</div>
+<div class="section" id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<p>Installing PostGIS 2.0 on Ubuntu [EN] <a class="reference external" href="http://linfiniti.com/2012/05/installing-postgis-2-0-on-ubuntu/">http://linfiniti.com/2012/05/installing-postgis-2-0-on-ubuntu/</a></p>
+<p>Instalar PostGIS 2.0 en Ubuntu Server 12.04 de 32 bits [EN] <a class="reference external" href="http://proyectosbeta.net/2012/08/instalar-postgis-2-0-en-ubuntu-server-12-04-de-32-bits/">http://proyectosbeta.net/2012/08/instalar-postgis-2-0-en-ubuntu-server-12-04-de-32-bits/</a></p>
+<p>pgModeller [EN] <a class="reference external" href="http://pgmodeler.com.br/">http://pgmodeler.com.br/</a></p>
+<p>PostgreSQL 9.1.6 Documentation [EN] <a class="reference external" href="http://www.postgresql.org/docs/9.1/interactive/index.html">http://www.postgresql.org/docs/9.1/interactive/index.html</a></p>
+<p>PosgreSQL-es <a class="reference external" href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a></p>
+<p>Configuración básica de PostgreSQL <a class="reference external" href="http://www.postgresql.org.es/node/219">http://www.postgresql.org.es/node/219</a></p>
+<p>psql [EN] <a class="reference external" href="http://www.postgresql.org/docs/9.1/static/app-psql.html">http://www.postgresql.org/docs/9.1/static/app-psql.html</a></p>
+<p>pgAdmin III [EN] <a class="reference external" href="http://www.pgadmin.org/">http://www.pgadmin.org/</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Instalación de <em>PostgreSQL</em></a><ul>
+<li><a class="reference internal" href="#introduccion-a-postgresql">Introducción a PostgreSQL</a><ul>
+<li><a class="reference internal" href="#caracteristicas">Características</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#instalacion-y-configuracion-de-pg">Instalación y configuración de <em>PostgreSQL</em></a></li>
+<li><a class="reference internal" href="#configuracion">Configuración</a><ul>
+<li><a class="reference internal" href="#estructura-de-la-instalacion">Estructura de la instalación</a></li>
+<li><a class="reference internal" href="#configuracion-de-los-accesos-al-servidor">Configuración de los accesos al servidor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clientes-psql-y-pgadmin3">Clientes: psql y pgadmin3</a><ul>
+<li><a class="reference internal" href="#psql">psql</a><ul>
+<li><a class="reference internal" href="#practicas">Prácticas</a><ul>
+<li><a class="reference internal" href="#practica-1">Práctica 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgadmin">pgAdmin</a><ul>
+<li><a class="reference internal" href="#id1">Prácticas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Práctica 1</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgresql/postgresql.html"
+                        title="previous chapter">PostgreSQL</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html"
+                        title="next chapter"><em>PostGIS</em>, características espaciales</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-instalacion/instalacion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-caracteristicas-espaciales/caracteristicas_espaciales.html" title="PostGIS, características espaciales"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgresql/postgresql.html" title="PostgreSQL"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

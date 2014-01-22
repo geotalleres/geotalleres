@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GeoServer: Publicación de datos vectoriales &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="GeoServer: Publicación de datos raster" href="../geoserver-raster/geoserver_raster.html" />
+    <link rel="prev" title="Introducción a GeoServer" href="../geoserver-intro/geoserver_intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../geoserver-raster/geoserver_raster.html" title="GeoServer: Publicación de datos raster"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-intro/geoserver_intro.html" title="Introducción a GeoServer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geoserver-publicacion-de-datos-vectoriales">
+<h1>GeoServer: Publicación de datos vectoriales<a class="headerlink" href="#geoserver-publicacion-de-datos-vectoriales" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Diciembre 2012</td>
+<td><ul class="first last simple">
+<li>Oscar Fonts (<a class="reference external" href="mailto:oscar&#46;fonts&#37;&#52;&#48;geomati&#46;co">oscar<span>&#46;</span>fonts<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2013 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>La publicación de datos se realiza a partir de los enlaces bajo el apartado <strong>Datos</strong>.</p>
+<div class="section" id="creacion-de-un-espacio-de-trabajo">
+<h2>Creación de un espacio de trabajo<a class="headerlink" href="#creacion-de-un-espacio-de-trabajo" title="Permalink to this headline">¶</a></h2>
+<p>Un espacio de trabajo es un contenedor para agrupar datos publicados. Por ejemplo, resulta útil para clasificar los datos publicados en
+diversas áreas temáticas. Vamos a crear un espacio de trabajo bajo el que publicar todos los datos del taller.</p>
+<ul class="simple">
+<li>En la página &#8220;Espacios de trabajo&#8221;, hacer clic en &#8220;crear un nuevo espacio de trabajo&#8221;.</li>
+</ul>
+<p>Simplemente hay que introducir el nombre del espacio de trabajo, y un identificador URI. En nuestro caso, el URI puede ser cualquiera, pero
+debe ser un identificador único universal.</p>
+<ul class="simple">
+<li>Utilizaremos <strong>capacitacion</strong> como nombre, y <strong>http://nfms4redd.org/capacitacion_[nombre]_[fecha]</strong> como espacio de nombres (reemplazando [nombre] y [fecha]).</li>
+</ul>
+<p>Una vez creado, nos debe aparecer en la lista de espacios de trabajo disponibles:</p>
+<img alt="../_images/gs_workspace_capacitacion.png" src="../_images/gs_workspace_capacitacion.png" />
+</div>
+<div class="section" id="creacion-de-un-almacen-de-datos">
+<h2>Creación de un almacén de datos<a class="headerlink" href="#creacion-de-un-almacen-de-datos" title="Permalink to this headline">¶</a></h2>
+<p>Una vez creado el espacio de trabajo, es posible crear capas en él. Sin embargo, GeoServer distingue dos conceptos relacionados con las capas: los almacenes de datos y las capas. El primer concepto representa la forma de encontrar los datos de la capa, datos de conexión a la base de datos, ruta en el sistema operativo donde se encuentran los ficheros, etc. El segundo concepto en cambio, contiene la información para la visualización: simbología, extensión de la capa, etc. Así pues, primeramente hay que crear un almacén de datos.</p>
+<p>Un almacén de datos contiene la información necesaria para acceder a un determinado tipo de datos geográficos. En función del
+tipo de datos, será necesario crear un tipo de almacén distinto.</p>
+<ul class="simple">
+<li>En la página &#8220;Almacenes de datos&#8221;, hacer clic en &#8220;Agregar nuevo almacén&#8221;.</li>
+</ul>
+<p>Aparece una lista de origenes de datos, separados en dos grandes bloques &#8220;Origenes de datos vectoriales&#8221; y
+&#8220;Origenes de datos raster&#8221;. Aquí debemos escoger en función del tipo de datos que queremos acceder. Durante el taller utilizaremos
+los almacenes de tipo &#8220;Directory of spatial files (shapefiles)&#8221;, &#8220;PostGIS&#8221;, &#8220;GeoTIFF&#8221; e &#8221; ImageMosaic&#8221;. Como vemos, también se
+puede conectar a servicios &#8220;WMS&#8221; y &#8220;WFS&#8221; remotos.</p>
+<p>Para este ejercicio publicaremos una serie de <em>shapefiles</em>:</p>
+<ul class="simple">
+<li>Clicar en &#8220;Directory of spatial files (shapefiles)&#8221;</li>
+<li>Escoger <strong>unredd</strong> como espacio de trabajo</li>
+<li>Asignar el nombre <strong>vector</strong> al almacén de datos.</li>
+<li>También podemos añadir una descripción.</li>
+</ul>
+<p>El dato más importante a introducir es el directorio donde están alojados los <strong>shapefiles</strong>.</p>
+<ul class="simple">
+<li>Hacer clic en el enlace &#8220;Buscar...&#8221; en &#8220;Directorio de Shapefiles&#8221;, y navegar al directorio de datos vectoriales.</li>
+<li>Hacer clic en &#8220;Guardar&#8221;.</li>
+</ul>
+<img alt="../_images/gs_new_shp_dir.png" src="../_images/gs_new_shp_dir.png" />
+</div>
+<div class="section" id="publicacion-de-capas-vectoriales">
+<h2>Publicación de capas vectoriales<a class="headerlink" href="#publicacion-de-capas-vectoriales" title="Permalink to this headline">¶</a></h2>
+<p>Tras la creación del almacén, GeoServer pasa automáticamente a la pantalla de publicación de capas, donde obtenemos una lista
+con las capas del almacén de datos recién creado que se pueden publicar y que, en este caso, se corresponden con los distintos
+shapefiles en el directorio. Publicaremos estas capas una a una.</p>
+<ul class="simple">
+<li>Clicar en &#8220;publicación&#8221; una a una en las capas que se quieren publicar.</li>
+</ul>
+<p>Podemos escoger un nombre, título, resumen y palabras clave para describir mejor los datos a publicar.</p>
+<p>Por ahora, nos centraremos en los campos &#8220;Sistema de referencia de coordenadas&#8221; y &#8220;Encuadres&#8221;:</p>
+<img alt="../_images/gs_new_layer.png" src="../_images/gs_new_layer.png" />
+<div class="section" id="sistema-de-referencia-de-coordenadas">
+<h3>Sistema de referencia de coordenadas<a class="headerlink" href="#sistema-de-referencia-de-coordenadas" title="Permalink to this headline">¶</a></h3>
+<p>En general, GeoServer tratará de leer el sistema de referencia en que están expresados los datos de forma automática. En ocasiones, GeoServer no puede identificarlo, y hay que declararlo manualmente, como en este caso.</p>
+<p>Sabemos que los datos para todos los ficheros &#8220;shapefile&#8221; están espresados en el sistema de referencia <strong>EPSG:4326</strong>.</p>
+<ul class="simple">
+<li>En &#8220;SRS Declarado&#8221;, clicar en &#8220;Buscar...&#8221;, introducir &#8220;4326&#8221;, y aplicar este SRS.</li>
+</ul>
+</div>
+<div class="section" id="encuadres">
+<h3>Encuadres<a class="headerlink" href="#encuadres" title="Permalink to this headline">¶</a></h3>
+<p>A continuación, hemos de declarar el ámbito geográfico cubierto por esta capa. Para datos que no vayan a cambiar su extensión en el futuro, se pueden calcular automáticamente a partir de los datos:</p>
+<ul class="simple">
+<li>Bajo &#8220;Encuadres&#8221;, Clicar en &#8220;Calcular desde los datos&#8221; y &#8220;Calcular desde el encuadre nativo&#8221;.</li>
+<li>Finalmente, clicar en &#8220;Guardar&#8221; para publicar la nueva capa &#8220;country&#8221;.</li>
+</ul>
+</div>
+<div class="section" id="publicacion-del-resto-de-capas">
+<h3>Publicación del resto de capas<a class="headerlink" href="#publicacion-del-resto-de-capas" title="Permalink to this headline">¶</a></h3>
+<p>Usando el mismo procedimiento, publicaremos las otras capas del almacén:</p>
+<ul class="simple">
+<li>Clicar en &#8220;Agregar nuevo recurso&#8221; dentro de la página &#8220;Capas&#8221;, y seleccionando el almacén <strong>capacitacion:vector</strong>.</li>
+<li>Repetir los pasos descritos anteriormente para cada capa.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Para saber más...</p>
+<ul class="last simple">
+<li>Documentación técnica NFMS: <a class="reference external" href="http://nfms4redd.org/doc/html/geoserver/adding_data/adding_base_types.html">GeoServer &gt; Adding Data to Geoserver &gt; Adding Base Types</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="previsualizacion-de-capas">
+<h2>Previsualización de capas<a class="headerlink" href="#previsualizacion-de-capas" title="Permalink to this headline">¶</a></h2>
+<p>Desde la página &#8220;Previsualización de capas&#8221;, podemos acceder a los datos recién publicados en diversos formatos.</p>
+<img alt="../_images/gs_layer_preview.png" src="../_images/gs_layer_preview.png" />
+<ul class="simple">
+<li>Visualizar las nuevas capas utilizando el enlace &#8220;OpenLayers&#8221;.</li>
+</ul>
+<p>Observamos que las capas poligonales están simbolizadas en gris, mientras que las capas lineales aparecen azules. Estas son las simbolizaciones o <strong>estilos</strong> que GeoServer aplica por defecto. En el siguiente apartado veremos cómo crear nuestra propia simbolización.</p>
+<img alt="../_images/gs_layer_preview_ol.png" src="../_images/gs_layer_preview_ol.png" />
+<p>Desde la página &#8220;Previsualización de capas&#8221; tambien tenemos acceso a los datos en muchos otros formatos, como KML, para visualizar sobre Google Earth.</p>
+</div>
+<div class="section" id="simbolizacion-de-capas-vectoriales">
+<h2>Simbolización de capas vectoriales<a class="headerlink" href="#simbolizacion-de-capas-vectoriales" title="Permalink to this headline">¶</a></h2>
+<p>Para agregar nuevos estilos, acceder a la página &#8220;Estilos&#8221;, y clicar en &#8220;Agregar un nuevo estilo&#8221;.</p>
+<p>Los estilos se definen utilizando el formato XML estándar llamado SLD (<em>Styled Layer Descriptor</em>). Es un formato bastante prolijo, con multitud de elementos, que iremos descubriendo paso a paso. Generalmente se parte de un ejemplo ya existente, y se adapta a nuestras necesidades.</p>
+<p>A continuación, una plantilla básica de SLD:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span>
+<span class="nt">&lt;StyledLayerDescriptor</span> <span class="na">version=</span><span class="s">&quot;1.0.0&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sld StyledLayerDescriptor.xsd&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/sld&quot;</span>
+    <span class="na">xmlns:ogc=</span><span class="s">&quot;http://www.opengis.net/ogc&quot;</span>
+    <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;NamedLayer&gt;</span>
+    <span class="nt">&lt;Name&gt;</span>...nombre del estilo...<span class="nt">&lt;/Name&gt;</span>
+    <span class="nt">&lt;UserStyle&gt;</span>
+      <span class="nt">&lt;FeatureTypeStyle&gt;</span>
+        <span class="nt">&lt;Rule&gt;</span>...regla de simbolización 1...<span class="nt">&lt;/Rule&gt;</span>
+        <span class="nt">&lt;Rule&gt;</span>...regla de simbolización 2...<span class="nt">&lt;/Rule&gt;</span>
+      <span class="nt">&lt;/FeatureTypeStyle&gt;</span>
+    <span class="nt">&lt;/UserStyle&gt;</span>
+  <span class="nt">&lt;/NamedLayer&gt;</span>
+<span class="nt">&lt;/StyledLayerDescriptor&gt;</span>
+</pre></div>
+</div>
+<p>A partir de esta plantilla, daremos un nombre al estilo, y añadiremos una o más reglas de simbolización.</p>
+<div class="section" id="estilo-para-limites-administrativos-linea-basica">
+<h3>Estilo para límites administrativos: Linea básica<a class="headerlink" href="#estilo-para-limites-administrativos-linea-basica" title="Permalink to this headline">¶</a></h3>
+<p>Para los límites administrativos, utilizaremos una línea de color ocre, codificado como <tt class="docutils literal"><span class="pre">#f0a020</span></tt>, y de grosor 1 píxel.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="http://html-color-codes.info/codigos-de-colores-hexadecimales/">Utilidad en línea para generar códigos de colores</a></p>
+</div>
+<p>Así, la regla de simbolización se aplicará sobre los elementos lineales (<tt class="docutils literal"><span class="pre">LineSymbolizer</span></tt>), sobre los que definiremos dos parámetros para el trazo: <tt class="docutils literal"><span class="pre">stroke</span></tt> y <tt class="docutils literal"><span class="pre">stroke-width</span></tt>.</p>
+<ul class="simple">
+<li>A partir de la plantilla anterior, incluir la siguente regla de simbolización:</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;Rule&gt;</span>
+  <span class="nt">&lt;LineSymbolizer&gt;</span>
+    <span class="nt">&lt;Stroke&gt;</span>
+      <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke&quot;</span><span class="nt">&gt;</span>#f0a020<span class="nt">&lt;/CssParameter&gt;</span>
+      <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;stroke-width&quot;</span><span class="nt">&gt;</span>1<span class="nt">&lt;/CssParameter&gt;</span>
+    <span class="nt">&lt;/Stroke&gt;</span>
+  <span class="nt">&lt;/LineSymbolizer&gt;</span>
+<span class="nt">&lt;/Rule&gt;</span>
+</pre></div>
+</div>
+<p><strong>Importante</strong>: Antes de &#8220;Enviar&#8221; el estilo, es conveniente &#8220;Validar&#8221;, para asegurarse que la sintaxis es la correcta, y evitar errores al aplicar el estilo a la capa.</p>
+<p>A continuación, asignaremos este nuevo estilo a la capa.</p>
+<ul class="simple">
+<li>Desde la página &#8220;capas&#8221;, seleccionar la capa a la que queremos aplicar el estilo.</li>
+<li>En la pestaña &#8220;Publicación&#8221;, bajo &#8220;Configuración WMS&#8221;, cambiar el estilo por defecto y seleccionar el estilo que acabamos de crear.
+Aparecerá una pequeña leyenda: <img alt="regions_legend" src="../_images/gs_legend_line.png" />.</li>
+<li>Guardar los cambios.</li>
+</ul>
+<p>Ahora, al previsualizar la capa obtendremos la nueva simbolización.</p>
+</div>
+<div class="section" id="multiples-simbolizadores-etiquetado">
+<h3>Múltiples simbolizadores: Etiquetado<a class="headerlink" href="#multiples-simbolizadores-etiquetado" title="Permalink to this headline">¶</a></h3>
+<p>Siguiendo los pasos anteriormente descritos, crearemos un nuevo estilo para una capa puntual.</p>
+<p>En esta ocasión, simbolizaremos con un triángulo cada uno de los puntos de la capa y, adicionalmente, añadiremos una
+etiqueta con el nombre del punto, para lo cual utilizaremos dos simbolizadores: <em>PointSymbolizer</em> y <em>TextSymbolizer</em>.</p>
+<p>Esta es la regla que debe aplicarse:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;Rule&gt;</span>
+  <span class="nt">&lt;PointSymbolizer&gt;</span>
+    <span class="nt">&lt;Graphic&gt;</span>
+      <span class="nt">&lt;Mark&gt;</span>
+        <span class="nt">&lt;WellKnownName&gt;</span>triangle<span class="nt">&lt;/WellKnownName&gt;</span>
+        <span class="nt">&lt;Fill&gt;</span>
+          <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#FF0000<span class="nt">&lt;/CssParameter&gt;</span>
+        <span class="nt">&lt;/Fill&gt;</span>
+      <span class="nt">&lt;/Mark&gt;</span>
+      <span class="nt">&lt;Size&gt;</span>6<span class="nt">&lt;/Size&gt;</span>
+    <span class="nt">&lt;/Graphic&gt;</span>
+  <span class="nt">&lt;/PointSymbolizer&gt;</span>
+  <span class="nt">&lt;TextSymbolizer&gt;</span>
+    <span class="nt">&lt;Label&gt;</span>
+      <span class="nt">&lt;ogc:PropertyName&gt;</span>Id<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+    <span class="nt">&lt;/Label&gt;</span>
+    <span class="nt">&lt;Fill&gt;</span>
+      <span class="nt">&lt;CssParameter</span> <span class="na">name=</span><span class="s">&quot;fill&quot;</span><span class="nt">&gt;</span>#000000<span class="nt">&lt;/CssParameter&gt;</span>
+    <span class="nt">&lt;/Fill&gt;</span>
+  <span class="nt">&lt;/TextSymbolizer&gt;</span>
+<span class="nt">&lt;/Rule&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Crear el nuevo estilo &#8220;etiquetado&#8221; aplicando los simbolizadores anteriores</li>
+<li>Validarlo</li>
+<li>Asignarlo a la capa</li>
+<li>Previsualizar la capa</li>
+</ul>
+</div>
+<div class="section" id="estilo-para-carreteras-filtros">
+<h3>Estilo para carreteras: Filtros<a class="headerlink" href="#estilo-para-carreteras-filtros" title="Permalink to this headline">¶</a></h3>
+<p>Para la capa de carreteras vamos a utilizar varias reglas de simbolización, dependiendo del valor del atributo <tt class="docutils literal"><span class="pre">RTT_DESCRI</span></tt>.</p>
+<ul class="simple">
+<li>Crear un nuevo estilo &#8220;roads&#8221;, con una simbolización de color rojo &#8220;#FF0000&#8221; y un grosor de línea de 4 píxeles.</li>
+<li>Añadir el siguiente filtro, justo antes del <tt class="docutils literal"><span class="pre">LineSymbolizer</span></tt>:</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;ogc:Filter&gt;</span>
+  <span class="nt">&lt;ogc:PropertyIsEqualTo&gt;</span>
+    <span class="nt">&lt;ogc:PropertyName&gt;</span>RTT_DESCRI<span class="nt">&lt;/ogc:PropertyName&gt;</span>
+    <span class="nt">&lt;ogc:Literal&gt;</span>Primary Route<span class="nt">&lt;/ogc:Literal&gt;</span>
+  <span class="nt">&lt;/ogc:PropertyIsEqualTo&gt;</span>
+<span class="nt">&lt;/ogc:Filter&gt;</span>
+</pre></div>
+</div>
+<p>De este modo, la regla de simbolización sólo se aplicará sobre las líneas con <tt class="docutils literal"><span class="pre">RTT_DESCRI</span></tt> igual a <tt class="docutils literal"><span class="pre">Primary</span> <span class="pre">Route</span></tt>.</p>
+<ul class="simple">
+<li>Aplicar el nuevo estilo a la capa &#8220;roads&#8221;, y previsualizar la capa.</li>
+</ul>
+<p>Deberán mostrarse sólamente algunas de las carreteras, de color rojo.</p>
+<p>A continuación, vamos a aplicar otras dos reglas, a otros dos tipos de carreteras:</p>
+<ul class="simple">
+<li>Volver a editar el estilo &#8220;roads&#8221;.</li>
+<li>Copiar la regla de simbolización (<tt class="docutils literal"><span class="pre">rule</span></tt>) y pegar dos veces. Obtendremos tres reglas idénticas.</li>
+<li>Editar la segunda regla:<ul>
+<li>Cambiar el filtro para que coincida con las líneas con <tt class="docutils literal"><span class="pre">RTT_DESCRI</span></tt> igual a <tt class="docutils literal"><span class="pre">Secondary</span> <span class="pre">Route</span></tt>.</li>
+<li>Cambiar el simbolizador para que utilice un color amarillo <tt class="docutils literal"><span class="pre">#FFCC33</span></tt> y un grosor de línea de 3 píxeles.</li>
+</ul>
+</li>
+<li>Editar la tercera regla:
+* Cambiar el filtro para que coincida con las líneas con <tt class="docutils literal"><span class="pre">RTT_DESCRI</span></tt> igual a <tt class="docutils literal"><span class="pre">Unknown</span></tt>.
+* Cambiar el simbolizador para que utilice un color gris <tt class="docutils literal"><span class="pre">#666666</span></tt> y un grosor de línea de 2 píxeles.</li>
+<li>Validar el nuevo estilo, aplicar y previsualizar la capa &#8220;roads&#8221; de nuevo. Debería presentar un aspecto como este:</li>
+</ul>
+<img alt="../_images/gs_road_classification.png" src="../_images/gs_road_classification.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Para saber más...</p>
+<ul class="last simple">
+<li>Documentación técnica NFMS: <a class="reference external" href="http://nfms4redd.org/doc/html/geoserver/pretty_maps/styling.html">GeoServer &gt; Pretty Maps with GeoServer &gt; Styling with SLD</a></li>
+<li>Manual de Usuario de GeoServer: <a class="reference external" href="http://docs.geoserver.org/stable/en/user/styling/index.html">Styling</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GeoServer: Publicación de datos vectoriales</a><ul>
+<li><a class="reference internal" href="#creacion-de-un-espacio-de-trabajo">Creación de un espacio de trabajo</a></li>
+<li><a class="reference internal" href="#creacion-de-un-almacen-de-datos">Creación de un almacén de datos</a></li>
+<li><a class="reference internal" href="#publicacion-de-capas-vectoriales">Publicación de capas vectoriales</a><ul>
+<li><a class="reference internal" href="#sistema-de-referencia-de-coordenadas">Sistema de referencia de coordenadas</a></li>
+<li><a class="reference internal" href="#encuadres">Encuadres</a></li>
+<li><a class="reference internal" href="#publicacion-del-resto-de-capas">Publicación del resto de capas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#previsualizacion-de-capas">Previsualización de capas</a></li>
+<li><a class="reference internal" href="#simbolizacion-de-capas-vectoriales">Simbolización de capas vectoriales</a><ul>
+<li><a class="reference internal" href="#estilo-para-limites-administrativos-linea-basica">Estilo para límites administrativos: Linea básica</a></li>
+<li><a class="reference internal" href="#multiples-simbolizadores-etiquetado">Múltiples simbolizadores: Etiquetado</a></li>
+<li><a class="reference internal" href="#estilo-para-carreteras-filtros">Estilo para carreteras: Filtros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../geoserver-intro/geoserver_intro.html"
+                        title="previous chapter">Introducción a GeoServer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../geoserver-raster/geoserver_raster.html"
+                        title="next chapter">GeoServer: Publicación de datos raster</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/geoserver-vector/geoserver_vector.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../geoserver-raster/geoserver_raster.html" title="GeoServer: Publicación de datos raster"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-intro/geoserver_intro.html" title="Introducción a GeoServer"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

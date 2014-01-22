@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PostGIS, características espaciales &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Simple Feature Model" href="../postgis-simple-feature-model/simple_feature_model.html" />
+    <link rel="prev" title="Instalación de PostgreSQL" href="../postgis-instalacion/instalacion.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-simple-feature-model/simple_feature_model.html" title="Simple Feature Model"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-instalacion/instalacion.html" title="Instalación de PostgreSQL"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pg-caracteristicas-espaciales">
+<h1><em>PostGIS</em>, características espaciales<a class="headerlink" href="#pg-caracteristicas-espaciales" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
+<p>Para el curso que nos compete realizaremos las prácticas con la versión 2.0 de <em>PostGIS</em> por ser la que dispone del módulo de Raster y de Topología. <em>PostGIS</em> es una extensión espacial para <em>PostgreSQL</em> que permite gestionar objetos geográficos, de tal manera que añade esta capacidad al SGBD <em>PostgreSQL</em>.</p>
+</div>
+<div class="section" id="instalacion-y-configuracion-de-pg">
+<h2>Instalación y configuración de <em>PostGIS</em><a class="headerlink" href="#instalacion-y-configuracion-de-pg" title="Permalink to this headline">¶</a></h2>
+<p>En función del sistema operativo que estemos usando, la instalación será de una forma u otra. Como ya hemos mencionado, vamos a contemplar tres sistemas operativos:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Sistemas Windows XP/7</li>
+<li>Sistemas Mac OS X</li>
+<li>Sistemas basados en Debian</li>
+</ul>
+</div></blockquote>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="mac-os-x">
+<h3>Mac OS X<a class="headerlink" href="#mac-os-x" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="debian-ubuntu-derivados">
+<h3>Debian/Ubuntu/Derivados<a class="headerlink" href="#debian-ubuntu-derivados" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="espacializacion-de-una-base-de-datos">
+<h3>Espacialización de una base de datos<a class="headerlink" href="#espacializacion-de-una-base-de-datos" title="Permalink to this headline">¶</a></h3>
+<p>La integración de <em>PostGIS</em> con <em>PostgreSQL</em> está hecha en el lenguaje PL/PGSQL, por
+lo que para dotar de capacidades espaciales una base de datos existente es necesario
+primero añadir soporte para este lenguaje. Esto es necesario para versiones de <em>PostgreSQL</em> anteriores a la 8.4:</p>
+<div class="highlight-python"><pre>$ createlang plpgsql curso</pre>
+</div>
+<a class="reference internal image-reference" href="../_images/pre-postgis.png"><img alt="../_images/pre-postgis.png" src="../_images/pre-postgis.png" style="width: 800.0px; height: 450.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/pre-postgis-2.png"><img alt="../_images/pre-postgis-2.png" src="../_images/pre-postgis-2.png" style="width: 800.0px; height: 450.0px;" /></a>
+<p>Hecho esto, la instalación de <em>PostGIS</em> se hará de una forma u otra, en función de si estamos usando una versión de <em>PostgreSQL</em> anterior a la 9.1 o no.</p>
+<div class="section" id="instalacion-de-pg-en-version-de-psql-inferior-a-9-1">
+<h4>Instalación de <em>PostGIS</em> en versión de <em>PostgreSQL</em> inferior a 9.1<a class="headerlink" href="#instalacion-de-pg-en-version-de-psql-inferior-a-9-1" title="Permalink to this headline">¶</a></h4>
+<p>A continuación hay que localizar dos ficheros SQL de PostGIS que al ejecutarse
+añadiran las estructuras necesarias a nuestra base de datos. Estos ficheros
+se llaman <em>lwpostgis.sql</em> (o símplemente <em>postgis.sql</em>) y <em>spatial_ref_sys.sql</em>.</p>
+<p>Para localizarlos podemos utilizar el comando <em>locate</em>:</p>
+<div class="highlight-python"><pre>$ locate postgis.sql
+/usr/share/postgresql/8.4/contrib/postgis-|PG_VERSION|/postgis.sql
+/usr/share/postgresql/8.4/contrib/postgis-|PG_VERSION|/uninstall_postgis.sql
+/usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/postgis.sql
+/usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/uninstall_postgis.sql
+
+$ locate spatial_ref_sys.sql
+/usr/share/postgresql/8.4/contrib/postgis-|PG_VERSION|/spatial_ref_sys.sql
+/usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/spatial_ref_sys.sql</pre>
+</div>
+<p>Una vez localizados dos ficheros de la misma versión, es necesario ejecutarlos
+en el servidor. Existen dos formas de hacerlo con <em>psql</em>: el parámetro -f y
+el comando \i. Con el parámetro -f llamaríamos a <em>psql</em> desde la línea de
+comandos del sistema y especificaríamos el fichero .sql que queremos ejecutar
+con dicho parámetro. Para que el fichero se ejecute en la base de datos que
+nos interesa hay que especificar también el parámetro -d visto anteriormente:</p>
+<div class="highlight-python"><pre>$ psql -U postgres -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/postgis.sql
+$ psql -U postgres -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/spatial_ref_sys.sql</pre>
+</div>
+<p>La opción de usar el comando \i consiste en entrar al modo interactivo de <em>psql</em>
+conectando a la base de datos de interés y ejecutando el fichero con \i:</p>
+<div class="highlight-python"><pre>$ psql -U postgres -d template_postgis
+=# \i /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/postgis.sql
+=# \i /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/spatial_ref_sys.sql</pre>
+</div>
+<p>o también se puede entrar a la base de datos por defecto (<em>postgres</em>) y
+conectar interactivamente a nuestra base de datos luego con \c:</p>
+<div class="highlight-python"><pre>$ psql -U postgres
+=# \c template_postgis
+=# \i /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/postgis.sql
+=# \i /usr/share/postgresql/9.1/contrib/postgis-|PG_VERSION|/spatial_ref_sys.sql</pre>
+</div>
+<p>Tras esta operación se puede observar que han aparecido dos
+nuevas tablas: <em>geometry_columns</em> y <em>spatial_ref_sys</em>, además de
+numerosas funciones en el esquema <em>public</em>.</p>
+<a class="reference internal image-reference" href="../_images/postgis-1.png"><img alt="../_images/postgis-1.png" src="../_images/postgis-1.png" style="width: 800.0px; height: 450.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/postgis-2.png"><img alt="../_images/postgis-2.png" src="../_images/postgis-2.png" style="width: 800.0px; height: 450.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/postgis-3.png"><img alt="../_images/postgis-3.png" src="../_images/postgis-3.png" style="width: 800.0px; height: 450.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/postgis-4.png"><img alt="../_images/postgis-4.png" src="../_images/postgis-4.png" style="width: 800.0px; height: 450.0px;" /></a>
+<p>La tabla <em>geometry_columns</em> es un catálogo de las columnas espaciales existentes en la base de datos. Como PostGIS no utiliza los tipos de datos espaciales de PostgreSQL, debe buscarse una manera de identificar qué campo contiene geometrías. Esto se hace de manera estándar (OGC) manteniendo un catálogo con la lista de columnas espaciales que existen. Cuando un cliente, como gvSIG por ejemplo, intente identificar las tablas espaciales que hay en la base de datos irá a la tabla <em>geometry_columns</em> y verá referencias a las tablas que contienen los datos espaciales. Por esto hay que tenerla siempre actualizada. Por su parte, la tabla <em>spatial_ref_sys</em> contiene una lista con los sistemas de referencia disponibles.</p>
+<img alt="../_images/training_postgis_spacialized.png" src="../_images/training_postgis_spacialized.png" />
+<p>Podremos comprobar la versión que tenemos instalada de <em>PostGIS</em> mediante:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT postgis_full_version();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instalacion-de-pg-en-version-de-psql-9-1-o-superior">
+<h4>Instalación de <em>PostGIS</em> en versión de <em>PostgreSQL</em> 9.1 o superior<a class="headerlink" href="#instalacion-de-pg-en-version-de-psql-9-1-o-superior" title="Permalink to this headline">¶</a></h4>
+<p>Si se cuenta con <em>PostgreSQL</em> 9.1 o superior, podremos utilizar la expresión <strong>CREATE EXTENSION</strong>.</p>
+<p>De manera que instalar <em>PostGIS</em> será tan sencillo como:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># CREATE EXTENSION postgis;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creacion-de-una-plantilla-template-postgis">
+<h3>Creación de una plantilla template_postgis<a class="headerlink" href="#creacion-de-una-plantilla-template-postgis" title="Permalink to this headline">¶</a></h3>
+<p>Podremos utilizar la base de datos creada inicialmente como plantilla para la posterior creación de bases de datos espaciales evitando tener que repetir el proceso. Para ello simplemente:</p>
+<div class="highlight-python"><pre>$ createdb -U postgres -T template_postgis [nueva_base_datos]</pre>
+</div>
+<p>En caso de querer crear la base de datos con un usuario diferente al utilizado para la creación de la plantilla debemos indicarselo al sistema:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># UPDATE pg_database SET datistemplate = TRUE WHERE datname = &#39;template_postgis&#39;;</span>
+</pre></div>
+</div>
+<p>Y seguidamente debemos asignarle permisos al esquema PUBLIC en las tablas de metadatos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># GRANT ALL ON geometry_columns TO PUBLIC;</span>
+<span class="c"># GRANT ALL ON geography_columns TO PUBLIC;</span>
+<span class="c"># GRANT ALL ON spatial_ref_sys TO PUBLIC;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-espaciales">
+<h2>Indices espaciales<a class="headerlink" href="#indices-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Una base de datos ordinaria pone a disposición del usuario una estructura de datos que sirve para agilizar el acceso a determinados registros en función del valor que tienen en un campo. La indexación para tipos de datos estándar que pueden ser ordenados (alfabéticamente o numéricamente) consiste en esencia en ordenar estos registros de manera que sea fácil localizarlos.</p>
+<p>Pero en el caso de la información espacial no existe un orden total ya que un polígono puede contener a un punto, cruzarse con una línea, etc. En cambio, se ponen en marcha ciertas estrategias para asociar los registros con determinadas partes del territorio que cubren y así poder obtener los registros que se encuentran cerca de una posición dada.</p>
+<p><em>PostgreSQL</em> implementa un algoritmo de indexación espacial denomimado <tt class="docutils literal"><span class="pre">GiST</span></tt> (Generalized Search Tree). <em>PostGIS</em> extiende los índices <tt class="docutils literal"><span class="pre">GiST</span></tt> para que funcionen adecuadamente con los tipos <tt class="docutils literal"><span class="pre">geometry`</span></tt>.</p>
+<p>Se recomienda el uso de estos índices cuando el número de registros excede de algunos miles. De esta manera se incrementará la velocidad de la búsqueda espacial y su visualización en SIG de escritorio.</p>
+</div>
+<div class="section" id="funciones-espaciales">
+<h2>Funciones espaciales<a class="headerlink" href="#funciones-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Una base de datos ordinaria proporciona funciones para manipular los datos en una consulta. Estas funciones incluyen la concatenación de cadenas, operaciones matemáticas o la extración de información de las fechas. Una base de datos espacial debe proporcionar un completo juego de funciones para poder realizar análisis con los objetos espaciales: analizar la composición del objeto, determinar su relación espacial con otros objetos, transformarlo, etc.</p>
+<p>La mayor parte de las funciones espaciales pueden ser agrupadas en una de las siguientes cinco categorías:</p>
+<ul class="simple">
+<li>Conversión: Funciones que convierten las geometrías a otros formatos externos</li>
+<li>Gestión: Tareas administrativas de PostGIS</li>
+<li>Recuperación: Obtienen propiedades y medidas de las geometrías.</li>
+<li>Comparación: Comparan dos geometrías y obtienen información sobre su relación
+espacial.</li>
+<li>Generación: Generan geometrías a partir de otros tipos de datos.</li>
+</ul>
+<p>La lista de funciones es muy larga. Para obtener una lista comúnmente presente
+en las bases de datos espaciales se puede consultar el estándar
+<a class="reference external" href="http://www.opengeospatial.org/standards/sfs">OGC SFSQL</a>, que es
+implementado por PostGIS.</p>
+</div>
+<div class="section" id="otros-modulos">
+<h2>Otros módulos<a class="headerlink" href="#otros-modulos" title="Permalink to this headline">¶</a></h2>
+<p>En la versión 2.0 de <em>PostGIS</em> se incorporan dos módulos nuevos dentro del núcleo del producto, el módulo <em>Raster</em> y el módulo de <em>Topología persistente</em>. En función de si estamos usando una versión de PostgreSQL inferior a la 9.1 o no, instalaremos ambos módulos de una forma u otra.</p>
+<div class="section" id="instalacion-de-modulos-en-postgresql-inferior-a-version-9-1">
+<h3>Instalación de módulos en PostgreSQL inferior a versión 9.1<a class="headerlink" href="#instalacion-de-modulos-en-postgresql-inferior-a-version-9-1" title="Permalink to this headline">¶</a></h3>
+<p>Deberemos instalar cada módulo cargando ficheros PL/pgSQL. Lo haremos mediante la herramienta de línea de comandos <em>psql</em></p>
+<div class="section" id="raster">
+<h4>Raster<a class="headerlink" href="#raster" title="Permalink to this headline">¶</a></h4>
+<p>Este módulo se encarga de gestionar la información raster siguiendo la misma filosofía que el tipo geometry y permitiendo análisis raster y mezclar información raster y vectorial en el análisis.</p>
+<p>La instalación de este módulo es similar a la instalación de <em>PostGIS</em> realizandose mediante la ejecución de scripts que crean la funcionalidad necesaria para el manejo raster en la base de datos.:</p>
+<div class="highlight-python"><pre>$ psql -U postgres -f path_rtpostgis.sql -d [nombre_base_datos]
+$ psql -U postgres -f path_raster_comments.sql -d [nombre_base_datos]</pre>
+</div>
+</div>
+<div class="section" id="topologia-persistente">
+<h4>Topologia persistente<a class="headerlink" href="#topologia-persistente" title="Permalink to this headline">¶</a></h4>
+<p>Este es una forma de estructurar la información geográfica de manera diferente al modelo <em>simple features</em>. Se instala de manera opcional y no se tratará en este curso por exceder los objetivos del mismo.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Instalación de módulos en PostgreSQL inferior a versión 9.1<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Como sucede al instalar la extensión <em>PostGIS</em>, si contamos con <em>PostgreSQL</em> 9.1 o superior, basta con que instalemos los siguientes comandos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># CREATE EXTENSION postgis_raster;</span>
+<span class="c"># CREATE EXTENSION postgis_topology;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="practicas">
+<h2>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Creé una base de datos espacial que se llame <tt class="docutils literal"><span class="pre">curso</span></tt> a partir de la plantilla <tt class="docutils literal"><span class="pre">template_postgis</span></tt>.</p>
+<p>Cree un esquema <tt class="docutils literal"><span class="pre">gis</span></tt> en la base de datos <tt class="docutils literal"><span class="pre">curso</span></tt>.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><em>PostGIS</em>, características espaciales</a><ul>
+<li><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li><a class="reference internal" href="#instalacion-y-configuracion-de-pg">Instalación y configuración de <em>PostGIS</em></a><ul>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+<li><a class="reference internal" href="#mac-os-x">Mac OS X</a></li>
+<li><a class="reference internal" href="#debian-ubuntu-derivados">Debian/Ubuntu/Derivados</a></li>
+<li><a class="reference internal" href="#espacializacion-de-una-base-de-datos">Espacialización de una base de datos</a><ul>
+<li><a class="reference internal" href="#instalacion-de-pg-en-version-de-psql-inferior-a-9-1">Instalación de <em>PostGIS</em> en versión de <em>PostgreSQL</em> inferior a 9.1</a></li>
+<li><a class="reference internal" href="#instalacion-de-pg-en-version-de-psql-9-1-o-superior">Instalación de <em>PostGIS</em> en versión de <em>PostgreSQL</em> 9.1 o superior</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creacion-de-una-plantilla-template-postgis">Creación de una plantilla template_postgis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-espaciales">Indices espaciales</a></li>
+<li><a class="reference internal" href="#funciones-espaciales">Funciones espaciales</a></li>
+<li><a class="reference internal" href="#otros-modulos">Otros módulos</a><ul>
+<li><a class="reference internal" href="#instalacion-de-modulos-en-postgresql-inferior-a-version-9-1">Instalación de módulos en PostgreSQL inferior a versión 9.1</a><ul>
+<li><a class="reference internal" href="#raster">Raster</a></li>
+<li><a class="reference internal" href="#topologia-persistente">Topologia persistente</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Instalación de módulos en PostgreSQL inferior a versión 9.1</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practicas">Prácticas</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-instalacion/instalacion.html"
+                        title="previous chapter">Instalación de <em>PostgreSQL</em></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-simple-feature-model/simple_feature_model.html"
+                        title="next chapter">Simple Feature Model</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-caracteristicas-espaciales/caracteristicas_espaciales.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-simple-feature-model/simple_feature_model.html" title="Simple Feature Model"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-instalacion/instalacion.html" title="Instalación de PostgreSQL"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

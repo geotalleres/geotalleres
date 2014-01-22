@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Relaciones espaciales &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Análisis espacial" href="../postgis-analisis-espacial/analisis_espacial.html" />
+    <link rel="prev" title="Indexación espacial" href="../postgis-indexacion-espacial/indexacion_espacial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgis-analisis-espacial/analisis_espacial.html" title="Análisis espacial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-indexacion-espacial/indexacion_espacial.html" title="Indexación espacial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="relaciones-espaciales">
+<h1>Relaciones espaciales<a class="headerlink" href="#relaciones-espaciales" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
+<p>Estos métodos lo que hacen es verificar el cumplimiento de determinados predicados geográficos entre dos geometrías distintas. Los predicados geográficos toman dos geometrías como argumento, y devuelven un valor booleano que indica si ambas geometrías cumplen o no una determinada relación espacial. Las principales relaciones espaciales contempladas son equals, disjoint, intersects, touches, crosses, within, contains, overlaps.</p>
+</div>
+<div class="section" id="matriz-de-9im">
+<h2>Matriz DE-9IM<a class="headerlink" href="#matriz-de-9im" title="Permalink to this headline">¶</a></h2>
+<p>Estas relaciones o predicados son descritas por la matriz DE-9IM (Dimensionally Extended 9 intersection Matrix), que es una construcción matemática de la rama de la topología.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/matriz.png"><img alt="../_images/matriz.png" src="../_images/matriz.png" style="width: 358.0px; height: 280.0px;" /></a>
+</div></blockquote>
+<p>Figura: Mátriz DE-9IM de dos figuras geométricas dadas. Fuente: wikipedia en inglés [7] (<a class="reference external" href="http://en.wikipedia.org/wiki/DE-9IM">http://en.wikipedia.org/wiki/DE-9IM</a>)</p>
+</div>
+<div class="section" id="predicados-espaciales">
+<h2>Predicados espaciales<a class="headerlink" href="#predicados-espaciales" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/mas_predicados_espaciales.png"><img alt="../_images/mas_predicados_espaciales.png" src="../_images/mas_predicados_espaciales.png" style="width: 395.0px; height: 276.5px;" /></a>
+</div></blockquote>
+<p>Figura: Ejemplos de predicados espaciales. Fuente: wikipedia. <a class="reference external" href="http://en.wikipedia.org/wiki/File:TopologicSpatialRelarions2.png">http://en.wikipedia.org/wiki/File:TopologicSpatialRelarions2.png</a></p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/touches.png"><img alt="../_images/touches.png" src="../_images/touches.png" style="width: 330.5px; height: 211.5px;" /></a>
+</div></blockquote>
+<p>Figura: Ejemplos de la relación “Touch” (toca). Fuente: “OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture”</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/crosses.png"><img alt="../_images/crosses.png" src="../_images/crosses.png" style="width: 428.5px; height: 200.0px;" /></a>
+</div></blockquote>
+<p>Figura: Ejemplos de la relación “Crosses” (cruza). Fuente: “OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture”</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/within.png"><img alt="../_images/within.png" src="../_images/within.png" style="width: 477.0px; height: 248.0px;" /></a>
+</div></blockquote>
+<p>Figura: Ejemplos de la relación “Within” (contenido en). Fuente: “OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture”</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/overlaps.png"><img alt="../_images/overlaps.png" src="../_images/overlaps.png" style="width: 451.0px; height: 172.0px;" /></a>
+</div></blockquote>
+<p>Figura: Ejemplos de la relación “Overlaps” (solapa). Fuente: “OpenGIS® Implementation Standard for Geographic information - Simple feature access - Part 1: Common architecture”</p>
+<p>Los principales métodos de la clase Geometry para chequear predicados espaciales entra la geometría en cuestión y otra proporcionada como parámetro son:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Equals (A, B)</strong>: Las geometrías son iguales desde un punto de vista topológico</li>
+<li><strong>Disjoint (A, B)</strong>: No tienen ningún punto en común, las geometrías son disjuntas</li>
+<li><strong>Intersects (A, B)</strong>:Tienen por lo menos un punto en común. Es el inverso de Disjoint</li>
+<li><strong>Touches (A, B)</strong>: Las geometrías tendrán por lo menos un punto en común del contorno, pero no puntos interiores</li>
+<li><strong>Crosses (A, B)</strong>: Comparten parte, pero no todos los puntos interiores, y la dimensión de la intersección es menor que la dimensión de al menos una de las geometrías</li>
+<li><strong>Contains (A, B)</strong>: Ningún punto de B está en el exterior de A. Al menos un punto del interior de B está en el interior de A</li>
+<li><strong>Within (A, B)</strong>: Es el inverso de Contains. Within(B, A) = Contains (A, B)</li>
+<li><strong>Overlaps (A, B)</strong>: Las geometrías comparten parte pero no todos los puntos y la intersección tiene la misma dimensión que las geometrías.</li>
+<li><strong>Covers (A, B)</strong>: Ningún punto de B está en el exterior de A. B está contenido en A.</li>
+<li><strong>CoveredBy (A, B)</strong>: Es el inverso de Covers. CoveredBy(A, B) = Covers(B, A)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="st-equals">
+<h3>ST_Equals<a class="headerlink" href="#st-equals" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>ST_Equals(geometry A, geometry B), comprueba que dos geometrías sean espacialmente iguales.</pre>
+</div>
+<p>ST_Equals devuelve TRUE si dos geometrías del mismo tipo tienen identicas coordenadas x,y.</p>
+<div class="section" id="ejemplo">
+<h4>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre># SELECT name, geom, ST_AsText(geom)
+FROM points
+WHERE name = 'Casa de Piedra';</pre>
+</div>
+<div class="highlight-python"><pre>        name    |                        geom                        |          st_astext
+----------------+----------------------------------------------------+------------------------------
+ Casa de Piedra | 0101000020E6100000A6CC727E2F8052C0F9AF62A70EA81240 | POINT(-74.0028988 4.6641184)</pre>
+</div>
+<p>Si usamos el valor obtenido en <tt class="docutils literal"><span class="pre">geom</span></tt> y consultamos a la base de datos:</p>
+<div class="highlight-python"><pre># SELECT name
+FROM points
+WHERE ST_Equals(geom, '0101000020E6100000A6CC727E2F8052C0F9AF62A70EA81240');</pre>
+</div>
+<div class="highlight-python"><pre>        name
+---------------
+Casa de Piedra</pre>
+</div>
+</div>
+</div>
+<div class="section" id="st-intersects-st-disjoint-st-crosses-y-st-overlaps">
+<h3>ST_Intersects, ST_Disjoint, ST_Crosses y ST_Overlaps<a class="headerlink" href="#st-intersects-st-disjoint-st-crosses-y-st-overlaps" title="Permalink to this headline">¶</a></h3>
+<p>Comprueban la relación entre los interiores de las geometrías.</p>
+<div class="section" id="st-intersects">
+<h4>ST_Intersects<a class="headerlink" href="#st-intersects" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Intersects(geometry A, geometry B)</pre>
+</div>
+<p>Devuelve TRUE si la intersección no es un resultado vacio.</p>
+</div>
+<div class="section" id="st-disjoint">
+<h4>ST_Disjoint<a class="headerlink" href="#st-disjoint" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Disjoint(geometry A , geometry B)</pre>
+</div>
+<p>Es el inverso de ST_Intersects. indica que dos geometrías no tienen ningún punto en común. Es menos eficiente que ST_Intersects ya que esta no está indexada. Se recomienda comprobar <tt class="docutils literal"><span class="pre">NOT</span> <span class="pre">ST_Intersects</span></tt></p>
+</div>
+<div class="section" id="st-crosses">
+<h4>ST_Crosses<a class="headerlink" href="#st-crosses" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Crosses(geometry A, geometry B)</pre>
+</div>
+<p>Se cumple esta relación si el resultado de la intesección de dos geometrías es de dimensión menor que la mayor de las dimensiones de las dos geometrías y además esta intersección está en el interior de ambas.</p>
+</div>
+<div class="section" id="st-overlap">
+<h4>ST_Overlap<a class="headerlink" href="#st-overlap" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Overlaps(geometry A, geometry B)</pre>
+</div>
+<p>compara dos geometrías de la misma dimensión y devuelve TRUE si su intersección resulta una geometría diferente de ambas pero de la misma dimensión</p>
+<div class="section" id="id1">
+<h5>Ejemplo<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>Dada la siguiente imagen</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/intersection.png"><img alt="../_images/intersection.png" src="../_images/intersection.png" style="width: 379.0px; height: 241.0px;" /></a>
+</div></blockquote>
+<p>Vemos que el poligono <strong>16</strong> intersecta a los poligonos <strong>8</strong> y <strong>15</strong>:</p>
+<div class="highlight-python"><pre># SELECT gid
+FROM barrios_de_bogota
+WHERE ST_Intersects(geom, (select geom from barrios_de_bogota where gid = 16))
+AND gid != 16</pre>
+</div>
+<div class="highlight-python"><pre>gid
+-----
+8
+15</pre>
+</div>
+</div>
+</div>
+<div class="section" id="st-touches">
+<h4>ST_Touches<a class="headerlink" href="#st-touches" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Touches(geometry A, geometry B)</pre>
+</div>
+<p>Devuelte TRUE si cualquiera de los contornos de las geometrías se cruzan o si sólo uno de los interiores de la geometría se cruza el contorno del otro.</p>
+</div>
+<div class="section" id="st-within-y-st-contains">
+<h4>ST_Within y ST_Contains<a class="headerlink" href="#st-within-y-st-contains" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Within(geometry A , geometry B)</pre>
+</div>
+<p>es TRUE si la geometría A está completamente dentro de la geometría B. Es el inverso de ST_Contains</p>
+<div class="highlight-python"><pre>ST_Contains(geometry A, geometry B)</pre>
+</div>
+<p>Devuelve TRUE si la geometría B está contenida completamente en la geometría A</p>
+<div class="section" id="id2">
+<h5>Ejemplo<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<p>¿En que barrio se encuentra el Museo del 20 de Julio?</p>
+<div class="highlight-python"><pre>#SELECT b.name from barrios_de_bogota b, points p
+WHERE ST_Contains(b.geom, p.geom) and
+p.name = 'Museo del 20 de Julio'</pre>
+</div>
+<div class="highlight-python"><pre>     name
+---------------
+San Cristóbal</pre>
+</div>
+</div>
+</div>
+<div class="section" id="st-distance-and-st-dwithin">
+<h4>ST_Distance and ST_DWithin<a class="headerlink" href="#st-distance-and-st-dwithin" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre>ST_Distance(geometry A, geometry B)</pre>
+</div>
+<p>Calcula la menor distancia entre dos geometrías.</p>
+<div class="highlight-python"><pre>ST_DWithin(geometry A, geometry B, distance)</pre>
+</div>
+<p>Permite calcular si dos objetos se encuentran a una distancia dada uno del otro.</p>
+<div class="section" id="id3">
+<h5>Ejemplo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
+<p>Encontrar los puntos de interes a como maximo 2km de la oficina de turismo de <strong>Bogotanisimo.com</strong>:</p>
+<div class="highlight-python"><pre># SELECT name
+FROM points
+WHERE
+        name is not null and
+        name != 'Bogotanisimo.com' and
+        ST_DWithin(
+             ST_Transform(geom, 21818),
+             (SELECT ST_Transform(geom, 21818)
+                FROM points
+                WHERE name='Bogotanisimo.com'),
+             2000
+           );</pre>
+</div>
+<div class="highlight-python"><pre>  name
+------------------------
+panaderia Los Hornitos</pre>
+</div>
+<p>Hemos aplicado una transformación geométrica a otro sistema de referencia (EPSG:21818), para poder medir distancias en metros. Nuestros datos originales usan grados en lugar de metros para las coordenadas.</p>
+<p>Otra manera de realizar la misma operación pero sin necesidad de transformar los datos a un sistema de referencia diferente para poder usar metros es usar el tipo de datos <strong>geography</strong> de PostGIS:</p>
+<div class="highlight-python"><pre>#SELECT name
+FROM points
+WHERE
+        name is not null and
+        name != 'Bogotanisimo.com' and
+        ST_DWithin(
+             geography(geom),
+             (SELECT geography(geom)
+                FROM points
+                WHERE name='Bogotanisimo.com'),
+             2000
+           );</pre>
+</div>
+<p>El resultado es el mismo que el de la consulta anterior.</p>
+<p>El uso del tipo <strong>geography</strong> para medir distancias, no obstante, es el recomendado cuando se trata de medir la distancia entre dos puntos de la Tierra muy distantes entre sí.</p>
+<p>En estos casos, un sistema de refencia plano no es una buena elección. Estos sistemas suelen dar buenos resultados a la hora de mostrar mapas en planos, porque conservan las direcciones, pero las distancias y áreas pueden estar bastante distorsionadas con respecto a la realidad. Es necesario utilizar un sistema de referencia espacial que conserve las distancias, teniendo en cuenta la curvatura terrestre. El tipo <strong>geography</strong> de PostGIS es un buen ejemplo, puesto que realiza los cálculos sobre una esfera, y no sobre un esferoide.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="joins-espaciales">
+<h2>JOINS espaciales<a class="headerlink" href="#joins-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Permite combinar información de diferentes tablas usando relaciones espaciales como clave dentro del JOIN. Es una de las caracteristicas más potentes de las bases de datos espaciales.</p>
+<p>Veamos un ejemplo: Los nombres de los barrios por los que cruza el rio Bogotá</p>
+<div class="highlight-python"><pre># SELECT b.name
+FROM barrios_de_bogota b JOIN waterways w
+ON ST_Crosses(b.geom, w.geom)
+WHERE w.name = 'Rio Bogotá'</pre>
+</div>
+<div class="highlight-python"><pre>name
+----------------
+Bosa
+Ciudad Kennedy
+Fontibón
+Engativá
+Suba</pre>
+</div>
+<p>Cualquier función que permita crear relaciones TRUE/FALSE entre dos tablas puede ser usada para manejar un JOIN espacial, pero comunmente las más usadas son:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ST_Intersects</li>
+<li>ST_Contains</li>
+<li>ST_DWithin</li>
+</ul>
+</div></blockquote>
+<div class="section" id="join-y-group-by">
+<h3>JOIN y GROUP BY<a class="headerlink" href="#join-y-group-by" title="Permalink to this headline">¶</a></h3>
+<p>El uso de las relaciones espaciales junto con funciones de agregacion, como <strong>group by</strong>, permite operaciones muy poderosas con nuestros datos. Veamos un ejemplo sencillo: El numero de escuelas que hay en cada uno de los barrios de Bogota:</p>
+<div class="highlight-python"><pre>#select b.name, count(p.type) as hospitals from barrios_de_bogota b join
+points p on st_contains(b.geom, p.geom) where p.type = 'hospital'
+group by b.name order by hospitals desc</pre>
+</div>
+<div class="highlight-python"><pre>      name      | schools
+----------------+---------
+ Suba           |       8
+ Usaquén        |       5
+ Los Mártires   |       3
+ Teusaquillo    |       3
+ Antonio Nariño |       3
+ Tunjuelito     |       2
+ Ciudad Kennedy |       2
+ Engativá       |       1
+ Fontibón       |       1
+ Santa Fé       |       1
+ Barrios Unidos |       1
+ Ciudad Bolívar |       1</pre>
+</div>
+<ol class="arabic simple">
+<li>La clausula JOIN crea una tabla virtual que incluye los datos de los barrios y de los puntos de interés</li>
+<li>WHERE filtra la tabla virtual solo para las columnas en las que el punto de interés es un hospital</li>
+<li>Las filas resultantes son agrupadas por el nombre del barrio y rellenadas con la función de agregación count().</li>
+</ol>
+</div>
+</div>
+<div class="section" id="practicas">
+<h2>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h2>
+<p>Comprueba si estas geometrías son iguales: LINESTRING(0 0, 10 0) Y MULTILINESTRING((10 0, 5 0),(0 0, 5 0)).</p>
+<p>Represente como texto el valor de la geometría del barrio &#8216;Ciudad Bolivar&#8217;.</p>
+<p>¿En que barrio se encuentra la Plaza de Las Americas? (Pista: buscar en tabla de edificios)</p>
+<p>¿Qué diferencias hay entre los predicados ST_Contains y ST_Covers? (Pista: <a class="reference external" href="http://lin-ear-th-inking.blogspot.com.es/2007/06/subtleties-of-ogc-covers-spatial.html">http://lin-ear-th-inking.blogspot.com.es/2007/06/subtleties-of-ogc-covers-spatial.html</a>)</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Relaciones espaciales</a><ul>
+<li><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li><a class="reference internal" href="#matriz-de-9im">Matriz DE-9IM</a></li>
+<li><a class="reference internal" href="#predicados-espaciales">Predicados espaciales</a><ul>
+<li><a class="reference internal" href="#st-equals">ST_Equals</a><ul>
+<li><a class="reference internal" href="#ejemplo">Ejemplo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#st-intersects-st-disjoint-st-crosses-y-st-overlaps">ST_Intersects, ST_Disjoint, ST_Crosses y ST_Overlaps</a><ul>
+<li><a class="reference internal" href="#st-intersects">ST_Intersects</a></li>
+<li><a class="reference internal" href="#st-disjoint">ST_Disjoint</a></li>
+<li><a class="reference internal" href="#st-crosses">ST_Crosses</a></li>
+<li><a class="reference internal" href="#st-overlap">ST_Overlap</a><ul>
+<li><a class="reference internal" href="#id1">Ejemplo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#st-touches">ST_Touches</a></li>
+<li><a class="reference internal" href="#st-within-y-st-contains">ST_Within y ST_Contains</a><ul>
+<li><a class="reference internal" href="#id2">Ejemplo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#st-distance-and-st-dwithin">ST_Distance and ST_DWithin</a><ul>
+<li><a class="reference internal" href="#id3">Ejemplo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#joins-espaciales">JOINS espaciales</a><ul>
+<li><a class="reference internal" href="#join-y-group-by">JOIN y GROUP BY</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practicas">Prácticas</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../postgis-indexacion-espacial/indexacion_espacial.html"
+                        title="previous chapter">Indexación espacial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgis-analisis-espacial/analisis_espacial.html"
+                        title="next chapter">Análisis espacial</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/postgis-relaciones-espaciales/relaciones_espaciales.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgis-analisis-espacial/analisis_espacial.html" title="Análisis espacial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../postgis-indexacion-espacial/indexacion_espacial.html" title="Indexación espacial"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

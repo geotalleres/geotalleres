@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Conceptos básicos de SQL &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="PostgreSQL" href="../postgresql/postgresql.html" />
+    <link rel="prev" title="Teoría de base de datos" href="../bases-de-datos/teoria_bases_datos.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../postgresql/postgresql.html" title="PostgreSQL"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../bases-de-datos/teoria_bases_datos.html" title="Teoría de base de datos"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="conceptos-basicos-de-sql">
+<h1>Conceptos básicos de SQL<a class="headerlink" href="#conceptos-basicos-de-sql" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Noviembre 2012</td>
+<td><ul class="first last simple">
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>15 Octubre  2013</td>
+<td><ul class="first last simple">
+<li>Jorge Arévalo(<a class="reference external" href="mailto:jorge&#46;arevalo&#37;&#52;&#48;geomati&#46;co">jorge<span>&#46;</span>arevalo<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Micho García</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
+<p>El lenguaje de consulta estructurado o SQL (por sus siglas en inglés <strong>Structured Query Language</strong>) es un lenguaje declarativo de acceso a bases de datos relacionales que permite especificar diversos tipos de operaciones en ellas. Una de sus características es el manejo del álgebra y el cálculo relacional que permiten efectuar consultas con el fin de recuperar de forma sencilla información de interés de bases de datos, así como hacer cambios en ella.</p>
+<p>El SQL es un lenguaje de acceso a bases de datos que explota la flexibilidad y potencia de los sistemas relacionales y permite así gran variedad de operaciones.</p>
+</div>
+<div class="section" id="componentes-del-sql">
+<h2>Componentes del SQL<a class="headerlink" href="#componentes-del-sql" title="Permalink to this headline">¶</a></h2>
+<p>El lenguaje SQL está compuesto por comandos, cláusulas, operadores y funciones de agregado. Estos elementos se combinan en las instrucciones para crear, actualizar y manipular las bases de datos.</p>
+<div class="section" id="comandos">
+<h3>Comandos<a class="headerlink" href="#comandos" title="Permalink to this headline">¶</a></h3>
+<p>Existen tres tipos de comandos SQL:</p>
+<p>Los <strong>DLL(Data Definition Language)</strong> que permiten crear y definir nuevas bases de datos, campos e índices.
+Los <strong>DML(Data Manipulation Language)</strong> que permiten generar consultas para ordenar, filtrar y extraer datos de la base de datos.
+Los <strong>DCL(Data Control Language)</strong> que se encargan de definir las permisos sobre los datos</p>
+<div class="section" id="lenguaje-de-definicion-de-datos-ddl">
+<h4>Lenguaje de definición de datos (DDL)<a class="headerlink" href="#lenguaje-de-definicion-de-datos-ddl" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Comando</strong></td>
+<td rowspan="2"><strong>Descripción</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>CREATE</td>
+<td>Utilizado para crear nuevas tablas, campos e índices</td>
+</tr>
+<tr class="row-even"><td>DROP</td>
+<td>Empleado para eliminar tablas e índices</td>
+</tr>
+<tr class="row-odd"><td>ALTER</td>
+<td>Utilizado para modificar las tablas agregando
+campos o cambiando la definición de los campos.</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>El lenguaje de definición de datos (en inglés Data Definition Language, o DDL), es el que se encarga de la modificación de la estructura de los objetos de la base de datos. Incluye órdenes para modificar, borrar o definir las tablas en las que se almacenan los datos de la base de datos. Existen cuatro operaciones básicas: CREATE, ALTER, DROP y TRUNCATE.</p>
+<div class="section" id="create">
+<h5>CREATE<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h5>
+<p>Este comando crea un objeto dentro del gestor de base de datos. Puede ser una base de datos, tabla, índice, procedimiento almacenado o vista.</p>
+<p>Ejemplo (crear una tabla):</p>
+<div class="highlight-python"><pre># CREATE TABLE Empleado
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+Nombre VARCHAR(50),
+Apellido VARCHAR(50),
+Direccion VARCHAR(255),
+Ciudad VARCHAR(60),
+Telefono VARCHAR(15),
+Peso VARCHAR (5),
+Edad (2),
+Actividad Específica (100),
+idCargo INT
+)</pre>
+</div>
+</div>
+<div class="section" id="alter">
+<h5>ALTER<a class="headerlink" href="#alter" title="Permalink to this headline">¶</a></h5>
+<p>Este comando permite modificar la estructura de un objeto. Se pueden agregar/quitar campos a una tabla, modificar el tipo de un campo, agregar/quitar índices a una tabla, modificar un trigger, etc.</p>
+<p>Ejemplo (agregar columna a una tabla):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># ALTER TABLE &#39;NOMBRE_TABLA&#39; ADD NUEVO_CAMPO INT;</span>
+<span class="c"># ALTER TABLE &#39;NOMBRE_TABLA&#39; DROP COLUMN NOMBRE_COLUMNA;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="drop">
+<h5>DROP<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h5>
+<p>Este comando elimina un objeto de la base de datos. Puede ser una tabla, vista, índice, trigger, función, procedimiento o cualquier otro objeto que el motor de la base de datos soporte. Se puede combinar con la sentencia ALTER.</p>
+<p>Ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># DROP TABLE &#39;NOMBRE_TABLA&#39;;</span>
+<span class="c"># DROP SCHEMA &#39;ESQUEMA;&#39;</span>
+<span class="c"># DROP DATABASE &#39;BASEDATOS&#39;;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="truncate">
+<h5>TRUNCATE<a class="headerlink" href="#truncate" title="Permalink to this headline">¶</a></h5>
+<p>Este comando trunca todo el contenido de una tabla. La ventaja sobre el comando DROP, es que si se quiere borrar todo el contenido de la tabla, es mucho más rápido, especialmente si la tabla es muy grande. La desventaja es que TRUNCATE sólo sirve cuando se quiere eliminar absolutamente todos los registros, ya que no se permite la cláusula WHERE. Si bien, en un principio, esta sentencia parecería ser DML (Lenguaje de Manipulación de Datos), es en realidad una DDL, ya que internamente, el comando TRUNCATE borra la tabla y la vuelve a crear y no ejecuta ninguna transacción.</p>
+<p>Ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># TRUNCATE TABLE &#39;NOMBRE_TABLA&#39;;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="practicas">
+<h3>Prácticas<a class="headerlink" href="#practicas" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="practica-1">
+<h4>Práctica 1<a class="headerlink" href="#practica-1" title="Permalink to this headline">¶</a></h4>
+<p>Definir mediante comandos SQL el modelo de datos creado para los Parques Naturales de Costa Rica</p>
+</div>
+<div class="section" id="lenguaje-de-manipulacion-de-datos-dml-data-manipulation-language">
+<h4>Lenguaje de manipulación de datos DML(Data Manipulation Language)<a class="headerlink" href="#lenguaje-de-manipulacion-de-datos-dml-data-manipulation-language" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Comando</strong></td>
+<td rowspan="2"><strong>Descripción</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>SELECT</td>
+<td>Utilizado para consultar registros de la base de datos
+que satisfagan un criterio determinado</td>
+</tr>
+<tr class="row-even"><td>INSERT</td>
+<td>Utilizado para cargar lotes de datos en la base de datos
+en una única operación.</td>
+</tr>
+<tr class="row-odd"><td>UPDATE</td>
+<td>Utilizado para modificar los valores de los campos y
+registros especificados Utilizado para modificar las
+tablas agregando campos o cambiando la definición de
+los campos.</td>
+</tr>
+<tr class="row-even"><td>DELETE</td>
+<td>Utilizado para eliminar registros de una tabla</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="section" id="definicion">
+<h5>Definición<a class="headerlink" href="#definicion" title="Permalink to this headline">¶</a></h5>
+<p>Un lenguaje de manipulación de datos (Data Manipulation Language, o DML en inglés) es un lenguaje proporcionado por el sistema de gestión de base de datos que permite a los usuarios llevar a cabo las tareas de consulta o manipulación de los datos, organizados por el modelo de datos adecuado.
+El lenguaje de manipulación de datos más popular hoy día es SQL, usado para recuperar y manipular datos en una base de datos relacional.</p>
+</div>
+<div class="section" id="insert">
+<h5>INSERT<a class="headerlink" href="#insert" title="Permalink to this headline">¶</a></h5>
+<p>Una sentencia INSERT de SQL agrega uno o más registros a una (y sólo una) tabla en una base de datos relacional.</p>
+<p>Forma básica:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># INSERT INTO &#39;&#39;tabla&#39;&#39; (&#39;&#39;columna1&#39;&#39;, [&#39;&#39;columna2,... &#39;&#39;]) VALUES (&#39;&#39;valor1&#39;&#39;, [&#39;&#39;valor2,...&#39;&#39;])</span>
+</pre></div>
+</div>
+<p>Las cantidades de columnas y valores deben ser iguales. Si una columna no se especifica, le será asignado el valor por omisión. Los valores especificados (o implícitos) por la sentencia INSERT deberán satisfacer todas las restricciones aplicables. Si ocurre un error de sintaxis o si alguna de las restricciones es violada, no se agrega la fila y se devuelve un error.</p>
+<p>Ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># INSERT INTO agenda_telefonica (nombre, numero) VALUES (&#39;Roberto Jeldrez&#39;, 4886850);</span>
+</pre></div>
+</div>
+<p>Cuando se especifican todos los valores de una tabla, se puede utilizar la sentencia acortada:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># INSERT INTO &#39;&#39;VALUES (&#39;&#39;valor1&#39;&#39;, [&#39;&#39;valor2,...&#39;&#39;])</span>
+</pre></div>
+</div>
+<p>Ejemplo (asumiendo que &#8216;nombre&#8217; y &#8216;número&#8217; son las únicas columnas de la tabla &#8216;agenda_telefonica&#8217;):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># INSERT INTO agenda_telefonica VALUES (&#39;Jhonny Aguiar&#39;, 080473968);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="update">
+<h5>UPDATE<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h5>
+<p>Una sentencia UPDATE de SQL es utilizada para modificar los valores de un conjunto de registros existentes en una tabla.</p>
+<p>Ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># UPDATE mi_tabla SET campo1 = &#39;nuevo valor campo1&#39; WHERE campo2 = &#39;N&#39;;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete">
+<h5>DELETE<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h5>
+<p>Una sentencia DELETE de SQL borra uno o más registros existentes en una tabla.</p>
+<p>Forma básica:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># DELETE FROM &#39;tabla&#39; WHERE &#39;columna1&#39; = &#39;valor1&#39;</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># DELETE FROM My_table WHERE field2 = &#39;N&#39;;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Prácticas<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id2">
+<h3>Práctica 1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Extraer de Wikipedia la información necesaria para insertar en el modelo de datos creado para Parques Nacionales y desarrollar en un script mediante sentencias SQL.</p>
+<div class="section" id="clausulas">
+<h4>Clausulas<a class="headerlink" href="#clausulas" title="Permalink to this headline">¶</a></h4>
+<p>Las cláusulas son condiciones de modificación utilizadas para definir los datos que desea seleccionar o manipular.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Comando</strong></td>
+<td rowspan="2"><strong>Descripción</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>FROM</td>
+<td>Utilizada para especificar la tabla de la cual se van a
+seleccionar los registros</td>
+</tr>
+<tr class="row-even"><td>GROUP BY</td>
+<td>Utilizada para separar los registros seleccionados en
+grupos específicos</td>
+</tr>
+<tr class="row-odd"><td>HAVING</td>
+<td>Utilizada para expresar condición que debe satisfacer
+cada grupo</td>
+</tr>
+<tr class="row-even"><td>ORDER BY</td>
+<td>Utilizada para ordenar los registros seleccionados de
+acuerdo con un orden específico</td>
+</tr>
+<tr class="row-odd"><td>WHERE</td>
+<td>Utilizada para determinar los registros seleccionados
+en la clausula FROM</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operadores">
+<h4>Operadores<a class="headerlink" href="#operadores" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="operadores-logicos">
+<h5>Operadores Lógicos<a class="headerlink" href="#operadores-logicos" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Operador</strong></td>
+<td rowspan="2"><strong>Uso</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>AND</td>
+<td>Es el “y” lógico. Evalúa dos condiciones y devuelve un
+valor de verdad sólo si ambas son ciertas.</td>
+</tr>
+<tr class="row-even"><td>OR</td>
+<td>Es el “o” lógico. Evalúa dos condiciones y devuelve un
+valor de verdad si alguna de las dos es cierta.</td>
+</tr>
+<tr class="row-odd"><td>NOT</td>
+<td>Negación lógica. Devuelve el valor contrario de la
+expresión.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="operadores-de-comparacion">
+<h5>Operadores de comparación<a class="headerlink" href="#operadores-de-comparacion" title="Permalink to this headline">¶</a></h5>
+<table border="1" class="docutils">
+<colgroup>
+<col width="74%" />
+<col width="26%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Operador</strong></td>
+<td rowspan="2"><strong>Uso</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">&lt;</td>
+<td rowspan="2">Menor que</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">&gt;</td>
+<td rowspan="2">Mayor que</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">&lt;&gt;</td>
+<td rowspan="2">Distinto de</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">&lt;=</td>
+<td rowspan="2">Menor o igual que</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">&gt;=</td>
+<td rowspan="2">Mayor o igual que</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">BETWEEN</td>
+<td rowspan="2">Intervalo</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">LIKE</td>
+<td rowspan="2">Comparación</td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td rowspan="2">In</td>
+<td rowspan="2">Especificar</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="funciones-de-agregado">
+<h4>Funciones de agregado<a class="headerlink" href="#funciones-de-agregado" title="Permalink to this headline">¶</a></h4>
+<p>Las funciones de agregado se usan dentro de una cláusula SELECT en grupos de registros para devolver un único valor que se aplica a un grupo de registros.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td rowspan="2"><strong>Comando</strong></td>
+<td rowspan="2"><strong>Descripción</strong></td>
+</tr>
+<tr class="row-even"></tr>
+<tr class="row-odd"><td>AVG</td>
+<td>Utilizada para calcular el promedio de los valores de
+un campo determinado</td>
+</tr>
+<tr class="row-even"><td>COUNT</td>
+<td>Utilizada para devolver el número de registros de la
+selección</td>
+</tr>
+<tr class="row-odd"><td>SUM</td>
+<td>Utilizada para devolver la suma de todos los valores de
+un campo determinado</td>
+</tr>
+<tr class="row-even"><td>MAX</td>
+<td>Utilizada para devolver el valor más alto de un campo
+especificado</td>
+</tr>
+<tr class="row-odd"><td>MIN</td>
+<td>Utilizada para devolver el valor más bajo de un campo
+especificado</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="consultas">
+<h2>Consultas<a class="headerlink" href="#consultas" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="consultas-de-seleccion">
+<h3>Consultas de selección<a class="headerlink" href="#consultas-de-seleccion" title="Permalink to this headline">¶</a></h3>
+<p>Las consultas de selección se utilizan para indicar al motor de datos que devuelva información de las bases de datos, esta información es devuelta en forma de conjunto de registros. Este conjunto de registros es modificable.</p>
+<div class="section" id="basicas">
+<h4>Básicas<a class="headerlink" href="#basicas" title="Permalink to this headline">¶</a></h4>
+<p>La sintaxis básica de una consulta de selección es:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT Campos FROM Tabla;</span>
+<span class="c"># SELECT Nombre, Telefono FROM Clientes;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ordenar-los-registros">
+<h4>Ordenar los registros<a class="headerlink" href="#ordenar-los-registros" title="Permalink to this headline">¶</a></h4>
+<p>Se puede especificar el orden en que se desean recuperar los registros de las tablas mediante la clausula <strong>ORDER BY</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT CodigoPostal, Nombre, Telefono FROM Clientes ORDER BY Nombre;</span>
+</pre></div>
+</div>
+<p>Se pueden ordenar los registros por mas de un campo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT CodigoPostal, Nombre, Telefono FROM Clientes ORDER BY CodigoPostal, Nombre;</span>
+</pre></div>
+</div>
+<p>Y se puede especificar el orden de los registros: ascendente mediante la claúsula (<strong>ASC</strong> -se toma este valor por defecto) ó descendente (<strong>DESC</strong>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT CodigoPostal, Nombre, Telefono FROM Clientes ORDER BY CodigoPostal DESC , Nombre ASC;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="consultas-con-predicado">
+<h4>Consultas con predicado<a class="headerlink" href="#consultas-con-predicado" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">ALL Si no se incluye ninguno de los predicados se asume ALL. El Motor de base de datos selecciona todos los registros que cumplen las condiciones de la instrucción SQL:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT ALL FROM Empleados;</span>
+<span class="c"># SELECT * FROM Empleados;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">TOP Devuelve un cierto número de registros que entran entre al principio o al final de un rango especificado por una cláusula ORDER BY. Supongamos que queremos recuperar los nombres de los 25 primeros estudiantes del curso 1994:</p>
+<div class="highlight-python"><pre>        # SELECT TOP 25 Nombre, Apellido
+        FROM Estudiantes
+        ORDER BY Nota DESC;
+
+Si no se incluye la cláusula ORDER BY, la consulta devolverá un conjunto arbitrario de 25 registros de la tabla Estudiantes .El predicado TOP no elige entre valores iguales. En el ejemplo anterior, si la nota media número 25 y la 26 son iguales, la consulta devolverá 26 registros. Se puede utilizar la palabra reservada PERCENT para devolver un cierto porcentaje de registros que caen al principio o al final de un rango especificado por la cláusula ORDER BY. Supongamos que en lugar de los 25 primeros estudiantes deseamos el 10 por ciento del curso::
+
+        # SELECT TOP 10 PERCENT Nombre, Apellido
+        FROM Estudiantes
+        ORDER BY Nota DESC;</pre>
+</div>
+</li>
+<li><p class="first">DISTINCT Omite los registros que contienen datos duplicados en los campos seleccionados. Para que los valores de cada campo listado en la instrucción SELECT se incluyan en la consulta deben ser únicos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT DISTINCT Apellido FROM Empleados;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">DISTINCTROW Devuelve los registros diferentes de una tabla; a diferencia del predicado anterior que sólo se fijaba en el contenido de los campos seleccionados, éste lo hace en el contenido del registro completo independientemente de los campo indicados en la cláusula SELECT:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT DISTINCTROW Apellido FROM Empleados;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="criterios-de-seleccion">
+<h3>Criterios de selección<a class="headerlink" href="#criterios-de-seleccion" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>Operadores Lógicos<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Los operadores lógicos soportados por SQL son:</p>
+<blockquote>
+<div><strong>AND, OR, XOR, Eqv, Imp, Is</strong> y <strong>Not.</strong></div></blockquote>
+<p>A excepción de los dos últimos todos poseen la siguiente sintaxis:</p>
+<div class="highlight-python"><pre>&lt;expresión1&gt; operador &lt;expresión2&gt;</pre>
+</div>
+<p>En donde expresión1 y expresión2 son las condiciones a evaluar, el resultado de la operación varía en función del operador lógico:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># SELECT * FROM Empleados WHERE Edad &gt; 25 AND Edad &lt; 50;</span>
+<span class="c"># SELECT * FROM Empleados WHERE (Edad &gt; 25 AND Edad &lt; 50) OR Sueldo = 100;</span>
+<span class="c"># SELECT * FROM Empleados WHERE NOT Estado = &#39;Soltero&#39;;</span>
+<span class="c"># SELECT * FROM Empleados WHERE (Sueldo &gt; 100 AND Sueldo &lt; 500) OR (Provincia = &#39;Madrid&#39; AND Estado = &#39;Casado&#39;);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operador-between">
+<h4>Operador <strong>BETWEEN</strong><a class="headerlink" href="#operador-between" title="Permalink to this headline">¶</a></h4>
+<p>Para indicar que deseamos recuperar los registros según el intervalo de valores de un campo emplearemos el operador <strong>Between</strong>:</p>
+<div class="highlight-python"><pre># SELECT * FROM Pedidos WHERE CodPostal Between 28000 And 28999;
+(Devuelve los pedidos realizados en la provincia de Madrid)
+
+# SELECT IIf(CodPostal Between 28000 And 28999, 'Provincial', 'Nacional') FROM Editores;
+(Devuelve el valor 'Provincial' si el código postal se encuentra en el intervalo,'Nacional' en caso contrario)</pre>
+</div>
+</div>
+<div class="section" id="operador-like">
+<h4>Operador <strong>LIKE</strong><a class="headerlink" href="#operador-like" title="Permalink to this headline">¶</a></h4>
+<p>Se utiliza para comparar una expresión de cadena con un modelo en una expresión SQL. Su sintaxis es:</p>
+<div class="highlight-python"><pre>expresión LIKE modelo</pre>
+</div>
+</div>
+<div class="section" id="operador-in">
+<h4>Operador <strong>IN</strong><a class="headerlink" href="#operador-in" title="Permalink to this headline">¶</a></h4>
+<p>Este operador devuelve aquellos registros cuyo campo indicado coincide con alguno de los indicados en una lista. Su sintaxis es:</p>
+<div class="highlight-python"><pre>expresión [Not] In(valor1, valor2, . . .)
+
+# SELECT * FROM Pedidos WHERE Provincia In ('Madrid', 'Barcelona', 'Sevilla');</pre>
+</div>
+</div>
+<div class="section" id="clausula-where">
+<h4>Clausula <strong>WHERE</strong><a class="headerlink" href="#clausula-where" title="Permalink to this headline">¶</a></h4>
+<p>La cláusula WHERE puede usarse para determinar qué registros de las tablas enumeradas en la cláusula FROM aparecerán en los resultados de la instrucción SELECT.  WHERE es opcional, pero cuando aparece debe ir a continuación de FROM:</p>
+<div class="highlight-python"><pre># SELECT Apellidos, Salario FROM Empleados
+WHERE Salario &gt; 21000;
+# SELECT Id_Producto, Existencias FROM Productos
+WHERE Existencias &lt;= Nuevo_Pedido;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="agrupamiento-de-registros-agregacion">
+<h3>Agrupamiento de registros (Agregación)<a class="headerlink" href="#agrupamiento-de-registros-agregacion" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="avg">
+<h4><strong>AVG</strong><a class="headerlink" href="#avg" title="Permalink to this headline">¶</a></h4>
+<p>Calcula la media aritmética de un conjunto de valores contenidos en un campo especificado de una consulta:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Avg</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>La función Avg no incluye ningún campo Null en el cálculo. Un ejemplo del funcionamiento de <strong>AVG</strong>:</p>
+<div class="highlight-python"><pre># SELECT Avg(Gastos) AS Promedio FROM
+Pedidos WHERE Gastos &gt; 100;</pre>
+</div>
+</div>
+<div class="section" id="max-min">
+<h4><strong>MAX, MIN</strong><a class="headerlink" href="#max-min" title="Permalink to this headline">¶</a></h4>
+<p>Devuelven el mínimo o el máximo de un conjunto de valores contenidos en un campo especifico de una consulta. Su sintaxis es:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Min</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="n">Max</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Un ejemplo de su uso:</p>
+<div class="highlight-python"><pre># SELECT Min(Gastos) AS ElMin FROM Pedidos
+WHERE Pais = 'Costa Rica';
+# SELECT Max(Gastos) AS ElMax FROM Pedidos
+WHERE Pais = 'Costa Rica';</pre>
+</div>
+</div>
+<div class="section" id="sum">
+<h4><strong>SUM</strong><a class="headerlink" href="#sum" title="Permalink to this headline">¶</a></h4>
+<p>Devuelve la suma del conjunto de valores contenido en un campo especifico de una consulta. Su sintaxis es:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Sum</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Por ejemplo:</p>
+<div class="highlight-python"><pre># SELECT Sum(PrecioUnidad * Cantidad)
+AS Total FROM DetallePedido;</pre>
+</div>
+</div>
+<div class="section" id="group-by">
+<h4><strong>GROUP BY</strong><a class="headerlink" href="#group-by" title="Permalink to this headline">¶</a></h4>
+<p>Combina los registros con valores idénticos, en la lista de campos especificados, en un único registro:</p>
+<div class="highlight-python"><pre># SELECT campos FROM tabla WHERE criterio
+GROUP BY campos del grupo</pre>
+</div>
+<p>Todos los campos de la lista de campos de SELECT deben o bien incluirse en la cláusula GROUP BY o como argumentos de una función SQL agregada:</p>
+<div class="highlight-python"><pre># SELECT Id_Familia, Sum(Stock)
+FROM Productos GROUP BY Id_Familia;</pre>
+</div>
+<p>HAVING es similar a WHERE, determina qué registros se seleccionan. Una vez que los registros se han agrupado utilizando GROUP BY, HAVING determina cuales de ellos se van a mostrar.</p>
+<blockquote>
+<div># SELECT Id_Familia Sum(Stock) FROM Productos
+GROUP BY Id_Familia
+HAVING Sum(Stock) &gt; 100 AND NombreProducto Like BOS*;</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="manejo-de-varias-tablas">
+<h2>Manejo de varias tablas<a class="headerlink" href="#manejo-de-varias-tablas" title="Permalink to this headline">¶</a></h2>
+<p>Partiendo de la definición de las siguientes tablas:</p>
+<ol class="arabic">
+<li><p class="first"><strong>Tabla clientes</strong></p>
+<div class="highlight-python"><pre>+------+--------+----------+
+| cid  | nombre | telefono |
++------+--------+----------+
+|    1 | jose   | 111      |
+|    2 | maria  | 222      |
+|    3 | manuel | 333      |
+|    4 | jesus  | 4444     |
++------+--------+----------+</pre>
+</div>
+</li>
+<li><p class="first"><strong>Tabla Acciones</strong></p>
+<div class="highlight-python"><pre>+-----+-----+--------+----------+
+| aid | cid | accion | cantidad |
++-----+-----+--------+----------+
+|   1 |   2 | REDHAT |      10  |
+|   2 |   4 | NOVELL |      20  |
+|   3 |   4 | SUN    |      30  |
+|   4 |   5 | FORD   |     100  |
++-----+-----+--------+----------+</pre>
+</div>
+</li>
+</ol>
+<div class="section" id="cosultas-mediante-join">
+<h3>Cosultas mediante JOIN<a class="headerlink" href="#cosultas-mediante-join" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="join">
+<h4>JOIN<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h4>
+<p>La sentencia SQL JOIN se utiliza para relacionar varias tablas. Nos permitirá obtener un listado de los campos que tienen coincidencias en ambas tablas:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># select nombre, telefono, accion, cantidad from clientes join acciones on clientes.cid=acciones.cid;</span>
+</pre></div>
+</div>
+<p>resultando:</p>
+<div class="highlight-python"><pre>+--------+----------+--------+----------+
+| nombre | telefono | accion | cantidad |
++--------+----------+--------+----------+
+| maria  | 222      | REDHAT |       10 |
+| jesus  | 4444     | NOVELL |       20 |
+| jesus  | 4444     | SUN    |       30 |
++--------+----------+--------+----------+</pre>
+</div>
+</div>
+<div class="section" id="left-join">
+<h4>LEFT JOIN<a class="headerlink" href="#left-join" title="Permalink to this headline">¶</a></h4>
+<p>La sentencia LEFT JOIN nos dará el resultado anterior mas los campos de la tabla de la izquierda del <strong>JOIN</strong> que no tienen coincidencias en la tabla de la derecha:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># select nombre, telefono, accion, cantidad from clientes left join acciones on clientes.cid=acciones.cid;</span>
+</pre></div>
+</div>
+<p>con resultado:</p>
+<div class="highlight-python"><pre>+--------+----------+--------+----------+
+| nombre | telefono | accion | cantidad |
++--------+----------+--------+----------+
+| jose   | 111      | NULL   |     NULL |
+| maria  | 222      | REDHAT |       10 |
+| manuel | 333      | NULL   |     NULL |
+| jesus  | 4444     | NOVELL |       20 |
+| jesus  | 4444     | SUN    |       30 |
++--------+----------+--------+----------+</pre>
+</div>
+</div>
+<div class="section" id="right-join">
+<h4>RIGHT JOIN<a class="headerlink" href="#right-join" title="Permalink to this headline">¶</a></h4>
+<p>Identico funcionamiento que en el caso anterior pero con la tabla que se incluye en la consulta a la derecha del <strong>JOIN</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># select nombre, telefono, accion, cantidad from clientes right join acciones on clientes.cid=acciones.cid;</span>
+</pre></div>
+</div>
+<p>cuyo resultado será:</p>
+<div class="highlight-python"><pre>+--------+----------+--------+----------+
+| nombre | telefono | accion | cantidad |
++--------+----------+--------+----------+
+| maria  | 222      | REDHAT |       10 |
+| jesus  | 4444     | NOVELL |       20 |
+| jesus  | 4444     | SUN    |       30 |
+| NULL   | NULL     | FORD   |      100 |
++--------+----------+--------+----------+</pre>
+</div>
+</div>
+<div class="section" id="union-y-union-all">
+<h4>UNION y UNION ALL<a class="headerlink" href="#union-y-union-all" title="Permalink to this headline">¶</a></h4>
+<p>Podemos combinar el resultado de varias sentencias con UNION o UNION ALL. UNION no nos muestra los resultados duplicados, pero UNION ALL si los muestra:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># select nombre, telefono, accion, cantidad from clientes left join acciones on clientes.cid=acciones.cid where accion is null union select nombre, telefono, accion, cantidad from clientes right join acciones on clientes.cid=acciones.cid where nombre is null;</span>
+</pre></div>
+</div>
+<p>que mostrará:</p>
+<div class="highlight-python"><pre>+--------+----------+--------+----------+
+| nombre | telefono | accion | cantidad |
++--------+----------+--------+----------+
+| jose   | 111      | NULL   |     NULL |
+| manuel | 333      | NULL   |     NULL |
+| NULL   | NULL     | FORD   |      100 |
++--------+----------+--------+----------+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vistas">
+<h2>Vistas<a class="headerlink" href="#vistas" title="Permalink to this headline">¶</a></h2>
+<p>Las vistas (“views”) en SQL son un mecanismo que permite generar un resultado a partir de una consulta (query) almacenado, y ejecutar nuevas consultas sobre este resultado como si fuera una tabla normal. Las vistas tienen la misma estructura que una tabla: filas y columnas. La única diferencia es que sólo se almacena de ellas la definición, no los datos.</p>
+<p>La cláusula CREATE VIEW permite la creación de vistas. La cláusula asigna un nombre a la vista y permite especificar la consulta que la define. Su sintaxis es:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># CREATE VIEW id_vista [(columna,…)]AS especificación_consulta;</span>
+</pre></div>
+</div>
+<p>Opcionalmente se puede asignar un nombre a cada columna de la vista. Si se especifica, la lista de nombres de las columnas debe de tener el mismo número de elementos que elnúmero de columnas producidas por la consulta. Si se omiten, cada columna de la vista1 adopta el nombre de la columna correspondiente en la consulta.</p>
+</div>
+<div class="section" id="referencias">
+<h2>Referencias<a class="headerlink" href="#referencias" title="Permalink to this headline">¶</a></h2>
+<p>SQL en Wikipedia <a class="reference external" href="http://es.wikipedia.org/wiki/SQL">http://es.wikipedia.org/wiki/SQL</a></p>
+<p>Tutorial de SQL <a class="reference external" href="http://www.unalmed.edu.co/~mstabare/Sql.pdf">http://www.unalmed.edu.co/~mstabare/Sql.pdf</a></p>
+<p>SQL - JOIN Básico <a class="reference external" href="http://ariel.esdebian.org/27200/sql-join-basico">http://ariel.esdebian.org/27200/sql-join-basico</a></p>
+<p>SQL Commands - <a class="reference external" href="http://www.postgresql.org/docs/9.1/static/sql-commands.html">http://www.postgresql.org/docs/9.1/static/sql-commands.html</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Conceptos básicos de SQL</a><ul>
+<li><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li><a class="reference internal" href="#componentes-del-sql">Componentes del SQL</a><ul>
+<li><a class="reference internal" href="#comandos">Comandos</a><ul>
+<li><a class="reference internal" href="#lenguaje-de-definicion-de-datos-ddl">Lenguaje de definición de datos (DDL)</a><ul>
+<li><a class="reference internal" href="#create">CREATE</a></li>
+<li><a class="reference internal" href="#alter">ALTER</a></li>
+<li><a class="reference internal" href="#drop">DROP</a></li>
+<li><a class="reference internal" href="#truncate">TRUNCATE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#practicas">Prácticas</a><ul>
+<li><a class="reference internal" href="#practica-1">Práctica 1</a></li>
+<li><a class="reference internal" href="#lenguaje-de-manipulacion-de-datos-dml-data-manipulation-language">Lenguaje de manipulación de datos DML(Data Manipulation Language)</a><ul>
+<li><a class="reference internal" href="#definicion">Definición</a></li>
+<li><a class="reference internal" href="#insert">INSERT</a></li>
+<li><a class="reference internal" href="#update">UPDATE</a></li>
+<li><a class="reference internal" href="#delete">DELETE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Prácticas</a></li>
+<li><a class="reference internal" href="#id2">Práctica 1</a><ul>
+<li><a class="reference internal" href="#clausulas">Clausulas</a></li>
+<li><a class="reference internal" href="#operadores">Operadores</a><ul>
+<li><a class="reference internal" href="#operadores-logicos">Operadores Lógicos</a></li>
+<li><a class="reference internal" href="#operadores-de-comparacion">Operadores de comparación</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#funciones-de-agregado">Funciones de agregado</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#consultas">Consultas</a><ul>
+<li><a class="reference internal" href="#consultas-de-seleccion">Consultas de selección</a><ul>
+<li><a class="reference internal" href="#basicas">Básicas</a></li>
+<li><a class="reference internal" href="#ordenar-los-registros">Ordenar los registros</a></li>
+<li><a class="reference internal" href="#consultas-con-predicado">Consultas con predicado</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#criterios-de-seleccion">Criterios de selección</a><ul>
+<li><a class="reference internal" href="#id3">Operadores Lógicos</a></li>
+<li><a class="reference internal" href="#operador-between">Operador <strong>BETWEEN</strong></a></li>
+<li><a class="reference internal" href="#operador-like">Operador <strong>LIKE</strong></a></li>
+<li><a class="reference internal" href="#operador-in">Operador <strong>IN</strong></a></li>
+<li><a class="reference internal" href="#clausula-where">Clausula <strong>WHERE</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#agrupamiento-de-registros-agregacion">Agrupamiento de registros (Agregación)</a><ul>
+<li><a class="reference internal" href="#avg"><strong>AVG</strong></a></li>
+<li><a class="reference internal" href="#max-min"><strong>MAX, MIN</strong></a></li>
+<li><a class="reference internal" href="#sum"><strong>SUM</strong></a></li>
+<li><a class="reference internal" href="#group-by"><strong>GROUP BY</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manejo-de-varias-tablas">Manejo de varias tablas</a><ul>
+<li><a class="reference internal" href="#cosultas-mediante-join">Cosultas mediante JOIN</a><ul>
+<li><a class="reference internal" href="#join">JOIN</a></li>
+<li><a class="reference internal" href="#left-join">LEFT JOIN</a></li>
+<li><a class="reference internal" href="#right-join">RIGHT JOIN</a></li>
+<li><a class="reference internal" href="#union-y-union-all">UNION y UNION ALL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vistas">Vistas</a></li>
+<li><a class="reference internal" href="#referencias">Referencias</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../bases-de-datos/teoria_bases_datos.html"
+                        title="previous chapter">Teoría de <strong>base de datos</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../postgresql/postgresql.html"
+                        title="next chapter">PostgreSQL</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/conceptos-sql/conceptos_sql.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../postgresql/postgresql.html" title="PostgreSQL"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../bases-de-datos/teoria_bases_datos.html" title="Teoría de base de datos"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introducción a Linux &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Introducción a GeoServer" href="../geoserver-intro/geoserver_intro.html" />
+    <link rel="prev" title="Servicios web" href="../servicios-web/servicios-web.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../geoserver-intro/geoserver_intro.html" title="Introducción a GeoServer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../servicios-web/servicios-web.html" title="Servicios web"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduccion-a-linux">
+<h1>Introducción a Linux<a class="headerlink" href="#introduccion-a-linux" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1 Septiembre 2012</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;geomati&#46;co">fernando<span>&#46;</span>gonzalez<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+<li>Micho García (<a class="reference external" href="mailto:micho&#46;garcia&#37;&#52;&#48;geomati&#46;co">micho<span>&#46;</span>garcia<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>24 Junio 2013</td>
+<td><ul class="first last simple">
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2012 Fernando González Cortés y Miguel García Coya</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>En el símbolo de sistema presentado es posible hacer uso de una serie de comandos que la mayor
+parte de sistemas linux tienen. Pero antes de ver los comandos es importante tener claro
+cómo se organiza el sistema de ficheros y cómo se referencian estos mediante rutas relativas
+y absolutas.</p>
+<p>El sistema de ficheros linux se organiza jerárquicamente a partir de un directorio llamado
+&#8220;raíz&#8221; y que se denota por la barra inclinada hacia adelante (/). En linux los ficheros
+se referencian mediante rutas. Estas rutas pueden ser relativas o absolutas.
+Las absolutas comienzan por /, mientras que las relativas empiezan por el nombre de un subdirectorio,
+por . (directorio actual) o por .. (directorio padre).</p>
+<p>Así pues, podemos tener rutas absolutas como:</p>
+<div class="highlight-python"><pre>/tmp
+/home/geo
+/home/geo/Escritorio
+etc.</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">En la documentación antepondremos el símbolo <tt class="docutils literal"><span class="pre">$</span></tt> a toda aquella instrucción que se puede ejecutar en la línea de comandos de un sistema Linux. ¡¡Pero dicho símbolo no forma parte de la instrucción!!</p>
+</div>
+<p>Las rutas absolutas se pueden utilizar desde cualquier directorio. Podemos listar los directorios
+anteriores con los siguientes comandos, independientemente del directorio en el que se esté:</p>
+<div class="highlight-python"><pre>$ ls /tmp
+$ ls /home/geo
+$ ls /home/geo/Escritorio</pre>
+</div>
+<p>Las rutas relativas en cambio, parten del directorio actual. Si por ejemplo estamos en <em>/home/geo</em>, podemos
+listar los directorios anteriores con los siguientes comandos:</p>
+<div class="highlight-python"><pre>$ ls ../../tmp
+$ ls .
+$ ls Escritorio</pre>
+</div>
+<p>o &#8220;navegando&#8221; de forma más caprichosa:</p>
+<div class="highlight-python"><pre>$ ls Escritorio/../../../tmp
+$ ls ./././././././././././../geo
+$ ls ../geo/Escritorio</pre>
+</div>
+<p>A continuación mostramos algunos comandos útiles en linux:</p>
+<ul>
+<li><p class="first">less: Visualiza un fichero de texto. La interacción es la misma que la descrita en el apartado
+&#8220;Ayuda de psql&#8221; anterior:</p>
+<div class="highlight-python"><pre>$ less ruta_fichero_a_visualizar</pre>
+</div>
+<p>El fichero a visualizar se presenta de una manera muy común en los sistemas
+UNIX y que podemos identificar porque en la esquina inferior izquierda tenemos el
+signo de los dos puntos (:) seguido del cursor.</p>
+<img alt="../_images/training_postgresql_help.png" src="../_images/training_postgresql_help.png" />
+<p>Podemos navegar por el contenido pulsando los cursores arriba y abajo, así como las
+teclas de página anterior y posterior.</p>
+<p>También es posible hacer búsquedas utilizando el comando /texto. Una vez pulsamos intro,
+se resaltarán las coincidencias encontradas, como se puede ver en la siguiente imagen. Para navegar a la
+siguiente coincidencia es posible pulsar la tecla &#8216;n&#8217; y para ir a la anterior Mayúsculas + &#8216;n&#8217;</p>
+<img alt="../_images/training_postgresql_psql_help_search.png" src="../_images/training_postgresql_psql_help_search.png" />
+<p>Para salir pulsar &#8216;q&#8217;.</p>
+</li>
+<li><p class="first">nano: Permite editar ficheros. En la parte de abajo se muestran los comandos para salir, guardar
+el fichero, etc.:</p>
+<div class="highlight-python"><pre>$ nano ruta_fichero_a_editar</pre>
+</div>
+<p>Cuando se trabaja en modo texto en linux, dependiendo de la aplicación terminal utilizada, es posible copiar y pegar texto de la forma habitual: seleccionando con el ratón y presionando una combinación de teclas. Sin embargo, esta combinación de teclas suele ser diferente a las habituales (<tt class="docutils literal"><span class="pre">Ctrl+C</span></tt>, <tt class="docutils literal"><span class="pre">Ctrl+V</span></tt>) ya que <tt class="docutils literal"><span class="pre">Ctrl+C</span></tt> tiene un significado distinto en el terminal: el de interrumpir el proceso que se está ejecutando. La combinación de teclas se puede averiguar si se utiliza un terminal con barra de menúes como el siguiente:</p>
+<img alt="../_images/terminal.png" src="../_images/terminal.png" />
+<p>Si la aplicación terminal que se utiliza no incorpora menu, como <tt class="docutils literal"><span class="pre">xterm</span></tt>, siempre se puede utilizar un método bastante cómodo y siempre disponible en Linux que consiste en seleccionar el texto y pegar directamente con el botón central del ratón. Lo engañoso de este método es que el texto se pega en la posición del cursor y no allí donde se pincha.</p>
+<p>Ejercicio: Crear un fichero con tu nombre y que contenga este apartado.</p>
+</li>
+<li><p class="first">locate: Localiza ficheros en el sistema operativo:</p>
+<div class="highlight-python"><pre>$ locate parte_del_nombre_del_fichero</pre>
+</div>
+<p>Un aspecto a tener en cuenta en el uso de locate es que el sistema programa escaneos regulares del disco para construir un índice con los ficheros existentes y permitir así a <em>locate</em> responder al usuario sin tener que realizar la búsqueda en el sistema de ficheros, que toma mucho tiempo. Es por esto que <em>locate</em> funciona muy rápido pero puede que no encuentre los ficheros creados recientemente. Para estos, habrá que esperar a que se produzca un escaneo programado o lanzar un escaneo de forma manual con <tt class="docutils literal"><span class="pre">updatedb</span></tt>.</p>
+</li>
+<li><p class="first">find: Localiza ficheros en el sistema de archivos:</p>
+<div class="highlight-python"><pre>$ find ruta -name nombre_del_fichero</pre>
+</div>
+<p>A diferencia de locate, el comando find recorrerá el sistema de archivos cada vez que se lo ejecute,
+sin emplear índices. Por esa razón, si bien es mucho más lento el resultado, puede hallar ficheros que
+no se hayan indexado, por ejemplo, los ficheros creados recientemente.</p>
+</li>
+<li><p class="first">id: Muestra la identidad actual del usuario:</p>
+<div class="highlight-python"><pre>$ id</pre>
+</div>
+</li>
+<li><p class="first">su: Permite autenticarse con un usuario distinto. El siguiente comando probablemente no funcionará
+porque es necesario tener permisos de superusuario para realizar <em>su</em>, ver el siguiente caso:</p>
+<div class="highlight-python"><pre>$ su postgres</pre>
+</div>
+</li>
+<li><p class="first">sudo: No es un comando en sí, sino que permite ejecutar el comando que le sigue con permisos
+de superusuario. Por ejemplo, para ejecutar el comando anterior con permisos de superusuario:</p>
+<div class="highlight-python"><pre>$ sudo su postgres</pre>
+</div>
+</li>
+<li><p class="first">passwd: Cambia el password de un usuario. Por ejemplo para cambiar el password de root:</p>
+<div class="highlight-python"><pre>$ sudo passwd root</pre>
+</div>
+</li>
+<li><p class="first">ssh: Acceso remoto en línea de comandos. Con SSH es posible entrar a un servidor remoto que tenga
+activado dicho acceso. Para ello es necesario especificar la dirección del servidor:</p>
+<div class="highlight-python"><pre>$ ssh 168.202.48.151
+The authenticity of host '168.202.48.151 (168.202.48.151)' can't be established.
+ECDSA key fingerprint is 9f:7c:a8:9c:8b:66:37:68:8b:7f:95:a4:1b:24:06:39.
+Are you sure you want to continue connecting (yes/no)? yes</pre>
+</div>
+<p>En la salida anterior podemos observar como primeramente el sistema pregunta por la autenticidad de
+la máquina a la que queremos conectar. Tras responder afirmativamente el sistema nos comunica que
+el servidor al que vamos a conectarnos se añade a la lista de hosts conocidos, de manera que el
+mensaje anterior no volverá a aparecer la siguiente vez que se intente una conexión. A continuación
+el sistema pregunta el password del usuario &#8220;usuario&#8221;:</p>
+<div class="highlight-python"><pre>Warning: Permanently added '168.202.48.151' (ECDSA) to the list of known hosts.
+usuario@168.202.48.151's password:</pre>
+</div>
+<p>En caso de querer conectar con otro usuario es necesario prefijar el nombre de dicho usuario, seguido
+del carácter &#8220;&#64;&#8221; antes de la dirección del servidor:</p>
+<div class="highlight-python"><pre>$ ssh otro_usuario@168.202.48.151</pre>
+</div>
+</li>
+<li><p class="first">scp: Copia ficheros al servidor:</p>
+<div class="highlight-python"><pre>$ scp fichero_origen directorio_destino</pre>
+</div>
+<p>El directorio puede ser una ruta normal o la cadena de conexión por SSH a un servidor remoto. Veamos
+varios ejemplos. El siguiente copia ficheros locales en el directorio <em>/tmp</em> de un servidor remoto:</p>
+<div class="highlight-python"><pre>$ scp mi_fichero_local geo@geoportalcredia.org:/tmp</pre>
+</div>
+<p>El siguiente comando copia el fichero de vuelta:</p>
+<div class="highlight-python"><pre>$ scp geo@geoportalcredia.org:/tmp/mi_fichero_local .</pre>
+</div>
+<p>Se puede observar que el format de la URL remota es parecido al que se usa para conectar por cliente
+SSH. La única diferencia es que al final, separado por (:), encontramos una ruta en la máquina remota</p>
+<p>Ejercicio: Conectar a una máquina linux usando estos comandos.</p>
+<p>Ejercicio: Copiar el fichero creado en el apartado sobre <tt class="docutils literal"><span class="pre">nano</span></tt> en /tmp</p>
+<p>Ejercicio: Conectar al sistema linux desde windows y copiar un fichero cualquiera haciendo uso de putty.exe y scp.exe.</p>
+</li>
+<li><p class="first">zip: Comprime ficheros:</p>
+<div class="highlight-python"><pre>$ zip -r ruta_fichero.zip lista_de_ficheros_a_comprimir</pre>
+</div>
+<p>La opción -r hace que zip incluya los contenidos de los directorios que se encuentre en la
+lista de ficheros a compartir.</p>
+</li>
+<li><p class="first">unzip: Descomprime ficheros:</p>
+<div class="highlight-python"><pre>$ unzip ruta_fichero.zip</pre>
+</div>
+</li>
+<li><p class="first">chgrp: cambia el grupo de usuarios de un archivo o directorio en sistemas tipo UNIX.
+Cada archivo de Unix tiene un identificador de usuario (UID) y un identificador de grupo (GID)
+que se corresponden con el usuario y el grupo de quien lo creó.</p>
+<p>El usuario root puede cambiar a cualquier archivo el grupo. Los demás usuarios sólo pueden
+hacerlo con los archivos propios y grupos a los que pertenezca.:</p>
+<div class="highlight-python"><pre>$ chgrp nuevogrp archivo1 [ archivo2 archivo3...]
+
+Cambia el grupo de archivo1 archivo2, etc. que pasará a ser nuevogrp
+
+$ chgrp -R nuevogrp directorio
+
+Cambia el grupo para que pase a ser nuevogrp a directorio, todos los archivos y subdirectorios contenidos en él, cambiándolos también de forma recursiva en todos archivos de los subdirectorios.</pre>
+</div>
+</li>
+<li><p class="first">chown: cambiar el propietario de un archivo o directorio:</p>
+<div class="highlight-python"><pre>$ chown nuevousr archivo1 [ archivo2 archivo3...]
+$ chown -R nuevousr directorio</pre>
+</div>
+</li>
+<li><p class="first">chmod: permite cambiar los permisos de acceso de un archivo o directorio:</p>
+<div class="highlight-python"><pre>$ chmod [modificadores] permisos archivo/directorio</pre>
+</div>
+<p>Ejercicio: Quitarse el permiso de lectura sobre el fichero creado en el apartado de <tt class="docutils literal"><span class="pre">nano</span></tt>.</p>
+</li>
+<li><p class="first">wget: Utilizado para descargar ficheros de distintos servidores HTTP, HTTPS y FTP. Basta con teclear wget seguido de la dirección del fichero en internet:</p>
+<div class="highlight-python"><pre>wget http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</pre>
+</div>
+<p>Entre las muchas opciones que soporta, la más frecuente es <tt class="docutils literal"><span class="pre">-O</span> <span class="pre">&lt;nombre_fichero&gt;</span></tt>, que permite dar un nombre distinto al fichero descargado:</p>
+<div class="highlight-python"><pre>wget http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf -O especificacion_shapefile.pdf</pre>
+</div>
+<p>Ejercicio: Descargar el logo del portal de FAO (<a class="reference external" href="http://fao.org">http://fao.org</a>) con wget</p>
+</li>
+</ul>
+<p>Realizar el siguiente ejercicio:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Crear un fichero llamado <tt class="docutils literal"><span class="pre">/tmp/copy-contents.sh</span></tt> con las siguientes líneas (sustituyendo &lt;servidor&gt; y &lt;nombre&gt; por valores adecuados):</p>
+<div class="highlight-python"><pre>wget http://www.diva-gis.org/data/rrd/ARG_rrd.zip -O rails.zip
+unzip rails.zip
+scp * nfms@&lt;servidor&gt;:/tmp/&lt;nombre&gt;</pre>
+</div>
+</li>
+<li><p class="first">Dar permisos de ejecución</p>
+</li>
+<li><p class="first">Ejecutar</p>
+</li>
+</ol>
+</div></blockquote>
+<p>Ejercicio: Crear un fichero vacío en <tt class="docutils literal"><span class="pre">/var/lib/postgresql</span></tt></p>
+<blockquote>
+<div><p>De cuantas maneras es posible realizar esto?</p>
+<ol class="arabic simple">
+<li>Usando <tt class="docutils literal"><span class="pre">sudo</span></tt> para crear el fichero</li>
+<li>Creando el fichero como <tt class="docutils literal"><span class="pre">postgres</span></tt></li>
+<li>Cambiando los permisos al directorio. ¡NO!</li>
+</ol>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../servicios-web/servicios-web.html"
+                        title="previous chapter">Servicios web</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../geoserver-intro/geoserver_intro.html"
+                        title="next chapter">Introducción a GeoServer</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/linux/linux.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../geoserver-intro/geoserver_intro.html" title="Introducción a GeoServer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../servicios-web/servicios-web.html" title="Servicios web"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
