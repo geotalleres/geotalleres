@@ -1,12 +1,12 @@
 [submodule "mapproxy"]
 	path = mapproxy
-	url = git@github.com:geoinquietosvlc/mapproxy-workshop.git
+	url = https://github.com/Delawen/Taller-Routing.git
 [submodule "introduccion-gis"]
 	path = introduccion-gis
-	url = git@github.com:Delawen/Taller-GIS.git
+	url = https://github.com/Delawen/Taller-GIS.git
 [submodule "taller-geonetwork"]
 	path = taller-geonetwork
-	url = git@github.com:Delawen/taller-geonetwork.git
+	url = https://github.com/Delawen/taller-geonetwork.git
 [submodule "taller-routing"]
 	path = taller-routing
-	url = git@github.com:Delawen/Taller-Routing.git
+	url = https://github.com/Delawen/Taller-Routing.git
