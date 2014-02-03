@@ -1,6 +1,6 @@
 [submodule "mapproxy"]
 	path = mapproxy
-	url = https://github.com/Delawen/Taller-Routing.git
+	url = https://github.com/geoinquietosvlc/mapproxy-workshop.git
 [submodule "introduccion-gis"]
 	path = introduccion-gis
 	url = https://github.com/Delawen/Taller-GIS.git
