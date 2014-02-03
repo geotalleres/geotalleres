@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GeoServer en producción &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="Pregeneración de teselas en GeoWebCache" href="../geowebcache/pregeneracion.html" />
+    <link rel="prev" title="GeoServer: Publicación de datos raster" href="../geoserver-raster/geoserver_raster.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-raster/geoserver_raster.html" title="GeoServer: Publicación de datos raster"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="geoserver-en-produccion">
+<h1>GeoServer en producción<a class="headerlink" href="#geoserver-en-produccion" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>31 Enero 2014</td>
+<td><ul class="first last simple">
+<li>Víctor González (<a class="reference external" href="mailto:victor&#46;gonzalez&#37;&#52;&#48;geomati&#46;co">victor<span>&#46;</span>gonzalez<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2014 FAO Forestry</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de <em>logging</em>. Para una optimización más completa se puede consultar la <a class="reference external" href="http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit">documentación oficial de GeoServer</a> (en inglés). Además, es muy posible que GeoServer se esté ejecutando sobre el contendor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.</p>
+<div class="section" id="nivel-de-logging">
+<h2>Nivel de <em>logging</em><a class="headerlink" href="#nivel-de-logging" title="Permalink to this headline">¶</a></h2>
+<p>Para realizar las optimizaciones, primero tenemos que abrir interfaz web de administración y acceder a la configuración global de GeoServer:</p>
+<img alt="../_images/gs_global.png" class="align-center" src="../_images/gs_global.png" />
+<p>Una vez allí, únicamente hay que cambiar el <em>Perfil de registro</em> a <em>PRODUCTION_LOGGING</em> y pulsar <em>Enviar</em> al final de la página:</p>
+<img alt="../_images/gs_logging.png" class="align-center" src="../_images/gs_logging.png" />
+<p>También es posible cambiar la <em>Ubicación del registro</em> desde aquí, aunque se recomienda mantener la ubicación por defecto.</p>
+</div>
+<div class="section" id="limitacion-del-servicio-wms">
+<h2>Limitación del servicio WMS<a class="headerlink" href="#limitacion-del-servicio-wms" title="Permalink to this headline">¶</a></h2>
+<p>En cuanto al servicio WMS, vamos a limitar las peticiones recibidas desde dos puntos de vista. Por un lado limitaremos el tiempo y la memoria necesarios para procesar una petición de imagen, y por otro lado el número de peticiones simultáneas que acepta el servicio.</p>
+<div class="section" id="tiempo-y-memoria">
+<h3>Tiempo y memoria<a class="headerlink" href="#tiempo-y-memoria" title="Permalink to this headline">¶</a></h3>
+<p>Para limitar el tiempo y la memoria requeridos por una única petición WMS en GeoServer, deberemos acceder a <em>WMS</em> en la interfaz web:</p>
+<img alt="../_images/gs_wms.png" class="align-center" src="../_images/gs_wms.png" />
+<p>Una vez aquí, buscaremos el apartado <em>Límites de consumo de recursos</em>, donde podremos modificar tanto la memoria como el tiempo máximos de renderizado:</p>
+<img alt="../_images/gs_wms_render_limits.png" class="align-center" src="../_images/gs_wms_render_limits.png" />
+</div>
+<div class="section" id="numero-de-llamadas-concurrentes">
+<h3>Número de llamadas concurrentes<a class="headerlink" href="#numero-de-llamadas-concurrentes" title="Permalink to this headline">¶</a></h3>
+<p>Por otro lado, es interesante limitar el número de peticiones simultáneas que ha de manejar GeoServer. El número recomendado de peticiones simultáneas para GeoServer es 20.</p>
+<p>La manera más sencilla de conseguir esto es limitar el número de peticiones en la aplicación sobre la que se está ejecutando GeoServer, que asumiremos que es <strong>Tomcat</strong>.</p>
+<p>Para limitar el número de peticiones simultáneas en Tomcat hay que modificar el fichero <em>$TOMCAT/conf/server.xml</em>. Aquí buscaremos el conector con el puerto 8080 y añadiremos el parámetro <em>maxThreads</em> para determinar el número máximo de peticiones:</p>
+<div class="highlight-python"><pre>&lt;Server port="8005" shutdown="SHUTDOWN"&gt;
+  ...
+  &lt;Connector port="8080" protocol="HTTP/1.1"
+    ConnectionTimeout="20000" redirectPort="8443"
+    maxThreads="20" minSpareThreads="20" /&gt;
+  ...
+&lt;/Server&gt;</pre>
+</div>
+<p>Además, también es posible controlar el número de peticiones simultáneas desde GeoServer. Para ello hay que utilizar el módulo <strong>control-flow</strong>, que no se encuentra instalado por defecto en GeoServer.</p>
+<p>Para instalarlo primero hay que descargarlo de la web de GeoServer, en la sección de descargas tras seleccionar la versión de GeoServer en el apartado <em>Extensiones</em>. El fichero comprimido que se descarga contiene otro fichero llamado <em>control-flow-&lt;version&gt;.jar</em> que hay que copiar en <em>$TOMCAT/webapps/geoserver/WEB-INF/lib</em>.</p>
+<p>Una vez instalado el módulo, para configurarlo hay que crear un fichero de configuración en <em>$TOMCAT/webapps/geoserver/data</em> con el nombre <em>controlflow.properties</em>. En dicho fichero escribiremos el siguiente contenido para limitar el número de peticiones simultáneas de imágenes para el servicio WMS:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ows</span><span class="o">.</span><span class="n">wms</span><span class="o">.</span><span class="n">getmap</span><span class="o">=</span><span class="mi">8</span>
+</pre></div>
+</div>
+<p>Pondremos 8 peticiones simultáneas ya que con la configuración anterior de Tomcat, únicamente se admiten 20 peticiones simultáneas en total. De esta manera, dejamos 12 peticiones simultáneas para cualquier otro servicio o petición a GeoServer.</p>
+<p>En la <a class="reference external" href="http://docs.geoserver.org/stable/en/user/extensions/controlflow/index.html">documentación oficial de GeoServer</a> (en inglés) se puede encontrar mayor detalle sobre la configuración del módulo <em>control-flow</em>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GeoServer en producción</a><ul>
+<li><a class="reference internal" href="#nivel-de-logging">Nivel de <em>logging</em></a></li>
+<li><a class="reference internal" href="#limitacion-del-servicio-wms">Limitación del servicio WMS</a><ul>
+<li><a class="reference internal" href="#tiempo-y-memoria">Tiempo y memoria</a></li>
+<li><a class="reference internal" href="#numero-de-llamadas-concurrentes">Número de llamadas concurrentes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../geoserver-raster/geoserver_raster.html"
+                        title="previous chapter">GeoServer: Publicación de datos raster</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../geowebcache/pregeneracion.html"
+                        title="next chapter">Pregeneración de teselas en GeoWebCache</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/geoserver-produccion/geoserver_produccion.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../geowebcache/pregeneracion.html" title="Pregeneración de teselas en GeoWebCache"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../geoserver-raster/geoserver_raster.html" title="GeoServer: Publicación de datos raster"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
