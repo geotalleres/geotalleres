@@ -13,7 +13,7 @@ GeoServer en producción
 
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
-Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de *logging*. Para una optimización más completa se puede consultar la `documentación oficial de GeoServer <http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit>`_ (en inglés). Además, es muy posible que GeoServer se esté ejecutando sobre el contendor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.
+Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de *logging*. Para una optimización más completa se puede consultar la `documentación oficial de GeoServer <http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit>`_ (en inglés). En la presente documentación asumimos que GeoServer se está ejecutando sobre el contenedor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.
 
 Nivel de *logging*
 ------------------
@@ -34,7 +34,7 @@ También es posible cambiar la *Ubicación del registro* desde aquí, aunque se 
 Limitación del servicio WMS
 ---------------------------
 
-En cuanto al servicio WMS, vamos a limitar las peticiones recibidas desde dos puntos de vista. Por un lado limitaremos el tiempo y la memoria necesarios para procesar una petición de imagen, y por otro lado el número de peticiones simultáneas que acepta el servicio.
+En cuanto al servicio WMS, vamos a limitar las peticiones recibidas en dos niveles. Por un lado limitaremos el tiempo y la memoria necesarios para procesar una petición de la llamada GetMap, y por otro lado el número de peticiones simultáneas que acepta el dicho servicio.
 
 Tiempo y memoria
 ................
@@ -55,7 +55,7 @@ Número de llamadas concurrentes
 
 Por otro lado, es interesante limitar el número de peticiones simultáneas que ha de manejar GeoServer. El número recomendado de peticiones simultáneas para GeoServer es 20. 
 
-La manera más sencilla de conseguir esto es limitar el número de peticiones en la aplicación sobre la que se está ejecutando GeoServer, que asumiremos que es **Tomcat**.
+La manera más sencilla de conseguir esto es limitar el número de peticiones en Tomcat.
 
 Para limitar el número de peticiones simultáneas en Tomcat hay que modificar el fichero *$TOMCAT/conf/server.xml*. Aquí buscaremos el conector con el puerto 8080 y añadiremos el parámetro *maxThreads* para determinar el número máximo de peticiones::
 
@@ -73,9 +73,8 @@ Para instalarlo primero hay que descargarlo de la web de GeoServer, en la secci�
 
 Una vez instalado el módulo, para configurarlo hay que crear un fichero de configuración en *$TOMCAT/webapps/geoserver/data* con el nombre *controlflow.properties*. En dicho fichero escribiremos el siguiente contenido para limitar el número de peticiones simultáneas de imágenes para el servicio WMS::
 
-	ows.wms.getmap=8
+	ows.wms.getmap=16
 
-Pondremos 8 peticiones simultáneas ya que con la configuración anterior de Tomcat, únicamente se admiten 20 peticiones simultáneas en total. De esta manera, dejamos 12 peticiones simultáneas para cualquier otro servicio o petición a GeoServer. 
+El número de peticiones que asignamos al servicio WMS depende del uso que se vaya a hacer de nuestro servidor. La configuración anterior de Tomcat únicamente admite 20 peticiones simultáneas en total. En el caso de que usemos el servidor principalmente para WMS podemos, como en el ejemplo, dedicar 16 al servicio WMS y dejar 4 peticiones simultáneas para cualquier otro servicio o petición a GeoServer.
 
 En la `documentación oficial de GeoServer <http://docs.geoserver.org/stable/en/user/extensions/controlflow/index.html>`_ (en inglés) se puede encontrar mayor detalle sobre la configuración del módulo *control-flow*.
-
