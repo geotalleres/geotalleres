@@ -57,8 +57,8 @@
 <p class="first admonition-title">Note</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="25%" />
-<col width="75%" />
+<col width="24%" />
+<col width="76%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Fecha</th>
@@ -66,9 +66,10 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>31 Enero 2014</td>
+<tr class="row-even"><td>6 Feb 2014</td>
 <td><ul class="first last simple">
 <li>Víctor González (<a class="reference external" href="mailto:victor&#46;gonzalez&#37;&#52;&#48;geomati&#46;co">victor<span>&#46;</span>gonzalez<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
+<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
 </ul>
 </td>
 </tr>
@@ -77,7 +78,7 @@
 <p>©2014 FAO Forestry</p>
 <p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
 </div>
-<p>Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de <em>logging</em>. Para una optimización más completa se puede consultar la <a class="reference external" href="http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit">documentación oficial de GeoServer</a> (en inglés). Además, es muy posible que GeoServer se esté ejecutando sobre el contendor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.</p>
+<p>Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de <em>logging</em>. Para una optimización más completa se puede consultar la <a class="reference external" href="http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit">documentación oficial de GeoServer</a> (en inglés). En la presente documentación asumimos que GeoServer se está ejecutando sobre el contenedor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.</p>
 <div class="section" id="nivel-de-logging">
 <h2>Nivel de <em>logging</em><a class="headerlink" href="#nivel-de-logging" title="Permalink to this headline">¶</a></h2>
 <p>Para realizar las optimizaciones, primero tenemos que abrir interfaz web de administración y acceder a la configuración global de GeoServer:</p>
@@ -88,7 +89,7 @@
 </div>
 <div class="section" id="limitacion-del-servicio-wms">
 <h2>Limitación del servicio WMS<a class="headerlink" href="#limitacion-del-servicio-wms" title="Permalink to this headline">¶</a></h2>
-<p>En cuanto al servicio WMS, vamos a limitar las peticiones recibidas desde dos puntos de vista. Por un lado limitaremos el tiempo y la memoria necesarios para procesar una petición de imagen, y por otro lado el número de peticiones simultáneas que acepta el servicio.</p>
+<p>En cuanto al servicio WMS, vamos a limitar las peticiones recibidas en dos niveles. Por un lado limitaremos el tiempo y la memoria necesarios para procesar una petición de la llamada GetMap, y por otro lado el número de peticiones simultáneas que acepta el dicho servicio.</p>
 <div class="section" id="tiempo-y-memoria">
 <h3>Tiempo y memoria<a class="headerlink" href="#tiempo-y-memoria" title="Permalink to this headline">¶</a></h3>
 <p>Para limitar el tiempo y la memoria requeridos por una única petición WMS en GeoServer, deberemos acceder a <em>WMS</em> en la interfaz web:</p>
@@ -99,7 +100,7 @@
 <div class="section" id="numero-de-llamadas-concurrentes">
 <h3>Número de llamadas concurrentes<a class="headerlink" href="#numero-de-llamadas-concurrentes" title="Permalink to this headline">¶</a></h3>
 <p>Por otro lado, es interesante limitar el número de peticiones simultáneas que ha de manejar GeoServer. El número recomendado de peticiones simultáneas para GeoServer es 20.</p>
-<p>La manera más sencilla de conseguir esto es limitar el número de peticiones en la aplicación sobre la que se está ejecutando GeoServer, que asumiremos que es <strong>Tomcat</strong>.</p>
+<p>La manera más sencilla de conseguir esto es limitar el número de peticiones en Tomcat.</p>
 <p>Para limitar el número de peticiones simultáneas en Tomcat hay que modificar el fichero <em>$TOMCAT/conf/server.xml</em>. Aquí buscaremos el conector con el puerto 8080 y añadiremos el parámetro <em>maxThreads</em> para determinar el número máximo de peticiones:</p>
 <div class="highlight-python"><pre>&lt;Server port="8005" shutdown="SHUTDOWN"&gt;
   ...
@@ -112,10 +113,10 @@
 <p>Además, también es posible controlar el número de peticiones simultáneas desde GeoServer. Para ello hay que utilizar el módulo <strong>control-flow</strong>, que no se encuentra instalado por defecto en GeoServer.</p>
 <p>Para instalarlo primero hay que descargarlo de la web de GeoServer, en la sección de descargas tras seleccionar la versión de GeoServer en el apartado <em>Extensiones</em>. El fichero comprimido que se descarga contiene otro fichero llamado <em>control-flow-&lt;version&gt;.jar</em> que hay que copiar en <em>$TOMCAT/webapps/geoserver/WEB-INF/lib</em>.</p>
 <p>Una vez instalado el módulo, para configurarlo hay que crear un fichero de configuración en <em>$TOMCAT/webapps/geoserver/data</em> con el nombre <em>controlflow.properties</em>. En dicho fichero escribiremos el siguiente contenido para limitar el número de peticiones simultáneas de imágenes para el servicio WMS:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ows</span><span class="o">.</span><span class="n">wms</span><span class="o">.</span><span class="n">getmap</span><span class="o">=</span><span class="mi">8</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ows</span><span class="o">.</span><span class="n">wms</span><span class="o">.</span><span class="n">getmap</span><span class="o">=</span><span class="mi">16</span>
 </pre></div>
 </div>
-<p>Pondremos 8 peticiones simultáneas ya que con la configuración anterior de Tomcat, únicamente se admiten 20 peticiones simultáneas en total. De esta manera, dejamos 12 peticiones simultáneas para cualquier otro servicio o petición a GeoServer.</p>
+<p>El número de peticiones que asignamos al servicio WMS depende del uso que se vaya a hacer de nuestro servidor. La configuración anterior de Tomcat únicamente admite 20 peticiones simultáneas en total. En el caso de que usemos el servidor principalmente para WMS podemos, como en el ejemplo, dedicar 16 al servicio WMS y dejar 4 peticiones simultáneas para cualquier otro servicio o petición a GeoServer.</p>
 <p>En la <a class="reference external" href="http://docs.geoserver.org/stable/en/user/extensions/controlflow/index.html">documentación oficial de GeoServer</a> (en inglés) se puede encontrar mayor detalle sobre la configuración del módulo <em>control-flow</em>.</p>
 </div>
 </div>
