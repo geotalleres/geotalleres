@@ -4,7 +4,7 @@ Geotalleres
 Contenidos:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    virtual-box/virtual-box
    servicios-web/servicios-web
