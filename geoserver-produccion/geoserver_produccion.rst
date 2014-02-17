@@ -68,6 +68,22 @@ Para limitar el número de peticiones simultáneas en Tomcat hay que modificar e
       ...
     </Server>
 
+En el caso de que se esté utilizando Tomcat dentro del servidor Apache y se esté utilizando el conector AJP, el parámetro *maxThreads* se deberá añadir en el conector adecuado::
+
+    <Server port="8005" shutdown="SHUTDOWN">
+      ...
+      <Connector port="8009" protocol="AJP/1.3"
+        connectionTimeout="60000" redirectPort="8443"
+        maxThreads="20" minSpareThreads="20" />
+      ...
+    </Server>
+
+.. note::
+	En caso de no saber si se está utilizando el conector AJP, se recomienda establecer los límites igualmente.
+
+.. warning::
+	Es **MUY** importante especificar el valor de *connectionTimeout*, ya que para el conector AJP por defecto es infinito, lo cual puede resultar en un bloqueo del servidor si se reciben demasiadas peticiones simultáneamente.
+
 Además, también es posible controlar el número de peticiones simultáneas desde GeoServer. Para ello hay que utilizar el módulo **control-flow**, que no se encuentra instalado por defecto en GeoServer. 
 
 Para instalarlo primero hay que descargarlo de la web de GeoServer, en la sección de descargas tras seleccionar la versión de GeoServer en el apartado *Extensiones*. El fichero comprimido que se descarga contiene otro fichero llamado *control-flow-<version>.jar* que hay que copiar en *$TOMCAT/webapps/geoserver/WEB-INF/lib*. 
