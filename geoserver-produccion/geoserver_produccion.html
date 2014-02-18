@@ -110,6 +110,23 @@
   ...
 &lt;/Server&gt;</pre>
 </div>
+<p>En el caso de que se esté utilizando Tomcat dentro del servidor Apache y se esté utilizando el conector AJP, el parámetro <em>maxThreads</em> se deberá añadir en el conector adecuado:</p>
+<div class="highlight-python"><pre>&lt;Server port="8005" shutdown="SHUTDOWN"&gt;
+  ...
+  &lt;Connector port="8009" protocol="AJP/1.3"
+    connectionTimeout="60000" redirectPort="8443"
+    maxThreads="20" minSpareThreads="20" /&gt;
+  ...
+&lt;/Server&gt;</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">En caso de no saber si se está utilizando el conector AJP, se recomienda establecer los límites igualmente.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Es <strong>MUY</strong> importante especificar el valor de <em>connectionTimeout</em>, ya que para el conector AJP por defecto es infinito, lo cual puede resultar en un bloqueo del servidor si se reciben demasiadas peticiones simultáneamente.</p>
+</div>
 <p>Además, también es posible controlar el número de peticiones simultáneas desde GeoServer. Para ello hay que utilizar el módulo <strong>control-flow</strong>, que no se encuentra instalado por defecto en GeoServer.</p>
 <p>Para instalarlo primero hay que descargarlo de la web de GeoServer, en la sección de descargas tras seleccionar la versión de GeoServer en el apartado <em>Extensiones</em>. El fichero comprimido que se descarga contiene otro fichero llamado <em>control-flow-&lt;version&gt;.jar</em> que hay que copiar en <em>$TOMCAT/webapps/geoserver/WEB-INF/lib</em>.</p>
 <p>Una vez instalado el módulo, para configurarlo hay que crear un fichero de configuración en <em>$TOMCAT/webapps/geoserver/data</em> con el nombre <em>controlflow.properties</em>. En dicho fichero escribiremos el siguiente contenido para limitar el número de peticiones simultáneas de imágenes para el servicio WMS:</p>

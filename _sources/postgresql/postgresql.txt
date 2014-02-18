@@ -132,23 +132,75 @@ También podemos conectar a la base de datos con psql. Podemos conectar con psql
 	
 	$ ssh geo@190.109.197.226
 
-Una vez en el servidor hay que tomar la identidad del usuario *postgres*, que se utiliza
-para cualquier tarea administrativa de la base de datos::
+Es posible especificar al comando ``psql`` la base de datos a la que se quiere acceder, el usuario con el que se quiere realizar el acceso y la instrucción que se quiere ejecutar en el sistema. Los valores concretos utilizados dependerán de la configuración concreta del servidor. En adelante usaremos el usuario de base de datos ``postgres`` y la base de datos ``geoserverdata``.
 
-	$ sudo su postgres
+.. note: El usuario con más permisos es ``postgres`` pero su uso representa un riesgo ya que tiene permisos para leer y escribir en todas las bases de datos. En su lugar es preferible hacer uso de una cuenta creada específicamente para la base de datos que se quiere acceder y que no tenga acceso a otras bases de datos. Sin embargo, en este caso se usa ``postgres`` por simplicidad.  
+
+La siguiente instrucción invoca la función ``version``::
+
+	$ psql -U postgres -d test_database -c "SELECT version ()"
+	                                                  version                                                   
+	------------------------------------------------------------------------------------------------------------
+	 PostgreSQL 9.1.5 on x86_64-unknown-linux-gnu, compiled by gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3, 64-bit
+	(1 row)
+		
+Otros ejemplos::
+
+	$ psql -U postgres -d test_database -c "SELECT current_date"
+	    date    
+	------------
+	 2012-09-11
+	(1 row)
 	
-Una vez seamos *postgres* hay que conectar a la base de datos. Para ello podemos 
-usar la opción -d para entrar a *psql* ya conectados a la base de datos especificada::
+	$ psql -U postgres -d test_database -c "SELECT 2 + 2"
+	 ?column? 
+	----------
+	        4
+	(1 row)
 
-	$ psql -d mibd
+Todos estos comandos SQL pueden ser ejecutados usando otro parámetro del programa ``psql``. La opción -f permite especificar un fichero que contiene instrucciones SQL. Así, por ejemplo sería posible crear un fichero en ``/tmp/mi_script.sql`` con el siguiente contenido::
+
+	SELECT version ();
+	SELECT current_date;
+	SELECT 2 + 2;
+
+Y ejecutarlo con la instrucción::
+
+	$ psql -U geoserver -d geoserverdata -f /tmp/mi_script.sql
+	
+	                                               version                                                
+	------------------------------------------------------------------------------------------------------
+	 PostgreSQL 9.1.11 on i686-pc-linux-gnu, compiled by gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3, 32-bit
+	(1 row)
+	
+	    date    
+	------------
+	 2014-02-11
+	(1 row)
+	
+	 ?column? 
+	----------
+	        4
+	(1 row)
+	
+Como se puede observar, se ejecutan todos los comandos del script sql uno detrás de otro.
+
+Consola psql interactiva
+-------------------------
+
+También es posible, y conveniente para tareas de mayor complejidad, entrar al modo interactivo de ``psql``. Para ello podemos omitir el parámetro -c::
+
+	$ psql -U postgres -d test_database
 	
 o conectar sin especificar la base de datos y usar el comando \\c dentro de *psql*::
 
-	$ psql
-	=# \c mibd
+	$ psql -U postgres 
+	=# \c test_database
 	You are now connected to database "mibd" as user "postgres".
 
 .. note :: Dado que psql es un programa en línea de comandos tenemos que diferenciar en la documentación las instrucciones que se deben de ejecutar en la línea de comandos del sistema operativo y la línea de comandos de psql. Las primeras, como se comentó en la introducción a Linux, vienen precedidas del símbolo del dólar ($) mientras que para las últimas utilizaremos un par de símbolos: =#. Es necesario prestar atención a este detalle durante el resto de la documentación.
+
+En el resto de la documentación se seguirán enviando comandos SQL desde la línea de comandos del sistema operativo ($) usando el parámetro -c o el parámetro -f, como especificado anteriormente. Sin embargo, se especifica a continuación una mínima referencia sobre los comandos que se pueden ejecutar en la línea de comandos de postgresql (=#)
 
 Para obtener el listado de las bases de datos existentes en el sistema, usar el comando
 \\l::
@@ -181,101 +233,75 @@ Para una completa referencia de los comandos disponibles es posible usar el coma
 
 que nos abrirá la ayuda. El formato de la ayuda es el mismo que el del comando *less*.
 
-SQL en psql
-............	
-
-Hay que resaltar que además de los comandos, que comienzan por barra invertida (\\) es
-posible introducir directamente sentencias SQL::
-
-	=# SELECT version ();
-	                                                  version                                                   
-	------------------------------------------------------------------------------------------------------------
-	 PostgreSQL 9.1.5 on x86_64-unknown-linux-gnu, compiled by gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3, 64-bit
-	(1 row)
-	
-	=# SELECT current_date;
-	    date    
-	------------
-	 2012-09-11
-	(1 row)
-	
-	=# SELECT 2 + 2;
-	 ?column? 
-	----------
-	        4
-	(1 row)
-	
-	=# 
-
-Los comandos SQL se pueden introducir en varias líneas y *psql* sólo los da por finalizados cuando
-el usuario introduce el carácter de finalización de la instrución: el punto y coma::
-
-	=# SELECT 
-	-# current_date;
-	    date    
-	------------
-	 2012-09-11
-	(1 row)
-
-Así, si nos hemos olvidado teclear el punto y coma, no es necesario teclear de nuevo la instrucción.
-Basta con añadir dicho carácter::
-
-	=# select * from gis.categorias
-	-# ;
-	 id |         descripcion         |    abreviatura     | orden 
-	----+-----------------------------+--------------------+-------
-	  1 | Alojamiento                 | to_sleep           |     3
-	  2 | Alimentación                | where_to_eat       |     2
-	  3 | Esparcimiento               | for_fun            |     4
-	  4 | Otros Servicios turísticos  | organize_your_trip |     5
-	  6 | Qué quieres hacer           | what_do_you_do     |     1
-	  9 | Acontecimientos programados | what_happening     |     6
-	(6 rows)
-
-Ejecutando SQL desde la línea de comandos
-------------------------------------------
-
-Además de ejecutar el comando psql de forma interactiva es posible invocarlo pasándole como parámetro la instrucción SQL que se quiere utilizar. En dicho caso hay que especificar también el usuario con el que se ejecuta la acción y la base de datos a la que conectar::
-
-	$ psql -U postgres -d test_database -c "create schema test"
-	CREATE SCHEMA
-	$ _
-
 Cargando información desde shapefile: shp2pgsql
 ------------------------------------------------
 
-Para cargar datos desde shapefile es posible utilizar el programa ``shp2pgsql`` de la siguiente manera::
+El parámetro -f es extremadamente útil cuando queremos usar PostgreSQL junto con su extensión espacial PostGIS para la carga de datos desde shapefile. Para ello contamos con ``shp2pgsql``, que es capaz de generar un script SQL a partir de un shapefile que al ejecutar en PostgreSQL generará una tabla espacial con los mismos datos del shapefile.
 
-	$ shp2pgsql -c -D -g geom -s 4326 shapefile.shp test.tablename > tablename.sql
+La sintaxis básica es sencilla::
 
-Lo cual nos generará un fichero ``tablename.sql`` que incorporará las instrucciones que al ser cargadas en un servidor PostgreSQL/PostGIS crearán una tabla con los mismos contenidos que el shapefile.
+	shp2pgsql <shapefile> <nombre_de_tabla_a_crear>
+	
+Por ejemplo::
 
-Incluso es posible cargar en PostgreSQL el fichero resultante con una única línea, sólo enlazando la salida de ``shp2pgsql`` con la entrada de ``psql``::
+	$ shp2pgsql provincias.shp provincia
 
-	$ shp2pgsql -c -D -g geom -s 4326 shapefile.shp test.tablename | psql -U postgres -d test_database
+El comando anterior realmente muestra por pantalla el script, lo cual no es muy útil y además tarda mucho tiempo (con Ctrl+C es posible cancelar la ejecución en la mayoría de los casos). Para que realmente sea útil tenemos que almacenar los datos en un fichero que luego podamos pasar a psql con el parámetro -f. Esto lo podemos hacer mediante redireccionando la salida estándar a un fichero temporal::
+
+	$ shp2pgsql provincias.shp provincias > /tmp/provincias.sql
+
+A continuación no tenemos más que cargar el fichero recién generado con psql::
+
+	$ psql -U postgres -d geoserverdata -f /tmp/provincias.sql
+	
+Tras la ejecución podemos ver con cualquier sistema GIS que soporte conexiones PostGIS 2.0 (como QGis) que se ha creado una tabla en PostreSQL/PostGIS con los mismos datos que contenía el shapefile.
+
+Sin embargo, es posible darse cuenta de que el sistema de referencia de coordenadas (CRS) no está especificado. Por ejemplo, ejecutando esta instrucción::
+
+	$ psql -U postgres -d geoserverdata -c "select * from geometry_columns"
+	
+	 f_table_catalog | f_table_schema |      f_table_name       | f_geometry_column | coord_dimension | srid |      type       
+	-----------------+----------------+-------------------------+-------------------+-----------------+------+-----------------
+	 geoserverdata   | public         | provincias              | geom              |               2 |    0 | MULTIPOLYGON
+
+podemos observar que la tabla recién creada tiene un campo srid, que indica el código EPSG del sistema de coordenadas utilizado, con valor igual a 0. Para evitar esto es posible utilizar el parámetro -s de ``shp2pgsql``::
+
+	$ shp2pgsql -s 4326 provincias.shp provincias > /tmp/provincias.sql
+
+que establecerá que nuestros datos están en EPSG:4326 (o el CRS que se especifique).
+
+Por último, es recomendable crear nuestros datos en un esquema distinto de ``public`` para facilitar las copias de seguridad y las actualizaciones de PostGIS, por motivos que no se tratan en esta documentación::
+
+	$ psql -U postgres -d geoserverdata -c "create schema gis"
+	CREATE SCHEMA
+	$ shp2pgsql -s 4326 provincias.shp gis.provincias > /tmp/provincias.sql
+	
+Incluso es posible cargar en PostgreSQL el fichero resultante con una única línea, sólo enlazando la salida de ``shp2pgsql`` con la entrada de ``psql`` mediante una tubería de linux "|"::
+
+	$ shp2pgsql -s 4326 provincias.shp gis.provincias | psql -U postgres -d geoserverdata
 
 Por ejemplo los siguientes comandos cargan una serie de datos en PostGIS, en la base de datos ``geoserver``::
 
 	$ psql -U postgres -d geoserver -c "create schema gis"
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_adm0.shp gis.admin0 | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_adm1.shp gis.admin1 | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_adm2.shp gis.admin2 | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_rails.shp gis.ferrovia | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_roads.shp gis.vias | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_water_areas_dcw.shp gis.zonas_agua | psql -U postgres -d geoserver
-	$ shp2pgsql -c -D -g geom -s 4326 -W LATIN1 Escritorio/datos/ARG_water_lines_dcw.shp gis.lineas_agua | psql -U postgres -d geoserver
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm0.shp gis.admin0 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm1.shp gis.admin1 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm2.shp gis.admin2 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_rails.shp gis.ferrovia | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_roads.shp gis.vias | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_water_areas_dcw.shp gis.zonas_agua | psql -U postgres -d geoserverdata
+	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_water_lines_dcw.shp gis.lineas_agua | psql -U postgres -d geoserverdata
 	
 Nótese que todos estos pasos se pueden simplificar en sólo dos, que cargarían todos los shapefiles de un directorio::
 
 	$ psql -U postgres -d geoserver -c "create schema gis"
-	$ for i in `ls Escritorio/datos/*.shp`; do shp2pgsql -c -D -g geom -s 4326 $i | psql -U postgres -d geoserver; done
+	$ for i in `ls /tmp/datos/*.shp`; do shp2pgsql -s 4326 $i gis.${i%.shp} | psql -U postgres -d geoserverdata; done
 
 El siguiente ejemplo crea una base de datos llamada ``analisis`` y dentro de ella un esquema llamado ``gis``. Luego se instala la extensión PostGIS y por último se cargan en la base de datos todos los shapefiles existentes en el directorio ``Escritorio/datos/analisis``::
 
 	$ psql -U postgres -c "create database analisis"
 	$ psql -U postgres -d analisis -c "create schema gis"
 	$ psql -U postgres -d analisis -c "create extension postgis"
-	$ for i in `ls Escritorio/datos/analisis/*.shp`; do shp2pgsql -c -D -g geom -s 25830 $i | psql -U postgres -d analisis; done
+	$ for i in `ls /tmp/datos/analisis/*.shp`; do shp2pgsql -s 25830 $i gis.${i%.shp} | psql -U postgres -d analisis; done
 
 Más información
 ----------------
