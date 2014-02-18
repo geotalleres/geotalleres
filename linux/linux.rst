@@ -33,7 +33,7 @@ Así pues, podemos tener rutas absolutas como::
 	/home/geo/Escritorio
 	etc.
 
-.. note :: En la documentación antepondremos el símbolo ``$`` a toda aquella instrucción que se puede ejecutar en la línea de comandos de un sistema Linux. ¡¡Pero dicho símbolo no forma parte de la instrucción!!
+.. note :: En la documentación antepondremos el símbolo ``$`` a toda aquella instrucción que se puede ejecutar en la línea de comandos de un sistema Linux. ¡Pero dicho símbolo no forma parte de la instrucción!
 
 Las rutas absolutas se pueden utilizar desde cualquier directorio. Podemos listar los directorios
 anteriores con los siguientes comandos, independientemente del directorio en el que se esté::
