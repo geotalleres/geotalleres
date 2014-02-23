@@ -29,3 +29,4 @@ Contenidos:
    postgis-raster/postgis_raster
    postgis-cartodb/cartodb
    mapproxy/doc/source/index
+   josm-imposm-tilemill/index

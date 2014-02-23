@@ -1,3 +1,6 @@
 [submodule "mapproxy"]
 	path = mapproxy
 	url = git@github.com:geoinquietosvlc/mapproxy-workshop.git
+[submodule "josm-imposm-tilemill"]
+	path = josm-imposm-tilemill
+	url = git@github.com:geoinquietosvlc/josm-imposm-tilemill-workshop.git

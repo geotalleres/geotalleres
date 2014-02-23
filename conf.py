@@ -287,3 +287,17 @@ epub_copyright = u'2013, Varios'
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
+
+
+# -- Substitutions Setup
+rst_prolog = u"""
+.. |jsanz|       replace:: Jorge Sanz `@xurxosanz`_ · jsanz@osgeo.org
+.. |pferrer|     replace:: Pedro-Juan Ferrer `@vehrka`_ · pferrer@osgeo.org
+.. |isanchez|    replace:: Iván Sanchez `@realivansanchez`_ · ivan@sanchezortega.es
+.. |stramoyeres| replace:: Santiago Tramoyeres `@santracraus`_
+
+.. _@vehrka: http://twitter.com/vehrka
+.. _@realivansanchez: http://twitter.com/realivansanchez
+.. _@xurxosanz: http://twitter.com/xurxosanz
+.. _@santracraus: http://twitter.com/santracraus
+"""
