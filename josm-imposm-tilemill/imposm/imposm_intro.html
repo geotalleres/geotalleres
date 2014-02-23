@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. Importando OSM a un POSTGIS &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../index.html" />
+    <link rel="up" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre" href="../index.html" />
+    <link rel="next" title="4. Taller de ImpOSM" href="imposm_taller.html" />
+    <link rel="prev" title="2. Taller de JOSM" href="../osm/osm_taller.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="imposm_taller.html" title="4. Taller de ImpOSM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../osm/osm_taller.html" title="2. Taller de JOSM"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="importando-osm-a-un-postgis">
+<span id="imposm"></span><h1>3. Importando OSM a un POSTGIS<a class="headerlink" href="#importando-osm-a-un-postgis" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Autores:</p>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Santiago Tramoyeres <a class="reference external" href="http://twitter.com/santracraus">&#64;santracraus</a></li>
+</ul>
+<p>Licencia:</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
+se halla bajo licencia <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento Compartir Igual</a></p>
+</div>
+<div class="section" id="que-es-imposm">
+<h2>3.1. Qué es Imposm<a class="headerlink" href="#que-es-imposm" title="Permalink to this headline">¶</a></h2>
+<p>Se trata de una serie de scripts hechos en Python que permiten importar datos de
+Openstreetmaps a una base de datos Postgres. Los archivos a importar deben estar
+en el formato XML de OSM y la base de datos debe tener la extensión espacial
+PostGIS.</p>
+<p>Su espiritu es optimizar la creación de bases de datos geográficas enfocadas a renderizar o a montar servicios WMS.</p>
+<p>Los desarrolladores principales son <a class="reference external" href="http://omniscale.com">Omniscale</a>, que es la empresa de Dominik Helle y Oliver Tonnhofer, que también están detrás del proyecto <a class="reference external" href="http://mapproxy.org">MapProxy</a>.</p>
+<p>Funciona en Linux y Mac OS X y es código libre bajo licencia <a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software
+License 2.0</a>.</p>
+</div>
+<div class="section" id="caracteristicas">
+<h2>3.2. Características<a class="headerlink" href="#caracteristicas" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Esquemas de base de datos personalizados</dt>
+<dd>Crea tablas separadas para cada tipo de dato. Permite crear estilos independientes de manera sencilla y mejora el rendimiento de renderización.</dd>
+<dt>Soporte para Multiples CPUs</dt>
+<dd>Está pensado para usar procesos paralelos de manera que distribuye la carga de trabajo entre los CPUs y cores.</dd>
+<dt>Normaliza valores</dt>
+<dd>Por ejemplo, todos los posibles valores boleanos <cite>1</cite>, <cite>on</cite>, <cite>true</cite> y <cite>yes</cite> se convierten en <tt class="docutils literal"><span class="pre">TRUE</span></tt>.</dd>
+<dt>Soporte para localización de cadenas de texto</dt>
+<dd>Busqueda personalizable de valores localizados</dd>
+<dt>Filtro por etiqueta o por valor</dt>
+<dd>La importación es selectiva y configurable</dd>
+<dt>Cache eficiente de nodos</dt>
+<dd>Para almacenar las calles y las relaciones es necesario almacenar todos los nodos. Imposm usa la base de datos basada en archivo <a class="reference external" href="http://fallabs.com/tokyocabinet/">Tokyo Cabinet</a> que almacena pares clave valor para hacer una cache de estos datos. Así se reduce de manera significativa el uso de la memoria.</dd>
+<dt>Tablas generalizadas</dt>
+<dd>Se pueden crear automáticamente tablas con menor resolución espacial, lo que permite por ejemplo preparar rápidamente renders de grandes redes a bajas resoluciones</dd>
+<dt>Vistas de uniones</dt>
+<dd>Permite crear vistas que combinen distintas tablas</dd>
+</dl>
+</div>
+<div class="section" id="limitaciones">
+<h2>3.3. Limitaciones<a class="headerlink" href="#limitaciones" title="Permalink to this headline">¶</a></h2>
+<p>No permite el uso de actualizaciones diferenciales</p>
+<p>Solo permite el uso de bases de datos PostGIS, aunque podría implementarse con
+facilidad su uso con otras como SpatialLite, Oracle, etc.</p>
+<p>Aunque es bastante eficiente con el uso de la memoria, las importaciones de datos
+masivas pueden llevar bastante tiempo: un archivo de 1 GB (comprimido, equivalente a Alemania) en un sistema
+con 2 GB RAM o Europa entera (~5 GB) en un sistema de 8 GB no darían problemas, pero
+un planet requerirá de unos 16 GB de RAM o más (tarda unas 20h con 8GB).</p>
+</div>
+<div class="section" id="instalacion">
+<h2>3.4. Instalación<a class="headerlink" href="#instalacion" title="Permalink to this headline">¶</a></h2>
+<p>La instalación es súmamente sencilla ya que al estar incluída en el Python Package Index responde tanto a pip como a easy_install, solo hay que asegurarse de que se tienen instaladas las dependencias.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo pip install imposm
+</pre></div>
+</div>
+<p>La documentación recomienda instalar la aplicación en un entorno virtual de Python, para aislarlo del restao del sistema y también recomienda instalar los Speedups de Shapely.</p>
+</div>
+<div class="section" id="uso">
+<h2>3.5. Uso<a class="headerlink" href="#uso" title="Permalink to this headline">¶</a></h2>
+<p>Todas las funcionalidades de Imposm se ejecutan a través de comandos en una consola de sistema.</p>
+<div class="section" id="crear-la-base-de-datos">
+<h3>3.5.1. Crear la base de datos<a class="headerlink" href="#crear-la-base-de-datos" title="Permalink to this headline">¶</a></h3>
+<p>El primer paso para la carga de datos es la creación de la base de datos que se hace utilizando el comando <tt class="docutils literal"><span class="pre">imposm-psqldb</span></tt>, este comando nos devuelve una estructura de datos para la base de datos PostGIS, lo mejor es asignar una salida directa del comando a un archivo de texto.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm-psqldb &gt; create-db.sh
+</pre></div>
+</div>
+<p>Hay que editar el archivo <em>create-db.sh</em> ya que hay que cambiar la ruta a los scripts que instalan PostGIS en una base de datos Postgres y también la ruta al archivo <em>pg_hba.conf</em>.</p>
+<p>Otra manera de hacerlo es tener configurada una <em>template</em> de PostGIS en el servidor y modificar el script para usarla en el comando de creación de la base de datos.</p>
+</div>
+<div class="section" id="carga-de-datos">
+<h3>3.5.2. Carga de datos<a class="headerlink" href="#carga-de-datos" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="lectura">
+<h4>3.5.2.1. Lectura<a class="headerlink" href="#lectura" title="Permalink to this headline">¶</a></h4>
+<p>Para leer los datos ejecutamos el siguiente comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm --read datos20120321.osm
+</pre></div>
+</div>
+<p>Este comando crea los archivos de cache en el directorio en el que se ejecuta.</p>
+</div>
+<div class="section" id="escritura">
+<h4>3.5.2.2. Escritura<a class="headerlink" href="#escritura" title="Permalink to this headline">¶</a></h4>
+<p>Para trasladar la información de los archivos de cache a la base de datos se usa el comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm --write --database osm --host localhost --user osm
+</pre></div>
+</div>
+<p>Esto crea las tablas (ojo que si ya existían las borra primero) tanto de los datos como de las generalizaciones y también crea las vistas.</p>
+</div>
+<div class="section" id="optimizacion">
+<h4>3.5.2.3. Optimización<a class="headerlink" href="#optimizacion" title="Permalink to this headline">¶</a></h4>
+<p>Este paso es opcional, pero permite agrupar los datos, optimizar los índices y realiza un mantenimiento de la base de datos PostgreSQL.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm --optimize -d osm
+</pre></div>
+</div>
+</div>
+<div class="section" id="todo-en-un-paso">
+<h4>3.5.2.4. Todo en un paso<a class="headerlink" href="#todo-en-un-paso" title="Permalink to this headline">¶</a></h4>
+<p>En realidad pueden combinarse todos los pasos en un solo comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm --read --write --optimize -d osm datos20120321.osm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="flujo-de-trabajo">
+<h3>3.5.3. Flujo de trabajo<a class="headerlink" href="#flujo-de-trabajo" title="Permalink to this headline">¶</a></h3>
+<p>La importación de datos se hace sobre tablas a las que se le añade el prefijo osm_new_ en el nombre.</p>
+<p>Para trabajar sobre las tablas se debería hacer un despliegue de las mismas, con ImpOSM basta con ejecutar el comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm -d osm --deploy-production-tables
+</pre></div>
+</div>
+<p>Para que cambie el prefijo a osm_. Si ya hubieramos hecho otro despliegue las actuales tablas osm_ se renombran automáticamente a osm_old_. Cada vez que se hace un despliegue se borrarán primero las osm_old_.</p>
+<img alt="Flujo de despliegue de Imposm" class="align-center" src="../../_images/imposmflujodeploy.png" style="width: 600px;" />
+<p>Para revertir el despliegue se puede ejecutar el comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm -d osm --recover-production-tables
+</pre></div>
+</div>
+<p>Y para borrar las tablas con prefijo.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>imposm -d osm --remove-backup-tables
+</pre></div>
+</div>
+<img alt="Flujo Imposm II" class="align-center" src="../../_images/imposmflujorecover.png" style="width: 600px;" />
+</div>
+</div>
+<div class="section" id="cambiando-el-esquema-por-defecto">
+<span id="cambiaesqdef"></span><h2>3.6. Cambiando el esquema por defecto<a class="headerlink" href="#cambiando-el-esquema-por-defecto" title="Permalink to this headline">¶</a></h2>
+<p>El esquema de base de datos por defecto que utiliza ImpOSM viene de los <a class="reference external" href="http://wiki.openstreetmap.org/wiki/ES:Map_Features">elementos y etiquetas más comunes de OSM</a>. Este esquema permite trasladar los datos empleando el paquete <tt class="docutils literal"><span class="pre">imposm.mapping</span></tt> y las estructuras definidas en el archivo:</p>
+<blockquote>
+<div>/usr/local/lib/python2.7/dist-packages/imposm/defaultmapping.py</div></blockquote>
+<div class="section" id="tablas">
+<h3>3.6.1. Tablas<a class="headerlink" href="#tablas" title="Permalink to this headline">¶</a></h3>
+<p>Hay definidas tres clases de Python para las geometrías base: <tt class="docutils literal"><span class="pre">Points</span></tt>, <tt class="docutils literal"><span class="pre">LineStrings</span></tt>  y <tt class="docutils literal"><span class="pre">Polygons</span></tt> y todas las tablas tienen que ser instancias de una de ellas. Las tres clases usan los mimsmos argumentos:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">name</span></tt></dt>
+<dd>Nombre de la tabla (sin prefijos).</dd>
+<dt><tt class="docutils literal"><span class="pre">mapping</span></tt></dt>
+<dd>El <cite>mapping</cite> de los pares clave/valor básicos que se meterán en la tabla.</dd>
+<dt><tt class="docutils literal"><span class="pre">fields</span></tt></dt>
+<dd>El <cite>mapping</cite> de campos adicionales que también son pares clave/valor de OSM y que se convertiran en columnas de la tabla.</dd>
+<dt><tt class="docutils literal"><span class="pre">field_filter</span></tt></dt>
+<dd>Filtros que permitan discriminar los datos que se introducen.</dd>
+</dl>
+<div class="section" id="mapping">
+<h4>3.6.1.1. mapping<a class="headerlink" href="#mapping" title="Permalink to this headline">¶</a></h4>
+<p>El argumento <cite>Mapping</cite> debe ser un diccionario (un diccionario de Python) en la que las claves de OSM (p.e. <cite>highway</cite>, <cite>leisure</cite>, <cite>amenity</cite>, etc.) son las claves del diccionario y los valores de OSM (p.e. <cite>motorway</cite>, <cite>trunk</cite>, <cite>primary</cite>, etc.) los valores de las claves del diccionario.</p>
+<p>Para una tabla de paradas de autobús, de tranvía y de ferrocarril el <cite>mapping</cite> debería ser parecido a este:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;highway&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s">&#39;bus_stop&#39;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="s">&#39;railway&#39;</span><span class="p">:</span> <span class="p">(</span>
+        <span class="s">&#39;station&#39;</span><span class="p">,</span>
+        <span class="s">&#39;halt&#39;</span><span class="p">,</span>
+        <span class="s">&#39;tram_stop&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fields">
+<h4>3.6.1.2. fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h4>
+<p>El argumento <cite>fields</cite> debe ser una lista (o una tupla) con el nombre de la columna y su tipo de dato. Se emplea para añadir información adicional a la tabla. ImpOSM tiene clases para los tipos de datos más comunes que son las responsables de hacer sustituciones como <cite>1</cite>, <cite>yes</cite> y <cite>true</cite> a <tt class="docutils literal"><span class="pre">TRUE</span></tt> en caso de datos booleanos por lo que se recomienda su uso:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fields</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s">&#39;tunnel&#39;</span><span class="p">,</span> <span class="n">Bool</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s">&#39;bridge&#39;</span><span class="p">,</span> <span class="n">Bool</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s">&#39;oneway&#39;</span><span class="p">,</span> <span class="n">Direction</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s">&#39;ref&#39;</span><span class="p">,</span> <span class="n">String</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s">&#39;z_order&#39;</span><span class="p">,</span> <span class="n">WayZOrder</span><span class="p">()),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>En el ejemplo la línea <tt class="docutils literal"><span class="pre">('tunnel',</span> <span class="pre">Bool())</span></tt> convertirá los valores de la clave <tt class="docutils literal"><span class="pre">tunnel</span></tt> a valores booleanos.</p>
+</div>
+<div class="section" id="ejemplo">
+<h4>3.6.1.3. Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><pre> towers = Points(
+   name = 'towers',
+   mapping = {
+     'man_made': (
+       'tower',
+       'water_tower',
+     )
+   }
+   fields = (
+     ('height', Integer()),
+   )
+)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="referencias-y-enlaces">
+<h2>3.7. Referencias y enlaces<a class="headerlink" href="#referencias-y-enlaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://imposm.org">Página web de Imposm</a></li>
+<li><a class="reference external" href="http://omniscale.com">Página web de Omniscale</a></li>
+<li><a class="reference external" href="http://geospatial.nomad-labs.com/2006/12/24/postgis-template-database/">Página web de Nomad Labs en la que se explica como intalar un *template* de PostGIS</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. Importando OSM a un POSTGIS</a><ul>
+<li><a class="reference internal" href="#que-es-imposm">3.1. Qué es Imposm</a></li>
+<li><a class="reference internal" href="#caracteristicas">3.2. Características</a></li>
+<li><a class="reference internal" href="#limitaciones">3.3. Limitaciones</a></li>
+<li><a class="reference internal" href="#instalacion">3.4. Instalación</a></li>
+<li><a class="reference internal" href="#uso">3.5. Uso</a><ul>
+<li><a class="reference internal" href="#crear-la-base-de-datos">3.5.1. Crear la base de datos</a></li>
+<li><a class="reference internal" href="#carga-de-datos">3.5.2. Carga de datos</a><ul>
+<li><a class="reference internal" href="#lectura">3.5.2.1. Lectura</a></li>
+<li><a class="reference internal" href="#escritura">3.5.2.2. Escritura</a></li>
+<li><a class="reference internal" href="#optimizacion">3.5.2.3. Optimización</a></li>
+<li><a class="reference internal" href="#todo-en-un-paso">3.5.2.4. Todo en un paso</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flujo-de-trabajo">3.5.3. Flujo de trabajo</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cambiando-el-esquema-por-defecto">3.6. Cambiando el esquema por defecto</a><ul>
+<li><a class="reference internal" href="#tablas">3.6.1. Tablas</a><ul>
+<li><a class="reference internal" href="#mapping">3.6.1.1. mapping</a></li>
+<li><a class="reference internal" href="#fields">3.6.1.2. fields</a></li>
+<li><a class="reference internal" href="#ejemplo">3.6.1.3. Ejemplo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias-y-enlaces">3.7. Referencias y enlaces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../osm/osm_taller.html"
+                        title="previous chapter">2. Taller de JOSM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="imposm_taller.html"
+                        title="next chapter">4. Taller de ImpOSM</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/josm-imposm-tilemill/imposm/imposm_intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="imposm_taller.html" title="4. Taller de ImpOSM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../osm/osm_taller.html" title="2. Taller de JOSM"
+             >previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

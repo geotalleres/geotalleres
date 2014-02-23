@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="next" title="1. Qué son OSM y JOSM" href="osm/osm_intro.html" />
+    <link rel="prev" title="Referencias" href="../mapproxy/doc/source/referencias.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="osm/osm_intro.html" title="1. Qué son OSM y JOSM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../mapproxy/doc/source/referencias.html" title="Referencias"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="taller-de-osm-imposm-tilemill-vi-jornadas-de-sig-libre">
+<h1>Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre<a class="headerlink" href="#taller-de-osm-imposm-tilemill-vi-jornadas-de-sig-libre" title="Permalink to this headline">¶</a></h1>
+<p>Este taller pretende ser una breve introducción a un flujo de trabajo que
+permite tener mapas funcionales y estéticos. A lo largo del taller vamos a ver
+una serie de herramientas FOSS4G que permiten crear estos mapas de una manera
+sencilla y con un lenguaje de diseño cartográfico especialmente próximo a los
+desarrolladores web.</p>
+<div class="section" id="autores-del-taller">
+<h2>Autores del taller<a class="headerlink" href="#autores-del-taller" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><img alt="imgvehrka" src="../_images/vehrka.jpg" style="width: 48px;" /> Pedro-Juan Ferrer Matoses</dt>
+<dd>Project Manager en Omnium Inteligencia Estratégica y geofriki. <a class="reference external" href="mailto:pedro&#46;ferrer&#37;&#52;&#48;omniumie&#46;com">Email: pedro<span>&#46;</span>ferrer (a) omniumie<span>&#46;</span>com</a> | <a class="reference external" href="http://twitter.com/vehrka">Twitter: &#64;vehrka</a></dd>
+<dt><img alt="imgsantra" src="../_images/santra.png" style="width: 48px;" /> Santiago Tramoyeres Cuesta</dt>
+<dd>DBA en Omnium Inteligencia Estratégica y geek. <a class="reference external" href="mailto:santiago&#46;tramoyeres&#37;&#52;&#48;omniumie&#46;com">Email: santiago<span>&#46;</span>tramoyeres (a) omniumie<span>&#46;</span>com</a> | <a class="reference external" href="http://twitter.com/santracraus">Twitter: &#64;santracraus</a></dd>
+<dt><img alt="imgivan" src="../_images/ivansanchez.png" style="width: 48px;" /> Iván Sanchez Ortega</dt>
+<dd>Presidente de OpenStreetMap España y geonerd. <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">Email: ivan (a) sanchezortega<span>&#46;</span>es</a> | <a class="reference external" href="http://twitter.com/realivansanchez">Twitter: &#64;realivansanchez</a></dd>
+</dl>
+</div>
+<div class="section" id="licencia">
+<h2>Licencia<a class="headerlink" href="#licencia" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="licencia" src="../_images/88x31.png" /></a></p>
+<p>Taller Josm + ImpOSM + Tilemill por <a class="reference external" href="http://vehrka.net">Pedro-Juan Ferrer Matoses</a> se encuentra bajo una Licencia <a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribución-CompartirIgual 4.0 Unported</a> .</p>
+</div>
+<div class="section" id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Permalink to this headline">¶</a></h2>
+<p>El taller constará de los siguientes contenidos:</p>
+<p class="rubric">OSM y JOSM</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="osm/osm_intro.html#osmyjosm"><em>Qué son OSM y JOSM</em></a></dt>
+<dd>Por qué molan tanto los mapas de OSM y cómo obtengo sus datos.</dd>
+<dt><a class="reference internal" href="osm/osm_taller.html#tallerosmyjosm"><em>Taller de JOSM</em></a></dt>
+<dd>Trabajando con Josm.</dd>
+</dl>
+<p class="rubric">ImpOSM</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="imposm/imposm_intro.html#imposm"><em>Importando OSM a un POSTGIS</em></a></dt>
+<dd>La herramienta que convierte el XML de OSM en una base de datos como $deity manda.</dd>
+<dt><a class="reference internal" href="imposm/imposm_taller.html#tallerimposm"><em>Taller de ImpOSM</em></a></dt>
+<dd>Trabajando con ImpOSM.</dd>
+</dl>
+<p class="rubric">TileMill</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="tilemill/tilemill_intro.html#tilemill"><em>Qué es TileMill</em></a></dt>
+<dd>Haciendo mapas bonitos con Mapnik y su lenguaje Carto.</dd>
+<dt><a class="reference internal" href="tilemill/tilemill_taller.html#tallertilemill"><em>Taller de TileMill</em></a></dt>
+<dd>Trabajando con Tilemill</dd>
+</dl>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a><ul>
+<li><a class="reference internal" href="#autores-del-taller">Autores del taller</a></li>
+<li><a class="reference internal" href="#licencia">Licencia</a></li>
+<li><a class="reference internal" href="#agenda">Agenda</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../mapproxy/doc/source/referencias.html"
+                        title="previous chapter">Referencias</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="osm/osm_intro.html"
+                        title="next chapter">1. Qué son OSM y JOSM</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/josm-imposm-tilemill/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="osm/osm_intro.html" title="1. Qué son OSM y JOSM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../mapproxy/doc/source/referencias.html" title="Referencias"
+             >previous</a> |</li>
+        <li><a href="../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

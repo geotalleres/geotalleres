@@ -3,6 +3,21 @@
 El archivo de configuración seed.yaml
 =============================================
 
+
+.. note::
+
+    Autores:
+
+    * |pferrer|
+    * |jsanz|
+    * |isanchez|
+
+    Licencia:
+
+    Excepto donde quede reflejado de otra manera, la presente documentación
+    se halla bajo licencia `Creative Commons Reconocimiento Compartir Igual
+    <https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES>`_
+
 Introducción
 ---------------------------------
 
@@ -83,14 +98,6 @@ Estas zonas pueden definirse tanto como un *bounding box* o como una región def
 
 
 Se pueden encontrar algunos ejemplos de configuración en `la correspondiente sección sobre coverages de la página de seeding de la documentación de MapProxy`_
-
-
-Autores:
--------------------------
-
-* Pedro-Juan Ferrer `@vehrka <http://twitter.com/vehrka>`_ · pferrer@osgeo.org
-* Iván Sanchez `@realivansanchez <http://twitter.com/realivansanchez>`_ · ivan@sanchezortega.es
-* Jorge Sanz `@xurxosanz <http://twitter.com/xurxosanz>`_ · jsanz@osgeo.org
 
 .. _la correspondiente sección sobre seeds de la página de seeding de la documentación de MapProxy: http://mapproxy.org/docs/1.5.0/seed.html#seeds
 .. _la correspondiente sección sobre cleanups de la página de seeding de la documentación de MapProxy: http://mapproxy.org/docs/1.5.0/seed.html#cleanups

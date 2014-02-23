@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. Qué son OSM y JOSM &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../index.html" />
+    <link rel="up" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre" href="../index.html" />
+    <link rel="next" title="2. Taller de JOSM" href="osm_taller.html" />
+    <link rel="prev" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="osm_taller.html" title="2. Taller de JOSM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="que-son-osm-y-josm">
+<span id="osmyjosm"></span><h1>1. Qué son OSM y JOSM<a class="headerlink" href="#que-son-osm-y-josm" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Autores:</p>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Santiago Tramoyeres <a class="reference external" href="http://twitter.com/santracraus">&#64;santracraus</a></li>
+</ul>
+<p>Licencia:</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
+se halla bajo licencia <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento Compartir Igual</a></p>
+</div>
+<div class="section" id="introduccion-a-openstreetmap">
+<h2>1.1. Introducción a OpenStreetMap<a class="headerlink" href="#introduccion-a-openstreetmap" title="Permalink to this headline">¶</a></h2>
+<p>OpenStreetMap es un proyecto colaborativo para crear mapas libres y editables.
+Se dice que OSM es a lo mapas, como la Wikipedia a las enciclopedias.
+Actualmente hay más de 500.000 usuarios registrados.</p>
+<img alt="ejemplo de mapa osm" class="align-center" src="../../_images/inicioosm.png" style="width: 600px;" />
+<p>La página principal de OSM es <a class="reference external" href="http://www.openstreetmap.org/">http://www.openstreetmap.org/</a> donde puede verse el
+mapa que generan los usuarios. La comunidad se organiza a través de una wiki
+cuya dirección es <a class="reference external" href="http://wiki.openstreetmap.org/">http://wiki.openstreetmap.org/</a></p>
+<p>El proyecto es propiedad de la Fundación OpenStreetMap cuyo objetivo es
+<em>fomentar el crecimiento, desarrollo y distribución de datos geoespaciales
+libres y a proveer datos geoespaciales a cualquiera para usar y compartir</em>. Los
+datos tienen una licencia <a class="reference external" href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0</a>, aunque está en proceso de
+ser cambiada a <a class="reference external" href="http://www.opendatacommons.org/licenses/odbl/">Open Database License 1.0</a>.</p>
+</div>
+<div class="section" id="historia">
+<h2>1.2. Historia<a class="headerlink" href="#historia" title="Permalink to this headline">¶</a></h2>
+<p>El proyecto nace de la mano de Steve Coast en 2004 que por discrepancias
+personales con la gestión cartográfica y los precios del organismo británico
+Ordnance Survey decide crear una base de datos cartográfica accesible a todos
+los públicos.</p>
+<p>En 2006 el proyecto toma forma de fundación sin ánimo de lucro y en ese mismo
+año Yahoo autoriza a la fundación a utilizar su capa de imágenes aéreas de todo
+el mundo para que los usuarios puedan digitalizar información sobre ellas.</p>
+<p>En 2007 la empresa Automotive Navigation Data (AND) dona sus datos de los Países
+Bajos y de las principales carreteras de la India y China a la fundación y
+además se incorpora la información de TIGER (Censo de EEUU).</p>
+<p>En 2008 la aparece la empresa CloudMade con el objetivo de explotar
+comercialmente la información del proyecto y que dona a la fundación 2,4
+Millones ; en ese mismo año la iniciativa pública canadiense GeoBase.ca dona sus
+datos de Canadá al proyecto.</p>
+<p>En 2009 se libera la versión 0.6 de la API y se incrementan en casi 100.000 el
+número de usuarios duplicando los existentes en solo un años.</p>
+<p>En 2010 tiene lugar en Girona la conferencia State of the Map, Bing Maps
+(Microsost) permite el uso de sus imágenes para digitalizar información y el
+Ordnance Survey decide liberar sus dato.</p>
+<p>En 2011 se superan los 500.000 usuarios.</p>
+<p>En 2012 Foursquare abandona el uso de Google Maps y pasa a usar datos de OSM renderizados por MapBox. Apple emplea (sin respetar la licencia) los datos de OSM para su aplicación iPhoto 11.</p>
+</div>
+<div class="section" id="procedimiento">
+<h2>1.3. Procedimiento<a class="headerlink" href="#procedimiento" title="Permalink to this headline">¶</a></h2>
+<p>Los mapas se realizan siguiendo 3 pasos:</p>
+<ul class="simple">
+<li>Toma de datos</li>
+<li>Subida de datos a los servidores de OSM:<ul>
+<li>Edición gráfica de los datos</li>
+<li>Edición alfanumérica de los datos</li>
+</ul>
+</li>
+<li>Renderizado de los mapas</li>
+</ul>
+<div class="section" id="toma-de-datos">
+<h3>1.3.1. Toma de datos<a class="headerlink" href="#toma-de-datos" title="Permalink to this headline">¶</a></h3>
+<p>Los datos se recopilan por observación directa, preferentemente empleando GPS,
+aunque pueden emplearse otros medios como fotografía aérea si los derechos de la
+imagen lo permite. Aún así el proyecto recomienda conocer y recorrer la zona
+personalmente para garantizar la máxima calidad del resultado.</p>
+<p>Los orígenes más comunes de datos son:</p>
+<ul class="simple">
+<li>Trazas GPS, resultado de recorrer la zona usando un dispositivo GPS que almacene dicha información.<ul>
+<li>También suelen usarse waypoints, fotos geolocalizadas y archivos de audio geolocalizados</li>
+</ul>
+</li>
+<li>Imágenes de Yahoo, Bing Maps, el PNOA en España, Landsat y en general cualquier imágen cuyos derechos de autor hayan sido expresamente cedidos, se hayan extinguido o estén en el dominio público.</li>
+<li>Mapas e información de los usuarios. Siempre que se trate de información en el dominio público o cuyos derechos de autor hayan sido expresamente cedidos.</li>
+<li>Información prévia existente que requiera ser incluida en un mapa.</li>
+</ul>
+</div>
+<div class="section" id="subida-de-datos-a-los-servidores-de-openstreetmap">
+<h3>1.3.2. Subida de datos a los servidores de OpenStreetMap<a class="headerlink" href="#subida-de-datos-a-los-servidores-de-openstreetmap" title="Permalink to this headline">¶</a></h3>
+<p>Una vez recopilada la información, esta debe ser incorporada a la base de datos
+de OSM. Para ello existen diversos médios, aunque principalmente se emplea el
+cliente web Potlach2:</p>
+<img alt="editor potlach2" class="align-center" src="../../_images/potlach2.png" style="width: 600px;" />
+<p>y el cliente de escritorio JOSM:</p>
+<img alt="editor josm" class="align-center" src="../../_images/josmgirona.png" style="width: 600px;" />
+<p>En cualquier caso lo más frecuente es convertir los datos GPS tomados al formato
+estándar GPX y subirlos posteriormente al repositorio de trazas GPS de OSM de
+forma que cualquier usuario pueda acceder a dicha información.</p>
+<div class="section" id="edicion-grafica-de-los-datos">
+<h4>1.3.2.1. Edición gráfica de los datos<a class="headerlink" href="#edicion-grafica-de-los-datos" title="Permalink to this headline">¶</a></h4>
+<p>Empleando alguna de las aplicaciones que lo permiten; como Potlach2, JOSM o
+Merkaartor por ejemplo; se descarga del servidor la porción de información que
+se quiere editar, para que esta se ajuste a los estándares acordados en el
+proyecto.</p>
+<p>OpenStreetMap solo reconoce 2 tipos de datos gráficos:</p>
+<ul class="simple">
+<li><strong>Nodos:</strong> Son elementos puntuales</li>
+<li><strong>Vías:</strong> Conexiones lineales entre nodos.<ul>
+<li><strong>Vías abiertas:</strong> Vías que tienen entre 2 y 2000 nodos</li>
+<li><strong>Vías cerradas:</strong> Vías que empiezan y acaban en el mismo nodo y definen una forma poligonal.<ul>
+<li><strong>Áreas:</strong> Zonas contenidas dentro de <em>Vías cerradas</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="edicion-alfanumerica-de-los-datos">
+<h4>1.3.2.2. Edición alfanumérica de los datos<a class="headerlink" href="#edicion-alfanumerica-de-los-datos" title="Permalink to this headline">¶</a></h4>
+<p>OpenStreetMap reconoce 2 tipos de datos alfanuméricos:</p>
+<ul class="simple">
+<li><strong>Relación:</strong> Lista ordenada de nodos con un rol, como por ejemplo una restricción de giro.</li>
+<li><strong>Etiqueta:</strong> Par clave/valor que permite definir atributos.</li>
+</ul>
+<p>El modelo de datos alfanuméricos de OSM se basa en el uso de etiquetas <em>tags</em>
+consensuadas por los usuarios a través de la wiki del proyecto.</p>
+<p>Las etiquetas se definen por un par clave/valor. Actualmente <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tags">hay más de 700
+claves &#8220;oficialmente&#8221; reconocidas</a> y
+varios centenares propuestos.</p>
+<p>Esta información adicional alfanumérica permite clasificar los datos para que el
+proceso de renderizado los muestre correctamente representados.</p>
+</div>
+</div>
+<div class="section" id="renderizado-de-los-mapas">
+<h3>1.3.3. Renderizado de los mapas<a class="headerlink" href="#renderizado-de-los-mapas" title="Permalink to this headline">¶</a></h3>
+<p>El proyecto OSM tiene <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Renderers">varios motores de renderizado</a> tanto en 2D como en 3D que
+permiten obtener una imagen de la información de la base de datos.</p>
+<p>Los principales motores de renderizado son:</p>
+<ul class="simple">
+<li>Osmarender En realidad se trata más bien de un conjunto de reglas XLST que genera SVG.</li>
+</ul>
+<img alt="mapa renderizado con osmarender" class="align-center" src="../../_images/osmarender.png" style="width: 600px;" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Desde Febrero de 2012 ya no se emplea Osmarender de manera oficial y recomendada por OSM.</p>
+</div>
+<ul class="simple">
+<li>Mapnik Toma los datos y los carga en un PostGIS para posteriormente renderizar tiles de 256x256.</li>
+</ul>
+<img alt="mapa renderizado con mapnik" class="align-center" src="../../_images/mapnik.png" style="width: 600px;" />
+</div>
+</div>
+<div class="section" id="obteniendo-los-datos-de-openstreetmap">
+<h2>1.4. Obteniendo los datos de OpenStreetMap<a class="headerlink" href="#obteniendo-los-datos-de-openstreetmap" title="Permalink to this headline">¶</a></h2>
+<p>Daremos un rápido vistazo al formato XML de OSM y a JOSM como herramienta para
+obtener y mejorar los datos.</p>
+<div class="section" id="osm-xml-data-el-formato-openstreetmap">
+<h3>1.4.1. OSM XML Data: el formato OpenStreetMap<a class="headerlink" href="#osm-xml-data-el-formato-openstreetmap" title="Permalink to this headline">¶</a></h3>
+<p>Toda la API de OSM está basada en arquitectura RESTFul y reconoce los cuatro
+elementos.</p>
+<p>El formato de intercambio estándar de la API es un XML compuesto por
+combinaciones de esos elementos.</p>
+<div class="section" id="nodos-node">
+<h4>1.4.1.1. Nodos (Node)<a class="headerlink" href="#nodos-node" title="Permalink to this headline">¶</a></h4>
+<p>Los Nodos tienen, entre otras informaciones, las siguientes características:</p>
+<ul class="simple">
+<li><strong>id:</strong> el identificador</li>
+<li><strong>lat</strong> y <strong>lon:</strong> la posición geográfica en EPSG4326</li>
+<li><strong>visible:</strong> boolean que determina la visibilidad</li>
+<li><strong>user:</strong> usuario que creó la versión del nodo</li>
+<li><strong>timestamp:</strong> marca de tiempo de creación</li>
+<li><strong>version:</strong> incremental para cada objeto.</li>
+</ul>
+<p>Además el Nodo puede contener información asociada al estilo OSM a traves de
+pares key/value</p>
+<div class="highlight-none"><div class="highlight"><pre>&lt;node id=&quot;25496583&quot; lat=&quot;51.5173639&quot; lon=&quot;-0.140043&quot; version=&quot;1&quot; changeset=&quot;203496&quot; user=&quot;80n&quot; uid=&quot;1238&quot; visible=&quot;true&quot; timestamp=&quot;2007-01-28T11:40:26Z&quot;&gt;
+    &lt;tag k=&quot;highway&quot; v=&quot;traffic_signals&quot;/&gt;
+&lt;/node&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="vias-way">
+<h4>1.4.1.2. Vías (Way)<a class="headerlink" href="#vias-way" title="Permalink to this headline">¶</a></h4>
+<p>Las Vías son listas ordenadas de nodos que tienen información como:</p>
+<ul class="simple">
+<li><strong>id:</strong> el identificador</li>
+<li><strong>visible:</strong> boolean que determina la visibilidad</li>
+<li><strong>user:</strong> usuario que creó el nodo</li>
+<li><strong>timestamp:</strong> marca de tiempo de creación</li>
+<li><strong>version:</strong> incremental para cada objeto.</li>
+</ul>
+<p>Debe tener una lista de nodos agrupados cada uno con su etiqueta XML <em>nd</em> con la
+referencia id de los nodos que agrupa. Además la Vía puede contener información
+asociada al estilo OSM a traves de pares key/value</p>
+<div class="highlight-none"><div class="highlight"><pre>&lt;way id=&quot;5090250&quot; visible=&quot;true&quot; timestamp=&quot;2009-01-19T19:07:25Z&quot; version=&quot;8&quot; changeset=&quot;816806&quot; user=&quot;Blumpsy&quot; uid=&quot;64226&quot;&gt;
+    &lt;nd ref=&quot;822403&quot;/&gt;
+    &lt;nd ref=&quot;21533912&quot;/&gt;
+    &lt;nd ref=&quot;821601&quot;/&gt;
+    &lt;nd ref=&quot;21533910&quot;/&gt;
+    &lt;nd ref=&quot;135791608&quot;/&gt;
+    &lt;nd ref=&quot;333725784&quot;/&gt;
+    &lt;nd ref=&quot;333725781&quot;/&gt;
+    &lt;nd ref=&quot;333725774&quot;/&gt;
+    &lt;nd ref=&quot;333725776&quot;/&gt;
+    &lt;nd ref=&quot;823771&quot;/&gt;
+    &lt;tag k=&quot;highway&quot; v=&quot;unclassified&quot;/&gt;
+    &lt;tag k=&quot;name&quot; v=&quot;Clipstone Street&quot;/&gt;
+    &lt;tag k=&quot;oneway&quot; v=&quot;yes&quot;/&gt;
+&lt;/way&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="relaciones-relation">
+<h4>1.4.1.3. Relaciones (Relation)<a class="headerlink" href="#relaciones-relation" title="Permalink to this headline">¶</a></h4>
+<p>Las Relaciones son listas ordenadas de objetos, son objetos en si mismas y sirven para definir relaciones
+entre cualquier tipo de objeto. También tienen información como:</p>
+<ul class="simple">
+<li><strong>id:</strong> el identificador</li>
+<li><strong>visible:</strong> boolean que determina la visibilidad</li>
+<li><strong>user:</strong> usuario que creó el nodo</li>
+<li><strong>timestamp:</strong> marca de tiempo de creación</li>
+</ul>
+<p>Y además en una etiqueta XML member definir atributos <em>type</em>, <em>id</em> y <em>role</em> que
+permiten configurar la relación y unas etiquetas tag para describir el tipo de
+relación.</p>
+<div class="highlight-none"><div class="highlight"><pre>&lt;relation id=&quot;77&quot; visible=&quot;true&quot; timestamp=&quot;2006-03-14T10:07:23+00:00&quot; user=&quot;fred&quot;&gt;
+  &lt;member type=&quot;way&quot; id=&quot;343&quot; role=&quot;from&quot; /&gt;
+  &lt;member type=&quot;node&quot; id=&quot;911&quot; role=&quot;via&quot; /&gt;
+  &lt;member type=&quot;way&quot; id=&quot;227&quot; role=&quot;to&quot; /&gt;
+  &lt;tag k=&quot;type&quot; v=&quot;restriction&quot;/&gt;
+  &lt;tag k=&quot;type&quot; v=&quot;no_left_turn&quot;/&gt;
+&lt;/relation&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="etiqueta-tag">
+<h4>1.4.1.4. Etiqueta (Tag)<a class="headerlink" href="#etiqueta-tag" title="Permalink to this headline">¶</a></h4>
+<p>Pese a ser una primitiva reconocida por la API de OSM en realidad está integrada
+dentro de las otras primitivas y nos permite definir los atributos de las
+mismas.</p>
+<img alt="web de map features" class="align-center" src="../../_images/etiquetas.png" style="width: 600px;" />
+</div>
+</div>
+</div>
+<div class="section" id="josm">
+<h2>1.5. JOSM<a class="headerlink" href="#josm" title="Permalink to this headline">¶</a></h2>
+<p>JOSM es el acrónimo de Java OpenStreetMap Editor, se trata de una aplicación
+multiplataforma desarrollada por Immanuel Scholz y Frederik Ramm. Es el editor
+preferido por la comunidad OSM, ya que tiene muchas funcionalidades
+implementadas y permite editar gran cantidad de datos, aunque su curva de
+aprendizaje puede resultar un poco pronunciada al inicio.</p>
+<img alt="splash de josm" class="align-center" src="../../_images/iniciojosm.png" style="width: 600px;" />
+<div class="section" id="descarga-de-datos">
+<h3>1.5.1. Descarga de datos<a class="headerlink" href="#descarga-de-datos" title="Permalink to this headline">¶</a></h3>
+<p>JOSM trabaja por defecto con archivos de formato XML de OSM (archivos .osm).
+Para obtener un archivo de la zona con la que se quiere trabajar hay que pulsar
+el botón de Descarga de datos del servidor. Al pulsar el botón se muestra una
+interfaz donde se puede seleccionar la porción de datos que quiere obtenerse.</p>
+<img alt="splash de josm" class="align-center" src="../../_images/josmdescargar.png" style="width: 600px;" />
+<p>El servidor limita las peticiones que cubran gran extensión para no colapsar el
+servicio, pero si se requiere gran cantidad de datos se pueden realizar diversas
+peticiones que acabarán almacenándose en un solo fichero.</p>
+<p>Una vez seleccionada la zona y aceptada la petición por el servidor creará una
+capa que aparecerá en lado izquierdo de JOSM. Pulsando con el botón derecho
+sobre el nombre de la capa nos permitirá almacenar la capa con la ruta y nombre
+de archivo deseados.</p>
+<img alt="splash de josm" class="align-center" src="../../_images/josmguardar.png" style="width: 600px;" />
+</div>
+<div class="section" id="edicion-basica">
+<h3>1.5.2. Edición básica<a class="headerlink" href="#edicion-basica" title="Permalink to this headline">¶</a></h3>
+<p>Una edición básica de JOSM puede incluir la carga de datos GPS o el uso de
+imágenes satélite u ortofotografías, la digitalización de información, el
+etiquetado de la información y finalmente la subida de datos al servidor de OSM.</p>
+<div class="section" id="carga-de-datos-gnss">
+<h4>1.5.2.1. Carga de datos GNSS<a class="headerlink" href="#carga-de-datos-gnss" title="Permalink to this headline">¶</a></h4>
+<p>JOSM permite cargar información obtenida a través de un receptor GNSS usando
+para ello el formato de intercambio estandar GPX.</p>
+<img alt="Carga de gpx" class="align-center" src="../../_images/josmgpx.png" style="width: 600px;" />
+<p>Se recomienda encarecidamente no subir esta información directamente sin depurar
+o sin tratar, es preferible siempre usarla como base para digitalizar sobre ella
+y añadir los atributos correspondientes.</p>
+</div>
+<div class="section" id="anadir-pnoa">
+<h4>1.5.2.2. Añadir PNOA<a class="headerlink" href="#anadir-pnoa" title="Permalink to this headline">¶</a></h4>
+<p>También se pueden usar imágenes en distintos formatos para usarlas como
+cartografía de referencia y poder digitalizar sobre ellas.</p>
+<p>En especial tienen significativa importancia dentro de JOSM la posibilidad de
+cargar imágenes base provenientes de diversos Proveedores a través de Internet
+cuya información ya viene integrada en el propio JOSM o incluso se pueden
+agregar nuevos como por ejemplo orígenes de datos WMS o TMS.</p>
+<img alt="Carga de gpx" class="align-center" src="../../_images/josmpnoa.png" style="width: 600px;" />
+<p>Se puede acceder a la configuración de los proveedores a través del menú
+<strong>Editar&gt;Preferencias&gt;WMS/TMS</strong></p>
+<img alt="Carga de gpx" class="align-center" src="../../_images/josmproveeimg.png" style="width: 600px;" />
+<p>En España está autorizado el uso del PNOA para digitalizar sobre las ortofotos
+siempre que se identifiquen el origen y la resolución temporal con las etiquetas
+<em>source</em> y <em>sourcedate</em>.</p>
+<p><strong>NO</strong> está autorizado el uso del WMS de Catastro para digitalizar sobre él y la
+sospecha de que se está empleando puede incurrir en la suspensión de la cuenta y
+el borrado de todos los datos aportados por ese usuario.</p>
+<p>Se puede regular la opacidad de una capa para mejorar la visualización.</p>
+<img alt="Carga de gpx" class="align-center" src="../../_images/josmopa.png" style="width: 600px;" />
+</div>
+<div class="section" id="digitalizar">
+<h4>1.5.2.3. Digitalizar<a class="headerlink" href="#digitalizar" title="Permalink to this headline">¶</a></h4>
+<p>La digitalización en Josm consiste en utilizar las primitivas de <em>Punto</em>,
+<em>Línea</em> y <em>Área</em> para representar los elementos del terreno.</p>
+<img alt="Primitivas" class="align-center" src="../../_images/osmprimitivas.png" style="width: 600px;" />
+<p>Los comandos más utilizados son</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Comando</th>
+<th class="head">Icono</th>
+<th class="head">Atajo</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Agregar nuevo elemento</td>
+<td><img alt="Icono agregar" class="align-middle" src="../../_images/josmiconoagr.png" style="width: 35px;" /></td>
+<td>a</td>
+</tr>
+<tr class="row-odd"><td>Seleccionar elemento</td>
+<td><img alt="Icono seleccionar" class="align-middle" src="../../_images/josmiconosel.png" style="width: 35px;" /></td>
+<td>s</td>
+</tr>
+<tr class="row-even"><td>Modo Zoom</td>
+<td><img alt="Icono Zoom" class="align-middle" src="../../_images/josmiconozoo.png" style="width: 35px;" /></td>
+<td>z</td>
+</tr>
+<tr class="row-odd"><td>Borrar selección</td>
+<td><img alt="Icono Borrar" class="align-middle" src="../../_images/josmiconobor.png" style="width: 35px;" /></td>
+<td>Ctrl+Del</td>
+</tr>
+<tr class="row-even"><td>Separar vía</td>
+<td><img alt="Icono separar vía" class="align-middle" src="../../_images/josmiconosep.png" style="width: 35px;" /></td>
+<td>p</td>
+</tr>
+<tr class="row-odd"><td>Combinar vías</td>
+<td><img alt="Icono combinar vía" class="align-middle" src="../../_images/josmiconocom.png" style="width: 35px;" /></td>
+<td>c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="uso-de-filtros">
+<h4>1.5.2.4. Uso de filtros<a class="headerlink" href="#uso-de-filtros" title="Permalink to this headline">¶</a></h4>
+<p>Los filtros son una característica de JOSM que permite ocultar temporalmente
+elementos cargados en pantalla para tener una mejor visibilidad del área de
+trabajo.</p>
+<p>Antes de aplicar un filtro:</p>
+<img alt="Antes de aplicar el filtro" class="align-center" src="../../_images/josmfiltroantes.png" style="width: 600px;" />
+<p>Tras aplicar el filtro:</p>
+<img alt="Después de aplicar el filtro" class="align-center" src="../../_images/josmfiltrodespues.png" style="width: 600px;" />
+<p>Para definir nuevos filtros se utiliza la ventana de <em>Filtrar</em></p>
+<img alt="Primitivas" class="align-center" src="../../_images/josmfiltro.png" style="width: 350px;" />
+<p>La sintaxis de los filtros es bastante sencilla y al <em>Añadir</em> uno nuevo se nos
+muestra una pequeña guía con ejemplos.</p>
+<p>Los filtros que se muestran en la imágen realizan lo siguiente:</p>
+<ul class="simple">
+<li>Filtrar todos los nodos que no tengan etiqueta</li>
+<li>Filtrar todos los nodos que tengan la etiqueta <em>name</em> sea cual sea el valor de esta</li>
+<li>Filtrar todos los nodos que tengan la etiqueta <em>amenity</em> (otra forma de filtrar sin que importe el valor de la etiqueta)</li>
+</ul>
+</div>
+<div class="section" id="poner-etiquetas">
+<h4>1.5.2.5. Poner etiquetas<a class="headerlink" href="#poner-etiquetas" title="Permalink to this headline">¶</a></h4>
+<p>Para añadir etiquetas a un objeto se emplea el botón <em>Añadir</em> de la ventana
+<em>Propiedades/Relaciones</em></p>
+<img alt="Ventana de etiquetas" class="align-center" src="../../_images/josmetiquetas.png" style="width: 350px;" />
+<p>En una nueva ventana se nos permite poner el par clave/valor:</p>
+<img alt="Ventana de etiquetas" class="align-center" src="../../_images/josmetiquetaanyade.png" style="width: 350px;" />
+</div>
+<div class="section" id="subir-al-servidor">
+<h4>1.5.2.6. Subir al servidor<a class="headerlink" href="#subir-al-servidor" title="Permalink to this headline">¶</a></h4>
+<p>Por último, para subir los cambios a los servidores de OSM hay que tener un
+Usuario y contraseña válido de OpenStreetMaps.</p>
+</div>
+</div>
+</div>
+<div class="section" id="referencias-y-enlaces-de-interes">
+<h2>1.6. Referencias y enlaces de interés<a class="headerlink" href="#referencias-y-enlaces-de-interes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://www.openstreetmap.org/">Página principal de OpenStreetMap</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/">Wiki de OpenStreetMap</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Potlatch">Información sobre Potlach</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/JOSM">Información sobre JOSM</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Merkaartor">Información sobre Merkaartor</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tags">Etiquetas aceptadas por la comunidad OSM:</a></li>
+<li><a class="reference external" href="http://openstreetmap.com/export/">Exportación vía web de OSM</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/OSM_Protocol_Version_0.6">API de OSM versión 0.6</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/GvSIG_Valencia_mapping_party_Tutorial">Tutorial en español de JOSM</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1. Qué son OSM y JOSM</a><ul>
+<li><a class="reference internal" href="#introduccion-a-openstreetmap">1.1. Introducción a OpenStreetMap</a></li>
+<li><a class="reference internal" href="#historia">1.2. Historia</a></li>
+<li><a class="reference internal" href="#procedimiento">1.3. Procedimiento</a><ul>
+<li><a class="reference internal" href="#toma-de-datos">1.3.1. Toma de datos</a></li>
+<li><a class="reference internal" href="#subida-de-datos-a-los-servidores-de-openstreetmap">1.3.2. Subida de datos a los servidores de OpenStreetMap</a><ul>
+<li><a class="reference internal" href="#edicion-grafica-de-los-datos">1.3.2.1. Edición gráfica de los datos</a></li>
+<li><a class="reference internal" href="#edicion-alfanumerica-de-los-datos">1.3.2.2. Edición alfanumérica de los datos</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#renderizado-de-los-mapas">1.3.3. Renderizado de los mapas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#obteniendo-los-datos-de-openstreetmap">1.4. Obteniendo los datos de OpenStreetMap</a><ul>
+<li><a class="reference internal" href="#osm-xml-data-el-formato-openstreetmap">1.4.1. OSM XML Data: el formato OpenStreetMap</a><ul>
+<li><a class="reference internal" href="#nodos-node">1.4.1.1. Nodos (Node)</a></li>
+<li><a class="reference internal" href="#vias-way">1.4.1.2. Vías (Way)</a></li>
+<li><a class="reference internal" href="#relaciones-relation">1.4.1.3. Relaciones (Relation)</a></li>
+<li><a class="reference internal" href="#etiqueta-tag">1.4.1.4. Etiqueta (Tag)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#josm">1.5. JOSM</a><ul>
+<li><a class="reference internal" href="#descarga-de-datos">1.5.1. Descarga de datos</a></li>
+<li><a class="reference internal" href="#edicion-basica">1.5.2. Edición básica</a><ul>
+<li><a class="reference internal" href="#carga-de-datos-gnss">1.5.2.1. Carga de datos GNSS</a></li>
+<li><a class="reference internal" href="#anadir-pnoa">1.5.2.2. Añadir PNOA</a></li>
+<li><a class="reference internal" href="#digitalizar">1.5.2.3. Digitalizar</a></li>
+<li><a class="reference internal" href="#uso-de-filtros">1.5.2.4. Uso de filtros</a></li>
+<li><a class="reference internal" href="#poner-etiquetas">1.5.2.5. Poner etiquetas</a></li>
+<li><a class="reference internal" href="#subir-al-servidor">1.5.2.6. Subir al servidor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#referencias-y-enlaces-de-interes">1.6. Referencias y enlaces de interés</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="osm_taller.html"
+                        title="next chapter">2. Taller de JOSM</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/josm-imposm-tilemill/osm/osm_intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="osm_taller.html" title="2. Taller de JOSM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre"
+             >previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

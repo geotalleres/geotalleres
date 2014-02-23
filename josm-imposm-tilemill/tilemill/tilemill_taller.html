@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6. Taller de TileMill &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../index.html" />
+    <link rel="up" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre" href="../index.html" />
+    <link rel="prev" title="5. Qué es TileMill" href="tilemill_intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tilemill_intro.html" title="5. Qué es TileMill"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="taller-de-tilemill">
+<span id="tallertilemill"></span><h1>6. Taller de TileMill<a class="headerlink" href="#taller-de-tilemill" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Autores:</p>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Santiago Tramoyeres <a class="reference external" href="http://twitter.com/santracraus">&#64;santracraus</a></li>
+</ul>
+<p>Licencia:</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
+se halla bajo licencia <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento Compartir Igual</a></p>
+</div>
+<p>A continuación se detalla una práctica guiada en la que se verán los detalles básicos del manejo de la aplicación TileMill.</p>
+<p>Se espera del lector que vaya ejecutando las instrucciones que se detallan a continuación y en caso de duda pregunte al facilitador.</p>
+<div class="section" id="iniciando-tilemill">
+<h2>6.1. Iniciando TileMill<a class="headerlink" href="#iniciando-tilemill" title="Permalink to this headline">¶</a></h2>
+<p>Arrancamos TileMill usando el icono que hay en el menú de aplicaciones en la sección de <cite>Graphics</cite>, aunque en algunas instalaciones de TileMill puede que este método no funcione, por lo que tendremos que levantar el servicio manualmente.</p>
+<p>Si al usar el icono del menú de aplicaciones no arranca TileMill, <strong>y solamente si no se abre la aplicación al pulsar el icono en el menú Graphics</strong> abriremos una consola de comandos y escribiremos:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo service tilemill start
+</pre></div>
+</div>
+<p>Y a continuación abrimos el navegador <em>Chrome</em> y vamos a la página <a class="reference external" href="http://localhost:20009">http://localhost:20009</a></p>
+</div>
+<div class="section" id="creando-el-proyecto">
+<h2>6.2. Creando el proyecto<a class="headerlink" href="#creando-el-proyecto" title="Permalink to this headline">¶</a></h2>
+<p>TileMill carga por defecto la pestaña de <cite>Projects</cite> y en ella tenemos el botón <cite>+ New Project</cite> que pulsaremos definir nuestro proyecto.</p>
+<img alt="Nuevo proyecto con TileMill" class="align-center" src="../../_images/tilemillnewproject.png" style="width: 600px;" />
+<p>Nos muestra la ventana de información del proyecto en la que deberemos introducir los datos básicos que lo identifiquen.</p>
+<img alt="Información del nuevo proyecto" class="align-center" src="../../_images/tilemillprojectinfo.png" style="width: 600px;" />
+<dl class="docutils">
+<dt>Filename</dt>
+<dd>UdG</dd>
+<dt>Name</dt>
+<dd>Universitat de Girona</dd>
+<dt>Description</dt>
+<dd>Mapa del entorno de la Universitat de Girona</dd>
+<dt>File format</dt>
+<dd>PNG 24</dd>
+<dt>Default data</dt>
+<dd>Dejar marcado</dd>
+</dl>
+<p>Y pulsamos el botón <cite>Add</cite></p>
+<p>Al abrir el proyecto, pulsando sobre el en la pestaña <cite>Projects</cite> vemos que se han cargado una capa de países por defecto y que tiene un nivel de visualización bastante alto.</p>
+</div>
+<div class="section" id="anadiendo-una-capa-de-puntos">
+<h2>6.3. Añadiendo una capa de puntos<a class="headerlink" href="#anadiendo-una-capa-de-puntos" title="Permalink to this headline">¶</a></h2>
+<p>Procederemos ahora a añadir nuestra primera capa de puntos, para lo que desplegaremos el menú de capas pulsando en el botón <img alt="Menú de capas" class="align-middle" src="../../_images/tilemillbtnmenucapa.png" style="width: 48px;" /> y seleccionamos <cite>+ Add layer</cite></p>
+<p>En la ventana que aparece seleccionaremos la opción de <cite>PostGIS</cite> y rellenamos los campos como se indica.</p>
+<img alt="Añadiendo una capa PostGIS" class="align-center" src="../../_images/tilemilladdpostgis.png" style="width: 600px;" />
+<dl class="docutils">
+<dt>ID</dt>
+<dd>turismo_puntos</dd>
+<dt>Class</dt>
+<dd>turismo</dd>
+<dt>Connection</dt>
+<dd>host=localhost port=5432 user=osm password=osm dbname=osm</dd>
+<dt>Table or subquery</dt>
+<dd>osm_tourism</dd>
+<dt>Extent</dt>
+<dd>Dejar en blanco</dd>
+<dt>Unique key field</dt>
+<dd>osm_id</dd>
+<dt>Geometry field</dt>
+<dd>geometry</dd>
+<dt>SRS</dt>
+<dd>Dejamos la opción por defecto <cite>900913</cite></dd>
+</dl>
+<p>Y pulsamos <cite>Save &amp; Style</cite> para que añada los datos.</p>
+<p>Veremos como inmediatamente aparece un punto en la zona de España.</p>
+<img alt="Añadiendo una capa PostGIS" class="align-center" src="../../_images/tilemillpuntosnivel2.png" style="width: 600px;" />
+<div class="section" id="corrigiendo-la-visualizacion-por-defecto">
+<h3>6.3.1. Corrigiendo la visualización por defecto<a class="headerlink" href="#corrigiendo-la-visualizacion-por-defecto" title="Permalink to this headline">¶</a></h3>
+<p>En realidad nuestra zona de trabajo es bastante más pequeña que la que muestra por defecto TileMill, por lo que modificaremos las preferencias para que muestre por defecto una zona más ajustada a nuestro juego de datos. Para ello pulsaremos en el botón de configuración del proyecto <img alt="Menú de capas" class="align-middle" src="../../_images/tilemillbtnconfigproyecto.png" style="width: 48px;" /> y lo configuramos de la siguiente forma:</p>
+<dl class="docutils">
+<dt>Zoom</dt>
+<dd>Desplazar las barras para que los niveles de zoom estén entre 14 y 20</dd>
+<dt>Center</dt>
+<dd>2.8279,41.9855,14</dd>
+<dt>Bounds</dt>
+<dd>2.8256, 41.9834, 2.8304, 41.9867</dd>
+</dl>
+<img alt="Menú de capas" class="align-center" src="../../_images/tilemillconfigproyecto.png" style="width: 348px;" />
+</div>
+</div>
+<div class="section" id="simbologia-de-valores-unicos">
+<h2>6.4. Simbología de valores únicos<a class="headerlink" href="#simbologia-de-valores-unicos" title="Permalink to this headline">¶</a></h2>
+<p>Como se puede apreciar los 7 puntos de interes de tipo <em>Amenities/Tourism</em> que hay en la zona aparecen representados con la misma simbología, sin embargo sabemos que corresponden a tipos distintos.</p>
+<p>Como vimos en el bloque anterior (<a class="reference internal" href="tilemill_intro.html#pintandoconclase"><em>Pintando con clase</em></a>) se pueden usar condiciones para variar la simbología.</p>
+<p>Para definirlas es necesario conocer el nombre del campo de la tabla (<em>type</em>) y sus valores (<em>hotel</em>, <em>museum</em>, <em>viewpoint</em> e <em>information</em>)</p>
+<div class="highlight-css"><pre>#turismo_puntos {
+  marker-width:3;
+  marker-line-color:#813;
+  marker-allow-overlap:true;
+  [type = 'hotel'] {
+     marker-fill:#f45;
+  }
+  [type = 'museum'] {
+     marker-fill:#ffc425;
+  }
+  [type = 'viewpoint'] {
+     marker-fill:#94ff14;
+  }
+  [type = 'information'] {
+     marker-fill:#1cffb1;
+  }
+}</pre>
+</div>
+</div>
+<div class="section" id="elementos-lineales">
+<h2>6.5. Elementos lineales<a class="headerlink" href="#elementos-lineales" title="Permalink to this headline">¶</a></h2>
+<p>Para representar las calles utilizaremos una de las <em>ayudas</em> que proporciona ImpOSM; como ya hemos dicho, por defecto separa las vías en varias tablas, pero también crea una vista de PostGIS que aglutina toda la información relativa a estas.</p>
+<p>Añadiremos una nueva capa de PostGIS que lea la información de la tabla <tt class="docutils literal"><span class="pre">osm_roads</span></tt> y añadiremos una entrada para cada tipo de vía.</p>
+<ul class="simple">
+<li>footway</li>
+<li>living_street</li>
+<li>path</li>
+<li>pedestrian</li>
+<li>residential</li>
+<li>service</li>
+<li>steps</li>
+<li>track</li>
+</ul>
+<p>Para obtener todos los distintos tipos de vía podemos usar emplearemos <cite>pgAdmin III</cite> donde podemos lanzar la <em>query</em>:</p>
+<div class="highlight-sql"><div class="highlight"><pre><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="k">type</span> <span class="k">FROM</span> <span class="n">osm_roads</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Para representarlo usaremos el código siguiente:</p>
+<div class="highlight-css"><pre>#calles_lineas {
+    line-width:1;
+
+    [type = 'footway'], [type = 'pedestrian'] {
+          line-color:#f2f974;
+    }
+    [type = 'residential'],[type = 'living_street'],
+    [type = 'service']  {
+          line-color:#aaa;
+    }
+    [type = 'steps'] {
+          line-color:#7cc7fd;
+    }
+    [type = 'path'], [type = 'track'] {
+          line-color:#ff9f3b;
+    }
+}</pre>
+</div>
+</div>
+<div class="section" id="anadiendo-los-edificios">
+<h2>6.6. Añadiendo los edificios<a class="headerlink" href="#anadiendo-los-edificios" title="Permalink to this headline">¶</a></h2>
+<p>Añadiremos ahora los edificios, que están en la tabla <cite>osm_buildings</cite>.</p>
+<div class="highlight-css"><div class="highlight"><pre><span class="nf">#edificios</span> <span class="p">{</span>
+  <span class="n">line</span><span class="o">-</span><span class="k">color</span><span class="o">:</span><span class="m">#a71b62</span><span class="p">;</span>
+  <span class="n">line</span><span class="o">-</span><span class="k">width</span><span class="o">:</span><span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span>
+  <span class="n">polygon</span><span class="o">-</span><span class="k">opacity</span><span class="o">:</span><span class="m">1</span><span class="p">;</span>
+  <span class="n">polygon</span><span class="o">-</span><span class="n">fill</span><span class="o">:</span><span class="m">#d86ebb</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="anadiendo-etiquetas">
+<h2>6.7. Añadiendo etiquetas<a class="headerlink" href="#anadiendo-etiquetas" title="Permalink to this headline">¶</a></h2>
+<p>Por último, añadiremos los nombres de las calles, para lo cual primero tenemos que definir una variable, preferentemente al principio de todas las definiciones, que tenga el nombre de la fuente y las posibles fuentes sustitutas si la fuente no está instalada en el sistema.</p>
+<div class="highlight-css"><div class="highlight"><pre><span class="k">@futura_med</span><span class="o">:</span> <span class="s2">&quot;Futura Medium&quot;</span><span class="o">,</span><span class="s2">&quot;Function Pro Medium&quot;</span><span class="o">,</span><span class="s2">&quot;Ubuntu Regular&quot;</span><span class="o">,</span><span class="s2">&quot;Trebuchet MS Regular&quot;</span><span class="o">,</span><span class="s2">&quot;DejaVu Sans Book&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>TileMill incorpora un gestor de fuentes que nos permite ver qué fuentes hay instaladas en el sistema al que se accede empleando el botón de fuentes <img alt="botón del gestor de fuentes" class="align-middle" src="../../_images/tilemillbtnfuentes.png" style="width: 48px;" />, las fuentes instaladas aparecen en <strong>negrita</strong> y el gestor nos permite copiar y pegar literalmente el nombre de la fuente.</p>
+<p>Aunque la capa de calles ya tiene el campo <cite>name</cite> que es el que vamos a utilizar, es siempre muy recomendable volver a añadir la capa y usarla exclusivamente para las etiquetas. En este caso rellenaremos los campos con los siguientes datos:</p>
+<dl class="docutils">
+<dt>ID</dt>
+<dd>calles_nombres</dd>
+<dt>Class</dt>
+<dd>nombres</dd>
+<dt>Connection</dt>
+<dd>dbname=osm host=localhost port=5432 user=osm password=osm</dd>
+<dt>Table or subquery</dt>
+<dd>(SELECT * FROM osm_roads WHERE name IS NOT NULL) AS foo</dd>
+<dt>Unique key field</dt>
+<dd>osm_id</dd>
+<dt>Geometry field</dt>
+<dd>geometry</dd>
+</dl>
+<p>En esta ocasión en vez de la tabla, hemos usado una subconsulta, de forma que solo carguemos en memoria las entidades que tengan algún valor en el campo <cite>name</cite>. A las subconsultas hay que añadirles un alias para que TileMill las reconozca.</p>
+<p>TileMill habrá asignado a la capa un estilo por defecto para capas de líneas, aunque nosotros lo vamos a modificar para que represente textos:</p>
+<div class="highlight-css"><div class="highlight"><pre><span class="nf">#calles_nombres</span> <span class="p">{</span>
+    <span class="k">text</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="s2">&quot;[name]&quot;</span><span class="p">;</span>
+    <span class="k">text</span><span class="o">-</span><span class="n">face</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="o">@</span><span class="n">futura_med</span><span class="p">;</span>
+    <span class="k">text</span><span class="o">-</span><span class="n">placement</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Estos son los elementos mínimos para que una etiqueta aparezca en TileMill, aunque si vamos a la ayuda del programa <img alt="Botón de ayuda" class="align-middle" src="../../_images/tilemillbtnayudainline.png" style="width: 48px;" /> y vemos la sección <cite>text</cite> veremos que las etiquetas tienen 30 opciones de configuración distintas.</p>
+<img alt="Ayuda de texto desplegada" class="align-center" src="../../_images/tilemillayudatexto.png" style="width: 600px;" />
+</div>
+<div class="section" id="orden-de-las-capas">
+<h2>6.8. Orden de las capas<a class="headerlink" href="#orden-de-las-capas" title="Permalink to this headline">¶</a></h2>
+<p>El orden de renderizado de las capas es el orden en el que aparecen en el gestor de capas <img alt="Menú de capas" class="align-middle" src="../../_images/tilemillbtnmenucapa.png" style="width: 48px;" />, para cambiar el orden basta pulsar en el indicador del tipo de capa (puntos, líneas y áreas) que hay junto al nombre y arrastrar hacia arriba o hacia abajo la capa.</p>
+</div>
+<div class="section" id="ejercicio">
+<h2>6.9. Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this headline">¶</a></h2>
+<p>Como ejercicio del taller se propone incorporar al mapa los contenidos de las tablas <cite>osm_arboles</cite> y <cite>osm_landusages</cite>.</p>
+</div>
+<div class="section" id="extra-osm-bright">
+<h2>6.10. Extra: OSM-Bright<a class="headerlink" href="#extra-osm-bright" title="Permalink to this headline">¶</a></h2>
+<p>Recientemente MapBox ha publicado un ejemplo completo de representación de datos de OSM empleando TileMill.</p>
+<p>Si queremos ver como quedaría nuestro juego de datos con este estilo deberemos cerrar TileMill y en una consola de sistema escribir lo siguiente:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> ../datos/mapbox-osm-bright/
+<span class="nv">$ </span>./make.py
+<span class="nv">$ </span><span class="nb">cd</span> ../..
+<span class="nv">$ </span>imposm --read UniversitatGirona.osm --write --database osm --host localhost --user osm --optimize --overwrite-cache --deploy-production-tables -m /home/jornadas/taller_osm_tilemill/datos/mapbox-osm-bright/imposm-mapping.py
+</pre></div>
+</div>
+<p>Si volvemos a abrir TileMill veremos que se ahora existe un proyecto nuevo llamado <cite>OSM Bright Universitat de Girona</cite> y tras abrirlo, teniendo en cuenta que puede tardar un poco mientras comprueba las capas,</p>
+<p>En el ejemplo proporcionado por MapBox se puede ver como se representan muchos elementos y como condicionar la visualización usando niveles de zoom.</p>
+<img alt="La zona de trabajo usando OSM Bright" class="align-center" src="../../_images/tilemillosmbright.png" style="width: 600px;" />
+</div>
+<div class="section" id="referencias-y-enlaces">
+<h2>6.11. Referencias y enlaces<a class="headerlink" href="#referencias-y-enlaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://mapbox.com/TileMill/">Página principal de TileMill</a></li>
+<li><a class="reference external" href="http://mapbox.com/carto/">Referencia del lenguaje Carto</a></li>
+<li><a class="reference external" href="https://github.com/mapbox/osm-bright">Estilo OSM Bright de Mapbox para cartografía de OpenStreetMap</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6. Taller de TileMill</a><ul>
+<li><a class="reference internal" href="#iniciando-tilemill">6.1. Iniciando TileMill</a></li>
+<li><a class="reference internal" href="#creando-el-proyecto">6.2. Creando el proyecto</a></li>
+<li><a class="reference internal" href="#anadiendo-una-capa-de-puntos">6.3. Añadiendo una capa de puntos</a><ul>
+<li><a class="reference internal" href="#corrigiendo-la-visualizacion-por-defecto">6.3.1. Corrigiendo la visualización por defecto</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#simbologia-de-valores-unicos">6.4. Simbología de valores únicos</a></li>
+<li><a class="reference internal" href="#elementos-lineales">6.5. Elementos lineales</a></li>
+<li><a class="reference internal" href="#anadiendo-los-edificios">6.6. Añadiendo los edificios</a></li>
+<li><a class="reference internal" href="#anadiendo-etiquetas">6.7. Añadiendo etiquetas</a></li>
+<li><a class="reference internal" href="#orden-de-las-capas">6.8. Orden de las capas</a></li>
+<li><a class="reference internal" href="#ejercicio">6.9. Ejercicio</a></li>
+<li><a class="reference internal" href="#extra-osm-bright">6.10. Extra: OSM-Bright</a></li>
+<li><a class="reference internal" href="#referencias-y-enlaces">6.11. Referencias y enlaces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tilemill_intro.html"
+                        title="previous chapter">5. Qué es TileMill</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/josm-imposm-tilemill/tilemill/tilemill_taller.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tilemill_intro.html" title="5. Qué es TileMill"
+             >previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

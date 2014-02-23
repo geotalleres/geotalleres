@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Taller de JOSM &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../../index.html" />
+    <link rel="up" title="Taller de OSM + IMPOSM + TILEMILL VI Jornadas de SIG Libre" href="../index.html" />
+    <link rel="next" title="3. Importando OSM a un POSTGIS" href="../imposm/imposm_intro.html" />
+    <link rel="prev" title="1. Qué son OSM y JOSM" href="osm_intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../imposm/imposm_intro.html" title="3. Importando OSM a un POSTGIS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="osm_intro.html" title="1. Qué son OSM y JOSM"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="taller-de-josm">
+<span id="tallerosmyjosm"></span><h1>2. Taller de JOSM<a class="headerlink" href="#taller-de-josm" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Autores:</p>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Santiago Tramoyeres <a class="reference external" href="http://twitter.com/santracraus">&#64;santracraus</a></li>
+</ul>
+<p>Licencia:</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
+se halla bajo licencia <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento Compartir Igual</a></p>
+</div>
+<p>A continuación se detalla una práctica guiada en la que se verán los detalles básicos del manejo de la aplicación JOSM.</p>
+<p>Se espera del lector que vaya ejecutando las instrucciones que se detallan a continuación y en caso de duda pregunte al facilitador.</p>
+<div class="section" id="arrancando-josm">
+<h2>2.1. Arrancando JOSM<a class="headerlink" href="#arrancando-josm" title="Permalink to this headline">¶</a></h2>
+<p>La aplicación JOSM se encuentra en la carpeta</p>
+<blockquote>
+<div>/home/jornadas/taller_osm_tilemill/</div></blockquote>
+<p><strong>Abrimos una terminal</strong> y cambiamos al directorio tecleando</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /home/jornadas/taller_osm_tilemill/
+</pre></div>
+</div>
+<p>Para lanzarla deberemos teclear el comando</p>
+<blockquote>
+<div>$ java -jar josm-latest.jar</div></blockquote>
+<p>Sin embargo, debido a la rápida frecuencia de actualización de JOSM, es recomendable utilizar un sencillo script en BASH que permite ejecutar, siempre que se tenga conexión a Internet, una versión actualizada.</p>
+<p>Para crear el script tecleamos:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>gedit josm.sh
+</pre></div>
+</div>
+<p>Y tecleamos:</p>
+<blockquote>
+<div><p>#!/bin/bash</p>
+<p>mv josm-latest.jar josm-latest_0.jar</p>
+<p>wget -N <a class="reference external" href="http://josm.openstreetmap.de/josm-latest.jar">http://josm.openstreetmap.de/josm-latest.jar</a></p>
+<p>java -jar josm-latest.jar</p>
+</div></blockquote>
+<p>Guardamos el archivo y salimos.</p>
+<p>Hay que dar permisos de ejecución al script para poder lanzarlo, para lo que teclearemos:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>chmod 755 josm.sh
+</pre></div>
+</div>
+<p>y para lanzarlo teclearemos</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>./josm.sh
+</pre></div>
+</div>
+<p>El script comprobará si la versión de JOSM es la más reciente y de no ser así la descargará. Después lanzará automáticamente el programa.</p>
+<img alt="splash de josm" class="align-center" src="../../_images/iniciojosm.png" style="width: 600px;" />
+</div>
+<div class="section" id="descargando-datos">
+<h2>2.2. Descargando datos<a class="headerlink" href="#descargando-datos" title="Permalink to this headline">¶</a></h2>
+<p>Lo primero que hay que hacer es seleccionar una zona para descargar los datos, para lo que pulsaremos el botón de descarga <img alt="Icono seleccionar" class="align-middle" src="../../_images/josmbotondescarga.png" style="width: 35px;" /> que abrirá una nueva ventana para seleccionar el área de descarga.</p>
+<img alt="splash de josm" class="align-center" src="../../_images/josmdescargar.png" style="width: 600px;" />
+<p>Se puede utilizar el mapa que se nos muestra para seleccionar una zona, o bien a través de las pestañas dar unas coordenadas que definan un área de trabajo o buscar por nombre usando el servicio <cite>Nominatim</cite>.</p>
+<p>El servidor limita el tamaño de las peticiones, por lo que para zonas de trabajo grandes o con gran cantidad de datos, habrá que realizar la descarga en varias tandas.</p>
+<p>Buscaremos el área de la <cite>Universitat de Girona</cite> y sus alrededores, definiremos un rectángulo que las contenga y pulsaremos el botón <tt class="docutils literal"><span class="pre">Download</span></tt>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="26%" />
+<col width="26%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>min lat</td>
+<td>41.9834</td>
+<td>min lon</td>
+<td>2.8256</td>
+</tr>
+<tr class="row-odd"><td>max lat</td>
+<td>41.9867</td>
+<td>max lon</td>
+<td>2.8304</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="filtrando-la-informacion">
+<h2>2.3. Filtrando la información<a class="headerlink" href="#filtrando-la-informacion" title="Permalink to this headline">¶</a></h2>
+<p>En determinadas zonas la cantidad de información que puede llegar a mostrarse es abrumadora, por lo que a veces es necesario filtrarla para poder trabajar cómodamente.</p>
+<img alt="Girona antes del filtro" class="align-center" src="../../_images/josmgironaantesfiltro.png" style="width: 600px;" />
+<p>Para filtrar la información utilizaremos la ventana de filtros a la que se accede pulsando el botón de filtro <img alt="Icono seleccionar" class="align-middle" src="../../_images/josmbotonfiltro.png" style="width: 35px;" />.</p>
+<img alt="Ventana de filtro" class="align-center" src="../../_images/josmfiltro.png" style="width: 350px;" />
+<p>Pulsando en <tt class="docutils literal"><span class="pre">Add</span></tt> añadiremos los siguientes filtros:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Filtro</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>type:node untagged</td>
+</tr>
+<tr class="row-odd"><td>natural=tree</td>
+</tr>
+<tr class="row-even"><td>amenity:</td>
+</tr>
+</tbody>
+</table>
+<p>El primer filtro ocultará solamente los <cite>Nodos</cite> que no tengan ninguna etiqueta, son los pequeños cuadraditos amarillos.</p>
+<p>El segundo filtro ocultará los elementos etiquetados con el par clave - valor <cite>natural - tree</cite>, en la imagen las efes rojas.</p>
+<p>Por último, el tercer filtro ocultará cualquier elemento que tenga la clave <cite>amenity</cite> sea cual sea el valor de esta.</p>
+<p>Los filtros se activan o desactivan usando las dos cajas de comprobación que hay al lado de cada uno.</p>
+<p>La primera caja, marcada con una <cite>E</cite> activa o desactiva el filtro y la segunda, marcada con una <cite>H</cite> oculta o muestra los objetos filtrados.</p>
+<img alt="Girona antes del filtro" class="align-center" src="../../_images/josmgironadespuesfiltro.png" style="width: 600px;" />
+</div>
+<div class="section" id="anadiendo-imagenes">
+<h2>2.4. Añadiendo imágenes<a class="headerlink" href="#anadiendo-imagenes" title="Permalink to this headline">¶</a></h2>
+<p>Aunque existen muchos servicios de imágenes que podemos añadir como referencia para la digitalización de contenidos, en España existe la autorización tácita para emplear las imágenes del Plan Nacional de Ortofotografía Aérea (PNOA).</p>
+<p>Añadir las imágenes de fondo es un proceso en dos pasos, primero hay que definir el origen de datos y después seleccionarlo para que cargue en la zona de visualización.</p>
+<img alt="Añadir la imagen de referencia del PNOA" class="align-center" src="../../_images/anyadirPNOA.png" style="width: 600px;" />
+<p>Pulsando la tecla <tt class="docutils literal"><span class="pre">F12</span></tt> aparece el menú de preferencias, hay que pulsar en la pestaña <tt class="docutils literal"><span class="pre">WMS</span> <span class="pre">TMS</span></tt> para que aparezcan las opciones. Buscaremos en la lista la opción <cite>ES PNOA Spain</cite> y pulsamos el botón <tt class="docutils literal"><span class="pre">Activate</span></tt> que añade la capa a las opciones de menú, tras lo que podemos pulsar <tt class="docutils literal"><span class="pre">OK</span></tt>.</p>
+<p>Aparentemente nada habrá cambiado, pero ahora hay una nueva entrada en el menú <tt class="docutils literal"><span class="pre">Imagery</span></tt> y al pulsarla se cargará una capa, debajo de la capa de datos actual, con la ortofotografía de la zona.</p>
+<p>Es una capa que se puede activar o desactivar <img alt="Botón ver/ocultar" class="align-middle" src="../../_images/josmbotonverocultar.png" style="width: 35px;" /> , o cambiar la transparencia <img alt="Botón transparencia" class="align-middle" src="../../_images/josmbotontrans.png" style="width: 35px;" />.</p>
+</div>
+<div class="section" id="digitalizando">
+<h2>2.5. Digitalizando<a class="headerlink" href="#digitalizando" title="Permalink to this headline">¶</a></h2>
+<p>Para probar la digitalización crearemos una nueva capa en la que poder trabajar sin modificar los datos que se han descargado, para crear la capa usaremos el menú <tt class="docutils literal"><span class="pre">File</span> <span class="pre">&gt;</span> <span class="pre">New</span> <span class="pre">Layer</span></tt> o el atajo de teclado <tt class="docutils literal"><span class="pre">Ctrl+N</span></tt>.</p>
+<p>Al crear la nueva capa, la capa de datos anterior deja de ser la capa de datos activa y aparecerá como líneas de color negro. Es conveniente desactivar la capa para poder ver la ortofotografía, para lo que seleccionaremos la capa y pulsaremos en botón de cambiar la visibilidad <img alt="Botón ver/ocultar" class="align-middle" src="../../_images/josmbotonverocultar.png" style="width: 35px;" />.</p>
+<img alt="Ocultar la capa con la información ya registrada" class="align-center" src="../../_images/josmocultalayer.png" style="width: 600px;" />
+<p>También es recomendable desactivar los filtros pulsando en la casilla <cite>E</cite>.</p>
+<p>Para digitalizar un punto, haremos zoom sobre una zona con árboles, el zoom se controla con la barra que hay arriba a la izquierda, pero también con la rueda del ratón. Pulsaremos con el botón derecho del ratón sobre el nombre de la capa del PNOA y seleccionaremos <tt class="docutils literal"><span class="pre">Change</span> <span class="pre">resolution</span></tt>. A continuación pulsamos sobre el botón agregar <img alt="Icono agregar" class="align-middle" src="../../_images/josmiconoagr.png" style="width: 35px;" /> o pulsamos la tecla <tt class="docutils literal"><span class="pre">A</span></tt> para entrar en el modo de edición.</p>
+<div class="section" id="nodos">
+<h3>2.5.1. Nodos<a class="headerlink" href="#nodos" title="Permalink to this headline">¶</a></h3>
+<p>Digitalizamos los árboles poniendo un punto, haciendo un solo click, sobre cada copa de la ortofotografía. JOSM está pensado para añadir elementos lineales por lo que por defecto espera tener que añadir líneas, para añadir tan solo puntos deberemos pulsar la tecla <tt class="docutils literal"><span class="pre">ESC</span></tt> después de hacer click sobre cada árbol.</p>
+<img alt="Digitalizar copas de los árboles poniendo un nodo en cada uno." class="align-center" src="../../_images/josmanyadearbol.png" style="width: 600px;" />
+<p>Hay una manera de acelerar la digitalización de puntos aprovechando que JOSM tiene <em>muchos</em> atajos de teclado: si mantienes pulsada la tecla <tt class="docutils literal"><span class="pre">Shift</span></tt> mientras añades nodos no tendrás la necesidad de ir pulsando la tecla <tt class="docutils literal"><span class="pre">ESC</span></tt> después de poner cada nodo.</p>
+<p>En realidad estamos simplemente poniendo los <em>Nodos</em>, para que OSM los reconozca como árboles deberíamos añadir también las <em>Etiquetas</em>, como veremos más adelante.</p>
+</div>
+<div class="section" id="vias">
+<h3>2.5.2. Vías<a class="headerlink" href="#vias" title="Permalink to this headline">¶</a></h3>
+<p>Para digitalizar una vía, buscaremos un nivel de zoom que nos permita ver la vía en su totalidad por lo menos una parte muy significativa de ella.</p>
+<p>Puede que tengamos que desplazarnos por la imagen, pero como estamos en modo edición si hacemos click con el botón izquierdo añadiríamos un nuevo nodo ... para <strong>Desplazarnos</strong> hacemos click <em>Derecho</em> con el ratón y sin soltar movemos la imagen.</p>
+<p>Para digitalizar la vía vamos marcando nodos de manera consecutiva intentando seguir el eje de esta y respetar la forma siguiéndola sobre la ortofotografía. Es interesante que además pongamos un nodo en cada intersección que tenga la vía, lo que facilitará interconectar las vías entre si.</p>
+<img alt="Digitalizar la vía teniendo en cuenta su forma y las posibles intersecciones." class="align-center" src="../../_images/josmanyadevia.png" style="width: 600px;" />
+<p>Un par de atajos de teclado útiles a la hora de digitalizar vías:</p>
+<p>Pulsar la tecla <tt class="docutils literal"><span class="pre">Alt</span></tt> mientras digitalizas vías, te permite hacer que el próximo nodo, aunque esté conectado al nodo anterior, forme una vía nueva.</p>
+<p>Cuando tenemos una vía seleccionada (también funciona con vías cerradas) tener la tecla <tt class="docutils literal"><span class="pre">Ctrl</span></tt> pulsada te permite rotar el elemento seleccionado.</p>
+<p>Si pulsamos <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span></tt> podremos cambiar la escala del elemento seleccionada.</p>
+<p>Por último, si mientras digitalizamos pulsamos la tecla <tt class="docutils literal"><span class="pre">Tab</span></tt> una vez entraremos en el modo <em>ortogonal</em> en el que las líneas irán adaptándose a ángulos pre-establecidos y que pueden ser configurados. Para abandonar el modo <em>ortogonal</em> se vuelve a pulsar <tt class="docutils literal"><span class="pre">Tab</span></tt>.</p>
+</div>
+<div class="section" id="areas">
+<h3>2.5.3. Áreas<a class="headerlink" href="#areas" title="Permalink to this headline">¶</a></h3>
+<p>Las áreas no son más que una vía que empieza y acaba en el mismo punto y tiene una etiqueta que la identifica.</p>
+<p>En este ejemplo, digitalizaremos el área de aparcamiento que hay en la zona en la que estamos trabajando, teniendo en cuenta que deberemos cerrar la vía pulsando al final sobre el primer nodo que digitalicemos.</p>
+<img alt="Digitalizar el parking acabando en el mismo nodo en el que se comenzó." class="align-center" src="../../_images/josmanyadeparking.png" style="width: 600px;" />
+<p>Los edificios son seguramente el caso más típico de áreas a digitalizar.</p>
+<img alt="Digitalizar el edificio acabando en el mismo nodo en el que se comenzó." class="align-center" src="../../_images/josmanyadeedificio.png" style="width: 600px;" />
+</div>
+</div>
+<div class="section" id="anadiendo-etiquetas">
+<h2>2.6. Añadiendo etiquetas<a class="headerlink" href="#anadiendo-etiquetas" title="Permalink to this headline">¶</a></h2>
+<p>Para el siguiente paso es preferible desactivar la capa del PNOA seleccionándola y pulsando el botón correspondiente <img alt="Botón ver/ocultar" class="align-middle" src="../../_images/josmbotonverocultar.png" style="width: 35px;" />.</p>
+<p>Seleccionaremos el primer árbol que hemos digitalizado para lo que hay que entrar en modo selección pulsando el botón selección <img alt="Icono seleccionar" class="align-middle" src="../../_images/josmiconosel.png" style="width: 35px;" /> o la tecla <tt class="docutils literal"><span class="pre">S</span></tt> y hacemos click sobre uno de los nodos que representan a los árboles, puede que tengamos que hacer un poco de zoom.</p>
+<p>Una vez seleccionado, pulsamos el botón <tt class="docutils literal"><span class="pre">Add</span></tt> de la ventana <cite>Properties/Memberships</cite> para poder añadir las Etiquetas correspondientes.</p>
+<img alt="Pulsar el botón Add para añadir la etiqueta" class="align-center" src="../../_images/josmanyadeetqarbol.png" style="width: 600px;" />
+<div class="section" id="que-etiquetas-se-emplean-para-indicar-que-es-un-arbol">
+<h3>2.6.1. ¿Qué etiquetas se emplean para indicar que es un árbol?<a class="headerlink" href="#que-etiquetas-se-emplean-para-indicar-que-es-un-arbol" title="Permalink to this headline">¶</a></h3>
+<p>Lo mejor SIEMPRE es consultar la wiki de OSM donde tienen un <a class="reference external" href="http://wiki.openstreetmap.org/wiki/ES:Map_Features">listado de elementos comunes en los mapas Map Features en español</a> y cómo emplearlos. En este caso buscaremos la entrada de árbol en la página y vemos que se corresponde con el par clave/valor <em>natural</em>/<em>tree</em>.</p>
+<img alt="Entrada para árbol singular en la página de Map Features de OSM" class="align-center" src="../../_images/wikiosmfeaturestree.png" style="width: 600px;" />
+<p>Pero además si pulsamos sobre la palabra <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tag:natural%3Dtree">tree</a> nos lleva a la entrada específica de la wiki en la que explican las características a tener en cuenta y generalmente se detallan las claves a las que también suelen estar asociadas las entidades a cartografiar e incluso ejemplos.</p>
+<p>En definitiva, los árboles suelen etiquetarse usando las siguientes claves:</p>
+<ul class="simple">
+<li><em>natural</em> con el valor <em>tree</em></li>
+<li><em>name</em></li>
+<li><em>type</em></li>
+<li><em>height</em></li>
+<li><em>name:botanical</em></li>
+</ul>
+<p>La aplicación JOSM tiene, para determinados elementos, una serie de entradas de menú que permiten rellenar de manera cómoda las etiquetas. En el caso de los árboles, tras seleccionar uno usaremos las opciones de menú <tt class="docutils literal"><span class="pre">Presets</span> <span class="pre">&gt;</span> <span class="pre">Geography</span> <span class="pre">&gt;</span> <span class="pre">Nature</span> <span class="pre">&gt;</span> <span class="pre">Tree</span></tt>.</p>
+<p>Pueden asignarse etiquetas a grupos de elementos, para lo que primero hay que seleccionarlos manteniendo pulsada la tecla <em>Mayúsculas</em> mientras se va haciendo click; para posteriormente aplicar la etiqueta, según el procedimiento ya visto.</p>
+<p>También pueden <em>copiarse</em> etiquetas entre elementos, seleccionamos el elemento que tiene las etiquetas y lo copiamos con <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></tt> y después seleccionamos el elemento destino y pulsamos <tt class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">V</span></tt> y le asignará automáticamente las etiquetas del primer elemento.</p>
+</div>
+<div class="section" id="resto-de-etiquetas">
+<h3>2.6.2. Resto de etiquetas<a class="headerlink" href="#resto-de-etiquetas" title="Permalink to this headline">¶</a></h3>
+<p>Ahora hay que proceder igual con los demás elementos de nuestro dibujo.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tag:highway%3Dresidential">Carretera</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Tag:amenity%3Dparking">Parking</a></li>
+<li><a class="reference external" href="http://wiki.openstreetmap.org/wiki/Key:building">Edificio</a></li>
+</ul>
+<p>Consultaremos los elementos en su página correspondiente y  añadiremos las etiquetas que creamos sean necesarias para describir la realidad.</p>
+<p>El resultado tras aplicar las etiquetas será parecido a este:</p>
+<img alt="Tras aplicar las etiquetas en el ejercicio" class="align-center" src="../../_images/josmestadofinal.png" style="width: 600px;" />
+</div>
+<div class="section" id="especificar-las-fuentes">
+<h3>2.6.3. Especificar las fuentes<a class="headerlink" href="#especificar-las-fuentes" title="Permalink to this headline">¶</a></h3>
+<p>Es muy importante identificar los orígenes de datos de la información, ya que es una de las formas de medir la calidad de los datos que almacena OSM.</p>
+<p>En España, si se digitalizan datos sobre la ortofotografía del PNOA hay que añadir a <strong>TODOS</strong> los elementos digitalizados el par clave valor <em>source</em>/<em>PNOA</em> y a ser posible la clave <em>source:date</em> cuyo valor corresponde con la fecha en la que se realizó el vuelo</p>
+<p>Otros posibles orígenes de datos válidos para usar en España se pueden encontrar listados en la página web <a class="reference external" href="http://wiki.openstreetmap.org/wiki/Spain_Potential_Datasources">Spain Datasources</a> de la wiki de OpenStreetMap.</p>
+</div>
+</div>
+<div class="section" id="consejos-generales-sobre-digitalizacion-y-etiquetado">
+<h2>2.7. Consejos generales sobre digitalización y etiquetado<a class="headerlink" href="#consejos-generales-sobre-digitalizacion-y-etiquetado" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Acude SIEMPRE a la documentación y los expertos</dt>
+<dd>En caso de duda es mejor consultar la wiki primero y si no se encuentra la respuesta acudir a las <a class="reference external" href="http://lists.openstreetmap.org/listinfo/talk-es">lista de correo en español de OpenStreetMap</a></dd>
+<dt><em>Don&#8217;t map for the render</em></dt>
+<dd>O lo que es lo mismo, en general y excepto en muy contadas excepciones, no hay que dibujar y etiquetar las cosas &#8220;para que queden bonito en el mapa&#8221;, se debe dibujar y etiquetar <em>la realidad</em> o la mejor representación de ella que se pueda conseguir.</dd>
+<dt>No reinventar la rueda</dt>
+<dd>Hay mucho planeta cartografiado en OpenStreetMap, posiblemente alguién ya haya solucionado el probleam de representación de la realidad que se te presenta, muchas veces se aprende más intentando ver cómo han resuelto otros problemas similares, busca sitios donde ocurran los mísmos fenómenos que quieras representar y mira como lo han hecho otros.</dd>
+</dl>
+</div>
+<div class="section" id="guardando-el-archivo">
+<h2>2.8. Guardando el archivo<a class="headerlink" href="#guardando-el-archivo" title="Permalink to this headline">¶</a></h2>
+<p>Para poder continuar con el taller será necesario guardar esta información, para lo que pulsaremos con el botón derecho del ratón sobre el nombre de la capa y seleccionaremos la opción <tt class="docutils literal"><span class="pre">Save</span> <span class="pre">as...</span></tt> lo que nos permitirá guardar la información en formato <em>.osm</em> que es el formato XML de OpenStreetMap.</p>
+</div>
+<div class="section" id="ejercicio">
+<h2>2.9. Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this headline">¶</a></h2>
+<p>En la provincia de Valencia, al sur de la Albufera, se encuentra la localidad de Polinyà de Xúquer, una pequeña población de 2.000 habitantes que a fecha de redacción de este taller no tiene ni siquiera el entramado básico de calles.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>min lat</td>
+<td>39.1899</td>
+<td>min lon</td>
+<td>-0.3773</td>
+</tr>
+<tr class="row-odd"><td>max lat</td>
+<td>39.2025</td>
+<td>max lon</td>
+<td>-0.3603</td>
+</tr>
+</tbody>
+</table>
+<img alt="Estado de Polinyà de Xúquer al redactar el taller" class="align-center" src="../../_images/polinya.png" style="width: 600px;" />
+<p>Como ejercicio del taller se propone levantar el entramado de calles de Polinyà del Xúquer, digitalizar los edificios de una manzana y señalar algunos elementos puntuales.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2. Taller de JOSM</a><ul>
+<li><a class="reference internal" href="#arrancando-josm">2.1. Arrancando JOSM</a></li>
+<li><a class="reference internal" href="#descargando-datos">2.2. Descargando datos</a></li>
+<li><a class="reference internal" href="#filtrando-la-informacion">2.3. Filtrando la información</a></li>
+<li><a class="reference internal" href="#anadiendo-imagenes">2.4. Añadiendo imágenes</a></li>
+<li><a class="reference internal" href="#digitalizando">2.5. Digitalizando</a><ul>
+<li><a class="reference internal" href="#nodos">2.5.1. Nodos</a></li>
+<li><a class="reference internal" href="#vias">2.5.2. Vías</a></li>
+<li><a class="reference internal" href="#areas">2.5.3. Áreas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#anadiendo-etiquetas">2.6. Añadiendo etiquetas</a><ul>
+<li><a class="reference internal" href="#que-etiquetas-se-emplean-para-indicar-que-es-un-arbol">2.6.1. ¿Qué etiquetas se emplean para indicar que es un árbol?</a></li>
+<li><a class="reference internal" href="#resto-de-etiquetas">2.6.2. Resto de etiquetas</a></li>
+<li><a class="reference internal" href="#especificar-las-fuentes">2.6.3. Especificar las fuentes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#consejos-generales-sobre-digitalizacion-y-etiquetado">2.7. Consejos generales sobre digitalización y etiquetado</a></li>
+<li><a class="reference internal" href="#guardando-el-archivo">2.8. Guardando el archivo</a></li>
+<li><a class="reference internal" href="#ejercicio">2.9. Ejercicio</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="osm_intro.html"
+                        title="previous chapter">1. Qué son OSM y JOSM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../imposm/imposm_intro.html"
+                        title="next chapter">3. Importando OSM a un POSTGIS</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../../_sources/josm-imposm-tilemill/osm/osm_taller.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../imposm/imposm_intro.html" title="3. Importando OSM a un POSTGIS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="osm_intro.html" title="1. Qué son OSM y JOSM"
+             >previous</a> |</li>
+        <li><a href="../../index.html">geotalleres-teoria 1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Taller de OSM + IMPOSM + TILEMILL  VI Jornadas de SIG Libre</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Varios.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
