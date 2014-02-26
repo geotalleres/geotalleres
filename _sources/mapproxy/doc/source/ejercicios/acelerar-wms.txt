@@ -1,20 +1,6 @@
 Ejercicio: acelerar el acceso a un WMS
 ----------------------------------------------
 
-.. note::
-
-    Autores:
-
-    * |pferrer|
-    * |jsanz|
-    * |isanchez|
-
-    Licencia:
-
-    Excepto donde quede reflejado de otra manera, la presente documentación
-    se halla bajo licencia `Creative Commons Reconocimiento Compartir Igual
-    <https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES>`_
-
 Primera parte: acceder a un servicio de ortoimágenes
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -61,12 +47,12 @@ Como nuestros técnicos usan a menudo cartografía en coordenadas UTM, sería
 interesante que crearas una *cache* expresamente para ese sistema de coordenadas,
 de forma que MapProxy no tenga que reproyectar las teselas todo el tiempo.
 
-.. figure:: ../_static/exercise-wms1.png
+.. figure:: /_static/exercise-wms1.png
 	 :width: 50%
 	 :alt: TMS de la ortofoto del ICC
 	 :align: center
 
-	 TMS de la ortofoto del ICC
+	 TMS de la ortofoto del ICC 
 
 
 Tercera parte: cachear las teselas de OpenStreetMap
@@ -83,11 +69,17 @@ nuevo servicio, una nueva *cache* y un nuevo *grid* de acuerdo a las
 especificaciones de OSM. Podemos usar como base la configuración que ofrece el
 proyecto en su `wiki <http://wiki.openstreetmap.org/wiki/MapProxy_setup>`_.
 
-.. figure:: ../_static/exercise-wms2.png
+.. figure:: /_static/exercise-wms2.png
 	 :width: 50%
 	 :alt: WMS de OpenStreetMap servido en UTM 31N
 	 :align: center
 
-	 WMS de OpenStreetMap servido en UTM 31N
+	 WMS de OpenStreetMap servido en UTM 31N 
 
 
+Autores:
+-------------------------
+
+* Pedro-Juan Ferrer `@vehrka <http://twitter.com/vehrka>`_ · pferrer@osgeo.org
+* Iván Sanchez `@realivansanchez <http://twitter.com/realivansanchez>`_ · ivan@sanchezortega.es
+* Jorge Sanz `@xurxosanz <http://twitter.com/xurxosanz>`_ · jsanz@osgeo.org

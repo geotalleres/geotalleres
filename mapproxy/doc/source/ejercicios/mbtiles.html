@@ -56,18 +56,6 @@
             
   <div class="section" id="servir-un-fichero-mbtiles-creado-con-tilemill">
 <h1>Servir un fichero <em>MBTiles</em> creado con TileMill<a class="headerlink" href="#servir-un-fichero-mbtiles-creado-con-tilemill" title="Permalink to this headline">¶</a></h1>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>Autores:</p>
-<ul class="simple">
-<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
-<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
-<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
-</ul>
-<p>Licencia:</p>
-<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
-se halla bajo licencia <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES">Creative Commons Reconocimiento Compartir Igual</a></p>
-</div>
 <p>El objetivo de este ejercicio es montar una capa en MapProxy que sirva una
 <em>cache</em> en formato <a class="reference external" href="http://mapbox.com/developers/mbtiles/">MBTiles</a> generada en <a class="reference external" href="http://mapbox.com/tilemill/">TileMill</a>. Es decir, realizamos todo
 el proceso de diseño cartográfico con esta herramienta y después ofrecemos a
@@ -106,7 +94,7 @@ vacía porque el elemento es obligatorio). La cache ha configurar es de tipo
 <tt class="docutils literal"><span class="pre">mbtiles</span></tt> y hay que indicar la ubicación del fichero que habrá que dejar en la
 carpeta <tt class="docutils literal"><span class="pre">cache_data</span></tt>.</p>
 <div class="figure align-center">
-<img alt="TMS de la capa de *parkings* diseñada en TileMill" src="../../../../_images/exercise-mbtiles.png" style="width: 50%;" />
+<img alt="TMS de la capa de *parkings* diseñada en TileMill" src="_static/exercise-mbtiles.png" style="width: 50%;" />
 <p class="caption">TMS de la capa de <em>parkings</em> diseñada en TileMill</p>
 </div>
 <p>En la siguiente figura se muestran las dos capas accedidas por separado desde un
@@ -114,8 +102,16 @@ cliente GIS de escritorio (QGis) en el que se ha establecido una transparencia
 del 50% a la capa de ortofoto de tal forma que las zonas de aparcamiento se
 visualizan de forma más efectiva.</p>
 <div class="figure align-center">
-<img alt="Acceso a las dos capas desde QGis" src="../../../../_images/exercise-mbtiles2.png" style="width: 50%;" />
+<img alt="Acceso a las dos capas desde QGis" src="_static/exercise-mbtiles2.png" style="width: 50%;" />
 <p class="caption">Acceso a las dos capas mediante WMS</p>
+</div>
+<div class="section" id="autores">
+<h2>Autores:<a class="headerlink" href="#autores" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Pedro-Juan Ferrer <a class="reference external" href="http://twitter.com/vehrka">&#64;vehrka</a> · <a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+<li>Iván Sanchez <a class="reference external" href="http://twitter.com/realivansanchez">&#64;realivansanchez</a> · <a class="reference external" href="mailto:ivan&#37;&#52;&#48;sanchezortega&#46;es">ivan<span>&#64;</span>sanchezortega<span>&#46;</span>es</a></li>
+<li>Jorge Sanz <a class="reference external" href="http://twitter.com/xurxosanz">&#64;xurxosanz</a> · <a class="reference external" href="mailto:jsanz&#37;&#52;&#48;osgeo&#46;org">jsanz<span>&#64;</span>osgeo<span>&#46;</span>org</a></li>
+</ul>
 </div>
 </div>
 
@@ -125,6 +121,14 @@ visualizan de forma más efectiva.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Servir un fichero <em>MBTiles</em> creado con TileMill</a><ul>
+<li><a class="reference internal" href="#autores">Autores:</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="seeding.html"
                         title="previous chapter">Ejercicio: <em>seeding</em> y borrado de <em>caches</em></a></p>

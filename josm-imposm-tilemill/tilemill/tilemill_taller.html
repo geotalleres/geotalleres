@@ -233,12 +233,11 @@ se halla bajo licencia <a class="reference external" href="https://creativecommo
 </dl>
 <p>En esta ocasión en vez de la tabla, hemos usado una subconsulta, de forma que solo carguemos en memoria las entidades que tengan algún valor en el campo <cite>name</cite>. A las subconsultas hay que añadirles un alias para que TileMill las reconozca.</p>
 <p>TileMill habrá asignado a la capa un estilo por defecto para capas de líneas, aunque nosotros lo vamos a modificar para que represente textos:</p>
-<div class="highlight-css"><div class="highlight"><pre><span class="nf">#calles_nombres</span> <span class="p">{</span>
-    <span class="k">text</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="s2">&quot;[name]&quot;</span><span class="p">;</span>
-    <span class="k">text</span><span class="o">-</span><span class="n">face</span><span class="o">-</span><span class="n">name</span><span class="o">:</span> <span class="o">@</span><span class="n">futura_med</span><span class="p">;</span>
-    <span class="k">text</span><span class="o">-</span><span class="n">placement</span><span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight-css"><pre>#calles_nombres {
+    text-name: "[name]";
+    text-face-name: @futura_med;
+    text-placement: line;
+}</pre>
 </div>
 <p>Estos son los elementos mínimos para que una etiqueta aparezca en TileMill, aunque si vamos a la ayuda del programa <img alt="Botón de ayuda" class="align-middle" src="../../_images/tilemillbtnayudainline.png" style="width: 48px;" /> y vemos la sección <cite>text</cite> veremos que las etiquetas tienen 30 opciones de configuración distintas.</p>
 <img alt="Ayuda de texto desplegada" class="align-center" src="../../_images/tilemillayudatexto.png" style="width: 600px;" />
