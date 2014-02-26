@@ -1,3 +1,5 @@
+set -e
+
 cd /tmp
 git clone git@github.com:geotalleres/geotalleres.git
 cd geotalleres
