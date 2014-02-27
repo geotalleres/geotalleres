@@ -1,6 +1,21 @@
 Servir un fichero *MBTiles* creado con TileMill
 =====================================================
 
+.. note::
+
+    Autores:
+
+    * |pferrer|
+    * |jsanz|
+    * |isanchez|
+
+    Licencia:
+
+    Excepto donde quede reflejado de otra manera, la presente documentación
+    se halla bajo licencia `Creative Commons Reconocimiento Compartir Igual
+    <https://creativecommons.org/licenses/by-sa/4.0/deed.es_ES>`_
+
+
 El objetivo de este ejercicio es montar una capa en MapProxy que sirva una
 *cache* en formato MBTiles_ generada en TileMill_. Es decir, realizamos todo
 el proceso de diseño cartográfico con esta herramienta y después ofrecemos a
@@ -42,7 +57,7 @@ vacía porque el elemento es obligatorio). La cache ha configurar es de tipo
 ``mbtiles`` y hay que indicar la ubicación del fichero que habrá que dejar en la
 carpeta ``cache_data``.
 
-.. figure:: /_static/exercise-mbtiles.png
+.. figure:: ../_static/exercise-mbtiles.png
 	 :width: 50%
 	 :alt: TMS de la capa de *parkings* diseñada en TileMill
 	 :align: center
@@ -55,17 +70,10 @@ cliente GIS de escritorio (QGis) en el que se ha establecido una transparencia
 del 50% a la capa de ortofoto de tal forma que las zonas de aparcamiento se
 visualizan de forma más efectiva.
 
-.. figure:: /_static/exercise-mbtiles2.png
+.. figure:: ../_static/exercise-mbtiles2.png
 	 :width: 50%
 	 :alt:  Acceso a las dos capas desde QGis
 	 :align: center
 
 	 Acceso a las dos capas mediante WMS
 
-
-Autores:
--------------------------
-
-* Pedro-Juan Ferrer `@vehrka <http://twitter.com/vehrka>`_ · pferrer@osgeo.org
-* Iván Sanchez `@realivansanchez <http://twitter.com/realivansanchez>`_ · ivan@sanchezortega.es
-* Jorge Sanz `@xurxosanz <http://twitter.com/xurxosanz>`_ · jsanz@osgeo.org
