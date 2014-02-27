@@ -1,7 +1,7 @@
 set -e
 
 cd /tmp
-git clone git@github.com:geotalleres/geotalleres.git
+git clone https://github.com/geotalleres/geotalleres.git
 cd geotalleres
 git submodule update --init
 make html
