@@ -1,0 +1,18 @@
+.admonition-todo{
+  background-color: #e99002;
+  border-color: #d08002;
+  color: #ffffff;
+}
+
+.admonition-title{
+  display: none;
+}
+
+div.body p.todo-source{
+  font-size: 12px;
+  font-weight: 300;
+}
+
+blockquote p, blockquote div{
+  font-size:14px;
+}

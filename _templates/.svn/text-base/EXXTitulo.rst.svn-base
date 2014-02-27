@@ -1,0 +1,105 @@
+.. _ENNTitulo:
+
+***************
+Título
+***************
+
+
+:author: xxxx
+:contact: xxxx@prodevelop.es
+:organization: Prodevelop
+:date: xx/xx/2013
+:version: 1.0
+
+.. header::
+
+   GEONIMBO:###Title###. *###Section###*
+
+.. footer::
+
+   ###Page###/###Total###
+
+
+Acerca del documento
+=====================
+
+Información del documento:
+
+.. list-table::
+   :widths: 25, 25, 25, 25
+
+   * - Nombre del proyecto
+     - **GEONIMBO**
+     -
+     -
+
+   * - Fase del proyecto
+     - Arranque
+     - Director del proyecto
+     - Miguel Montesinos
+
+   * - Versión del documento
+     - 1.0
+     - Fecha versión del documento
+     - xx/xx/2013
+
+   * - Preparado por
+     - xxxxxx
+     - Fecha preparación
+     - xx/xx/2013
+
+   * - Revisado por
+     -
+     - Fecha revisión
+     -
+
+Lista de distribución:
+
+.. list-table::
+   :widths: 20, 30, 50
+   :header-rows: 1
+
+   * - De
+     - Fecha
+     - e-mail
+
+   * -
+     -
+     -
+
+----
+
+.. list-table::
+   :widths: 20, 20, 10, 50
+   :header-rows: 1
+
+   * - A
+     - Acción
+     - Fecha
+     - e-mail
+
+   * -
+     -
+     -
+     -
+
+Tipos de acción: *Aprobación, Revisión, Validación, Informe, Archivar, Lectura, Acción requerida, Asistencia a reunión, Otras*
+
+
+Historial de cambios:
+
+.. list-table::
+   :widths: 15, 15, 70
+   :header-rows: 1
+
+   * - Fecha
+     - Autor
+     - Notas
+
+   * - xx/xx/13
+     - xxxxxx
+     - Creación del documento
+
+
+.. contents:: Contenidos
+   :depth: 2
