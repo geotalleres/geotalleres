@@ -1,3 +1,0 @@
-[submodule "mapproxy"]
-	path = mapproxy
-	url = https://github.com/geoinquietosvlc/mapproxy-workshop.git
