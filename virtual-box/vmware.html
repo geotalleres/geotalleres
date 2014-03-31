@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Optimización de GeoTIFF para su publicación &mdash; geotalleres-teoria 1 documentation</title>
+    <title>VMWare Instalación de la máquina virtual &mdash; geotalleres-teoria 1 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
-    <link rel="next" title="Teoría de base de datos" href="../bases-de-datos/teoria_bases_datos.html" />
-    <link rel="prev" title="Pregeneración de teselas en GeoWebCache" href="../geowebcache/pregeneracion.html" />
+    <link rel="next" title="Servicios web" href="../servicios-web/servicios-web.html" />
+    <link rel="prev" title="Instalación de la máquina virtual" href="virtual-box.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -68,16 +68,16 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../virtual-box/virtual-box.html">Instalación de la máquina virtual</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/virtual-box.html#instalacion-de-virtualbox">Instalación de VirtualBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/virtual-box.html#creacion-de-una-maquina-virtual">Creación de una máquina virtual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/virtual-box.html#instalacion-de-ubuntu-linux">Instalación de Ubuntu/Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-box.html">Instalación de la máquina virtual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="virtual-box.html#instalacion-de-virtualbox">Instalación de VirtualBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-box.html#creacion-de-una-maquina-virtual">Creación de una máquina virtual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual-box.html#instalacion-de-ubuntu-linux">Instalación de Ubuntu/Linux</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../virtual-box/vmware.html">VMWare Instalación de la máquina virtual</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/vmware.html#descarga-e-instalacion-de-vmware">Descarga e instalación de VMWare</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/vmware.html#descarga-de-osgeo-live">Descarga de OSGeo Live</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../virtual-box/vmware.html#configuracion-de-la-maquina-virtual">Configuración de la máquina virtual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">VMWare Instalación de la máquina virtual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#descarga-e-instalacion-de-vmware">Descarga e instalación de VMWare</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#descarga-de-osgeo-live">Descarga de OSGeo Live</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion-de-la-maquina-virtual">Configuración de la máquina virtual</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../servicios-web/servicios-web.html">Servicios web</a><ul>
@@ -120,10 +120,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../geowebcache/pregeneracion.html#ejemplo-pregeneracion-de-unidades-administrativas-de-ecuador">Ejemplo: pregeneración de unidades administrativas de Ecuador</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Optimización de GeoTIFF para su publicación</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#gdalinfo">gdalinfo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#gdal-translate">gdal_translate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#gdaladdo">gdaladdo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html">Optimización de GeoTIFF para su publicación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html#gdalinfo">gdalinfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html#gdal-translate">gdal_translate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizacion-raster-gdal/optimizacion-raster-gdal.html#gdaladdo">gdaladdo</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bases-de-datos/teoria_bases_datos.html">Teoría de <strong>base de datos</strong></a><ul>
@@ -254,10 +254,17 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Optimización de GeoTIFF para su publicación</a><ul>
-<li><a class="reference internal" href="#gdalinfo">gdalinfo</a></li>
-<li><a class="reference internal" href="#gdal-translate">gdal_translate</a></li>
-<li><a class="reference internal" href="#gdaladdo">gdaladdo</a></li>
+<li><a class="reference internal" href="#">VMWare Instalación de la máquina virtual</a><ul>
+<li><a class="reference internal" href="#descarga-e-instalacion-de-vmware">Descarga e instalación de VMWare</a><ul>
+<li><a class="reference internal" href="#instalacion-en-gnu-linux-debian">Instalación en GNU/Linux (Debian)</a></li>
+<li><a class="reference internal" href="#instalacion-en-windows">Instalación en Windows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#descarga-de-osgeo-live">Descarga de OSGeo Live</a><ul>
+<li><a class="reference internal" href="#descompresion-del-archivo-en-gnu-linux">Descompresión del archivo en GNU/Linux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuracion-de-la-maquina-virtual">Configuración de la máquina virtual</a></li>
 </ul>
 </li>
 </ul>
@@ -269,11 +276,11 @@
               
                 
   <li>
-    <a href="../geowebcache/pregeneracion.html" title="Previous Chapter: Pregeneración de teselas en GeoWebCache"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Pregeneración de...</span>
+    <a href="virtual-box.html" title="Previous Chapter: Instalación de la máquina virtual"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Instalación de l...</span>
     </a>
   </li>
   <li>
-    <a href="../bases-de-datos/teoria_bases_datos.html" title="Next Chapter: Teoría de base de datos"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Teoría de base d... &raquo;</span>
+    <a href="../servicios-web/servicios-web.html" title="Next Chapter: Servicios web"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Servicios web &raquo;</span>
     </a>
   </li>
               
@@ -283,7 +290,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/optimizacion-raster-gdal/optimizacion-raster-gdal.txt"
+  <a href="../_sources/virtual-box/vmware.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -307,106 +314,160 @@
   <div class="row">
     <div class="col-md-12">
       
-  <div class="section" id="optimizacion-de-geotiff-para-su-publicacion">
-<h1>Optimización de GeoTIFF para su publicación<a class="headerlink" href="#optimizacion-de-geotiff-para-su-publicacion" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="vmware-instalacion-de-la-maquina-virtual">
+<h1>VMWare Instalación de la máquina virtual<a class="headerlink" href="#vmware-instalacion-de-la-maquina-virtual" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="25%" />
-<col width="75%" />
+<col width="23%" />
+<col width="77%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Fecha</th>
-<th class="head">Autores</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td>1 Diciembre 2012</td>
-<td><ul class="first last simple">
-<li>Oscar Fonts (<a class="reference external" href="mailto:oscar&#46;fonts&#37;&#52;&#48;geomati&#46;co">oscar<span>&#46;</span>fonts<span>&#64;</span>geomati<span>&#46;</span>co</a>)</li>
-</ul>
-</td>
+<tr class="row-odd"><td>Fecha</td>
+<td>Autor</td>
 </tr>
-<tr class="row-odd"><td>24 Junio 2013</td>
+<tr class="row-even"><td>2014-03-31</td>
 <td><ul class="first last simple">
-<li>Fernando González (<a class="reference external" href="mailto:fernando&#46;gonzalez&#37;&#52;&#48;fao&#46;org">fernando<span>&#46;</span>gonzalez<span>&#64;</span>fao<span>&#46;</span>org</a>)</li>
+<li>Pedro-Juan Ferrer (<a class="reference external" href="mailto:pferrer&#37;&#52;&#48;osgeo&#46;org">pferrer<span>&#64;</span>osgeo<span>&#46;</span>org</a>)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>©2013 FAO Forestry</p>
-<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+<p>©2014 Geoinquietos Valencia</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación
+se halla bajo licencia : Creative Commons (Creative Commons -
+Attribution - Share Alike:
+<a class="reference external" href="http://creativecommons.org/licenses/by-sa/4.0/">http://creativecommons.org/licenses/by-sa/4.0/</a>)</p>
 </div>
-<p>Los datos raster generalmente contienen una gran cantidad de información, mucha más de la que se puede mostrar en una pantalla de una sola vez.
-Para que GeoServer pueda gestionar esta gran cantidad de datos de forma eficiente en diferentes situaciones, es necesario prestar atención a su optimización.</p>
-<p>Imaginemos que queremos mostrar por pantalla una imagen raster de 10.000 x 10.000 píxeles.
-Puesto que la resolución de la pantalla es limitada, sólamente será capaz de mostrar,
-como máximo, un 1% de los píxeles totales del raster.</p>
-<p>En lugar de leer todo el ráster, debemos incorporar mecanismos en que no sea necesario leer completamente todos los datos cada vez que visualizamos el ráster, sino sólamente a la porción de información que podemos visualizar. Esto se hace de dos modos:</p>
+<p>La formación se va a realizar en una máquina virtual. Para ello se utilizará
+un software de virtualización, que se encargará de hospedar la máquina
+virtual.</p>
+<p>Para el caso que nos ocupa emplearemos la máquina virtual versión 7.0 de <a class="reference external" href="http://live.osgeo.org">OSGeo
+Live</a> dentro del software de virtualización <em>VMWare</em>.</p>
+<p>Los pasos necesarios para esto son:</p>
 <ul class="simple">
-<li>En situación de &#8220;zoom in&#8221;, es conveniente poder acceder sólo a la porción de imagen que se va a mostrar, descartando el resto.</li>
-<li>En situación de &#8220;zoom out&#8221;, es conveniente disponer de una o varias copias del ráster a resoluciones menores.</li>
+<li>Descarga e instalación de VMWare.</li>
+<li>Descarga de OSGeo Live.</li>
+<li>Configuración de la máquina virutal</li>
 </ul>
-<p>El formato interno de los ficheros GeoTIFF se puede procesar y prepararlo para estas dos situaciones.</p>
-<p>Para ello utilizaremos las librerías GDAL desde la línea de comandos.
-En concreto, veremos las utilidades <tt class="docutils literal"><span class="pre">gdalinfo</span></tt>, <tt class="docutils literal"><span class="pre">gdal_translate</span></tt> y  <tt class="docutils literal"><span class="pre">gdaladdo</span></tt>.</p>
-<div class="section" id="gdalinfo">
-<h2>gdalinfo<a class="headerlink" href="#gdalinfo" title="Permalink to this headline">¶</a></h2>
-<p>Proporciona información sobre ficheros ráster.</p>
-<ul>
-<li><p class="first">Abrir una consola (terminal).</p>
-</li>
-<li><p class="first">Acceder al directorio que contiene las imágenes landsat:</p>
-<div class="highlight-python"><pre>cd pry_workshop_data/raster/landsat/</pre>
+<p>En la terminología de los software de virtualización, la máquina real es la
+anfitriona, host en inglés; mientras que la máquina virtual es la huésped, o
+guest en inglés.</p>
+<div class="section" id="descarga-e-instalacion-de-vmware">
+<h2>Descarga e instalación de VMWare<a class="headerlink" href="#descarga-e-instalacion-de-vmware" title="Permalink to this headline">¶</a></h2>
+<p>El primer paso es descargar el software de la <a class="reference external" href="https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0">página de descargas de
+VMWare</a> y proceder a su instalación.</p>
+<img alt="../_images/download_vmware.png" src="../_images/download_vmware.png" />
+<p>El resultado de esta descarga debe ser un fichero con un nombre parecido a
+<tt class="file docutils literal"><span class="pre">VMware-Player-6.0.1-1379776.x86_64.bundle</span></tt> o
+<tt class="file docutils literal"><span class="pre">VMware-player-6.0.1-1379776.exe</span></tt> en función del sistema operativo
+seleccionado.</p>
+<div class="section" id="instalacion-en-gnu-linux-debian">
+<h3>Instalación en GNU/Linux (Debian)<a class="headerlink" href="#instalacion-en-gnu-linux-debian" title="Permalink to this headline">¶</a></h3>
+<p>Al tratarse de un archivo binario, deberán cambiarse los permisos para poder
+ejecutar la instalación:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>chmod +x VMware-Player-6.0.1-1379776.x86_64.bundle
+</pre></div>
 </div>
-</li>
-<li><p class="first">Ejecutar <tt class="docutils literal"><span class="pre">gdalinfo</span></tt> sobre la imagen de 1990:</p>
-<div class="highlight-python"><pre>gdalinfo landsat_1990.tif</pre>
+<p>Y deberemos ejecutarlo con permisos de superusuario:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo ./VMware-Player-6.0.1-1379776.x86_64.bundle
+</pre></div>
 </div>
-</li>
-</ul>
-<p>Obtendremos información sobre el tamaño del fichero, el sistema de coordenadas, y la manera en que están codificadas las diferentes bandas internamente.</p>
-<p>En concreto, observamos:</p>
-<div class="highlight-python"><pre>Band 1 Block=3069x1 Type=Byte, ColorInterp=Red
-Band 2 Block=3069x1 Type=Byte, ColorInterp=Green
-Band 3 Block=3069x1 Type=Byte, ColorInterp=Blue</pre>
+<p>y usar las opciones por defecto para la instalación.</p>
 </div>
-<p>Esto significa que la imagen está guardada en &#8220;tiras&#8221; de 1px de alto.</p>
-</div>
-<div class="section" id="gdal-translate">
-<h2>gdal_translate<a class="headerlink" href="#gdal-translate" title="Permalink to this headline">¶</a></h2>
-<p>Para optimizar el acceso en situaciones de &#8220;zoom in&#8221;, podemos cambiar esta codificación interna
-para que almacene la información en bloques cuadrados de 512x512 píxeles. Ejecutar:</p>
-<div class="highlight-python"><pre>gdal_translate -co "TILED=YES" -co "BLOCKXSIZE=512" -co "BLOCKYSIZE=512" landsat_1990.tif landsat_1990_tiled.tif</pre>
-</div>
-<p>Veamos la información en la nueva imagen:</p>
-<div class="highlight-python"><pre>gdalinfo landsat_1990_tiled.tif</pre>
-</div>
-<p>Ahora obtenemos:</p>
-<div class="highlight-python"><pre>Band 1 Block=512x512 Type=Byte, ColorInterp=Red
-Band 2 Block=512x512 Type=Byte, ColorInterp=Green
-Band 3 Block=512x512 Type=Byte, ColorInterp=Blue</pre>
+<div class="section" id="instalacion-en-windows">
+<h3>Instalación en Windows<a class="headerlink" href="#instalacion-en-windows" title="Permalink to this headline">¶</a></h3>
+<p>Ejecutaremos el archivo <tt class="file docutils literal"><span class="pre">.exe</span></tt> y usaremos las opciones por defecto para la
+instalación.</p>
 </div>
 </div>
-<div class="section" id="gdaladdo">
-<h2>gdaladdo<a class="headerlink" href="#gdaladdo" title="Permalink to this headline">¶</a></h2>
-<p>Para optimizar el acceso en situaciones de &#8220;zoom out&#8221;, podemos añadir, internamente, una serie de imágenes a menor resolución:</p>
-<div class="highlight-python"><pre>gdaaddo landsat_1990_tiled.tif 2 4 8</pre>
+<div class="section" id="descarga-de-osgeo-live">
+<h2>Descarga de OSGeo Live<a class="headerlink" href="#descarga-de-osgeo-live" title="Permalink to this headline">¶</a></h2>
+<p>Para descargar la versión 7.0 de la máquina virtual deberemos visitar la
+<a class="reference external" href="http://sourceforge.net/projects/osgeo-live/files/7.0/">sección correspondiente de la web Sourceforge</a> y proceder a la descarga
+del archivo <tt class="file docutils literal"><span class="pre">.7z</span></tt> <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<img alt="../_images/download_live.png" src="../_images/download_live.png" />
+<div class="section" id="descompresion-del-archivo-en-gnu-linux">
+<h3>Descompresión del archivo en GNU/Linux<a class="headerlink" href="#descompresion-del-archivo-en-gnu-linux" title="Permalink to this headline">¶</a></h3>
+<p>Para descomprimir el archivo emplearemos el comando:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>7z e osgeo-live-vm-7.0.7z
+</pre></div>
 </div>
-<p>Ejecutando de nuevo gdalinfo, observamos que para cada banda aparece esta nueva información:</p>
-<div class="highlight-python"><pre>Overviews of mask band: 1535x1535, 768x768, 384x384</pre>
 </div>
-<p>La ventaja de utilizar la línea de comandos es que se puede crear un <em>script</em>  para automatizar
-este procesado y aplicarlo masivamente a un gran conjunto de ficheros siempre que sea necesario.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>Para saber más...</p>
-<ul class="last simple">
-<li><a class="reference external" href="http://www.gdal.org/gdal_utilities.html">GDAL Utilities</a>.</li>
-</ul>
 </div>
+<div class="section" id="configuracion-de-la-maquina-virtual">
+<h2>Configuración de la máquina virtual<a class="headerlink" href="#configuracion-de-la-maquina-virtual" title="Permalink to this headline">¶</a></h2>
+<p>La máquina virtual se ejecuta dentro del programa <em>VMWare Player</em> que hemos
+instalado con anterioridad, por lo que arrancaremos dicho programa</p>
+<img alt="../_images/vmware_open_vm.png" src="../_images/vmware_open_vm.png" />
+<p>Seleccionaremos la opción <em>Create a New Virtual Machine</em>.</p>
+<img alt="../_images/vmware_proc_01.png" src="../_images/vmware_proc_01.png" />
+<p>Seleccionamos <em>I will install the operating system later</em></p>
+<img alt="../_images/vmware_proc_02.png" src="../_images/vmware_proc_02.png" />
+<p>Seleccionamos <em>Guest Operating System: Linux</em> y <em>Version: Ubuntu</em></p>
+<p>A continuación deberemos darle un nombre a la máquina virtual y seleccionar
+una ubicación en disco en la que almacenarla.
+.. image:: _static/vmware_proc_03.png</p>
+<p>Seleccionamos el nombre de la máquina y cuál será su localización en disco.
+El nombre de la máquina <em>osgeo_live</em> y el destino de la
+máquina aparece difuminado.</p>
+<img alt="../_images/vmware_proc_04.png" src="../_images/vmware_proc_04.png" />
+<p>La aplicación nos solicitará que seleccionemos la capacidad del disco. En
+realidad no usaremos el disco que configure la máquina virtual, por lo que
+podemos dejar las opciones por defecto.</p>
+<p>Seleccionamos la configuración del disco duro: <em>Split virtual disk into multiple files</em></p>
+<img alt="../_images/vmware_proc_05.png" src="../_images/vmware_proc_05.png" />
+<p>Pulsaremos <em>Finish</em></p>
+<img alt="../_images/vmware_proc_06.png" src="../_images/vmware_proc_06.png" />
+<p>Pulsaremos <em>Close</em></p>
+<p>Tenemos la máquina virtual creada pero hay que configurarla para que use el
+disco que nos hemos descargado.</p>
+<img alt="../_images/vmware_proc_07.png" src="../_images/vmware_proc_07.png" />
+<p>Seleccionamos la máquina osgeo_live y a continuación pulsamos <em>Edit virtual
+machine settings</em></p>
+<img alt="../_images/vmware_proc_08.png" src="../_images/vmware_proc_08.png" />
+<p>Seleccionaremos el disco duro creado por defecto <em>Hard Disk (SCSI)</em> y lo
+eliminaremos.</p>
+<p>Seleccionar <em>Hard Disk (SCSI)</em> y después pulsar <em>Remove</em></p>
+<p>Ahora añadiremos el disco virtual que nos hemos descargado de <em>Sourceforge</em>
+y hemos descomprimido.</p>
+<img alt="../_images/vmware_proc_09.png" src="../_images/vmware_proc_09.png" />
+<p>Pulsar <em>Add...</em></p>
+<img alt="../_images/vmware_proc_10.png" src="../_images/vmware_proc_10.png" />
+<p>Seleccionar <em>Hard Disk</em> y pulsar <em>Next</em></p>
+<img alt="../_images/vmware_proc_11.png" src="../_images/vmware_proc_11.png" />
+<p>Dejaremos la opción por defecto <em>SCSI</em></p>
+<p>Pulsar <em>Next</em></p>
+<p>El nuevo disco ya existe por lo que hay que seleccionar la opción <em>Use an
+existing virtual disk</em></p>
+<img alt="../_images/vmware_proc_12.png" src="../_images/vmware_proc_12.png" />
+<p>Seleccionar <em>Use an existing virtual disk</em> y pulsar <em>Next</em></p>
+<img alt="../_images/vmware_proc_13.png" src="../_images/vmware_proc_13.png" />
+<p>A continuación pulsaremos <em>Browse</em> y buscaremos el lugar dónde
+hemos descomprimido el archivo descargado de <em>Sourceforge</em>. En la imagen
+podemos ver que la casilla ha sido difuminada.</p>
+<p>Seleccionar el disco que hemos descomprimido y pulsar <em>Finish</em></p>
+<img alt="../_images/vmware_proc_14.png" src="../_images/vmware_proc_14.png" />
+<p>Es posible que la aplicación nos solicite información sobre la ejecución de
+una actualización de versión del disco virtual. Deberemos seleccionar la
+opción <em>Convert</em>.</p>
+<img alt="../_images/vmware_proc_15.png" src="../_images/vmware_proc_15.png" />
+<p>Solo restará guardar la configuración de la máquina virtual pulsando <em>Save</em></p>
+<p>Pulsamos <em>Save</em></p>
+<p>Y ejecutar la máquina virtual con la opción <em>Play virtual machine</em></p>
+<img alt="../_images/vmware_proc_16.png" src="../_images/vmware_proc_16.png" />
+<p>Seleccionamos <em>osgeo_live</em> y pulsamos <em>Play virtual machine</em></p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>7-Zip es un gestor de archivos comprimidos Open Source y
+multiplataforma que usa de manera nativa el formato de archivo <tt class="file docutils literal"><span class="pre">7z</span></tt>
+aunque puede trabajar con muchos otros. Puede instalarse por paquetes o
+descargarse de <a class="reference external" href="http://www.7-zip.org">http://www.7-zip.org</a></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 

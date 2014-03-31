@@ -17,6 +17,7 @@ Materiales:
    :maxdepth: 1 
 
    virtual-box/virtual-box
+   virtual-box/vmware
    servicios-web/servicios-web
    linux/linux
    geoserver-intro/geoserver_intro
