@@ -75,7 +75,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">VMWare Instalación de la máquina virtual</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#descarga-e-instalacion-de-vmware">Descarga e instalación de VMWare</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#descarga-e-instalacion-de-vmware-player">Descarga e instalación de VMWare Player</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#descarga-de-osgeo-live">Descarga de OSGeo Live</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuracion-de-la-maquina-virtual">Configuración de la máquina virtual</a></li>
 </ul>
@@ -255,13 +255,14 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">VMWare Instalación de la máquina virtual</a><ul>
-<li><a class="reference internal" href="#descarga-e-instalacion-de-vmware">Descarga e instalación de VMWare</a><ul>
+<li><a class="reference internal" href="#descarga-e-instalacion-de-vmware-player">Descarga e instalación de VMWare Player</a><ul>
 <li><a class="reference internal" href="#instalacion-en-gnu-linux-debian">Instalación en GNU/Linux (Debian)</a></li>
 <li><a class="reference internal" href="#instalacion-en-windows">Instalación en Windows</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#descarga-de-osgeo-live">Descarga de OSGeo Live</a><ul>
 <li><a class="reference internal" href="#descompresion-del-archivo-en-gnu-linux">Descompresión del archivo en GNU/Linux</a></li>
+<li><a class="reference internal" href="#descompresion-del-archivo-en-windows">Descompresión del archivo en Windows</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#configuracion-de-la-maquina-virtual">Configuración de la máquina virtual</a></li>
@@ -345,18 +346,18 @@ Attribution - Share Alike:
 un software de virtualización, que se encargará de hospedar la máquina
 virtual.</p>
 <p>Para el caso que nos ocupa emplearemos la máquina virtual versión 7.0 de <a class="reference external" href="http://live.osgeo.org">OSGeo
-Live</a> dentro del software de virtualización <em>VMWare</em>.</p>
+Live</a> dentro del software de virtualización <strong class="program">VMWare Player</strong>.</p>
 <p>Los pasos necesarios para esto son:</p>
 <ul class="simple">
-<li>Descarga e instalación de VMWare.</li>
-<li>Descarga de OSGeo Live.</li>
+<li>Descarga e instalación de <strong class="program">VMWare player</strong>.</li>
+<li>Descarga de <em>OSGeo Live</em>.</li>
 <li>Configuración de la máquina virutal</li>
 </ul>
 <p>En la terminología de los software de virtualización, la máquina real es la
-anfitriona, host en inglés; mientras que la máquina virtual es la huésped, o
-guest en inglés.</p>
-<div class="section" id="descarga-e-instalacion-de-vmware">
-<h2>Descarga e instalación de VMWare<a class="headerlink" href="#descarga-e-instalacion-de-vmware" title="Permalink to this headline">¶</a></h2>
+anfitriona, <em>host</em> en inglés; mientras que la máquina virtual es la huésped, o
+<em>guest</em> en inglés.</p>
+<div class="section" id="descarga-e-instalacion-de-vmware-player">
+<h2>Descarga e instalación de VMWare Player<a class="headerlink" href="#descarga-e-instalacion-de-vmware-player" title="Permalink to this headline">¶</a></h2>
 <p>El primer paso es descargar el software de la <a class="reference external" href="https://my.vmware.com/web/vmware/free#desktop_end_user_computing/vmware_player/6_0">página de descargas de
 VMWare</a> y proceder a su instalación.</p>
 <img alt="../_images/download_vmware.png" src="../_images/download_vmware.png" />
@@ -396,20 +397,32 @@ del archivo <tt class="file docutils literal"><span class="pre">.7z</span></tt> 
 </pre></div>
 </div>
 </div>
+<div class="section" id="descompresion-del-archivo-en-windows">
+<h3>Descompresión del archivo en Windows<a class="headerlink" href="#descompresion-del-archivo-en-windows" title="Permalink to this headline">¶</a></h3>
+<p>Si hemos instalado la aplicación <strong class="program">7-Zip File Manager</strong> al hacer
+doble click sobre el archivo descargado nos mostrará una ventana de
+aplicación con la que podemos seleccionar <em class="guilabel">Extraer</em> y después
+indicarle a la aplicación en qué directorio queremos descomprimir el
+archivo.</p>
+<img alt="../_images/vmware_proc_17.png" src="../_images/vmware_proc_17.png" />
+<p>También es posible descomprimir el archivo usando la aplicación
+<strong class="program">WinRAR</strong>.</p>
+</div>
 </div>
 <div class="section" id="configuracion-de-la-maquina-virtual">
 <h2>Configuración de la máquina virtual<a class="headerlink" href="#configuracion-de-la-maquina-virtual" title="Permalink to this headline">¶</a></h2>
-<p>La máquina virtual se ejecuta dentro del programa <em>VMWare Player</em> que hemos
-instalado con anterioridad, por lo que arrancaremos dicho programa</p>
+<p>La máquina virtual se ejecuta dentro del programa <strong class="program">VMWare Player</strong>
+que hemos instalado con anterioridad, por lo que arrancaremos dicho programa</p>
 <img alt="../_images/vmware_open_vm.png" src="../_images/vmware_open_vm.png" />
-<p>Seleccionaremos la opción <em>Create a New Virtual Machine</em>.</p>
+<p>Seleccionaremos la opción <em class="guilabel">Create a New Virtual Machine</em>.</p>
 <img alt="../_images/vmware_proc_01.png" src="../_images/vmware_proc_01.png" />
-<p>Seleccionamos <em>I will install the operating system later</em></p>
+<p>Seleccionamos <em class="guilabel">I will install the operating system later</em></p>
 <img alt="../_images/vmware_proc_02.png" src="../_images/vmware_proc_02.png" />
-<p>Seleccionamos <em>Guest Operating System: Linux</em> y <em>Version: Ubuntu</em></p>
+<p>Seleccionamos <em class="guilabel">Guest Operating System: Linux</em> y
+<em class="guilabel">Version: Ubuntu</em></p>
 <p>A continuación deberemos darle un nombre a la máquina virtual y seleccionar
-una ubicación en disco en la que almacenarla.
-.. image:: _static/vmware_proc_03.png</p>
+una ubicación en disco en la que almacenarla.</p>
+<img alt="../_images/vmware_proc_03.png" src="../_images/vmware_proc_03.png" />
 <p>Seleccionamos el nombre de la máquina y cuál será su localización en disco.
 El nombre de la máquina <em>osgeo_live</em> y el destino de la
 máquina aparece difuminado.</p>
@@ -417,48 +430,52 @@ máquina aparece difuminado.</p>
 <p>La aplicación nos solicitará que seleccionemos la capacidad del disco. En
 realidad no usaremos el disco que configure la máquina virtual, por lo que
 podemos dejar las opciones por defecto.</p>
-<p>Seleccionamos la configuración del disco duro: <em>Split virtual disk into multiple files</em></p>
+<p>Seleccionamos la configuración del disco duro: <em class="guilabel">Split virtual disk
+into multiple files</em></p>
 <img alt="../_images/vmware_proc_05.png" src="../_images/vmware_proc_05.png" />
-<p>Pulsaremos <em>Finish</em></p>
+<p>Pulsaremos <em class="guilabel">Finish</em></p>
 <img alt="../_images/vmware_proc_06.png" src="../_images/vmware_proc_06.png" />
-<p>Pulsaremos <em>Close</em></p>
+<p>Pulsaremos <em class="guilabel">Close</em></p>
 <p>Tenemos la máquina virtual creada pero hay que configurarla para que use el
 disco que nos hemos descargado.</p>
 <img alt="../_images/vmware_proc_07.png" src="../_images/vmware_proc_07.png" />
-<p>Seleccionamos la máquina osgeo_live y a continuación pulsamos <em>Edit virtual
-machine settings</em></p>
+<p>Seleccionamos la máquina osgeo_live y a continuación pulsamos
+<em class="guilabel">Edit virtual machine settings</em></p>
 <img alt="../_images/vmware_proc_08.png" src="../_images/vmware_proc_08.png" />
-<p>Seleccionaremos el disco duro creado por defecto <em>Hard Disk (SCSI)</em> y lo
-eliminaremos.</p>
-<p>Seleccionar <em>Hard Disk (SCSI)</em> y después pulsar <em>Remove</em></p>
+<p>Seleccionaremos el disco duro creado por defecto <em class="guilabel">Hard Disk
+(SCSI)</em> y lo eliminaremos.</p>
+<p>Seleccionar <em class="guilabel">Hard Disk (SCSI)</em> y después pulsar <em class="guilabel">Remove</em></p>
 <p>Ahora añadiremos el disco virtual que nos hemos descargado de <em>Sourceforge</em>
 y hemos descomprimido.</p>
 <img alt="../_images/vmware_proc_09.png" src="../_images/vmware_proc_09.png" />
-<p>Pulsar <em>Add...</em></p>
+<p>Pulsar <em class="guilabel">Add...</em></p>
 <img alt="../_images/vmware_proc_10.png" src="../_images/vmware_proc_10.png" />
-<p>Seleccionar <em>Hard Disk</em> y pulsar <em>Next</em></p>
+<p>Seleccionar <em class="guilabel">Hard Disk</em> y pulsar <em class="guilabel">Next</em></p>
 <img alt="../_images/vmware_proc_11.png" src="../_images/vmware_proc_11.png" />
-<p>Dejaremos la opción por defecto <em>SCSI</em></p>
-<p>Pulsar <em>Next</em></p>
-<p>El nuevo disco ya existe por lo que hay que seleccionar la opción <em>Use an
-existing virtual disk</em></p>
+<p>Dejaremos la opción por defecto <em class="guilabel">SCSI</em></p>
+<p>Pulsar <em class="guilabel">Next</em></p>
+<p>El nuevo disco ya existe por lo que hay que seleccionar la opción
+<em class="guilabel">Use an existing virtual disk</em></p>
 <img alt="../_images/vmware_proc_12.png" src="../_images/vmware_proc_12.png" />
-<p>Seleccionar <em>Use an existing virtual disk</em> y pulsar <em>Next</em></p>
+<p>Seleccionar <em class="guilabel">Use an existing virtual disk</em> y pulsar
+<em class="guilabel">Next</em></p>
 <img alt="../_images/vmware_proc_13.png" src="../_images/vmware_proc_13.png" />
-<p>A continuación pulsaremos <em>Browse</em> y buscaremos el lugar dónde
+<p>A continuación pulsaremos <em class="guilabel">Browse</em> y buscaremos el lugar dónde
 hemos descomprimido el archivo descargado de <em>Sourceforge</em>. En la imagen
 podemos ver que la casilla ha sido difuminada.</p>
-<p>Seleccionar el disco que hemos descomprimido y pulsar <em>Finish</em></p>
+<p>Seleccionar el disco que hemos descomprimido y pulsar <em class="guilabel">Finish</em></p>
 <img alt="../_images/vmware_proc_14.png" src="../_images/vmware_proc_14.png" />
 <p>Es posible que la aplicación nos solicite información sobre la ejecución de
-una actualización de versión del disco virtual. Deberemos seleccionar la
-opción <em>Convert</em>.</p>
+una actualización de versión del disco virtual. <strong>La opción de convertirlo
+es completamente opcional</strong> por lo que nos podemos saltar este paso. Para
+convertirlo deberemos seleccionar la opción <em class="guilabel">Convert</em>.</p>
 <img alt="../_images/vmware_proc_15.png" src="../_images/vmware_proc_15.png" />
-<p>Solo restará guardar la configuración de la máquina virtual pulsando <em>Save</em></p>
-<p>Pulsamos <em>Save</em></p>
-<p>Y ejecutar la máquina virtual con la opción <em>Play virtual machine</em></p>
+<p>Solo restará guardar la configuración de la máquina virtual pulsando
+<em class="guilabel">Save</em></p>
+<p>Y ejecutar la máquina virtual con la opción <em class="guilabel">Play virtual machine</em></p>
 <img alt="../_images/vmware_proc_16.png" src="../_images/vmware_proc_16.png" />
-<p>Seleccionamos <em>osgeo_live</em> y pulsamos <em>Play virtual machine</em></p>
+<p>Seleccionamos <em class="guilabel">osgeo_live</em> y pulsamos <em class="guilabel">Play virtual
+machine</em></p>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
