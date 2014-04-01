@@ -21,21 +21,21 @@ un software de virtualización, que se encargará de hospedar la máquina
 virtual. 
 
 Para el caso que nos ocupa emplearemos la máquina virtual |olver| de `OSGeo
-Live`_ dentro del software de virtualización *VMWare*.
+Live`_ dentro del software de virtualización :program:`VMWare Player`.
 
 Los pasos necesarios para esto son:
 
-* Descarga e instalación de VMWare.
-* Descarga de OSGeo Live.
+* Descarga e instalación de :program:`VMWare player`.
+* Descarga de *OSGeo Live*.
 * Configuración de la máquina virutal
 
 En la terminología de los software de virtualización, la máquina real es la
-anfitriona, host en inglés; mientras que la máquina virtual es la huésped, o
-guest en inglés.
+anfitriona, *host* en inglés; mientras que la máquina virtual es la huésped, o
+*guest* en inglés.
 
 
-Descarga e instalación de VMWare
---------------------------------
+Descarga e instalación de VMWare Player
+----------------------------------------
 
 El primer paso es descargar el software de la `página de descargas de
 VMWare`_ y proceder a su instalación.
@@ -91,33 +91,47 @@ Para descomprimir el archivo emplearemos el comando:
 
    $ 7z e osgeo-live-vm-7.0.7z
 
+Descompresión del archivo en Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Si hemos instalado la aplicación :program:`7-Zip File Manager` al hacer
+doble click sobre el archivo descargado nos mostrará una ventana de
+aplicación con la que podemos seleccionar :guilabel:`Extraer` y después
+indicarle a la aplicación en qué directorio queremos descomprimir el
+archivo.
+
+.. image:: _static/vmware_proc_17.png
+
+También es posible descomprimir el archivo usando la aplicación
+:program:`WinRAR`.
+
 Configuración de la máquina virtual
 --------------------------------------
 
-La máquina virtual se ejecuta dentro del programa *VMWare Player* que hemos
-instalado con anterioridad, por lo que arrancaremos dicho programa
+La máquina virtual se ejecuta dentro del programa :program:`VMWare Player`
+que hemos instalado con anterioridad, por lo que arrancaremos dicho programa
 
 .. image:: _static/vmware_open_vm.png
 
-Seleccionaremos la opción *Create a New Virtual Machine*.
+Seleccionaremos la opción :guilabel:`Create a New Virtual Machine`.
 
 .. image:: _static/vmware_proc_01.png
 
-Seleccionamos *I will install the operating system later*
+Seleccionamos :guilabel:`I will install the operating system later`
 
 .. image:: _static/vmware_proc_02.png
 
-Seleccionamos *Guest Operating System: Linux* y *Version: Ubuntu*
+Seleccionamos :guilabel:`Guest Operating System: Linux` y
+:guilabel:`Version: Ubuntu`
 
 A continuación deberemos darle un nombre a la máquina virtual y seleccionar
 una ubicación en disco en la que almacenarla. 
+
 .. image:: _static/vmware_proc_03.png
-   
 
 Seleccionamos el nombre de la máquina y cuál será su localización en disco. 
 El nombre de la máquina *osgeo_live* y el destino de la
 máquina aparece difuminado.
-
 
 .. image:: _static/vmware_proc_04.png
    
@@ -125,92 +139,83 @@ La aplicación nos solicitará que seleccionemos la capacidad del disco. En
 realidad no usaremos el disco que configure la máquina virtual, por lo que
 podemos dejar las opciones por defecto.
 
-Seleccionamos la configuración del disco duro: *Split virtual disk into multiple files*
+Seleccionamos la configuración del disco duro: :guilabel:`Split virtual disk
+into multiple files`
 
 .. image:: _static/vmware_proc_05.png
-   
 
-Pulsaremos *Finish*
-
+Pulsaremos :guilabel:`Finish`
 
 .. image:: _static/vmware_proc_06.png
-   
 
-Pulsaremos *Close*
+Pulsaremos :guilabel:`Close`
 
 Tenemos la máquina virtual creada pero hay que configurarla para que use el
 disco que nos hemos descargado.
 
 .. image:: _static/vmware_proc_07.png
-   
 
-Seleccionamos la máquina osgeo_live y a continuación pulsamos *Edit virtual
-machine settings*
+Seleccionamos la máquina osgeo_live y a continuación pulsamos
+:guilabel:`Edit virtual machine settings`
 
 .. image:: _static/vmware_proc_08.png
    
-Seleccionaremos el disco duro creado por defecto *Hard Disk (SCSI)* y lo
-eliminaremos.
+Seleccionaremos el disco duro creado por defecto :guilabel:`Hard Disk
+(SCSI)` y lo eliminaremos.
 
-Seleccionar *Hard Disk (SCSI)* y después pulsar *Remove*
+Seleccionar :guilabel:`Hard Disk (SCSI)` y después pulsar :guilabel:`Remove`
 
 Ahora añadiremos el disco virtual que nos hemos descargado de *Sourceforge*
 y hemos descomprimido.
 
 .. image:: _static/vmware_proc_09.png
-   
 
-Pulsar *Add...*
-
+Pulsar :guilabel:`Add...`
 
 .. image:: _static/vmware_proc_10.png
-   
 
-Seleccionar *Hard Disk* y pulsar *Next*
-
+Seleccionar :guilabel:`Hard Disk` y pulsar :guilabel:`Next`
 
 .. image:: _static/vmware_proc_11.png
    
-Dejaremos la opción por defecto *SCSI*
+Dejaremos la opción por defecto :guilabel:`SCSI`
 
-Pulsar *Next*
+Pulsar :guilabel:`Next`
 
-El nuevo disco ya existe por lo que hay que seleccionar la opción *Use an
-existing virtual disk*
+El nuevo disco ya existe por lo que hay que seleccionar la opción
+:guilabel:`Use an existing virtual disk`
 
 .. image:: _static/vmware_proc_12.png
-   
 
-Seleccionar *Use an existing virtual disk* y pulsar *Next*
-
+Seleccionar :guilabel:`Use an existing virtual disk` y pulsar
+:guilabel:`Next`
 
 .. image:: _static/vmware_proc_13.png
    
-A continuación pulsaremos *Browse* y buscaremos el lugar dónde
+A continuación pulsaremos :guilabel:`Browse` y buscaremos el lugar dónde
 hemos descomprimido el archivo descargado de *Sourceforge*. En la imagen
 podemos ver que la casilla ha sido difuminada.
 
-Seleccionar el disco que hemos descomprimido y pulsar *Finish*
-
+Seleccionar el disco que hemos descomprimido y pulsar :guilabel:`Finish`
 
 .. image:: _static/vmware_proc_14.png
    
 Es posible que la aplicación nos solicite información sobre la ejecución de
-una actualización de versión del disco virtual. Deberemos seleccionar la
-opción *Convert*.
-
+una actualización de versión del disco virtual. **La opción de convertirlo
+es completamente opcional** por lo que nos podemos saltar este paso. Para
+convertirlo deberemos seleccionar la opción :guilabel:`Convert`.
 
 .. image:: _static/vmware_proc_15.png
    
-Solo restará guardar la configuración de la máquina virtual pulsando *Save*
+Solo restará guardar la configuración de la máquina virtual pulsando
+:guilabel:`Save`
 
-Pulsamos *Save*
-
-Y ejecutar la máquina virtual con la opción *Play virtual machine*
+Y ejecutar la máquina virtual con la opción :guilabel:`Play virtual machine`
 
 .. image:: _static/vmware_proc_16.png
 
-Seleccionamos *osgeo_live* y pulsamos *Play virtual machine*
+Seleccionamos :guilabel:`osgeo_live` y pulsamos :guilabel:`Play virtual
+machine`
 
 .. [1] 7-Zip es un gestor de archivos comprimidos Open Source y
    multiplataforma que usa de manera nativa el formato de archivo :file:`7z`
