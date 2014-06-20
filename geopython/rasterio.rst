@@ -4,7 +4,7 @@ rasterio
 Lectura de raster y obtención de información
 -----------------------------------------------
 
-El siguiente programa python muestra la información de un raster que se pasa como parámetro::
+Obtención de información de un raster::
 
 	#! /usr/bin/env python
 	
@@ -28,15 +28,15 @@ El siguiente programa python muestra la información de un raster que se pasa co
 
 Ejemplos::
 
-	raster_info.py ~/data/north_carolina/rast_geotiff/elevation.tif
-	raster_info.py /usr/share/osgearth/data/world.tif
+	./raster_info.py ~/data/north_carolina/rast_geotiff/elevation.tif
+	./raster_info.py /usr/share/osgearth/data/world.tif
 
-Truco: En modo interactivo ejecutar ``dir(d)`` para ver las opciones
+Truco: En modo interactivo ejecutar dir(d) para ver las opciones
 
 Lectura en una coordenada
 ----------------------------
 
-Una propiedad ``affine`` en rasterio... que no he encontrado. Está en el master, pero no está todavía en la versión que hay instalada. Con lo cual esto no se puede hacer:
+Una propiedad affine en rasterio... que no he encontrado. Está en el master, pero no está todavía en la versión que hay instalada. Con lo cual esto no se puede hacer:
 
 https://github.com/mapbox/rasterio/blob/master/docs/datasets.rst#attributes
 
@@ -54,7 +54,7 @@ Cambiamos la primera columna al final::
 
 	affine = affine[:,numpy.array([1, 2, 0])]
 
-Y por último multipicamos un vector coordenada (con un 1 en la z) y obtenemos la coordenada de la esquina superior izquierda de nuestro raster::
+Y por último multipicamos por la coordenada (0, 0, 1) y obtenemos la coordenada de la esquina superior izquierda de nuestro raster::
 
 	affine * numpy.mat("0;0;1")
 	affine * numpy.mat("{0};{1};1".format(d.width, d.height))
@@ -111,13 +111,13 @@ y hacer un programita que nos devuelva la posición::
 
 Ejemplos::
 
-	raster_coordinate.py ~/data/raster/bluemarble.tif -60 -50
+	./raster_coordinate.py ~/data/raster/bluemarble.tif -60 -50
 	Pixel:  (1440, 1680)
 	26
 	69
 	125
 
-	raster_coordinate.py ~/data/north_carolina/rast_geotiff/elevation.tif 633519 223743
+	./raster_coordinate.py ~/data/north_carolina/rast_geotiff/elevation.tif 633519 223743
 	Pixel:  (351, 475)
 	129.621
 
@@ -175,12 +175,6 @@ Generalizando, podríamos hacer un programita que leyera un fichero de entrada y
 
 Ejemplos::
 
-
-
-
-
-
-
-
+	./raster_filter.py ~/data/north_carolina/rast_geotiff/elevation.tif /tmp/output.tif 'band > 100'
 
 

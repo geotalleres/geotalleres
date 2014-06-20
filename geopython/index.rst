@@ -10,6 +10,9 @@ Contenidos:
 
    instalacion
    rasterio
+   fiona
+   shapely
+   fiona_shapely
    guion
 
 

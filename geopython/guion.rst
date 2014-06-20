@@ -44,11 +44,15 @@ Guía del workshop
     
 #. Fiona
 	
-	acceso a datos pythonizado
-	lectura de distintas fuentes de datos
-	Modificación de una feature
-	Creación de un shape desde cero (malla?)
+	Mostrar el script de lectura en la consola interactiva explicando cada línea
+	Mostrar dir(d)
+	Hacer ejercicio
 	
+	Seguir la teoría desde la consola de python
+	hacer ejercicio
+
+	
+
 #. Shapely
 
 	Os suena JTS? os suena OGR? Pues la misma "mierda"
