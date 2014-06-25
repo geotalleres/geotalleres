@@ -1,10 +1,22 @@
 fiona
 =========
 
+.. note::
+
+    ================  ================================================
+    Fecha              Autores
+    ================  ================================================             
+    25 Junio 2014       * Fernando González Cortés(fergonco@gmail.com) 
+    ================  ================================================  
+
+    ©2014 Fernando González Cortés
+
+    Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Lectura de una juego de datos
 -------------------------------
 
-Ejercicio: Hacer script que lee un fichero que se le pasa como parámetro::
+Ejercicio: Hacer script que muestra información de un fichero que se le pasa como parámetro::
 
 	#! /usr/bin/env python
 	
@@ -60,7 +72,7 @@ Fiona ofrece los contenidos del shapefile como objetos python. Invocando el mét
 	    ])
 	}
 
-Ejercicio: hacer script que muestre todos los valores de un campo que se pasa como parámetro::
+Ejercicio: hacer script que muestre todos los valores de un campo que se pasa como parámetro (fiona_show_field.py)::
 
 	#! /usr/bin/env python
 	
@@ -85,7 +97,7 @@ Ejemplo::
 Operaciones con campos
 ------------------------
 
-Llevando el ejemplo anterior un paso más allá, podemos hacer un programita que en lugar de mostrar los campos por la consola lo que haga sea modificar las features eliminando todos los campos menos el seleccionado (fiona_projection)::
+Llevando el ejemplo anterior un paso más allá, podemos hacer un programita que en lugar de mostrar los campos por la consola lo que haga sea modificar las features eliminando todos los campos menos el seleccionado (fiona_projection.py)::
 
 	#! /usr/bin/env python
 	
@@ -110,7 +122,7 @@ Ejemplo::
 
 	./fiona_projection.py ~/data/north_carolina/shape/hospitals.shp NAME
 
-Y generalizando todavía más, podemos obtener una serie de expresiones como parámetros que serán los nuevos campos (fiona_projection_ops)::
+Y generalizando todavía más, podemos obtener una serie de expresiones como parámetros que serán los nuevos campos (fiona_projection_ops.py)::
 
 	#! /usr/bin/env python
 	
@@ -158,7 +170,7 @@ Ejemplo::
 Filtrado
 ---------
 
-Ejercicio: Hacer un script que muestre sólo los objetos hospital que están en la ciudad de "Goldsboro" (fiona_goldsboro_hospitals)::
+Ejercicio: Hacer un script que muestre sólo los objetos hospital que están en la ciudad de "Goldsboro" (fiona_goldsboro_hospitals.py)::
 
 	#! /usr/bin/env python
 	
@@ -169,16 +181,12 @@ Ejercicio: Hacer un script que muestre sólo los objetos hospital que están en 
 	
 	for feature in d:
 		if feature["properties"]["CITY"]=="Goldsboro":
-			for property in feature["properties"]:
-				if property != "NAME":
-					del feature["properties"][property]
-		
-			print feature
+			print feature["properties"]["NAME"]
 	
 	d.close()
 
 
-Incluso se podría extender el último ejemplo del punto anterior y pasar la expresión como parámetro también (fiona_projection_selection)::
+Incluso se podría extender el último ejemplo del punto anterior y pasar la expresión como parámetro también (fiona_projection_selection.py)::
 
 	#! /usr/bin/env python
 	
@@ -239,7 +247,7 @@ Es obvio que sería interesante escribir el resultado como otro shapefile, ¿no?
 Creación de un shapefile desde cero
 ------------------------------------
 
-El siguiente código crea un fichero con objetos de tipo punto cuyas coordenadas se leen como parámetro (fiona_create_two_points)::
+El siguiente código crea un fichero con objetos de tipo punto cuyas coordenadas se leen como parámetro (fiona_create_points.py)::
 
 	#! /usr/bin/env python
 	
@@ -312,7 +320,7 @@ Ejercicio: Crear un programa que tome un shapefile de entrada y un tamaño y cre
 	
 	output.close()
 
-Solución (fiona_grid)::
+Solución (fiona_grid.py)::
 
 	#! /usr/bin/env python
 	
@@ -369,12 +377,12 @@ Solución (fiona_grid)::
 
 Ejemplo::
 
-	./fiona_grid.py ~/data/north_carolina/shape/hospitals.shp 50000 /tmp/out.shp
+	./fiona_grid.py ~/data/north_carolina/shape/hospitals.shp 50000 /tmp/grid.shp
 
 Modificación y escritura de un shapefile
 ------------------------------------------
 
-Ejercicio: tomar el ejemplo "fiona_goldsboro_hospitals" y escribir el resultado en otro fichero (fiona_goldsboro_hospitals_write)::
+Ejercicio: tomar el ejemplo "fiona_goldsboro_hospitals" y escribir el resultado en otro fichero (fiona_goldsboro_hospitals_write.py)::
 
 	#! /usr/bin/env python
 	
@@ -393,17 +401,20 @@ Ejercicio: tomar el ejemplo "fiona_goldsboro_hospitals" y escribir el resultado 
 	
 	for feature in d:
 		if feature["properties"]["CITY"]=="Goldsboro":
-			for property in feature["properties"]:
-				if property != "NAME":
-					del feature["properties"][property]
-		
+	                newFeature = {
+	                        "geometry" : feature["geometry"],
+	                        "properties" : {
+	                                "NAME" : feature["properties"]["NAME"]
+	                        }
+	                }
+
 			output.write(feature)
 	
 	output.close()
 	
 	d.close()
 
-Por último, vamos a generalizar el último ejemplo del punto de filtrado para pasarle como segundo parámetro el fichero de salida donde se quiere escribir (fiona_projection_selection_write)::
+Por último, vamos a generalizar el último ejemplo del punto de filtrado para pasarle como segundo parámetro el fichero de salida donde se quiere escribir (fiona_projection_selection_write.py)::
 
 	#! /usr/bin/env python
 	

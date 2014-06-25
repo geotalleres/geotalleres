@@ -1,6 +1,18 @@
 Instalación
 ===========
 
+.. note::
+
+    ================  ================================================
+    Fecha              Autores
+    ================  ================================================             
+    25 Junio 2014       * Fernando González Cortés(fergonco@gmail.com) 
+    ================  ================================================  
+
+    ©2014 Fernando González Cortés
+
+    Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 El taller se realiza sobre una máquina virtual con la versión 7.9 del DVD de OSGEO, sobre el que tenemos que instalar las librerías Shapely, Fiona y Rasterio.
 
 Detallamos a continuación el método de instalación de dos formas.

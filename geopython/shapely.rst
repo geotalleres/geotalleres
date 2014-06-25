@@ -1,6 +1,18 @@
 shapely
 =========
 
+.. note::
+
+    ================  ================================================
+    Fecha              Autores
+    ================  ================================================             
+    25 Junio 2014       * Fernando González Cortés(fergonco@gmail.com) 
+    ================  ================================================  
+
+    ©2014 Fernando González Cortés
+
+    Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Sesión interactiva::
 
 	# Dibujamos dos puntos en el JTSTestBuilder para obtener su WKT

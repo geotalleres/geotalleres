@@ -1,10 +1,22 @@
 rasterio
 =========
 
+.. note::
+
+    ================  ================================================
+    Fecha              Autores
+    ================  ================================================             
+    25 Junio 2014       * Fernando González Cortés(fergonco@gmail.com) 
+    ================  ================================================  
+
+    ©2014 Fernando González Cortés
+
+    Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 Lectura de raster y obtención de información
 -----------------------------------------------
 
-Obtención de información de un raster::
+Obtención de información de un raster (raster_info.py)::
 
 	#! /usr/bin/env python
 	
@@ -31,14 +43,18 @@ Ejemplos::
 	./raster_info.py ~/data/north_carolina/rast_geotiff/elevation.tif
 	./raster_info.py /usr/share/osgearth/data/world.tif
 
-Truco: En modo interactivo ejecutar dir(d) para ver las opciones
+Truco: En modo interactivo ejecutar dir(d) o help(d) para ver las opciones
 
 Lectura en una coordenada
 ----------------------------
 
-Una propiedad affine en rasterio... que no he encontrado. Está en el master, pero no está todavía en la versión que hay instalada. Con lo cual esto no se puede hacer:
+RasterIO proporciona el método ``read_band`` que devuelve una matriz numpy con los contenidos de la banda que se pasa como parámetro. Así, para leer el valor del raster en una coordenada del mapa es suficiente con obtener el pixel que contiene a esa coordenada.
+
+Existe una propiedad ``affine`` en rasterio... que no he encontrado. Está en el master, pero no está todavía en la versión que hay instalada. Con lo cual esto no se puede hacer:
 
 https://github.com/mapbox/rasterio/blob/master/docs/datasets.rst#attributes
+
+Existe el método ul, que hace justo lo contrario.
 
 Es un poquito más complicado:
 
@@ -64,7 +80,7 @@ Podemos también hacer la transformación al contrario, a partir de unas coorden
 
 	affine.I * numpy.mat("0;0;1")
 
-Una vez resuelto el problema técnico podemos empaquetar lo anterior como funciones en un módulo util::
+Una vez resuelto el problema técnico podemos empaquetar lo anterior como funciones en un módulo util (utils.py)::
 
 	#! /usr/bin/env python
 	
@@ -86,7 +102,28 @@ Una vez resuelto el problema técnico podemos empaquetar lo anterior como funcio
 		return (ret.item(0), ret.item(1))
  
 
-y hacer un programita que nos devuelva la posición::
+y hacer el programita que nos devuelva el valor de la coordenada que le pasamos a partir de esta plantilla::
+
+        #! /usr/bin/env python
+        
+        import sys
+        import utils
+        import rasterio
+        
+        file = sys.argv[1]
+        x = sys.argv[2]
+        y = sys.argv[3]
+        
+        d = rasterio.open(file)
+        
+        pixel = utils.toPixel(x, y, d)
+        print "Pixel: ", pixel
+       
+	..
+ 
+        d.close()
+
+Solución (raster_coordinate.py)::
 
 	#! /usr/bin/env python
 	
@@ -143,7 +180,13 @@ que luego podríamos utilizar para multiplicar por la propia banda y así dejar 
 
 	result = mask * band
 
-Generalizando, podríamos hacer un programita que leyera un fichero de entrada y una expresión y creara un raster manteniendo los pixeles que cumplen dicha expresión y dejando los demás a cero::
+El resultado podría escribirse y visualizarse en algún GIS::
+
+        w = rasterio.open('/tmp/filtered.tif', 'w', driver='GTiff', dtype=rasterio.float32, transform=d.transform, nodata=0, count=1, width=d.width, height=d.height)
+	w.write_band(1, result)
+	w.close()
+
+Ejercicio: hacer un programita que leyera un fichero de entrada y una expresión y creara un raster manteniendo los pixeles que cumplen dicha expresión y dejando los demás a cero (raster_filter.py)::
 
 	#! /usr/bin/env python
 	

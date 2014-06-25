@@ -1,5 +1,17 @@
-Fiona: como conocí a vuestro shapely
-====================================
+fiona y shapely
+====================
+
+.. note::
+
+    ================  ================================================
+    Fecha              Autores
+    ================  ================================================             
+    25 Junio 2014       * Fernando González Cortés(fergonco@gmail.com) 
+    ================  ================================================  
+
+    ©2014 Fernando González Cortés
+
+    Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 Ahora que sabemos hacer cosas interesantes con Shapely, vamos a ver cómo podemos utilizar ésta librería con datos leídos por Fiona.
 
@@ -8,7 +20,7 @@ shape y mapping
 
 Las funciones ``shape`` y ``mapping`` nos permiten convertir desde objetos geométricos de fiona a objetos geométricos de shapely y viceversa.
 
-Ejercicio. Qué hace el siguiente código (shape_mean_area)::
+Ejercicio. Qué hace el siguiente código (shape_mean_area.py)::
 
 	#! /usr/bin/env python
 	
@@ -62,7 +74,7 @@ Ejercicio. Crear un shapefile con un buffer alrededor de cada hospital. Podemos 
 	d.close()
 
 
-Solución (shape_write_buffer)::
+Solución (shape_write_buffer.py)::
 
 	#! /usr/bin/env python
 	
@@ -129,8 +141,43 @@ y ejecutar la siguiente instrucción::
 
 	./shape_projection_selection_write.py ~/data/north_carolina/shape/hospitals.shp /tmp/nearby_hospitals.shp 'shape(feature["geometry"]).distance(loads("POINT(446845 161978)")) < 20000' 'name as NAME'
 
-Transformaciones espaciales
+Proyecciones espaciales
 ------------------------------
+
+Modificar fiona_goldsboro_hospitals_write.py para que escriba un buffer de 4km alrededor de cada hospital.
+
+Solución (fiona_goldsboro_hospitals_buffer_write.py)::
+
+	#! /usr/bin/env python
+	
+	import sys
+	import fiona
+	from shapely.geometry import shape, mapping
+	
+	d = fiona.open("/home/user/data/north_carolina/shape/hospitals.shp")
+	
+	outputSchema = {
+	        "geometry": 'Polygon',
+	        "properties": {
+	                ("NAME", d.schema["properties"]["NAME"])
+	        }
+	}
+	output = fiona.open("/tmp/hospitals_in_goldsboro_buffer.shp", "w", driver="ESRI Shapefile", crs=d.crs, schema=outputSchema)
+	
+	for feature in d:
+	        if feature["properties"]["CITY"]=="Goldsboro":
+	                newFeature = {
+	                        "geometry" : mapping(shape(feature["geometry"]).buffer(4000)),
+	                        "properties" : {
+	                                "NAME" : feature["properties"]["NAME"]
+	                        }
+	                }
+	
+	                output.write(newFeature)
+	
+	output.close()
+	
+	d.close()
 
 Ejercicio:: ¿Es posible utilizar el script "fiona_projection_selection_write.py" para calcular el buffer de los hospitales? ¿Qué cambios hay que hacerle?
 
@@ -151,7 +198,7 @@ y el valor en la feature::
 	if geomField is not None:
 		newFeature["geometry"] = eval(field["expression"])
 
-quedando al final el script así::
+quedando al final el script así (shape_projection_selection_write.py)::
 
 	#! /usr/bin/env python
 	
@@ -251,7 +298,7 @@ Ejemplo de uso::
 ¿Qué más?: agrupados
 ---------------------
 
-Podemos agrupar con este script (shape_group)::
+Podemos agrupar con este script (shape_group.py)::
 
 	#! /usr/bin/env python
 	
@@ -377,7 +424,7 @@ También podemos hacer Joins. Para ello extraemos el código que parsea los par�
 	def getAlphanumericFields(fields):
 		return [field for field in fields if field["name"] != "geometry"]
 
-Y con el siguiente script::
+Y con el siguiente script (shape_join.py)::
 
 	#! /usr/bin/env python
 	
@@ -506,7 +553,7 @@ Por último podemos hacer un join con la malla inicial, por el código de malla 
 
 	./shape_join.py /tmp/num_hospitals_cell.shp /tmp/cutted_grid.shp /tmp/density.shp sequential 'outerFeature["properties"]["gid"] == innerFeature["properties"]["gid"]' 'geometry:Polygon as innerFeature["geometry"]' 'gid:int as outerFeature["properties"]["gid"]' 'density:float as outerFeature["properties"]["count"] / shape(innerFeature["geometry"]).area'
 
-Resumiendo, aquí tenemos el proceso para el cálculo de densidades::
+Resumiendo, aquí tenemos el proceso para el cálculo::
 
 	./fiona_grid.py ~/data/north_carolina/shape/hospitals.shp 50000 /tmp/grid.shp
 	./shape_group.py /home/user/data/north_carolina/shape/boundary_county.shp /tmp/bounds.shp MultiPolygon
