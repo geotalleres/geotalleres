@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalación &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/geotalleres.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="up" title="Geoprocesamiento con Python" href="index.html" />
+    <link rel="next" title="rasterio" href="rasterio.html" />
+    <link rel="prev" title="Librerías GEO interesantes en Python" href="librerias.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          GeoTalleres</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Nav <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Geoprocesamiento con Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="miniintro_python.html">Mini intro a python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librerias.html">Librerías GEO interesantes en Python</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Instalación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterio.html">rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona.html">fiona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapely.html">shapely</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona_shapely.html">fiona y shapely</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Instalación</a><ul>
+<li><a class="reference internal" href="#version-rapida">Versión rápida</a></li>
+<li><a class="reference internal" href="#version-detallada">Versión detallada</a></li>
+<li><a class="reference internal" href="#creacion-de-un-entorno-virtual">Creación de un entorno virtual</a></li>
+<li><a class="reference internal" href="#fiona-y-shapely">Fiona y Shapely</a><ul>
+<li><a class="reference internal" href="#rtree">Rtree</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rasterio">Rasterio</a></li>
+<li><a class="reference internal" href="#comprobacion">Comprobación</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="librerias.html" title="Previous Chapter: Librerías GEO interesantes en Python"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Librerías GEO in...</span>
+    </a>
+  </li>
+  <li>
+    <a href="rasterio.html" title="Next Chapter: rasterio"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">rasterio &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/geopython/instalacion.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="instalacion">
+<h1>Instalación<a class="headerlink" href="#instalacion" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>25 Junio 2014</td>
+<td><ul class="first last simple">
+<li>Fernando González Cortés(<a class="reference external" href="mailto:fergonco&#37;&#52;&#48;gmail&#46;com">fergonco<span>&#64;</span>gmail<span>&#46;</span>com</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2014 Fernando González Cortés</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>El taller se realiza sobre una máquina virtual con la versión 7.9 del DVD de OSGEO, sobre el que tenemos que instalar las librerías Shapely, Fiona y Rasterio.</p>
+<p>Detallamos a continuación el método de instalación de dos formas.</p>
+<div class="section" id="version-rapida">
+<h2>Versión rápida<a class="headerlink" href="#version-rapida" title="Permalink to this headline">¶</a></h2>
+<p>Copiar la <a class="reference external" href="http://download.osgeo.org/libspatialindex/spatialindex-src-1.7.0.tar.gz">versión 1.7.0 de los fuentes en tar.gz de libspatialindex</a> al directorio <tt class="docutils literal"><span class="pre">/tmp/</span></tt> de la máquina virtual.</p>
+<p>Crear en la máquina un fichero <tt class="docutils literal"><span class="pre">/tmp/install.sh</span></tt> con este contenido:</p>
+<div class="highlight-python"><pre>set -e
+
+cd $HOME
+
+sudo apt-get install libgdal1-dev python-dev
+sudo apt-get install python-virtualenv
+
+mkdir tig_env
+virtualenv tig_env
+source tig_env/bin/activate
+
+pip install fiona
+pip install Shapely
+
+cd /tmp
+tar -xzvf /tmp/spatialindex-src-1.7.0.tar.gz
+cd spatialindex-src-1.7.0/
+sudo ./configure
+sudo make
+sudo make install
+sudo ldconfig
+pip install Rtree
+
+pip install affine&gt;=1.0
+pip install Numpy
+pip install setuptools
+
+pip install rasterio</pre>
+</div>
+<p>Dar permisos de ejecución:</p>
+<div class="highlight-python"><pre>chmod u+x /tmp/install.sh</pre>
+</div>
+<p>Ejecutar:</p>
+<div class="highlight-python"><pre>/tmp/install.sh</pre>
+</div>
+</div>
+<div class="section" id="version-detallada">
+<h2>Versión detallada<a class="headerlink" href="#version-detallada" title="Permalink to this headline">¶</a></h2>
+<p>Shapely, Fiona y Rasterio funcionan sobre GDAL y su instalación requiere la compilación de código en C, por lo que antes de empezar a instalar las librerías hay que instalar los siguientes prerrequisitos:</p>
+<div class="highlight-python"><pre>sudo apt-get install libgdal1-dev python-dev</pre>
+</div>
+</div>
+<div class="section" id="creacion-de-un-entorno-virtual">
+<h2>Creación de un entorno virtual<a class="headerlink" href="#creacion-de-un-entorno-virtual" title="Permalink to this headline">¶</a></h2>
+<p>Para la instalación crearemos un entorno virtual:</p>
+<div class="highlight-python"><pre>sudo apt-get install python-virtualenv
+mkdir tig_env
+virtualenv tig_env</pre>
+</div>
+<p>Tras la creación, podemos ejecutar la siguiente instrucción para entrar en el entorno virtual:</p>
+<div class="highlight-python"><pre>source tig_env/bin/activate</pre>
+</div>
+<p>Para dejar el entorno virtual es suficiente con ejecutar la instrucción <tt class="docutils literal"><span class="pre">deactivate</span></tt></p>
+</div>
+<div class="section" id="fiona-y-shapely">
+<h2>Fiona y Shapely<a class="headerlink" href="#fiona-y-shapely" title="Permalink to this headline">¶</a></h2>
+<p>Una vez creado y activado el entorno virtual, hay que ejecutar los siguientes comandos para instalar Fiona y Shapely:</p>
+<div class="highlight-python"><pre>pip install fiona
+pip install Shapely</pre>
+</div>
+<div class="section" id="rtree">
+<h3>Rtree<a class="headerlink" href="#rtree" title="Permalink to this headline">¶</a></h3>
+<p>Durante las prácticas se hará uso de un índice espacial, por lo que hay que instalar la librería <tt class="docutils literal"><span class="pre">libspatialindex</span></tt> 1.7.0, que se puede descargar de aquí:</p>
+<div class="highlight-python"><pre>http://download.osgeo.org/libspatialindex/</pre>
+</div>
+<p>Descargamos <tt class="docutils literal"><span class="pre">spatialindex-src-1.7.0.tar.gz</span></tt> en el directorio <tt class="docutils literal"><span class="pre">/tmp</span></tt> y descomprimimos:</p>
+<div class="highlight-python"><pre>cd /tmp/
+tar -xzvf /tmp/spatialindex-src-1.7.0.tar.gz</pre>
+</div>
+<p>A continuación, dentro del directorio que ha aparecido:</p>
+<div class="highlight-python"><pre>cd spatialindex-src-1.7.0/</pre>
+</div>
+<p>Se ejecutan las siguientes instrucciones:</p>
+<div class="highlight-python"><pre>sudo ./configure
+sudo make
+sudo make install
+sudo ldconfig</pre>
+</div>
+<p>Y por último instalamos el índice espacial:</p>
+<div class="highlight-python"><pre>pip install Rtree</pre>
+</div>
+</div>
+</div>
+<div class="section" id="rasterio">
+<h2>Rasterio<a class="headerlink" href="#rasterio" title="Permalink to this headline">¶</a></h2>
+<p>Para la manipulación de datos raster utilizaremos rasterio. Instalamos primero los requisitos:</p>
+<div class="highlight-python"><pre>pip install affine&gt;=1.0
+pip install Numpy
+pip install setuptools</pre>
+</div>
+<p>Y por último instalamos rasterio:</p>
+<div class="highlight-python"><pre>pip install rasterio</pre>
+</div>
+</div>
+<div class="section" id="comprobacion">
+<h2>Comprobación<a class="headerlink" href="#comprobacion" title="Permalink to this headline">¶</a></h2>
+<p>Por último comprobamos que todo está instalado correctamente. Ejecutamos python:</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Varios.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

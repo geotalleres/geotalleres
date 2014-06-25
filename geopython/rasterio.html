@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>rasterio &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/geotalleres.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="up" title="Geoprocesamiento con Python" href="index.html" />
+    <link rel="next" title="fiona" href="fiona.html" />
+    <link rel="prev" title="Instalación" href="instalacion.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          GeoTalleres</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Nav <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Geoprocesamiento con Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="miniintro_python.html">Mini intro a python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librerias.html">Librerías GEO interesantes en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html">Instalación</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona.html">fiona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapely.html">shapely</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona_shapely.html">fiona y shapely</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">rasterio</a><ul>
+<li><a class="reference internal" href="#lectura-de-raster-y-obtencion-de-informacion">Lectura de raster y obtención de información</a></li>
+<li><a class="reference internal" href="#lectura-en-una-coordenada">Lectura en una coordenada</a></li>
+<li><a class="reference internal" href="#escribir-un-raster">Escribir un raster</a></li>
+<li><a class="reference internal" href="#operaciones-con-bandas">Operaciones con bandas</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="instalacion.html" title="Previous Chapter: Instalación"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Instalación</span>
+    </a>
+  </li>
+  <li>
+    <a href="fiona.html" title="Next Chapter: fiona"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">fiona &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/geopython/rasterio.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="rasterio">
+<h1>rasterio<a class="headerlink" href="#rasterio" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>25 Junio 2014</td>
+<td><ul class="first last simple">
+<li>Fernando González Cortés(<a class="reference external" href="mailto:fergonco&#37;&#52;&#48;gmail&#46;com">fergonco<span>&#64;</span>gmail<span>&#46;</span>com</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2014 Fernando González Cortés</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="lectura-de-raster-y-obtencion-de-informacion">
+<h2>Lectura de raster y obtención de información<a class="headerlink" href="#lectura-de-raster-y-obtencion-de-informacion" title="Permalink to this headline">¶</a></h2>
+<p>Obtención de información de un raster (raster_info.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;filas, columnas:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">width</span>
+<span class="k">print</span> <span class="s">&quot;bandas:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">count</span>
+<span class="k">print</span> <span class="s">&quot;crs:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">crs</span>
+<span class="k">print</span> <span class="s">&quot;crs_wkt:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">crs_wkt</span>
+<span class="k">print</span> <span class="s">&quot;bounds:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bounds</span>
+<span class="k">print</span> <span class="s">&quot;driver:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">driver</span>
+<span class="k">print</span> <span class="s">&quot;nodatavalues:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">nodatavals</span>
+<span class="k">print</span> <span class="s">&quot;transform&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">get_transform</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplos:</p>
+<div class="highlight-python"><pre>./raster_info.py ~/data/north_carolina/rast_geotiff/elevation.tif
+./raster_info.py /usr/share/osgearth/data/world.tif</pre>
+</div>
+<p>Truco: En modo interactivo ejecutar dir(d) o help(d) para ver las opciones</p>
+</div>
+<div class="section" id="lectura-en-una-coordenada">
+<h2>Lectura en una coordenada<a class="headerlink" href="#lectura-en-una-coordenada" title="Permalink to this headline">¶</a></h2>
+<p>RasterIO proporciona el método <tt class="docutils literal"><span class="pre">read_band</span></tt> que devuelve una matriz numpy con los contenidos de la banda que se pasa como parámetro. Así, para leer el valor del raster en una coordenada del mapa es suficiente con obtener el pixel que contiene a esa coordenada.</p>
+<p>Existe una propiedad <tt class="docutils literal"><span class="pre">affine</span></tt> en rasterio... que no he encontrado. Está en el master, pero no está todavía en la versión que hay instalada. Con lo cual esto no se puede hacer:</p>
+<p><a class="reference external" href="https://github.com/mapbox/rasterio/blob/master/docs/datasets.rst#attributes">https://github.com/mapbox/rasterio/blob/master/docs/datasets.rst#attributes</a></p>
+<p>Existe el método ul, que hace justo lo contrario.</p>
+<p>Es un poquito más complicado:</p>
+<p>Con <tt class="docutils literal"><span class="pre">t.get_transform</span></tt> podemos obtener una lista con los coeficientes de la matriz de transformacion. Pero para que sea una matriz de transformación correcta hay que añadirle una fila:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_transform</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>También tenemos que mover la primera columna al final de la matriz, para lo cual utilizaremos numpy. Numpy lo utilizaremos también después para multiplicar la coordenada por la matriz de transformación:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">affine</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">([</span><span class="n">t</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">6</span><span class="p">:]])</span>
+</pre></div>
+</div>
+<p>Cambiamos la primera columna al final:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">affine</span> <span class="o">=</span> <span class="n">affine</span><span class="p">[:,</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
+</pre></div>
+</div>
+<p>Y por último multipicamos por la coordenada (0, 0, 1) y obtenemos la coordenada de la esquina superior izquierda de nuestro raster:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">affine</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;0;0;1&quot;</span><span class="p">)</span>
+<span class="n">affine</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;{0};{1};1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+<span class="n">affine</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;{0};{1};1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Podemos también hacer la transformación al contrario, a partir de unas coordenadas (en el CRS de la imagen) podemos obtener el pixel del raster que contiene dicho punto. Para ello utilizaremos la inversa de la matriz para hacer la transformación (.I en numpy):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">affine</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;0;0;1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Una vez resuelto el problema técnico podemos empaquetar lo anterior como funciones en un módulo util (utils.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+
+<span class="k">def</span> <span class="nf">getAffine</span><span class="p">(</span><span class="n">raster</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">raster</span><span class="o">.</span><span class="n">get_transform</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">affine</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">([</span><span class="n">t</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">6</span><span class="p">:]])</span>
+        <span class="n">affine</span> <span class="o">=</span> <span class="n">affine</span><span class="p">[:,</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])]</span>
+        <span class="k">return</span> <span class="n">affine</span>
+
+<span class="k">def</span> <span class="nf">toPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">raster</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">getAffine</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;{0};{1};1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">toMap</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">raster</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">getAffine</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s">&quot;{0};{1};1&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ret</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>y hacer el programita que nos devuelva el valor de la coordenada que le pasamos a partir de esta plantilla:</p>
+<div class="highlight-python"><pre>#! /usr/bin/env python
+
+import sys
+import utils
+import rasterio
+
+file = sys.argv[1]
+x = sys.argv[2]
+y = sys.argv[3]
+
+d = rasterio.open(file)
+
+pixel = utils.toPixel(x, y, d)
+print "Pixel: ", pixel
+
+..
+
+d.close()</pre>
+</div>
+<p>Solución (raster_coordinate.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">pixel</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">toPixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Pixel: &quot;</span><span class="p">,</span> <span class="n">pixel</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="o">.</span><span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">band</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">band</span><span class="p">[</span><span class="n">pixel</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pixel</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplos:</p>
+<div class="highlight-python"><pre>./raster_coordinate.py ~/data/raster/bluemarble.tif -60 -50
+Pixel:  (1440, 1680)
+26
+69
+125
+
+./raster_coordinate.py ~/data/north_carolina/rast_geotiff/elevation.tif 633519 223743
+Pixel:  (351, 475)
+129.621</pre>
+</div>
+</div>
+<div class="section" id="escribir-un-raster">
+<h2>Escribir un raster<a class="headerlink" href="#escribir-un-raster" title="Permalink to this headline">¶</a></h2>
+<p>La escritura del raster sería similar a la lectura. Lo único que hay que tener en cuenta es que las lectura y escritura de bandas se hace a través de estructuras numpy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">w</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/out.tif&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">write_band</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mat</span><span class="p">([[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>
+<span class="n">w</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operaciones-con-bandas">
+<h2>Operaciones con bandas<a class="headerlink" href="#operaciones-con-bandas" title="Permalink to this headline">¶</a></h2>
+<p>Podemos aprovechar que las bandas son almacenadas en una estructura de numpy para realizar operaciones entre bandas fácilmente. En el siguiente ejemplo estaríamos creando una máscara sobre un modelo digital de terreno:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;~/data/north_carolina/rast_geotiff/elevation.tif&quot;</span><span class="p">)</span>
+<span class="n">band</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">band</span> <span class="o">&lt;</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>que luego podríamos utilizar para multiplicar por la propia banda y así dejar a 0 los valores que no cumplen la condición:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">result</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">*</span> <span class="n">band</span>
+</pre></div>
+</div>
+<p>El resultado podría escribirse y visualizarse en algún GIS:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">w</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;/tmp/filtered.tif&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">write_band</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejercicio: hacer un programita que leyera un fichero de entrada y una expresión y creara un raster manteniendo los pixeles que cumplen dicha expresión y dejando los demás a cero (raster_filter.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">rasterio</span>
+<span class="kn">from</span> <span class="nn">rasterio</span> <span class="kn">import</span> <span class="n">features</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">outputPath</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">band</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">read_band</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">*</span> <span class="n">band</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+        <span class="n">outputPath</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">,</span>
+        <span class="n">driver</span><span class="o">=</span><span class="s">&#39;GTiff&#39;</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">rasterio</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+        <span class="n">nodata</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">write_band</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplos:</p>
+<div class="highlight-python"><pre>./raster_filter.py ~/data/north_carolina/rast_geotiff/elevation.tif /tmp/output.tif 'band &gt; 100'</pre>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Varios.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

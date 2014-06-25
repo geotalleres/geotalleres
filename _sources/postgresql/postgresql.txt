@@ -250,13 +250,23 @@ El comando anterior realmente muestra por pantalla el script, lo cual no es muy 
 
 	$ shp2pgsql provincias.shp provincias > /tmp/provincias.sql
 
+Es posible que durante este proceso obtengamos un error similar a éste::
+
+	Unable to convert data value to UTF-8 (iconv reports "Invalid or incomplete multibyte or wide character"). Current encoding is "UTF-8". Try "LATIN1" (Western European), or one of the values described at http://www.postgresql.org/docs/current/static/multibyte.html.
+	
+lo cual quiere decir que la codificación utilizada para almacenar los textos en el fichero .dbf no es UTF-8, que es la que espera el programa ``shp2pgsql`` por defecto. También nos sugiere que intentemos LATIN1. Para decirle al programa qué codificacion utilizamos, podemos especificar el parámetro -W::
+
+	$ shp2pgsql -W LATIN1 provincias.shp provincias > /tmp/provincias.sql
+
+Y si nuestros datos están en LATIN1 se generará el script sin ningún problema.
+
 A continuación no tenemos más que cargar el fichero recién generado con psql::
 
 	$ psql -U postgres -d geoserverdata -f /tmp/provincias.sql
 	
 Tras la ejecución podemos ver con cualquier sistema GIS que soporte conexiones PostGIS 2.0 (como QGis) que se ha creado una tabla en PostreSQL/PostGIS con los mismos datos que contenía el shapefile.
 
-Sin embargo, es posible darse cuenta de que el sistema de referencia de coordenadas (CRS) no está especificado. Por ejemplo, ejecutando esta instrucción::
+El siguiente aspecto que tenemos que tener en cuenta, es que el sistema de referencia de coordenadas (CRS) no está especificado. Por ejemplo, ejecutando esta instrucción::
 
 	$ psql -U postgres -d geoserverdata -c "select * from geometry_columns"
 	

@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fiona y shapely &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/geotalleres.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="up" title="Geoprocesamiento con Python" href="index.html" />
+    <link rel="prev" title="shapely" href="shapely.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          GeoTalleres</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Nav <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Geoprocesamiento con Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="miniintro_python.html">Mini intro a python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librerias.html">Librerías GEO interesantes en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html">Instalación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterio.html">rasterio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona.html">fiona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapely.html">shapely</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">fiona y shapely</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">fiona y shapely</a><ul>
+<li><a class="reference internal" href="#shape-y-mapping">shape y mapping</a></li>
+<li><a class="reference internal" href="#filtrado-espacial">Filtrado espacial</a></li>
+<li><a class="reference internal" href="#proyecciones-espaciales">Proyecciones espaciales</a></li>
+<li><a class="reference internal" href="#que-mas-agrupados">¿Qué más?: agrupados</a></li>
+<li><a class="reference internal" href="#y-joins">¿Y?: Joins</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="shapely.html" title="Previous Chapter: shapely"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; shapely</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/geopython/fiona_shapely.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="fiona-y-shapely">
+<h1>fiona y shapely<a class="headerlink" href="#fiona-y-shapely" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>25 Junio 2014</td>
+<td><ul class="first last simple">
+<li>Fernando González Cortés(<a class="reference external" href="mailto:fergonco&#37;&#52;&#48;gmail&#46;com">fergonco<span>&#64;</span>gmail<span>&#46;</span>com</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2014 Fernando González Cortés</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<p>Ahora que sabemos hacer cosas interesantes con Shapely, vamos a ver cómo podemos utilizar ésta librería con datos leídos por Fiona.</p>
+<div class="section" id="shape-y-mapping">
+<h2>shape y mapping<a class="headerlink" href="#shape-y-mapping" title="Permalink to this headline">¶</a></h2>
+<p>Las funciones <tt class="docutils literal"><span class="pre">shape</span></tt> y <tt class="docutils literal"><span class="pre">mapping</span></tt> nos permiten convertir desde objetos geométricos de fiona a objetos geométricos de shapely y viceversa.</p>
+<p>Ejercicio. Qué hace el siguiente código (shape_mean_area.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">area</span>
+
+<span class="k">print</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo de utilización:</p>
+<div class="highlight-python"><pre>./shape_mean_area.py /home/user/data/north_carolina/shape/urbanarea.shp
+13941122.63</pre>
+</div>
+<p>Ejercicio. Crear un shapefile con un buffer alrededor de cada hospital. Podemos usar la siguiente plantilla:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/hospitals.shp&quot;</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="s">&quot;Polygon&quot;</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/hospitals_buffer.shp&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Solución (shape_write_buffer.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/hospitals.shp&quot;</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="s">&quot;Polygon&quot;</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/hospitals_buffer.shp&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;NAME&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtrado-espacial">
+<h2>Filtrado espacial<a class="headerlink" href="#filtrado-espacial" title="Permalink to this headline">¶</a></h2>
+<p>Ejercicio: Escribir un fichero que contenga sólo las areas urbanas cuya area es mayor que 13941122.63 (la media):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/urbanarea.shp&quot;</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/big_urban_areas.shp&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="mf">13941122.63</span><span class="p">:</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span>
+                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejercicio: Obtener el nombre de los hospitales que están a menos de veinte kilómetros del punto (446845,161978). ¿Es posible utilizar el programa &#8220;fiona_projection_selection_write.py&#8221;? ¿Qué cambios hay que hacerle?</p>
+<p>Solución: Basta con importar las funciones de Shapely que vamos a usar en nuestra expressión:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+<span class="kn">from</span> <span class="nn">shapely.wkt</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+</pre></div>
+</div>
+<p>y ejecutar la siguiente instrucción:</p>
+<div class="highlight-python"><pre>./shape_projection_selection_write.py ~/data/north_carolina/shape/hospitals.shp /tmp/nearby_hospitals.shp 'shape(feature["geometry"]).distance(loads("POINT(446845 161978)")) &lt; 20000' 'name as NAME'</pre>
+</div>
+</div>
+<div class="section" id="proyecciones-espaciales">
+<h2>Proyecciones espaciales<a class="headerlink" href="#proyecciones-espaciales" title="Permalink to this headline">¶</a></h2>
+<p>Modificar fiona_goldsboro_hospitals_write.py para que escriba un buffer de 4km alrededor de cada hospital.</p>
+<p>Solución (fiona_goldsboro_hospitals_buffer_write.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/hospitals.shp&quot;</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="s">&#39;Polygon&#39;</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/hospitals_in_goldsboro_buffer.shp&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;CITY&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;Goldsboro&quot;</span><span class="p">:</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">mapping</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">4000</span><span class="p">)),</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                                <span class="s">&quot;NAME&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">]</span>
+                        <span class="p">}</span>
+                <span class="p">}</span>
+
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejercicio:: ¿Es posible utilizar el script &#8220;fiona_projection_selection_write.py&#8221; para calcular el buffer de los hospitales? ¿Qué cambios hay que hacerle?</p>
+<p>Solución: Como se pretende cambiar la geometría y esta no es una propiedad, hay que comprobar el caso específico al analizar los campos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;geometry&quot;</span><span class="p">:</span>
+        <span class="n">geomField</span> <span class="o">=</span> <span class="n">field</span>
+<span class="k">else</span><span class="p">:</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Luego, si efectivamente hubo una expresión con &#8220;geometry&#8221; tenemos que poner el tipo específico en el esquema:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">geomField</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geomField</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>y el valor en la feature:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">geomField</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>quedando al final el script así (shape_projection_selection_write.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+<span class="kn">from</span> <span class="nn">shapely.wkt</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">geomField</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)):</span>
+        <span class="n">fieldExpression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c"># field parsing</span>
+        <span class="n">asIndex</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot; as &quot;</span><span class="p">)</span>
+        <span class="n">fieldNameAndType</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[:</span><span class="n">asIndex</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">fieldEvalExpression</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[</span><span class="n">asIndex</span><span class="o">+</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="n">colonIndex</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colonIndex</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[:</span><span class="n">colonIndex</span><span class="p">]</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[</span><span class="n">colonIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldEvalExpression</span><span class="p">]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;name&quot;</span> <span class="p">:</span> <span class="n">fieldName</span><span class="p">,</span>
+                <span class="s">&quot;type&quot;</span> <span class="p">:</span> <span class="n">fieldType</span><span class="p">,</span>
+                <span class="s">&quot;expression&quot;</span> <span class="p">:</span> <span class="n">fieldEvalExpression</span><span class="p">,</span>
+                <span class="s">&quot;computed&quot;</span> <span class="p">:</span> <span class="n">computed</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;geometry&quot;</span><span class="p">:</span>
+                <span class="n">geomField</span> <span class="o">=</span> <span class="n">field</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+                <span class="c"># create field in new feature</span>
+                <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">geomField</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geomField</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="n">geomField</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">geomField</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">])</span>
+
+                <span class="c"># If there are no field ops include all</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+                                <span class="c"># field evaluation</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                                <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;computed&quot;</span><span class="p">]:</span>
+                                        <span class="c"># Expression</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                        <span class="c"># Just field reference</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">]]</span>
+
+                                <span class="c"># create field in new feature</span>
+                                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo de uso:</p>
+<div class="highlight-python"><pre>./shape_projection_selection_write.py ~/data/north_carolina/shape/hospitals.shp /tmp/oout.shp 'shape(feature["geometry"]).distance(loads("POINT(446845 161978)")) &lt; 20000' 'geometry:Polygon as mapping(shape(feature["geometry"]).buffer(20000))' 'name as NAME'</pre>
+</div>
+</div>
+<div class="section" id="que-mas-agrupados">
+<h2>¿Qué más?: agrupados<a class="headerlink" href="#que-mas-agrupados" title="Permalink to this headline">¶</a></h2>
+<p>Podemos agrupar con este script (shape_group.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">MultiPoint</span><span class="p">,</span> <span class="n">MultiLineString</span><span class="p">,</span> <span class="n">MultiPolygon</span>
+<span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">cascaded_union</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">geometryType</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">geometryType</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="n">groupField</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">groupFieldUsed</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">groupField</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">groupFieldUsed</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">groupField</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">groupField</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+        <span class="n">groupField</span> <span class="o">=</span> <span class="s">&quot;id&quot;</span>
+        <span class="n">groupFieldUsed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;int&quot;</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="n">classes</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\r</span><span class="s">group:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">counter</span> <span class="o">/</span> <span class="n">total</span><span class="p">,</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">groupFieldUsed</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">groupField</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+                <span class="n">class_</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">class_</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">classes</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="n">class_</span>
+        <span class="n">class_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\r</span><span class="s">group:</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">50</span> <span class="o">+</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">counter</span> <span class="o">/</span> <span class="n">total</span><span class="p">,</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">class_</span> <span class="o">=</span> <span class="n">classes</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="n">classGeometries</span> <span class="o">=</span> <span class="p">[</span><span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">class_</span><span class="p">]</span>
+        <span class="n">unionResult</span> <span class="o">=</span> <span class="n">cascaded_union</span><span class="p">(</span><span class="n">classGeometries</span><span class="p">)</span>
+
+        <span class="c"># hack because cascaded_union may not give a collection</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unionResult</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">geometryType</span> <span class="o">==</span> <span class="s">&quot;MultiPoint&quot;</span><span class="p">:</span>
+                        <span class="n">unionResult</span> <span class="o">=</span> <span class="n">MultiPoint</span><span class="p">([</span><span class="n">unionResult</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="n">geometryType</span> <span class="o">==</span> <span class="s">&quot;MultiLineString&quot;</span><span class="p">:</span>
+                        <span class="n">unionResult</span> <span class="o">=</span> <span class="n">MultiLineString</span><span class="p">([</span><span class="n">unionResult</span><span class="p">])</span>
+                <span class="k">elif</span> <span class="n">geometryType</span> <span class="o">==</span> <span class="s">&quot;MultiPolygon&quot;</span><span class="p">:</span>
+                        <span class="n">unionResult</span> <span class="o">=</span> <span class="n">MultiPolygon</span><span class="p">([</span><span class="n">unionResult</span><span class="p">])</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">mapping</span><span class="p">(</span><span class="n">unionResult</span><span class="p">),</span>
+                <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                        <span class="n">groupField</span> <span class="p">:</span> <span class="n">value</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>y usando estas instrucciones:</p>
+<div class="highlight-python"><pre>./shape_group.py /home/user/data/north_carolina/shape/boundary_county.shp /tmp/groupedByName.shp MultiPolygon NAME
+./shape_group.py /home/user/data/north_carolina/shape/boundary_county.shp /tmp/bounds.shp MultiPolygon</pre>
+</div>
+</div>
+<div class="section" id="y-joins">
+<h2>¿Y?: Joins<a class="headerlink" href="#y-joins" title="Permalink to this headline">¶</a></h2>
+<p>También podemos hacer Joins. Para ello extraemos el código que parsea los parámetros a un módulo &#8220;schema_parser&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">getField</span><span class="p">(</span><span class="n">fieldExpression</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
+        <span class="n">asIndex</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot; as &quot;</span><span class="p">)</span>
+        <span class="n">fieldNameAndType</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[:</span><span class="n">asIndex</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">fieldEvalExpression</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[</span><span class="n">asIndex</span><span class="o">+</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="n">colonIndex</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colonIndex</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[:</span><span class="n">colonIndex</span><span class="p">]</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[</span><span class="n">colonIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldEvalExpression</span><span class="p">]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="p">{</span>
+                <span class="s">&quot;name&quot;</span> <span class="p">:</span> <span class="n">fieldName</span><span class="p">,</span>
+                <span class="s">&quot;type&quot;</span> <span class="p">:</span> <span class="n">fieldType</span><span class="p">,</span>
+                <span class="s">&quot;expression&quot;</span> <span class="p">:</span> <span class="n">fieldEvalExpression</span><span class="p">,</span>
+                <span class="s">&quot;computed&quot;</span> <span class="p">:</span> <span class="n">computed</span>
+        <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">getFields</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">fieldExpression</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getField</span><span class="p">(</span><span class="n">fieldExpression</span><span class="p">,</span> <span class="n">schema</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">fields</span>
+
+<span class="k">def</span> <span class="nf">getGeometryField</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">next</span><span class="p">((</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span> <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;geometry&quot;</span><span class="p">),</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">getAlphanumericFields</span><span class="p">(</span><span class="n">fields</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span> <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;geometry&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Y con el siguiente script (shape_join.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">schema_parser</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span><span class="p">,</span> <span class="n">mapping</span>
+<span class="kn">from</span> <span class="nn">shapely.ops</span> <span class="kn">import</span> <span class="n">cascaded_union</span>
+<span class="kn">from</span> <span class="nn">rtree</span> <span class="kn">import</span> <span class="n">index</span>
+
+<span class="k">class</span> <span class="nc">SequentialScan</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">preLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+        <span class="k">def</span> <span class="nf">featuresFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outerFeature</span><span class="p">,</span> <span class="n">inner</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">inner</span>
+
+<span class="k">class</span> <span class="nc">SpatialIndexScan</span><span class="p">:</span>
+
+        <span class="n">innerMemory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">Index</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">preLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inner</span><span class="p">):</span>
+                <span class="c"># Load inner in memory for random access</span>
+                <span class="k">for</span> <span class="n">innerFeature</span> <span class="ow">in</span> <span class="n">inner</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">innerMemory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">innerFeature</span><span class="p">)</span>
+                        <span class="n">bounds</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">innerFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">bounds</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">innerMemory</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">featuresFor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outerFeature</span><span class="p">,</span> <span class="n">inner</span><span class="p">):</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="c"># Query the index</span>
+                <span class="n">queryResult</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">outerFeature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">innerFeatureIndex</span> <span class="ow">in</span> <span class="n">queryResult</span><span class="p">:</span>
+                        <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">innerMemory</span><span class="p">[</span><span class="n">innerFeatureIndex</span><span class="p">])</span>
+
+                <span class="k">return</span> <span class="n">ret</span>
+
+<span class="n">outerPath</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">innerPath</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">scanType</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">joinCondition</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">outer</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">outerPath</span><span class="p">)</span>
+<span class="n">inner</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">innerPath</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">scanType</span> <span class="o">==</span> <span class="s">&quot;sequential&quot;</span><span class="p">:</span>
+        <span class="n">innerScan</span> <span class="o">=</span> <span class="n">SequentialScan</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">scanType</span> <span class="o">==</span> <span class="s">&quot;spatial-index&quot;</span><span class="p">:</span>
+        <span class="n">innerScan</span> <span class="o">=</span> <span class="n">SpatialIndexScan</span><span class="p">()</span>
+
+<span class="n">innerScan</span><span class="o">.</span><span class="n">preLoop</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span>
+
+<span class="n">combinedSchema</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">outer</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="o">+</span> <span class="n">inner</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="n">schema_parser</span><span class="o">.</span><span class="n">getFields</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">6</span><span class="p">:],</span> <span class="n">combinedSchema</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;field expressions missing&quot;</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+        <span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+        <span class="n">geomField</span> <span class="o">=</span> <span class="n">schema_parser</span><span class="o">.</span><span class="n">getGeometryField</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">geomField</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">&quot;geometry field expression missing&quot;</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geomField</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+
+        <span class="n">alphanumericFields</span> <span class="o">=</span> <span class="n">schema_parser</span><span class="o">.</span><span class="n">getAlphanumericFields</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">alphanumericFields</span><span class="p">:</span>
+                <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">outer</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outer</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">outerFeature</span> <span class="ow">in</span> <span class="n">outer</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;</span><span class="se">\r</span><span class="s">join:</span><span class="se">\t\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">counter</span> <span class="o">/</span> <span class="n">total</span><span class="p">,</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="n">scannedFeatures</span> <span class="o">=</span> <span class="n">innerScan</span><span class="o">.</span><span class="n">featuresFor</span><span class="p">(</span><span class="n">outerFeature</span><span class="p">,</span> <span class="n">inner</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">innerFeature</span> <span class="ow">in</span> <span class="n">scannedFeatures</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">joinCondition</span><span class="p">):</span>
+                        <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                                <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">geomField</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">]),</span>
+                                <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+                        <span class="p">}</span>
+                        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">alphanumericFields</span><span class="p">:</span>
+                                <span class="c"># field evaluation</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">])</span>
+
+                                <span class="c"># create field in new feature</span>
+                                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+
+                        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">inner</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">outer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="s">&quot;seconds&quot;</span>
+</pre></div>
+</div>
+<p>Podemos hacer joins. Por ejemplo podemos cortar la malla que creamos con el contorno de north_carolina, calculado con un agrupado:</p>
+<div class="highlight-python"><pre>./shape_join.py /tmp/bounds.shp /tmp/grid.shp /tmp/cutted_grid.shp spatial-index 'shape(outerFeature["geometry"]).intersects(shape(innerFeature["geometry"]))' 'geometry:Polygon as mapping(shape(outerFeature["geometry"]).intersection(shape(innerFeature["geometry"])))' 'gid:int as innerFeature["properties"]["gid"]'</pre>
+</div>
+<p>Ahora podemos asignar a cada hospital el código de la celda de la malla recién calculada:</p>
+<div class="highlight-python"><pre>./shape_join.py /tmp/cutted_grid.shp ~/data/north_carolina/shape/hospitals.shp /tmp/hospital_gridcode.shp spatial-index 'shape(outerFeature["geometry"]).contains(shape(innerFeature["geometry"]))' 'geometry:Point as innerFeature["geometry"]' 'gid:int as outerFeature["properties"]["gid"]'</pre>
+</div>
+<p>Usando el script de agrupado, podemos agrupar por celda:</p>
+<div class="highlight-python"><pre>./shape_group.py /tmp/hospital_gridcode.shp /tmp/hospital_group_by_cell.shp MultiPoint gid</pre>
+</div>
+<p>para obtener el número de hospitales por celda:</p>
+<div class="highlight-python"><pre>./shape_process.py /tmp/hospital_group_by_cell.shp /tmp/num_hospitals_cell.shp True 'gid as gid' 'count:int as len(list(shape(feature["geometry"])))'</pre>
+</div>
+<p>Por último podemos hacer un join con la malla inicial, por el código de malla y obtener el número de hospitales por superficie:</p>
+<div class="highlight-python"><pre>./shape_join.py /tmp/num_hospitals_cell.shp /tmp/cutted_grid.shp /tmp/density.shp sequential 'outerFeature["properties"]["gid"] == innerFeature["properties"]["gid"]' 'geometry:Polygon as innerFeature["geometry"]' 'gid:int as outerFeature["properties"]["gid"]' 'density:float as outerFeature["properties"]["count"] / shape(innerFeature["geometry"]).area'</pre>
+</div>
+<p>Resumiendo, aquí tenemos el proceso para el cálculo:</p>
+<div class="highlight-python"><pre>./fiona_grid.py ~/data/north_carolina/shape/hospitals.shp 50000 /tmp/grid.shp
+./shape_group.py /home/user/data/north_carolina/shape/boundary_county.shp /tmp/bounds.shp MultiPolygon
+./shape_join.py /tmp/bounds.shp /tmp/grid.shp /tmp/cutted_grid.shp spatial-index 'shape(outerFeature["geometry"]).intersects(shape(innerFeature["geometry"]))' 'geometry:Polygon as mapping(shape(outerFeature["geometry"]).intersection(shape(innerFeature["geometry"])))' 'gid:int as innerFeature["properties"]["gid"]'
+./shape_join.py /tmp/cutted_grid.shp ~/data/north_carolina/shape/hospitals.shp /tmp/hospital_gridcode.shp spatial-index 'shape(outerFeature["geometry"]).contains(shape(innerFeature["geometry"]))' 'geometry:Point as innerFeature["geometry"]' 'gid:int as outerFeature["properties"]["gid"]'
+./shape_group.py /tmp/hospital_gridcode.shp /tmp/hospital_group_by_cell.shp MultiPoint gid
+./shape_process.py /tmp/hospital_group_by_cell.shp /tmp/num_hospitals_cell.shp True 'gid as gid' 'count:int as len(list(shape(feature["geometry"])))'
+./shape_join.py /tmp/num_hospitals_cell.shp /tmp/cutted_grid.shp /tmp/density.shp sequential 'outerFeature["properties"]["gid"] == innerFeature["properties"]["gid"]' 'geometry:Polygon as innerFeature["geometry"]' 'gid:int as outerFeature["properties"]["gid"]' 'density:float as outerFeature["properties"]["count"] / shape(innerFeature["geometry"]).area'</pre>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Varios.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

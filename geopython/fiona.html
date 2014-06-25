@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fiona &mdash; geotalleres-teoria 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/geotalleres.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.1.0/readable/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="geotalleres-teoria 1 documentation" href="../index.html" />
+    <link rel="up" title="Geoprocesamiento con Python" href="index.html" />
+    <link rel="next" title="shapely" href="shapely.html" />
+    <link rel="prev" title="rasterio" href="rasterio.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          GeoTalleres</a>
+        <span class="navbar-text navbar-version pull-left"><b>1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Nav <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Geoprocesamiento con Python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="miniintro_python.html">Mini intro a python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librerias.html">Librerías GEO interesantes en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instalacion.html">Instalación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rasterio.html">rasterio</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">fiona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapely.html">shapely</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fiona_shapely.html">fiona y shapely</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">fiona</a><ul>
+<li><a class="reference internal" href="#lectura-de-una-juego-de-datos">Lectura de una juego de datos</a></li>
+<li><a class="reference internal" href="#lectura-de-objetos">Lectura de objetos</a></li>
+<li><a class="reference internal" href="#operaciones-con-campos">Operaciones con campos</a></li>
+<li><a class="reference internal" href="#filtrado">Filtrado</a></li>
+<li><a class="reference internal" href="#creacion-de-un-shapefile-desde-cero">Creación de un shapefile desde cero</a></li>
+<li><a class="reference internal" href="#modificacion-y-escritura-de-un-shapefile">Modificación y escritura de un shapefile</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="rasterio.html" title="Previous Chapter: rasterio"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; rasterio</span>
+    </a>
+  </li>
+  <li>
+    <a href="shapely.html" title="Next Chapter: shapely"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">shapely &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/geopython/fiona.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="fiona">
+<h1>fiona<a class="headerlink" href="#fiona" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Fecha</th>
+<th class="head">Autores</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>25 Junio 2014</td>
+<td><ul class="first last simple">
+<li>Fernando González Cortés(<a class="reference external" href="mailto:fergonco&#37;&#52;&#48;gmail&#46;com">fergonco<span>&#64;</span>gmail<span>&#46;</span>com</a>)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>©2014 Fernando González Cortés</p>
+<p class="last">Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/deed.es">http://creativecommons.org/licenses/by-sa/3.0/deed.es</a>)</p>
+</div>
+<div class="section" id="lectura-de-una-juego-de-datos">
+<h2>Lectura de una juego de datos<a class="headerlink" href="#lectura-de-una-juego-de-datos" title="Permalink to this headline">¶</a></h2>
+<p>Ejercicio: Hacer script que muestra información de un fichero que se le pasa como parámetro:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">&quot;crs:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">crs</span>
+<span class="k">print</span> <span class="s">&quot;bounds:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">bounds</span>
+<span class="k">print</span> <span class="s">&quot;driver:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">driver</span>
+<span class="k">print</span> <span class="s">&quot;encoding:&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">encoding</span>
+<span class="k">print</span> <span class="s">&quot;schema&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lectura-de-objetos">
+<h2>Lectura de objetos<a class="headerlink" href="#lectura-de-objetos" title="Permalink to this headline">¶</a></h2>
+<p>Es posible iterar secuencialmente por la fuente de datos con un bucle:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>Fiona ofrece los contenidos del shapefile como objetos python. Invocando el método <tt class="docutils literal"><span class="pre">next</span></tt> podemos obtener el primer registro de una fuente de datos:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Point&#39;</span><span class="p">,</span>
+        <span class="s">&#39;coordinates&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">914347.8748615</span><span class="p">,</span> <span class="mf">249079.07840056275</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;Feature&#39;</span><span class="p">,</span>
+    <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="s">&#39;159&#39;</span><span class="p">,</span>
+    <span class="s">&#39;properties&#39;</span><span class="p">:</span> <span class="n">OrderedDict</span><span class="p">([</span>
+        <span class="p">(</span><span class="s">u&#39;cat&#39;</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;OBJECTID&#39;</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;AREA&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;PERIMETER&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;HLS_&#39;</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;HLS_ID&#39;</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;NAME&#39;</span><span class="p">,</span> <span class="s">u&#39;TheOuterBanksHospital(licensepending)&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;ADDRESS&#39;</span><span class="p">,</span> <span class="s">u&#39;4800SCroatanHwy&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;CITY&#39;</span><span class="p">,</span> <span class="s">u&#39;NagsHead&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;ZIP&#39;</span><span class="p">,</span> <span class="s">u&#39;27959&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;COUNTY&#39;</span><span class="p">,</span> <span class="s">u&#39;Dare&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;PHONE&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;CANCER&#39;</span><span class="p">,</span> <span class="s">u&#39;?&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;POLYGONID&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;SCALE&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">u&#39;ANGLE&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="p">])</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Ejercicio: hacer script que muestre todos los valores de un campo que se pasa como parámetro (fiona_show_field.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">fieldName</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldName</span><span class="p">]</span>
+
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_show_field.py ~/data/north_carolina/shape/hospitals.shp NAME</pre>
+</div>
+</div>
+<div class="section" id="operaciones-con-campos">
+<h2>Operaciones con campos<a class="headerlink" href="#operaciones-con-campos" title="Permalink to this headline">¶</a></h2>
+<p>Llevando el ejemplo anterior un paso más allá, podemos hacer un programita que en lugar de mostrar los campos por la consola lo que haga sea modificar las features eliminando todos los campos menos el seleccionado (fiona_projection.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">fieldName</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">for</span> <span class="nb">property</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="nb">property</span> <span class="o">!=</span> <span class="n">fieldName</span><span class="p">:</span>
+                        <span class="k">del</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="nb">property</span><span class="p">]</span>
+
+        <span class="k">print</span> <span class="n">feature</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_projection.py ~/data/north_carolina/shape/hospitals.shp NAME</pre>
+</div>
+<p>Y generalizando todavía más, podemos obtener una serie de expresiones como parámetros que serán los nuevos campos (fiona_projection_ops.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+                <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)):</span>
+                <span class="n">fieldExpression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="c"># field parsing</span>
+                <span class="n">asIndex</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot; as &quot;</span><span class="p">)</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[:</span><span class="n">asIndex</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">evalExpression</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[</span><span class="n">asIndex</span><span class="o">+</span><span class="mi">4</span><span class="p">:]</span>
+
+                <span class="c"># field evaluation</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^[A-Za-z0-9_-]*$&quot;</span><span class="p">,</span> <span class="n">evalExpression</span><span class="p">):</span>
+                        <span class="c"># Just field reference</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">evalExpression</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="c"># Expression</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">evalExpression</span><span class="p">)</span>
+
+                <span class="c"># create field in new feature</span>
+                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldName</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">print</span> <span class="n">newFeature</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_projection_ops.py ~/data/north_carolina/shape/hospitals.shp 'ingol as feature["properties"]["CITY"]=="Goldsboro"' 'city as CITY' 'name as NAME'</pre>
+</div>
+</div>
+<div class="section" id="filtrado">
+<h2>Filtrado<a class="headerlink" href="#filtrado" title="Permalink to this headline">¶</a></h2>
+<p>Ejercicio: Hacer un script que muestre sólo los objetos hospital que están en la ciudad de &#8220;Goldsboro&#8221; (fiona_goldsboro_hospitals.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/hospitals.shp&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;CITY&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;Goldsboro&quot;</span><span class="p">:</span>
+                <span class="k">print</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">]</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Incluso se podría extender el último ejemplo del punto anterior y pasar la expresión como parámetro también (fiona_projection_selection.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+                <span class="p">}</span>
+
+                <span class="c"># If there are no field ops include all</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)):</span>
+                                <span class="n">fieldExpression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                                <span class="c"># field parsing</span>
+                                <span class="n">asIndex</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot; as &quot;</span><span class="p">)</span>
+                                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[:</span><span class="n">asIndex</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                                <span class="n">evalExpression</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[</span><span class="n">asIndex</span><span class="o">+</span><span class="mi">4</span><span class="p">:]</span>
+
+                                <span class="c"># field evaluation</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">&quot;^[A-Za-z0-9_-]*$&quot;</span><span class="p">,</span> <span class="n">evalExpression</span><span class="p">):</span>
+                                        <span class="c"># Just field reference</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">evalExpression</span><span class="p">]</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                        <span class="c"># Expression</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">evalExpression</span><span class="p">)</span>
+
+                                <span class="c"># create field in new feature</span>
+                                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldName</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+                <span class="k">print</span> <span class="n">newFeature</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_projection_selection.py ~/data/north_carolina/shape/hospitals.shp 'feature["properties"]["CITY"]=="Goldsboro"'
+
+./fiona_projection_selection.py ~/data/north_carolina/shape/hospitals.shp 'feature["properties"]["CITY"]=="Goldsboro"' 'name as NAME' 'city as CITY'</pre>
+</div>
+<p>Es obvio que sería interesante escribir el resultado como otro shapefile, ¿no? Vemos primero cómo crear un shapefile desde cero.</p>
+</div>
+<div class="section" id="creacion-de-un-shapefile-desde-cero">
+<h2>Creación de un shapefile desde cero<a class="headerlink" href="#creacion-de-un-shapefile-desde-cero" title="Permalink to this headline">¶</a></h2>
+<p>El siguiente código crea un fichero con objetos de tipo punto cuyas coordenadas se leen como parámetro (fiona_create_points.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">fiona.crs</span> <span class="kn">import</span> <span class="n">from_epsg</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">epsg</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="s">&quot;Point&quot;</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;gid&quot;</span><span class="p">,</span> <span class="s">&quot;str&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">from_epsg</span><span class="p">(</span><span class="n">epsg</span><span class="p">),</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                        <span class="s">&quot;coordinates&quot;</span> <span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+                        <span class="s">&quot;type&quot;</span> <span class="p">:</span> <span class="s">&quot;Point&quot;</span>
+                <span class="p">},</span>
+                <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                        <span class="s">&quot;gid&quot;</span> <span class="p">:</span> <span class="nb">id</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejercicio: Crear un programa que tome un shapefile de entrada y un tamaño y cree una malla que cubra el shapefile original y cuya celda tiene el tamaño especificado. Se puede usar la plantilla siguiente:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">crs</span>
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="n">feature</span> <span class="o">=</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">size</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">size</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Solución (fiona_grid.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">bounds</span>
+<span class="n">crs</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">crs</span>
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="s">&quot;Polygon&quot;</span><span class="p">,</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;gid&quot;</span><span class="p">,</span> <span class="s">&quot;str&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="n">feature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                                <span class="s">&quot;coordinates&quot;</span> <span class="p">:</span> <span class="p">[[</span>
+                                        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">size</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">size</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">size</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                                <span class="p">]],</span>
+                                <span class="s">&quot;type&quot;</span> <span class="p">:</span> <span class="s">&quot;Polygon&quot;</span>
+                        <span class="p">},</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                                <span class="s">&quot;gid&quot;</span> <span class="p">:</span> <span class="nb">id</span>
+                        <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+                <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">size</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">size</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_grid.py ~/data/north_carolina/shape/hospitals.shp 50000 /tmp/grid.shp</pre>
+</div>
+</div>
+<div class="section" id="modificacion-y-escritura-de-un-shapefile">
+<h2>Modificación y escritura de un shapefile<a class="headerlink" href="#modificacion-y-escritura-de-un-shapefile" title="Permalink to this headline">¶</a></h2>
+<p>Ejercicio: tomar el ejemplo &#8220;fiona_goldsboro_hospitals&#8221; y escribir el resultado en otro fichero (fiona_goldsboro_hospitals_write.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/home/user/data/north_carolina/shape/hospitals.shp&quot;</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">])</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;/tmp/hospitals_in_goldsboro.shp&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;CITY&quot;</span><span class="p">]</span><span class="o">==</span><span class="s">&quot;Goldsboro&quot;</span><span class="p">:</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                                <span class="s">&quot;NAME&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="s">&quot;NAME&quot;</span><span class="p">]</span>
+                        <span class="p">}</span>
+                <span class="p">}</span>
+
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
+
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Por último, vamos a generalizar el último ejemplo del punto de filtrado para pasarle como segundo parámetro el fichero de salida donde se quiere escribir (fiona_projection_selection_write.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#! /usr/bin/env python</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+<span class="n">outputSchema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+        <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)):</span>
+        <span class="n">fieldExpression</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="c"># field parsing</span>
+        <span class="n">asIndex</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot; as &quot;</span><span class="p">)</span>
+        <span class="n">fieldNameAndType</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[:</span><span class="n">asIndex</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">fieldEvalExpression</span> <span class="o">=</span> <span class="n">fieldExpression</span><span class="p">[</span><span class="n">asIndex</span><span class="o">+</span><span class="mi">4</span><span class="p">:]</span>
+        <span class="n">colonIndex</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colonIndex</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[:</span><span class="n">colonIndex</span><span class="p">]</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">fieldNameAndType</span><span class="p">[</span><span class="n">colonIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="n">fieldName</span> <span class="o">=</span> <span class="n">fieldNameAndType</span>
+                <span class="n">fieldType</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">fieldEvalExpression</span><span class="p">]</span>
+                <span class="n">computed</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">&quot;name&quot;</span> <span class="p">:</span> <span class="n">fieldName</span><span class="p">,</span>
+                <span class="s">&quot;type&quot;</span> <span class="p">:</span> <span class="n">fieldType</span><span class="p">,</span>
+                <span class="s">&quot;expression&quot;</span> <span class="p">:</span> <span class="n">fieldEvalExpression</span><span class="p">,</span>
+                <span class="s">&quot;computed&quot;</span> <span class="p">:</span> <span class="n">computed</span>
+        <span class="p">}</span>
+        <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+
+        <span class="c"># create field in new feature</span>
+        <span class="n">outputSchema</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s">&quot;ESRI Shapefile&quot;</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">outputSchema</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">):</span>
+                <span class="n">newFeature</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s">&quot;geometry&quot;</span> <span class="p">:</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">],</span>
+                        <span class="s">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{}</span>
+                <span class="p">}</span>
+
+                <span class="c"># If there are no field ops include all</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+                                <span class="c"># field evaluation</span>
+                                <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                                <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="s">&quot;computed&quot;</span><span class="p">]:</span>
+                                        <span class="c"># Expression</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                        <span class="c"># Just field reference</span>
+                                        <span class="n">value</span> <span class="o">=</span> <span class="n">feature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;expression&quot;</span><span class="p">]]</span>
+
+                                <span class="c"># create field in new feature</span>
+                                <span class="n">newFeature</span><span class="p">[</span><span class="s">&quot;properties&quot;</span><span class="p">][</span><span class="n">field</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value</span>
+
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newFeature</span><span class="p">)</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">output</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ejemplo:</p>
+<div class="highlight-python"><pre>./fiona_projection_selection_write.py ~/data/north_carolina/shape/hospitals.shp /tmp/hospital_projection_and_filter.shp 'feature["properties"]["CITY"]=="Goldsboro"' 'name as NAME' 'city as CITY' 'shorname:str as feature["properties"]["NAME"][:3]'</pre>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2013, Varios.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
