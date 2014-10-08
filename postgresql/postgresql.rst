@@ -313,6 +313,47 @@ El siguiente ejemplo crea una base de datos llamada ``analisis`` y dentro de ell
 	$ psql -U postgres -d analisis -c "create extension postgis"
 	$ for i in `ls /tmp/datos/analisis/*.shp`; do shp2pgsql -s 25830 $i gis.${i%.shp} | psql -U postgres -d analisis; done
 
+Creación de copias de seguridad
+----------------------------------
+
+Un aspecto importante a la hora de administrar un servidor de base de datos es la creación de copias de seguridad.
+
+Para hacer y restaurar la copia de seguridad se utilizan los comandos ``pg_dump`` y ``pg_restore`` en la línea de comandos del sistema operativo. El comando ``pg_dump`` tiene la siguiente sintaxis::
+
+	 pg_dump <options> <database>
+
+Entre las opciones más interesantes están:
+
+* username: nombre del usuario con el que conectar a la base de datos para realizar la copia: --username=geo
+* password: clave para conectar a la base de datos
+* host: dirección del servidor de base de datos. Se puede omitir si es la máquina desde la cual se lanza el comando: --host=192.168.2.107
+* schema: esquema que se quiere copiar. Si no se especifica se copiarán todos los esquemas.
+* format: formato de la copia. Para obtener un formato compatible con ``pg_restore`` es necesario especificar "c": --format=c
+* file: fichero donde queremos guardar la copia de seguridad: --file=/tmp/db.backup
+
+Así, si accedemos a la base de datos "geoserverdata" con el usuario "geoserver" y quisiéramos hacer una copia del esquema "gis" podríamos ejecutar la siguiente instrucción desde la línea de comandos del servidor de base de datos::
+
+	$ pg_dump --username=geoserver --format=c --schema=gis --file=/tmp/gis.backup geoserverdata
+
+Dicho comando creará un fichero en ``/tmp/gis.backup`` con la copia de todos los datos que hay en el esquema "gis".
+
+Para recuperar la copia se puede utilizar el comando ``pg_restore``::
+
+	$ pg_restore --username=geoserver --dbname=geoserverdata /tmp/gis.backup 
+
+Si el esquema existe, el comando ``pg_restore`` dará un error por lo que si queremos reemplazar los contenidos del esquema deberemos renombrar el esquema primero con la siguiente instrucción:: 
+
+	$ psql --username=geoserver --dbname=geoserverdata --command="alter schema gis rename to gis2"
+
+Una vez la copia de seguridad ha sido recuperada de forma satisfactoria es posible eliminar el esquema renombrado::
+
+	$ psql --username=geoserver --dbname=geoserverdata --command="drop schema gis2 cascade"
+
+.. warning :: Para que todo este proceso se de sin problemas, es importante que los datos estén en un esquema distinto de "public", ya que algunas extensiones, como PostGIS, instalan tablas y funciones en dicho esquema y al hacer el backup estaremos incluyendo también estos objetos que luego no dejarán recuperar la copia.
+
+.. warning :: También es muy importante guardar los ficheros con la copia de seguridad en una máquina distinta al servidor de bases de datos, ya que en caso de que haya algún problema con dicha máquina se pueden perder también las copias. 
+
+
 Más información
 ----------------
 
