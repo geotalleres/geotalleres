@@ -313,6 +313,8 @@ El siguiente ejemplo crea una base de datos llamada ``analisis`` y dentro de ell
 	$ psql -U postgres -d analisis -c "create extension postgis"
 	$ for i in `ls /tmp/datos/analisis/*.shp`; do shp2pgsql -s 25830 $i gis.${i%.shp} | psql -U postgres -d analisis; done
 
+.. _postgresql-backup:
+
 Creación de copias de seguridad
 ----------------------------------
 
