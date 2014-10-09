@@ -24,6 +24,7 @@ Materiales:
    geoserver-vector/geoserver_vector
    geoserver-raster/geoserver_raster
    geoserver-produccion/geoserver_produccion
+   geoserver-backup/geoserver_backup
    geowebcache/pregeneracion.rst
    optimizacion-raster-gdal/optimizacion-raster-gdal
    bases-de-datos/teoria_bases_datos
