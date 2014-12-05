@@ -23,6 +23,7 @@ Materiales:
    geoserver-intro/geoserver_intro
    geoserver-vector/geoserver_vector
    geoserver-raster/geoserver_raster
+   geoserver-piramide-raster-transparencia/geoserver_piramide_raster_transparencia
    geoserver-produccion/geoserver_produccion
    geoserver-backup/geoserver_backup
    geowebcache/pregeneracion.rst
