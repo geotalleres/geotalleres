@@ -13,6 +13,7 @@ PostgreSQL
 	24 Junio 2013       * Fernando González (fernando.gonzalez@fao.org)
 	                    * Ramiro Mata (rmata@zonageo.com.ar)
 	                    * Leandro Roncoroni (lronco@zonageo.com.ar)
+	24 Junio 2015       * Oscar Fonts (oscar.fonts@geomati.co)
 	=================  ====================================================
 
 	©2012 Fernando González Cortés y Miguel García Coya
@@ -240,15 +241,21 @@ El parámetro -f es extremadamente útil cuando queremos usar PostgreSQL junto c
 
 La sintaxis básica es sencilla::
 
-	shp2pgsql <shapefile> <nombre_de_tabla_a_crear>
-	
+	shp2pgsql <opciones> <nombre_shapefile_origen> <nombre_tabla_destino>
+
+Las opciones más interesantes son:
+
+   * **-I** crea un índice espacial de la columna de geometrías. Esto impacta significativamente en el rendimiento posterior, y su uso es recomendado en todos los casos.
+   * **-s <srid>** indica el sistema de referencia de coordenadas en el que está expresada la capa. Suele corresponder con el código numérico EPSG. Consultar http://spatialreference.org/ para buscar los posibles códigos.
+   * **-W <encoding>** en ocasiones los atributos alfanuméricos con caracteres especiales (acentos) vienen codificados en LATIN1, y hay que indicarlo con éste parámetro.
+
 Por ejemplo::
 
-	$ shp2pgsql provincias.shp provincia
+	$ shp2pgsql -I -s 4326 provincias.shp provincias
 
-El comando anterior realmente muestra por pantalla el script, lo cual no es muy útil y además tarda mucho tiempo (con Ctrl+C es posible cancelar la ejecución en la mayoría de los casos). Para que realmente sea útil tenemos que almacenar los datos en un fichero que luego podamos pasar a psql con el parámetro -f. Esto lo podemos hacer mediante redireccionando la salida estándar a un fichero temporal::
+El comando anterior realmente muestra por pantalla el script, lo cual no es muy útil y además tarda mucho tiempo (con Ctrl+C es posible cancelar la ejecución en la mayoría de los casos). Para que realmente sea útil tenemos que almacenar los datos en un fichero que luego podamos pasar a psql con el parámetro -f. Esto lo podemos hacer redireccionando la salida estándar a un fichero temporal::
 
-	$ shp2pgsql provincias.shp provincias > /tmp/provincias.sql
+	$ shp2pgsql -I -s 4326 provincias.shp provincias > /tmp/provincias.sql
 
 Es posible que durante este proceso obtengamos un error similar a éste::
 
@@ -256,7 +263,7 @@ Es posible que durante este proceso obtengamos un error similar a éste::
 	
 lo cual quiere decir que la codificación utilizada para almacenar los textos en el fichero .dbf no es UTF-8, que es la que espera el programa ``shp2pgsql`` por defecto. También nos sugiere que intentemos LATIN1. Para decirle al programa qué codificacion utilizamos, podemos especificar el parámetro -W::
 
-	$ shp2pgsql -W LATIN1 provincias.shp provincias > /tmp/provincias.sql
+	$ shp2pgsql -I -s 4326 -W LATIN1 provincias.shp provincias > /tmp/provincias.sql
 
 Y si nuestros datos están en LATIN1 se generará el script sin ningún problema.
 
@@ -272,46 +279,42 @@ El siguiente aspecto que tenemos que tener en cuenta, es que el sistema de refer
 	
 	 f_table_catalog | f_table_schema |      f_table_name       | f_geometry_column | coord_dimension | srid |      type       
 	-----------------+----------------+-------------------------+-------------------+-----------------+------+-----------------
-	 geoserverdata   | public         | provincias              | geom              |               2 |    0 | MULTIPOLYGON
+	 geoserverdata   | public         | provincias              | geom              |               2 | 4326 | MULTIPOLYGON
 
-podemos observar que la tabla recién creada tiene un campo srid, que indica el código EPSG del sistema de coordenadas utilizado, con valor igual a 0. Para evitar esto es posible utilizar el parámetro -s de ``shp2pgsql``::
-
-	$ shp2pgsql -s 4326 provincias.shp provincias > /tmp/provincias.sql
-
-que establecerá que nuestros datos están en EPSG:4326 (o el CRS que se especifique).
+podemos observar que la tabla recién creada tiene un campo srid, que indica el código EPSG del sistema de coordenadas utilizado.
 
 Por último, es recomendable crear nuestros datos en un esquema distinto de ``public`` para facilitar las copias de seguridad y las actualizaciones de PostGIS, por motivos que no se tratan en esta documentación::
 
 	$ psql -U postgres -d geoserverdata -c "create schema gis"
 	CREATE SCHEMA
-	$ shp2pgsql -s 4326 provincias.shp gis.provincias > /tmp/provincias.sql
+	$ shp2pgsql -I -s 4326 provincias.shp gis.provincias > /tmp/provincias.sql
 	
 Incluso es posible cargar en PostgreSQL el fichero resultante con una única línea, sólo enlazando la salida de ``shp2pgsql`` con la entrada de ``psql`` mediante una tubería de linux "|"::
 
-	$ shp2pgsql -s 4326 provincias.shp gis.provincias | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 provincias.shp gis.provincias | psql -U postgres -d geoserverdata
 
 Por ejemplo los siguientes comandos cargan una serie de datos en PostGIS, en la base de datos ``geoserver``::
 
 	$ psql -U postgres -d geoserver -c "create schema gis"
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm0.shp gis.admin0 | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm1.shp gis.admin1 | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_adm2.shp gis.admin2 | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_rails.shp gis.ferrovia | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_roads.shp gis.vias | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_water_areas_dcw.shp gis.zonas_agua | psql -U postgres -d geoserverdata
-	$ shp2pgsql -s 4326 -W LATIN1 /tmp/datos/ARG_water_lines_dcw.shp gis.lineas_agua | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_adm0.shp gis.admin0 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_adm1.shp gis.admin1 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_adm2.shp gis.admin2 | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_rails.shp gis.ferrovia | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_roads.shp gis.vias | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_water_areas_dcw.shp gis.zonas_agua | psql -U postgres -d geoserverdata
+	$ shp2pgsql -I -s 4326 -W LATIN1 /tmp/datos/ARG_water_lines_dcw.shp gis.lineas_agua | psql -U postgres -d geoserverdata
 	
 Nótese que todos estos pasos se pueden simplificar en sólo dos, que cargarían todos los shapefiles de un directorio::
 
 	$ psql -U postgres -d geoserver -c "create schema gis"
-	$ for i in `ls /tmp/datos/*.shp`; do shp2pgsql -s 4326 $i gis.${i%.shp} | psql -U postgres -d geoserverdata; done
+	$ for i in `ls /tmp/datos/*.shp`; do shp2pgsql -I -s 4326 $i gis.${i%.shp} | psql -U postgres -d geoserverdata; done
 
 El siguiente ejemplo crea una base de datos llamada ``analisis`` y dentro de ella un esquema llamado ``gis``. Luego se instala la extensión PostGIS y por último se cargan en la base de datos todos los shapefiles existentes en el directorio ``Escritorio/datos/analisis``::
 
 	$ psql -U postgres -c "create database analisis"
 	$ psql -U postgres -d analisis -c "create schema gis"
 	$ psql -U postgres -d analisis -c "create extension postgis"
-	$ for i in `ls /tmp/datos/analisis/*.shp`; do shp2pgsql -s 25830 $i gis.${i%.shp} | psql -U postgres -d analisis; done
+	$ for i in `ls /tmp/datos/analisis/*.shp`; do shp2pgsql -I -s 25830 $i gis.${i%.shp} | psql -U postgres -d analisis; done
 
 .. _postgresql-backup:
 
