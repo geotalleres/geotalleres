@@ -1,6 +1,3 @@
-.. |CDB| replace:: CartoDB
-.. |OG| replace:: OpenGeo
-
 **********************************************
 Productos basados en PostGIS: CartoDB, OpenGeo
 **********************************************
@@ -17,6 +14,7 @@ Productos basados en PostGIS: CartoDB, OpenGeo
 	©2012 Micho García
 	
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
+
 
 CartoDB
 =======

@@ -14,7 +14,7 @@ GeoServer en producción
 
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
-Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de *logging*. Para una optimización más completa se puede consultar la `documentación oficial de GeoServer <http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit>`_ (en inglés). En la presente documentación asumimos que GeoServer se está ejecutando sobre el contenedor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.
+Existen varias optimizaciones a tener en cuenta para poner GeoServer en producción. Aquí tendremos en cuenta únicamente la limitación del servicio WMS y la configuración del nivel de *logging*. Para una optimización más completa se puede consultar `este whitepaper <http://boundlessgeo.com/whitepaper/geoserver-production-2/#limit>`_ (en inglés). En la presente documentación asumimos que GeoServer se está ejecutando sobre el contenedor Tomcat, por lo que también veremos cómo limitar el número máximo de conexiones simultáneas en Tomcat.
 
 Nivel de *logging*
 ------------------

@@ -134,7 +134,7 @@ Y por último instalamos rasterio::
 Comprobación
 ------------
 
-Por último comprobamos que todo está instalado correctamente. Ejecutamos python::
+Por último comprobamos que todo está instalado correctamente y ejecutamos python::
 
-
-
+	pip freeze
+	python

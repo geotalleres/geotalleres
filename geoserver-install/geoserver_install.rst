@@ -98,17 +98,17 @@ Editar el fichero /etc/default/tomcat7 y añadir al final las rutas a Java, los 
 
 	JAVA_OPTS="-server -Xms1560m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -Duser.timezone=GMT -DGEOSERVER_DATA_DIR=$GEOSERVER_DATA_DIR -Dfile.encoding=UTF-8 -DMINIFIED_JS=true -DPORTAL_CONFIG_DIR=$PORTAL_CONFIG_DIR"
 
-
-Reiniciar tomcat:
+Reiniciar tomcat::
 
 	service tomcat7 restart
+
 
 Configuración GeoServer
 -----------------------
 
 Entrar a:
 
-	http://<maquina>:8080/geoserver/web/
+	http://localhost:8080/geoserver/web/
 
 En "server status", combrobar que:
 
@@ -130,7 +130,7 @@ Configuración Web
 Bajo "About & Status":
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Editar la información de contacto. Esto aparecerá en los servicios WMS públicos: dejar a "Claudius Ptolomaeus" es indecente.
+* Editar la información de contacto. Esto aparecerá en los servicios WMS públicos: dejar a "Claudius Ptolomaeus" es indecente.
 
 Bajo "Data":
 ^^^^^^^^^^^^

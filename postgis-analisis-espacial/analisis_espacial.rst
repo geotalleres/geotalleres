@@ -203,7 +203,7 @@ Transformación y edición de coordenadas
 Mediante el uso de diferentes funciones seremos capaces de manejar transformaciones entre sistemas de coordenadas o hacer reproyeciones de las capas. Para un manejo básico de estas utilizaremos las funciones que |PG| pone a nuestra disposición:
 
 	* **ST_Transform(geometría, srid)**, que nos permite la transformación de la geometría al SRID que le pasamos por parámetro.
-	* **ST_SRID(geometria) nos muestra el SRID de la geometría
+	* **ST_SRID(geometria)** nos muestra el SRID de la geometría
 	* **ST_SetSRID(geometria, srid)** asigna el SRID a la geometría pero sin relizar la transformación
 	
 En la tabla ``spatial_ref_sys`` encontraremos la definición de los sistemas de coordenadas de los que disponemos. Podremos consultar la descripción de ellos mediante consultas ``select`` del estilo::
