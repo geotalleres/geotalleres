@@ -1,4 +1,4 @@
-.. _geoserver-deploy:
+.. _geoserver-install:
 
 Instalación de GeoServer (con PostGIS)
 ======================================
@@ -7,9 +7,13 @@ Instalación de GeoServer (con PostGIS)
 
 	=================  ================================================
 	Fecha              Autores
-	=================  ================================================             
+	=================  ================================================
 	2 Julio 2015       * Oscar Fonts (oscar.fonts@geomati.co)
-	=================  ================================================	
+	=================  ================================================
+
+	©2012-2015 Oscar Fonts
+
+	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
 
 Requisitos hardware
