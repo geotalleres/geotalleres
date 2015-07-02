@@ -20,6 +20,7 @@ Materiales:
    virtual-box/vmware
    servicios-web/servicios-web
    linux/linux
+   geoserver-install/geoserver_install
    geoserver-intro/geoserver_intro
    geoserver-vector/geoserver_vector
    geoserver-raster/geoserver_raster
