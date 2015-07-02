@@ -164,3 +164,56 @@ Bajo "Tile Caching":
 .. note:: Para saber más...
 
    * `GeoServer on Steroids <http://es.slideshare.net/geosolutions/gs-steroids-foss4ge2014>`_.
+
+
+Instalación y configuración de Apache2
+--------------------------------------
+
+El servidor HTTP Apache se usará para hacer accesibles las diferentes aplicaciones de tomcat al exterior a través del puerto estándard HTTP (80). Este mapeo de direcciones se hará mediante la extensión ``proxy_ajp`` de Apache.
+
+En Ubuntu, instalar Apache con el gestor de paquetes::
+
+	sudo apt-get install apache2
+
+Habilitar los módulos ``proxy`` y ``proxy_ajp``::
+
+	sudo a2enmod proxy proxy_ajp
+
+Reiniciar el servidor::
+
+	sudo service apache2 restart
+
+Accediendo a http://localhost veremos una página donde se lee el mensaje: **It works!**.
+
+
+Redirección mediante AJP
+........................
+
+La configuración por defecto de apache está en el fichero ``/etc/apache2/sites-enabled/000-default.conf``. Editarlo y añadir lo siguiente bajo ``<VirtualHost *:80>``::
+
+	ProxyPass        /geoserver ajp://localhost:8009/geoserver
+	ProxyPassReverse /geoserver ajp://localhost:8009/geoserver
+
+	ProxyPass        /portal    ajp://localhost:8009/portal
+	ProxyPassReverse /portal    ajp://localhost:8009/portal
+
+Reiniciar el servidor::
+
+	sudo service apache2 restart
+
+Y acceder a:
+
+	http://localhost/geoserver
+
+	http://localhost/portal
+
+
+Habilitar CORS
+..............
+
+Añadiendo una cabecera CORS (Cross-Origin Resource Sharing), facilitaremos el desarrollo de visores que accedan a los datos de geoserver (WFS, GetFeatureInfo...), evitando tener que desplegar innecesarios proxies (ver http://enable-cors.org/).
+
+Simplemente, añadir esta otra línea en ``/etc/apache2/sites-enabled/000-default.conf``::
+
+    Header set Access-Control-Allow-Origin "*"
+
