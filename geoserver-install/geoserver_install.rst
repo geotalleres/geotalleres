@@ -9,9 +9,10 @@ Instalación de GeoServer (con PostGIS)
 	Fecha              Autores
 	=================  ================================================
 	2 Julio 2015       * Oscar Fonts (oscar.fonts@geomati.co)
+	23 Octubre 2015    * Oscar Fonts
 	=================  ================================================
 
-	©2012-2015 Oscar Fonts
+	©2015 Oscar Fonts
 
 	Excepto donde quede reflejado de otra manera, la presente documentación se halla bajo licencia : Creative Commons (Creative Commons - Attribution - Share Alike: http://creativecommons.org/licenses/by-sa/3.0/deed.es)
 
@@ -19,7 +20,7 @@ Instalación de GeoServer (con PostGIS)
 Requisitos hardware
 -------------------
 
-* Sistema Operativo: Recomendado Ubuntu 14.04 Server 64 bits
+* Sistema Operativo: Recomendado Ubuntu 14.04 Server (64 bits)
 * CPU con 4 núcleos
 * RAM: 2 GB mínimo, 4 GB recomendado
 * Disco: 8 GB para sistema y binarios. A partir de ahí, según cantidad de datos a publicar. Raster es especialmente crítico al publicarse como GeoTIFF sin compresión y con redundancia. Dejar también margen para GeoWebCache y para manipular GeoTIFFs con GDAL.
@@ -80,13 +81,13 @@ Instalar PostgreSQL (9.3) y PostGIS (2.1)::
 Instalación GeoServer
 ---------------------
 
-Instalar la última estable descargable de geoserver.org (ejemplo comandos para 2.7.1.1)::
+Instalar la última estable descargable de geoserver.org (ejemplo comandos para 2.8.0)::
 
 	cd /var/lib/tomcat7/webapps/
-	wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.7.1.1/geoserver-2.7.1.1-war.zip
+	wget http://sourceforge.net/projects/geoserver/files/GeoServer/2.8.0/geoserver-2.8.0-war.zip
 	apt-get install unzip
-	unzip geoserver-2.7.1.1-war.zip
-	rm -rf target/ *.txt geoserver-2.7.1.1-war.zip
+	unzip geoserver-2.8.0-war.zip
+	rm -rf target/ *.txt geoserver-2.8.0-war.zip
 
 Mover el GEOSERVER_DATA_DIR fuera de los binarios::
 
@@ -98,9 +99,8 @@ Editar el fichero /etc/default/tomcat7 y añadir al final las rutas a Java, los 
 
 	JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 	GEOSERVER_DATA_DIR=/var/geoserver
-	PORTAL_CONFIG_DIR=/var/portal
 
-	JAVA_OPTS="-server -Xms1560m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -Duser.timezone=GMT -DGEOSERVER_DATA_DIR=$GEOSERVER_DATA_DIR -Dfile.encoding=UTF-8 -DMINIFIED_JS=true -DPORTAL_CONFIG_DIR=$PORTAL_CONFIG_DIR"
+	JAVA_OPTS="-server -Xms1560m -Xmx2048m -XX:PermSize=256m -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC -XX:NewSize=48m -Dorg.geotools.shapefile.datetime=true -Duser.timezone=GMT -DGEOSERVER_DATA_DIR=$GEOSERVER_DATA_DIR"
 
 Reiniciar tomcat::
 
@@ -194,9 +194,6 @@ La configuración por defecto de apache está en el fichero ``/etc/apache2/sites
 	ProxyPass        /geoserver ajp://localhost:8009/geoserver
 	ProxyPassReverse /geoserver ajp://localhost:8009/geoserver
 
-	ProxyPass        /portal    ajp://localhost:8009/portal
-	ProxyPassReverse /portal    ajp://localhost:8009/portal
-
 Reiniciar el servidor::
 
 	sudo service apache2 restart
@@ -204,8 +201,6 @@ Reiniciar el servidor::
 Y acceder a:
 
 	http://localhost/geoserver
-
-	http://localhost/portal
 
 
 Habilitar CORS
@@ -216,4 +211,3 @@ Añadiendo una cabecera CORS (Cross-Origin Resource Sharing), facilitaremos el d
 Simplemente, añadir esta otra línea en ``/etc/apache2/sites-enabled/000-default.conf``::
 
     Header set Access-Control-Allow-Origin "*"
-
